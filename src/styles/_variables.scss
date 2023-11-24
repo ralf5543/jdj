@@ -1,4 +1,13 @@
-/*
-Définition de variables Sass, par exemple :
-   $color: #282c34;
-*/
+:root {
+  // =============------------------ SPACERS
+  --spacer-xs: 0.4rem;
+  --spacer-s: 0.8rem;
+  --spacer-m: 1.6rem;
+  --spacer-l: 3.2rem;
+  --spacer-xl: 6.4rem;
+
+  // =============------------------ COLORS
+  --color-primary: #bdc3c7;
+  --color-secondary: #ecf0f1;
+  --color-light: white;
+}
