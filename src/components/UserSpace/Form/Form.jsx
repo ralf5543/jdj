@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import './Form.scss';
 
-const Form = ({ inputValue, setInputValue, addNewPost }) => {
+const Form = ({ inputValue, setInputValue, addNewGame }) => {
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        addNewPost(inputValue);
+        addNewGame(inputValue);
       }}
     >
       <input
@@ -22,7 +22,7 @@ const Form = ({ inputValue, setInputValue, addNewPost }) => {
 Form.propTypes = {
   setInputValue: PropTypes.func.isRequired,
   inputValue: PropTypes.string.isRequired,
-  addNewPost: PropTypes.func.isRequired,
+  addNewGame: PropTypes.func.isRequired,
 };
 
 export default Form;
