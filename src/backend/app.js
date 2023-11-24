@@ -5,11 +5,12 @@ const express = require('express');
 
 const app = express();
 
-const Thing = require('./models/Thing');
+const Game = require('./models/Game');
 
 mongoose
   .connect(
-    'mongodb+srv://ralf5543:ko8yMWq9ewMhqmCi@cluster0.uvb0mui.mongodb.net/?retryWrites=true&w=majority',
+    // user test sur MongoDB
+    'mongodb+srv://jdj-test:3zpw5EIHBVO33PFn@cluster0.uvb0mui.mongodb.net/?retryWrites=true&w=majority',
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -31,14 +32,15 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('/api/stuff', (req, res, next) => {
+app.post('/api/stuff', (req, res) => {
+  // eslint-disable-next-line no-underscore-dangle
   delete req.body._id;
 
-  const thing = new Thing({
+  const game = new Game({
     ...req.body,
   });
 
-  thing
+  game
     .save()
 
     .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
@@ -46,29 +48,28 @@ app.post('/api/stuff', (req, res, next) => {
 });
 
 app.get('/api/stuff/:id', (req, res) => {
-  Thing.findOne({ _id: req.params.id })
+  Game.findOne({ _id: req.params.id })
     .then((thing) => res.status(200).json(thing))
     .catch((error) => res.status(404).json({ error }));
 });
 
 app.put('/api/stuff/:id', (req, res) => {
-  Thing.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+  Game.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
     .then(() => res.status(200).json({ message: 'Objet modifié !' }))
     .catch((error) => res.status(400).json({ error }));
 });
 
 app.delete('/api/stuff/:id', (req, res) => {
   // deleteOne() supprime l'instance avec l'id correspondant
-  Thing.deleteOne({ _id: req.params.id })
+  Game.deleteOne({ _id: req.params.id })
     .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
     .catch((error) => res.status(400).json({ error }));
 });
 
 app.get('/api/stuff', (req, res) => {
-  Thing.find()
+  Game.find()
     .then((things) => {
       res.status(200).json(things);
-      console.log('AAAAAAAAAA');
     })
     .catch((error) => res.status(400).json({ error }));
 });

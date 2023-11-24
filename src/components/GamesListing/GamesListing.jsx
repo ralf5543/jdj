@@ -9,7 +9,6 @@ const GamesListing = ({ games }) => {
       {games.map((game) => (
         <BoardgameCard key={game._id} {...game} />
       ))}
-      <BoardgameCard />
     </ul>
   );
 };
