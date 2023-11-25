@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 // importe le package http de Node
 // (require est équivalent à import, mais permet de simplifier la syntaxe (pas d'extension, par exemple))
 const http = require('http');
@@ -14,7 +15,7 @@ const app = require('./app');
 const normalizePort = (val) => {
   const port = parseInt(val, 10);
 
-  if (isNaN(port)) {
+  if (Number.isNaN(port)) {
     return val;
   }
   if (port >= 0) {
@@ -45,7 +46,7 @@ const errorHandler = (error) => {
   }
 };
 
-//indique à l'app Express sur quel port écouter
+// indique à l'app Express sur quel port écouter
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 

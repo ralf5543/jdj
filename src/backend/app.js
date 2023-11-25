@@ -9,7 +9,7 @@ const express = require('express');
 const app = express();
 
 // On importe notre modèle
-const Thing = require('./models/Thing');
+// const Thing = require('./models/Thing');
 const Game = require('./models/Game');
 
 // connexion à un user (ralf5543, le mdp est juste après les deux points)
@@ -40,7 +40,7 @@ app.use((request, response) => {
     response.json({ message: 'Votre requête a bien été reçue !' });
 }); */
 
-//intercepte toutes les requetes avec un content-type de type json et le met à disposition de req.body
+// intercepte toutes les requetes avec un content-type de type json et le met à disposition de req.body
 app.use(express.json());
 
 // Ici on donne l'autorisation à l'app de recevoir les requetes et réponses (mais s'applique sur la réponse) d'autres serveurs, en passant des "headers".
@@ -62,17 +62,18 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('/api/stuff', (req, res, next) => {
+app.post('/api/games', (req, res, next) => {
   // supprime l'id existant par défaut dans le body (puisque mongoose va en ajouté un)
+  // eslint-disable-next-line no-underscore-dangle
   delete req.body._id;
 
   // crée une instance du modèle Thing en lui passant tous les éléments de body, via un spread operator
-  const thing = new Thing({
+  const game = new Game({
     ...req.body,
   });
 
   // La méthode save() renvoie une Promise
-  thing
+  game
     .save()
     // 201 est une création de ressource
     // il faut envoyer qquechose dans le then, sinon la requete est abandonnée
@@ -106,35 +107,35 @@ app.post('/api/stuff', (req, res, next) => {
   }); */
 
 // deux-points en face du segment dynamique de la route pour la rendre accessible en tant que paramètre ;
-app.get('/api/stuff/:id', (req, res, next) => {
+app.get('/api/games/:id', (req, res) => {
   // findOne() trouve le Thing unique ayant le même _id que le paramètre de la requête
-  Thing.findOne({ _id: req.params.id })
-    .then((thing) => res.status(200).json(thing))
+  Game.findOne({ _id: req.params.id })
+    .then((game) => res.status(200).json(game))
     .catch((error) => res.status(404).json({ error }));
 });
 
-app.put('/api/stuff/:id', (req, res, next) => {
+app.put('/api/games/:id', (req, res) => {
   //  updateOne modifie le corps de l'objet avec l'id précisé
   // on ne veut pas créer un nouvel id, donc on précise que son "nouvel" id correspond à l'ancien (celui de la requete)
-  Thing.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+  Game.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
     .then(() => res.status(200).json({ message: 'Objet modifié !' }))
     .catch((error) => res.status(400).json({ error }));
 });
 
-app.delete('/api/stuff/:id', (req, res, next) => {
+app.delete('/api/games/:id', (req, res) => {
   // deleteOne() supprime l'instance avec l'id correspondant
-  Thing.deleteOne({ _id: req.params.id })
+  Game.deleteOne({ _id: req.params.id })
     .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
     .catch((error) => res.status(400).json({ error }));
 });
 
 // api/stuff est ici un raccourci pour http://localhost:3000/api/stuff
-app.get('/api/stuff', (req, res, next) => {
+app.get('/api/games', (req, res) => {
   // la méthode find() renvvoit le tableau de toutes nos instances Thing de la BDD
   /* La base de données MongoDB est fractionnée en collections : le nom de la collection est 
-    défini par défaut sur le pluriel du nom du modèle. Ici, ce sera Things .*/
-  Thing.find()
-    .then((things) => res.status(200).json(things))
+    défini par défaut sur le pluriel du nom du modèle. Ici, ce sera Things . */
+  Game.find()
+    .then((games) => res.status(200).json(games))
     .catch((error) => res.status(400).json({ error }));
 });
 

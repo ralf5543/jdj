@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 // import de mongoose, pour créer le schéma
 const mongoose = require('mongoose');
 
@@ -5,9 +6,9 @@ const mongoose = require('mongoose');
 const gameSchema = mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  imageUrl: { type: String, required: true },
-  userId: { type: String, required: true },
-  price: { type: Number, required: true },
+  maxplayers: { type: Number, required: true },
+  idealplayers: { type: Number, required: true },
+  duration: { type: Number, required: true },
 });
 
 // transforme ce schéma en modèle utilisable
