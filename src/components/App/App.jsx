@@ -1,30 +1,21 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require */
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import './App.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import UserSpace from '../UserSpace/UserSpace';
 import GamesListing from '../GamesListing/GamesListing';
+import { fetchGames } from '../../actions/recipes';
 
-function App() {
-  const [games, setGames] = useState([]);
+const App = () => {
+  const games = useSelector((state) => state.games.list);
 
-  const loadGames = () => {
-    console.log('il faut charger les jeux');
+  const dispatch = useDispatch();
 
-    axios
-      .get('http://localhost:3000/api/games')
-      .then((response) => {
-        console.log('affichage de la liste de jeux : ', response.data);
-        setGames(response.data);
-      })
-      .catch((error) => {
-        console.log('erreur de la requete : ', error);
-      })
-      .finally(() => {
-        console.log('le Finally qui sert à rien');
-      });
-  };
+  useEffect(() => {
+    const action = fetchGames();
+    dispatch(action);
+  }, [dispatch]);
 
   const deleteGame = () => {
     axios
@@ -85,11 +76,6 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    console.log('allleeeeeeeeeez');
-    loadGames();
-  }, []);
-
   return (
     <div className="App">
       <button onClick={addNewGame} type="button">
@@ -98,13 +84,12 @@ function App() {
       <button onClick={deleteGame} type="button">
         Supprimer un jeu
       </button>
-      <button onClick={loadGames} type="button">
-        Afficher la liste
-      </button>
+
+      {/* <UserSpace /> */}
 
       <GamesListing games={games} />
     </div>
   );
-}
+};
 
 export default App;

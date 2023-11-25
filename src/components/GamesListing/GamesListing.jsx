@@ -4,8 +4,10 @@ import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import './GamesListing.scss';
 
 const GamesListing = ({ games }) => {
+  console.log('liste de jeux : ', games);
   return (
     <ul>
+      {games && <p>youpi</p>}
       {games.map((game) => (
         <BoardgameCard key={game._id} {...game} />
       ))}
