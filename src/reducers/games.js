@@ -1,11 +1,10 @@
-import { SAVE_GAMES } from '../actions/recipes';
+import { SAVE_GAMES } from '../actions/games';
 
 export const initialState = {
-  list: ['aaaa', 'vvvv'],
-  // les recettes préférées (quand l'utilisateur est connecté)
-
+  list: [],
   // indique si les jeux sont chargés
   areGamesLoaded: false,
+  test: '',
 };
 
 /* reducer qui s'occupe de ce qui concerne les jeux */

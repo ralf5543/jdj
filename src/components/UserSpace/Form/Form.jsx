@@ -1,28 +1,39 @@
 import PropTypes from 'prop-types';
+import Field from './Field/Field';
 import './Form.scss';
 
-const Form = ({ inputValue, setInputValue, addNewGame }) => {
+const Form = ({ changeField, handlePostGame, test }) => {
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    handlePostGame();
+  };
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        addNewGame(inputValue);
-      }}
-    >
-      <input
-        value={inputValue}
-        type="text"
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button type="submit">submit</button>
-    </form>
+    <div className="login-form">
+      <form
+        autoComplete="off"
+        className="login-form-element"
+        onSubmit={handleSubmit}
+      >
+        <Field
+          name="password"
+          type="password"
+          placeholder="test"
+          onChange={changeField}
+          value={test}
+        />
+        <button type="submit" className="login-form-button">
+          OK
+        </button>
+      </form>
+    </div>
   );
 };
 
 Form.propTypes = {
-  setInputValue: PropTypes.func.isRequired,
-  inputValue: PropTypes.string.isRequired,
-  addNewGame: PropTypes.func.isRequired,
+  test: PropTypes.string.isRequired,
+  changeField: PropTypes.func.isRequired,
+  handlePostGame: PropTypes.func.isRequired,
 };
 
 export default Form;

@@ -5,7 +5,8 @@ import './App.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import GamesListing from '../GamesListing/GamesListing';
-import { fetchGames } from '../../actions/recipes';
+import UserSpace from '../UserSpace/UserSpace';
+import { fetchGames } from '../../actions/games';
 
 const App = () => {
   const games = useSelector((state) => state.games.list);
@@ -42,7 +43,7 @@ const App = () => {
       });
   };
 
-  const addNewGame = () => {
+  /* const addNewGame = () => {
     axios
       .post(
         // URL
@@ -74,18 +75,15 @@ const App = () => {
       .finally(() => {
         console.log('le Finally qui sert à rien');
       });
-  };
+  }; */
 
   return (
     <div className="App">
-      <button onClick={addNewGame} type="button">
-        ajouter un jeu
-      </button>
       <button onClick={deleteGame} type="button">
         Supprimer un jeu
       </button>
 
-      {/* <UserSpace /> */}
+      <UserSpace />
 
       <GamesListing games={games} />
     </div>
