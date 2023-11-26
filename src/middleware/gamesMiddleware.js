@@ -1,13 +1,13 @@
 import axios from 'axios';
 import {
-  DELETE_GAME,
   FETCH_GAMES,
   POST_GAME,
   saveGames,
+  // updateGamesList,
 } from '../actions/games';
 
 const gamesMiddleware = (store) => (next) => (action) => {
-  // console.log('action.type : ', action.type);
+  console.log('action.type : ', action.type);
   switch (action.type) {
     case FETCH_GAMES:
       // console.log('aller chercher les jeux');
@@ -42,7 +42,13 @@ const gamesMiddleware = (store) => (next) => (action) => {
           }
         )
         .then((response) => {
+          console.log('test, mais cest mort : ', store);
           console.log('on poste ce jeu : ', response.data);
+          console.log(
+            'updaate de la liste de jeux : ',
+            store.getState().games.list
+          );
+          // updateGamesList();
         })
         .catch((error) => {
           if (error.response) {
@@ -60,22 +66,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
         });
       break;
 
-    case DELETE_GAME:
-      console.log('Supprime le jeu : ');
-      axios
-        .delete(`http://localhost:3000/api/games/`)
-        .then((response) => {
-          // console.log(response);
-          console.log('jaurais supprimé ce jeu : ', response.data);
-          // store.dispatch(saveGames(response.data));
-        })
-        .catch((error) => {
-          console.log('erreur de la requete : ', error);
-        })
-        .finally(() => {
-          // console.log('le Finally qui sert à rien');
-        });
-      break;
     default:
   }
 

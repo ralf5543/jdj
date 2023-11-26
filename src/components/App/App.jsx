@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import './App.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import GamesListing from '../GamesListing/GamesListing';
 import UserSpace from '../UserSpace/UserSpace';
 import { fetchGames } from '../../actions/games';
@@ -17,6 +16,8 @@ const App = () => {
     const action = fetchGames();
     dispatch(action);
   }, [dispatch]);
+
+  console.log('render de app');
 
   return (
     <div className="App">

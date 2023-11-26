@@ -4,6 +4,7 @@ export const POST_GAME = 'POST_GAME';
 export const SAVE_GAMES = 'SAVE_GAMES';
 export const DELETE_GAME = 'DELETE_GAME';
 export const CHANGE_GAME_TITLE_FIELD = 'CHANGE_GAME_TITLE_FIELD';
+export const UPDATE_GAMES_LIST = 'UPDATE_GAMES_LIST';
 
 export const fetchGames = () => ({
   type: FETCH_GAMES,
@@ -28,4 +29,8 @@ export const changeGameTitleField = (newValue, gameTitleField) => ({
 
 export const deleteGame = () => ({
   type: DELETE_GAME,
+});
+
+export const updateGamesList = () => ({
+  type: UPDATE_GAMES_LIST,
 });

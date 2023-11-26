@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import './GamesListing.scss';
@@ -8,7 +9,7 @@ const GamesListing = ({ games }) => {
   return (
     <ul>
       {games.map((game) => (
-        <BoardgameCard key={game._id} {...game} />
+        <BoardgameCard key={game._id} id={game._id} {...game} />
       ))}
     </ul>
   );

@@ -1,6 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Form from './Form/Form';
-import { postGame, changeGameTitleField } from '../../actions/games';
+import {
+  postGame,
+  updateGamesList,
+  changeGameTitleField,
+} from '../../actions/games';
 import './UserSpace.scss';
 
 const UserSpace = () => {
@@ -15,15 +19,18 @@ const UserSpace = () => {
         changeField={(newValue, gameTitleField) => {
           const action = changeGameTitleField(newValue, gameTitleField);
           dispatch(action);
-          console.log('newValue : ', newValue);
-          console.log('gameTitleField : ', gameTitleField);
-          console.log('gameTitleValue : ', gameTitleValue);
+          // console.log('newValue : ', newValue);
+          // console.log('gameTitleField : ', gameTitleField);
+          // console.log('gameTitleValue : ', gameTitleValue);
         }}
         handlePostGame={() => {
           // le traitement placé ici est déclenché à la soumission du formulaire
           // console.log('handlePostGame');
           const action = postGame();
           dispatch(action);
+        }}
+        updateGamesList={() => {
+          dispatch(updateGamesList());
         }}
       />
     </>
