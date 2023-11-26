@@ -19,7 +19,8 @@ export const saveGames = (games) => ({
   // ici c'est équivalent à games: games
 });
 
-export const changeTestField = (games) => ({
+export const changeTestField = (newValue, testfield) => ({
   type: CHANGE_TEST_FIELD,
-  games,
+  newValue,
+  testfield,
 });

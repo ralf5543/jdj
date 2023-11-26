@@ -43,40 +43,6 @@ const App = () => {
       });
   };
 
-  /* const addNewGame = () => {
-    axios
-      .post(
-        // URL
-        'http://localhost:3000/api/games',
-        // paramètres
-        {
-          title: 'Mon super jeu test',
-          description: 'Ceci est un jeu trop bien',
-          maxplayers: 6,
-          idealplayers: 4,
-          duration: 60,
-        }
-      )
-      .then((response) => {
-        console.log('affichage de la liste de jeux : ', response.data);
-        setGames(response.data);
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log('erreur de la response : ', error.response);
-        } else if (error.request) {
-          console.log('erreur de la request : ', error.request);
-        } else if (error.message) {
-          console.log('erreur du message : ', error.message);
-        }
-
-        console.log('erreur de la requete : ', error);
-      })
-      .finally(() => {
-        console.log('le Finally qui sert à rien');
-      });
-  }; */
-
   return (
     <div className="App">
       <button onClick={deleteGame} type="button">

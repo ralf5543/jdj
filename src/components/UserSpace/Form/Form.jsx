@@ -16,8 +16,9 @@ const Form = ({ changeField, handlePostGame, test }) => {
         onSubmit={handleSubmit}
       >
         <Field
-          name="password"
-          type="password"
+          // must have the same name of the state !!!!!!!!!!
+          name="test"
+          type="text"
           placeholder="test"
           onChange={changeField}
           value={test}

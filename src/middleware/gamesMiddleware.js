@@ -2,8 +2,7 @@ import axios from 'axios';
 import { FETCH_GAMES, POST_GAME, saveGames } from '../actions/games';
 
 const gamesMiddleware = (store) => (next) => (action) => {
-  // console.log('on a intercepté une action dans le middleware: ', action);
-  console.log('action.type : ', action.type);
+  // console.log('action.type : ', action.type);
   switch (action.type) {
     case FETCH_GAMES:
       // console.log('aller chercher les jeux');
@@ -24,13 +23,14 @@ const gamesMiddleware = (store) => (next) => (action) => {
 
     case POST_GAME:
       console.log('poste un nouveau jeu');
+      // console.log('avec comme ttitre : ', store.games.test);
       axios
         .post(
           // URL
           'http://localhost:3000/api/games',
           // paramètres
           {
-            title: 'Mon jeu ENCORE MEILLEUR',
+            title: store.getState().games.test,
             description: 'Ceci est un jeu trop bien',
             maxplayers: 12,
             idealplayers: 1,

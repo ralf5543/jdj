@@ -1,4 +1,4 @@
-import { SAVE_GAMES } from '../actions/games';
+import { SAVE_GAMES, CHANGE_TEST_FIELD } from '../actions/games';
 
 export const initialState = {
   list: [],
@@ -16,6 +16,12 @@ const reducer = (state = initialState, action = {}) => {
         list: action.games,
         // on indique que les recettes sont chargées
         areGamesLoaded: true,
+      };
+
+    case CHANGE_TEST_FIELD:
+      return {
+        ...state,
+        [action.testfield]: action.newValue,
       };
 
     default:
