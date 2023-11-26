@@ -1,10 +1,10 @@
-import { SAVE_GAMES, CHANGE_TEST_FIELD } from '../actions/games';
+import { SAVE_GAMES, CHANGE_GAME_TITLE_FIELD } from '../actions/games';
 
 export const initialState = {
   list: [],
   // indique si les jeux sont chargés
   areGamesLoaded: false,
-  test: '',
+  gameTitle: '',
 };
 
 /* reducer qui s'occupe de ce qui concerne les jeux */
@@ -18,10 +18,10 @@ const reducer = (state = initialState, action = {}) => {
         areGamesLoaded: true,
       };
 
-    case CHANGE_TEST_FIELD:
+    case CHANGE_GAME_TITLE_FIELD:
       return {
         ...state,
-        [action.testfield]: action.newValue,
+        [action.gameTitleField]: action.newValue,
       };
 
     default:

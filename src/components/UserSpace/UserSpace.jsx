@@ -1,23 +1,23 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Form from './Form/Form';
-import { postGame, changeTestField } from '../../actions/games';
+import { postGame, changeGameTitleField } from '../../actions/games';
 import './UserSpace.scss';
 
 const UserSpace = () => {
-  const testValue = useSelector((state) => state.games.test);
+  const gameTitleValue = useSelector((state) => state.games.gameTitle);
 
   const dispatch = useDispatch();
   return (
     <>
       <p>furtur espace perso</p>
       <Form
-        test={testValue}
-        changeField={(newValue, testfield) => {
-          const action = changeTestField(newValue, testfield);
+        gameTitle={gameTitleValue}
+        changeField={(newValue, gameTitleField) => {
+          const action = changeGameTitleField(newValue, gameTitleField);
           dispatch(action);
           console.log('newValue : ', newValue);
-          console.log('testfield : ', testfield);
-          console.log('testValue : ', testValue);
+          console.log('gameTitleField : ', gameTitleField);
+          console.log('gameTitleValue : ', gameTitleValue);
         }}
         handlePostGame={() => {
           // le traitement placé ici est déclenché à la soumission du formulaire

@@ -18,37 +18,8 @@ const App = () => {
     dispatch(action);
   }, [dispatch]);
 
-  const deleteGame = () => {
-    axios
-      .delete(
-        // URL
-        'http://localhost:3000/api/games/6561db86f9214b6364b7e3b2'
-      )
-      .then((response) => {
-        console.log('affichage de la requete delete : ', response);
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.log('erreur de la response : ', error.response);
-        } else if (error.request) {
-          console.log('erreur de la request : ', error.request);
-        } else if (error.message) {
-          console.log('erreur du message : ', error.message);
-        }
-
-        console.log('erreur de la requete : ', error);
-      })
-      .finally(() => {
-        console.log('le Finally qui sert à rien');
-      });
-  };
-
   return (
     <div className="App">
-      <button onClick={deleteGame} type="button">
-        Supprimer un jeu
-      </button>
-
       <UserSpace />
 
       <GamesListing games={games} />

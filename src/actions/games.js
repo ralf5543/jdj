@@ -2,7 +2,8 @@
 export const FETCH_GAMES = 'FETCH_GAMES';
 export const POST_GAME = 'POST_GAME';
 export const SAVE_GAMES = 'SAVE_GAMES';
-export const CHANGE_TEST_FIELD = 'CHANGE_TEST_FIELD';
+export const DELETE_GAME = 'DELETE_GAME';
+export const CHANGE_GAME_TITLE_FIELD = 'CHANGE_GAME_TITLE_FIELD';
 
 export const fetchGames = () => ({
   type: FETCH_GAMES,
@@ -19,8 +20,12 @@ export const saveGames = (games) => ({
   // ici c'est équivalent à games: games
 });
 
-export const changeTestField = (newValue, testfield) => ({
-  type: CHANGE_TEST_FIELD,
+export const changeGameTitleField = (newValue, gameTitleField) => ({
+  type: CHANGE_GAME_TITLE_FIELD,
   newValue,
-  testfield,
+  gameTitleField,
+});
+
+export const deleteGame = () => ({
+  type: DELETE_GAME,
 });

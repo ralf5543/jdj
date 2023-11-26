@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Field from './Field/Field';
 import './Form.scss';
 
-const Form = ({ changeField, handlePostGame, test }) => {
+const Form = ({ changeField, handlePostGame, gameTitle }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handlePostGame();
@@ -17,11 +17,11 @@ const Form = ({ changeField, handlePostGame, test }) => {
       >
         <Field
           // must have the same name of the state !!!!!!!!!!
-          name="test"
+          name="gameTitle"
           type="text"
-          placeholder="test"
+          placeholder="Titre du jeu"
           onChange={changeField}
-          value={test}
+          value={gameTitle}
         />
         <button type="submit" className="login-form-button">
           OK
@@ -32,7 +32,7 @@ const Form = ({ changeField, handlePostGame, test }) => {
 };
 
 Form.propTypes = {
-  test: PropTypes.string.isRequired,
+  gameTitle: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handlePostGame: PropTypes.func.isRequired,
 };

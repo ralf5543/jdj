@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { FETCH_GAMES, POST_GAME, saveGames } from '../actions/games';
+import {
+  DELETE_GAME,
+  FETCH_GAMES,
+  POST_GAME,
+  saveGames,
+} from '../actions/games';
 
 const gamesMiddleware = (store) => (next) => (action) => {
   // console.log('action.type : ', action.type);
@@ -23,14 +28,13 @@ const gamesMiddleware = (store) => (next) => (action) => {
 
     case POST_GAME:
       console.log('poste un nouveau jeu');
-      // console.log('avec comme ttitre : ', store.games.test);
       axios
         .post(
           // URL
           'http://localhost:3000/api/games',
           // paramètres
           {
-            title: store.getState().games.test,
+            title: store.getState().games.gameTitle,
             description: 'Ceci est un jeu trop bien',
             maxplayers: 12,
             idealplayers: 1,
@@ -56,6 +60,22 @@ const gamesMiddleware = (store) => (next) => (action) => {
         });
       break;
 
+    case DELETE_GAME:
+      console.log('Supprime le jeu : ');
+      axios
+        .delete(`http://localhost:3000/api/games/`)
+        .then((response) => {
+          // console.log(response);
+          console.log('jaurais supprimé ce jeu : ', response.data);
+          // store.dispatch(saveGames(response.data));
+        })
+        .catch((error) => {
+          console.log('erreur de la requete : ', error);
+        })
+        .finally(() => {
+          // console.log('le Finally qui sert à rien');
+        });
+      break;
     default:
   }
 
