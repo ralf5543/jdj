@@ -1,10 +1,5 @@
 import axios from 'axios';
-import {
-  FETCH_GAMES,
-  POST_GAME,
-  fetchGames,
-  saveGames,
-} from '../actions/games';
+import { FETCH_GAMES, POST_GAME, saveGames } from '../actions/games';
 
 const gamesMiddleware = (store) => (next) => (action) => {
   console.log('action.type : ', action.type);
