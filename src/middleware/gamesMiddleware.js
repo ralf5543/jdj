@@ -2,8 +2,8 @@ import axios from 'axios';
 import {
   FETCH_GAMES,
   POST_GAME,
+  fetchGames,
   saveGames,
-  // updateGamesList,
 } from '../actions/games';
 
 const gamesMiddleware = (store) => (next) => (action) => {
@@ -27,7 +27,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
       break;
 
     case POST_GAME:
-      console.log('poste un nouveau jeu');
       axios
         .post(
           // URL
@@ -42,13 +41,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
           }
         )
         .then((response) => {
-          console.log('test, mais cest mort : ', store);
-          console.log('on poste ce jeu : ', response.data);
-          console.log(
-            'updaate de la liste de jeux : ',
-            store.getState().games.list
-          );
-          // updateGamesList();
+          console.log('on poste ce jeu : ', store.getState().games.gameTitle);
         })
         .catch((error) => {
           if (error.response) {
@@ -62,8 +55,25 @@ const gamesMiddleware = (store) => (next) => (action) => {
           console.log('erreur de la requete : ', error);
         })
         .finally(() => {
-          console.log('le Finally qui sert à rien');
+          // refetch la liste de jeux mise à jour
+          axios
+            .get('http://localhost:3000/api/games')
+            .then((response) => {
+              // console.log(response);
+              console.log(
+                'affichage de la nouvelle liste de jeux : ',
+                response.data
+              );
+              store.dispatch(saveGames(response.data));
+            })
+            .catch((error) => {
+              console.log('erreur de la requete : ', error);
+            })
+            .finally(() => {
+              // console.log('le Finally qui sert à rien');
+            });
         });
+
       break;
 
     default:

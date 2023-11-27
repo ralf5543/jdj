@@ -1,10 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Form from './Form/Form';
-import {
-  postGame,
-  updateGamesList,
-  changeGameTitleField,
-} from '../../actions/games';
+import { postGame, changeGameTitleField } from '../../actions/games';
+
 import './UserSpace.scss';
 
 const UserSpace = () => {
@@ -26,11 +23,7 @@ const UserSpace = () => {
         handlePostGame={() => {
           // le traitement placé ici est déclenché à la soumission du formulaire
           // console.log('handlePostGame');
-          const action = postGame();
-          dispatch(action);
-        }}
-        updateGamesList={() => {
-          dispatch(updateGamesList());
+          dispatch(postGame());
         }}
       />
     </>

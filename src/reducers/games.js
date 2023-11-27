@@ -1,8 +1,4 @@
-import {
-  SAVE_GAMES,
-  CHANGE_GAME_TITLE_FIELD,
-  UPDATE_GAMES_LIST,
-} from '../actions/games';
+import { SAVE_GAMES, CHANGE_GAME_TITLE_FIELD } from '../actions/games';
 
 export const initialState = {
   list: [],

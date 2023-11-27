@@ -1,15 +1,11 @@
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
 import Field from './Field/Field';
 import './Form.scss';
-import { fetchGames } from '../../../actions/games';
 
 const Form = ({ changeField, handlePostGame, gameTitle }) => {
-  const dispatch = useDispatch();
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handlePostGame();
-    dispatch(fetchGames());
   };
 
   return (

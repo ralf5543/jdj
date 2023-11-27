@@ -19,7 +19,7 @@ const BoardgameCard = ({
       .delete(`http://localhost:3000/api/games/${idtest}`)
       .then((response) => {
         // console.log(response);
-        console.log('Suppression de jeu');
+        console.log('Suppression du  jeu ', title);
       })
       .catch((error) => {
         console.log('erreur de la requete : ', error);
