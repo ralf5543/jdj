@@ -34,7 +34,7 @@ const Field = ({ value, type, name, placeholder, onChange }) => {
 };
 
 Field.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.node,
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,

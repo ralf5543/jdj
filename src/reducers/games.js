@@ -1,11 +1,20 @@
-import { SAVE_GAMES, CHANGE_GAME_TITLE_FIELD } from '../actions/games';
+import {
+  SAVE_GAMES,
+  CHANGE_GAME_TITLE_FIELD,
+  POST_GAME,
+} from '../actions/games';
 
 export const initialState = {
   list: [],
   // indique si les jeux sont chargés
   areGamesLoaded: false,
   gameTitle: '',
-  currentGameId: '',
+  gameDescription: '',
+  gameMaxPlayers: 8000,
+  gameIdealPlayers: 6000,
+  gameDuration: 300,
+  gameVisual: '',
+  currentGameId: 'dfgdfgdfg',
 };
 
 /* reducer qui s'occupe de ce qui concerne les jeux */
@@ -23,6 +32,19 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.gameTitleField]: action.newValue,
+      };
+
+    case POST_GAME:
+      return {
+        ...state,
+        // clear all fields
+        gameTitle: '',
+        gameDescription: '',
+        gameMaxPlayers: '',
+        gameIdealPlayers: '',
+        gameDuration: '',
+        gameVisual: '',
+        currentGameId: '',
       };
 
     default:

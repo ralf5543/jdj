@@ -10,6 +10,7 @@ const BoardgameCard = ({
   maxplayers,
   idealplayers,
   duration,
+  visual,
   id,
 }) => {
   const dispatch = useDispatch();
@@ -32,11 +33,7 @@ const BoardgameCard = ({
   return (
     <li className="boardgame-card">
       <h2 className="boardgame-card_title">{title}</h2>
-      <img
-        className="boardgame-card_visual"
-        src="https://picsum.photos/300/300"
-        alt=""
-      />
+      <img className="boardgame-card_visual" src={visual} alt="" />
       <p className="boardgame-card_description">{description}</p>
       <p className="boardgame-card_maxplayers">
         Nombre de joueurs MAX : {maxplayers}
@@ -47,8 +44,6 @@ const BoardgameCard = ({
       <p className="boardgame-card_duration">{duration} minutes</p>
       <button
         onClick={() => {
-          console.log('game id', id);
-
           deleteGame(id);
         }}
         type="button"
@@ -65,6 +60,7 @@ BoardgameCard.propTypes = {
   maxplayers: PropTypes.number.isRequired,
   idealplayers: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
+  visual: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };
 

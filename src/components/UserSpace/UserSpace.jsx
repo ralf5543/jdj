@@ -6,6 +6,17 @@ import './UserSpace.scss';
 
 const UserSpace = () => {
   const gameTitleValue = useSelector((state) => state.games.gameTitle);
+  const gameDescriptionValue = useSelector(
+    (state) => state.games.gameDescription
+  );
+  const gameMaxPlayersValue = useSelector(
+    (state) => state.games.gameMaxPlayers
+  );
+  const gameIdealPlayersValue = useSelector(
+    (state) => state.games.gameIdealPlayers
+  );
+  const gameDurationValue = useSelector((state) => state.games.gameDuration);
+  const gameVisualValue = useSelector((state) => state.games.gameVisual);
 
   const dispatch = useDispatch();
   return (
@@ -13,6 +24,11 @@ const UserSpace = () => {
       <p>furtur espace perso</p>
       <Form
         gameTitle={gameTitleValue}
+        gameDescription={gameDescriptionValue}
+        gameMaxPlayers={gameMaxPlayersValue}
+        gameIdealPlayers={gameIdealPlayersValue}
+        gameDuration={gameDurationValue}
+        gameVisual={gameVisualValue}
         changeField={(newValue, gameTitleField) => {
           const action = changeGameTitleField(newValue, gameTitleField);
           dispatch(action);

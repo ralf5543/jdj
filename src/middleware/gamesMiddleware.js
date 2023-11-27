@@ -29,10 +29,11 @@ const gamesMiddleware = (store) => (next) => (action) => {
           // paramètres
           {
             title: store.getState().games.gameTitle,
-            description: 'Ceci est un jeu trop bien',
-            maxplayers: 12,
-            idealplayers: 1,
-            duration: 6000,
+            description: store.getState().games.gameDescription,
+            maxplayers: store.getState().games.gameMaxPlayers,
+            idealplayers: store.getState().games.gameIdealPlayers,
+            duration: store.getState().games.gameDuration,
+            visual: store.getState().games.gameVisual,
           }
         )
         .then((response) => {
