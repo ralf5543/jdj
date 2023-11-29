@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+
 // import de mongoose, pour gérer les BDD du backend avec MongoDB
 const mongoose = require('mongoose');
 
@@ -8,18 +9,26 @@ const express = require('express');
 // app est notre application; elle devient une application express
 const app = express();
 
+// Gère tout ce qui est problèmes de CORS (Cross origin bla bla)
+const cors = require('cors');
+
+app.use(cors());
+
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 // On importe notre modèle
-// const Thing = require('./models/Thing');
-const Game = require('./models/Game');
+const Game = require('./models/game');
+
+const uri = process.env.STRING_URI;
 
 // connexion à un user (ralf5543, le mdp est juste après les deux points)
 mongoose
-  .connect(
-    'mongodb+srv://ralf5543:ko8yMWq9ewMhqmCi@cluster0.uvb0mui.mongodb.net/?retryWrites=true&w=majority',
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
+mongoose.connect(uri, { useNewUrlParser: true });
 
 // Ceci est un middleware, une fonction qui traite les requetes et les réponses
 // "use" si on veut intercepter toutes les requetes, sinon on précise (get, post...)
@@ -46,7 +55,7 @@ app.use(express.json());
 // Ici on donne l'autorisation à l'app de recevoir les requetes et réponses (mais s'applique sur la réponse) d'autres serveurs, en passant des "headers".
 // Si on ne fait pas ça, le CORS protège les échanges entre deux serveurs
 // pas de route spécifique, on veut que ça s'applique à toutes les routes
-app.use((req, res, next) => {
+/* app.use(cors) => {
   // * : tout le monde à accès à l'origine (notre api)
   res.setHeader('Access-Control-Allow-Origin', '*');
   // ajoute les headers mentionnés aux requêtes envoyées vers notre API (Origin , X-Requested-With , etc.) ;
@@ -60,7 +69,8 @@ app.use((req, res, next) => {
     'GET, POST, PUT, DELETE, PATCH, OPTIONS'
   );
   next();
-});
+}); */
+app.use(cors());
 
 app.post('/api/games', (req, res, next) => {
   // supprime l'id existant par défaut dans le body (puisque mongoose va en ajouté un)
@@ -129,7 +139,7 @@ app.delete('/api/games/:id', (req, res) => {
     .catch((error) => res.status(400).json({ error }));
 });
 
-// api/stuff est ici un raccourci pour http://localhost:3000/api/stuff
+// api/games est ici un raccourci pour http://localhost:3000/api/games
 app.get('/api/games', (req, res) => {
   // la méthode find() renvvoit le tableau de toutes nos instances Thing de la BDD
   /* La base de données MongoDB est fractionnée en collections : le nom de la collection est 

@@ -3,7 +3,12 @@ import Field from './Field/Field';
 import './Form.scss';
 
 const Form = ({
-  changeField,
+  changeTitleField,
+  changeDescriptionField,
+  changeMaxplayersField,
+  changeIdealPlayersField,
+  changeDurationField,
+  changeVisualField,
   handlePostGame,
   gameTitle,
   gameDescription,
@@ -29,7 +34,7 @@ const Form = ({
           name="gameTitle"
           type="text"
           placeholder="Titre du jeu"
-          onChange={changeField}
+          onChange={changeTitleField}
           value={gameTitle}
         />
         <Field
@@ -37,7 +42,7 @@ const Form = ({
           name="gameDescription"
           type="text"
           placeholder="Description du jeu"
-          onChange={changeField}
+          onChange={changeDescriptionField}
           value={gameDescription}
         />
         <Field
@@ -45,7 +50,7 @@ const Form = ({
           name="gameMaxPlayers"
           type="number"
           placeholder="Nombre de joueurs maximum"
-          onChange={changeField}
+          onChange={changeMaxplayersField}
           value={gameMaxPlayers}
         />
         <Field
@@ -53,7 +58,7 @@ const Form = ({
           name="gameIdealPlayers"
           type="number"
           placeholder="Nombre de joueurs idéal"
-          onChange={changeField}
+          onChange={changeIdealPlayersField}
           value={gameIdealPlayers}
         />
         <Field
@@ -61,15 +66,15 @@ const Form = ({
           name="gameDuration"
           type="number"
           placeholder="Durée d'une partie"
-          onChange={changeField}
+          onChange={changeDurationField}
           value={gameDuration}
         />
         <Field
           // must have the same name of the state !!!!!!!!!!
           name="gameVisual"
-          type="image"
+          type="text"
           placeholder="Visuel du jeu"
-          onChange={changeField}
+          onChange={changeVisualField}
           value={gameVisual}
         />
         <button type="submit" className="login-form-button">
@@ -87,7 +92,12 @@ Form.propTypes = {
   gameIdealPlayers: PropTypes.number.isRequired,
   gameDuration: PropTypes.number.isRequired,
   gameVisual: PropTypes.string.isRequired,
-  changeField: PropTypes.func.isRequired,
+  changeTitleField: PropTypes.func.isRequired,
+  changeDescriptionField: PropTypes.func.isRequired,
+  changeMaxplayersField: PropTypes.func.isRequired,
+  changeIdealPlayersField: PropTypes.func.isRequired,
+  changeDurationField: PropTypes.func.isRequired,
+  changeVisualField: PropTypes.func.isRequired,
   handlePostGame: PropTypes.func.isRequired,
 };
 

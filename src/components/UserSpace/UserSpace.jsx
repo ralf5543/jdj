@@ -1,6 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
 import Form from './Form/Form';
-import { postGame, changeGameTitleField } from '../../actions/games';
+import {
+  postGame,
+  changeGameTitleField,
+  changeGameDescriptionField,
+  changeGameMaxPlayersField,
+  changeGameIdealPlayersField,
+  changeGameDurationField,
+  changeGameVisualField,
+} from '../../actions/games';
 
 import './UserSpace.scss';
 
@@ -29,12 +37,42 @@ const UserSpace = () => {
         gameIdealPlayers={gameIdealPlayersValue}
         gameDuration={gameDurationValue}
         gameVisual={gameVisualValue}
-        changeField={(newValue, gameTitleField) => {
+        changeTitleField={(newValue, gameTitleField) => {
           const action = changeGameTitleField(newValue, gameTitleField);
           dispatch(action);
-          // console.log('newValue : ', newValue);
-          // console.log('gameTitleField : ', gameTitleField);
-          // console.log('gameTitleValue : ', gameTitleValue);
+        }}
+        changeDescriptionField={(newValue, gameDescriptionField) => {
+          const action = changeGameDescriptionField(
+            newValue,
+            gameDescriptionField
+          );
+          dispatch(action);
+        }}
+        changeMaxplayersField={(newValue, gameMaxPlayersField) => {
+          const action = changeGameMaxPlayersField(
+            // Number, because we want a number type, frome a text field
+            Number(newValue),
+            gameMaxPlayersField
+          );
+          dispatch(action);
+        }}
+        changeIdealPlayersField={(newValue, gameIdealPlayersField) => {
+          const action = changeGameIdealPlayersField(
+            Number(newValue),
+            gameIdealPlayersField
+          );
+          dispatch(action);
+        }}
+        changeDurationField={(newValue, gameDurationField) => {
+          const action = changeGameDurationField(
+            Number(newValue),
+            gameDurationField
+          );
+          dispatch(action);
+        }}
+        changeVisualField={(newValue, gameVisualField) => {
+          const action = changeGameVisualField(newValue, gameVisualField);
+          dispatch(action);
         }}
         handlePostGame={() => {
           // le traitement placé ici est déclenché à la soumission du formulaire
