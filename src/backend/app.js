@@ -18,7 +18,9 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+// Importation des routes
 const gamesRoutes = require('./routes/games');
+const userRoutes = require('./routes/user');
 
 const uri = process.env.STRING_URI;
 
@@ -71,7 +73,9 @@ app.use(express.json());
 }); */
 app.use(cors());
 
+// Remplace la racine de tous les paths du fichier routeur par "/api/games"
 app.use('/api/games', gamesRoutes);
+app.use('/api/auth', userRoutes);
 
 // Exporte la const pour pouvvoir y appliquer partout (notamment dans le fichier server.js)
 module.exports = app;
