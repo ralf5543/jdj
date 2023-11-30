@@ -2,7 +2,7 @@ import axios from 'axios';
 import { FETCH_GAMES, POST_GAME, saveGames } from '../actions/games';
 
 const gamesMiddleware = (store) => (next) => (action) => {
-  console.log('action.type : ', action.type);
+  // console.log('action.type : ', action.type);
   switch (action.type) {
     case FETCH_GAMES:
       // console.log('aller chercher les jeux');
