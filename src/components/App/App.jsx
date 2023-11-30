@@ -5,6 +5,7 @@ import './App.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import GamesListing from '../GamesListing/GamesListing';
 import UserSpace from '../UserSpace/UserSpace';
+import AppHeader from '../AppHeader/AppHeader';
 import { fetchGames } from '../../actions/games';
 
 const App = () => {
@@ -21,8 +22,8 @@ const App = () => {
 
   return (
     <div className="App">
+      <AppHeader />
       <UserSpace />
-
       <GamesListing games={games} />
     </div>
   );

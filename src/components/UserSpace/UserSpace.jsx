@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import Form from './Form/Form';
+import Form from './FormPostGame/FormPostGame';
 import {
   postGame,
   changeGameTitleField,

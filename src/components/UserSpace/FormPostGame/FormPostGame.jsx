@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import Field from './Field/Field';
-import './Form.scss';
+import Field from '../../genericComponents/Field/Field';
+import './FormPostGame.scss';
 
-const Form = ({
+const FormPostGame = ({
   changeTitleField,
   changeDescriptionField,
   changeMaxplayersField,
@@ -23,12 +23,8 @@ const Form = ({
   };
 
   return (
-    <div className="login-form">
-      <form
-        autoComplete="off"
-        className="login-form-element"
-        onSubmit={handleSubmit}
-      >
+    <div>
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <Field
           // must have the same name of the state !!!!!!!!!!
           name="gameTitle"
@@ -85,7 +81,7 @@ const Form = ({
   );
 };
 
-Form.propTypes = {
+FormPostGame.propTypes = {
   gameTitle: PropTypes.string.isRequired,
   gameDescription: PropTypes.string.isRequired,
   gameMaxPlayers: PropTypes.number.isRequired,
@@ -101,4 +97,4 @@ Form.propTypes = {
   handlePostGame: PropTypes.func.isRequired,
 };
 
-export default Form;
+export default FormPostGame;

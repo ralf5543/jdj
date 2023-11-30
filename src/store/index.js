@@ -5,11 +5,13 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 import reducer from '../reducers';
 
 import gamesMiddleware from '../middleware/gamesMiddleware';
+import userMiddleware from '../middleware/userMiddleware';
 
 // on combine devTools avec les middlewares
 const enhancers = composeWithDevTools(
   applyMiddleware(
-    gamesMiddleware
+    gamesMiddleware,
+    userMiddleware
     // ... d'autres middlewares
   )
 );

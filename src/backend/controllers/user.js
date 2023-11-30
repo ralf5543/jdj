@@ -36,7 +36,7 @@ exports.login = (req, res, next) => {
           res
             // sinon, envoie un message vlontairement trouble, pour la sécurité
             .status(401)
-            .json({ message: 'Paire login/mot de passe incorrecte' })
+            .json({ message: 'AAAAA Paire login/mot de passe incorrecte' })
         );
       }
       // compare le mdp crypté avec celui de la BDD
@@ -47,7 +47,7 @@ exports.login = (req, res, next) => {
           if (!valid) {
             return res
               .status(401)
-              .json({ message: 'Paire login/mot de passe incorrecte' });
+              .json({ message: 'BBBBB Paire login/mot de passe incorrecte' });
           }
           // si c'est ok, renvoie l'id avec un token
           res.status(200).json({

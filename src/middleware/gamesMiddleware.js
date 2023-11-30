@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import axios from 'axios';
 import { FETCH_GAMES, POST_GAME, saveGames } from '../actions/games';
 
