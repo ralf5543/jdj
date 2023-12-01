@@ -6,7 +6,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
-exports.signup = (req, res, next) => {
+exports.signup = (req, res) => {
   // bcrypt est asynchrone
   bcrypt
     // hash le body de la requete, et "10", c'est le nombre de fois qu'il l'applique

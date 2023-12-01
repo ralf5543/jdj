@@ -3,7 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import './style.scss';
 
 import LoginForm from '../LoginForm/LoginForm';
-import { changeLoginField, submitLogin } from '../../actions/user';
+import {
+  changeLoginField,
+  changeSignupField,
+  submitSignup,
+  submitLogin,
+} from '../../actions/user';
+import SignupForm from '../SignupForm/SignupForm';
 
 const AppHeader = () => {
   // /!\ ne pas oublier le nom du tiroir, state.email c'est undefined
@@ -27,6 +33,22 @@ const AppHeader = () => {
 
   return (
     <header className="header">
+      <SignupForm
+        email={emailValue}
+        password={passwordValue}
+        changeField={(newValue, identifier) => {
+          const action = changeSignupField(newValue, identifier);
+          dispatch(action);
+        }}
+        handleSignup={() => {
+          const action = submitSignup();
+          dispatch(action);
+        }}
+        handleLogin={() => {
+          const action = submitLogin();
+          dispatch(action);
+        }}
+      />
       <LoginForm
         email={emailValue}
         password={passwordValue}
