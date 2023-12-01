@@ -41,8 +41,6 @@ const reducer = (state = initialState, action = {}) => {
     case HANDLE_SUCCESSFUL_SIGNUP:
       return {
         ...state,
-        nickname: action.nickname,
-        token: action.token,
         // sécurité : on efface les identifiants dans le state dès qu'on en a
         // plus besoin
         email: '',

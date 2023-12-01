@@ -21,17 +21,18 @@ const userMiddleware = (store) => (next) => (action) => {
           {
             email: store.getState().user.email,
             password: store.getState().user.password,
+            nickname: store.getState().user.nickname,
           }
         )
         .then((response) => {
           console.log(response);
           // on a 3 infos dans response.data : pseudo, logged, token
           store.dispatch(
-            handleSuccessfulSignup(response.data.pseudo, response.data.token)
+            handleSuccessfulSignup(response.data.nickname, response.data.token)
           );
         })
         .catch((error) => {
-          console.log('erreur lors du login : ', error.message);
+          console.log("erreur lors de l'inscription : ", error.message);
         });
       break;
 
@@ -49,13 +50,10 @@ const userMiddleware = (store) => (next) => (action) => {
           }
         )
         .then((response) => {
-          console.log(
-            'bien connecté avec cet user ID : ',
-            response.data.userId
-          );
+          console.log('bien connecté avec ce user : ', response.data.nickname);
           // on a 3 infos dans response.data : pseudo, logged, token
           store.dispatch(
-            handleSuccessfulLogin(response.data.pseudo, response.data.token)
+            handleSuccessfulLogin(response.data.nickname, response.data.token)
           );
         })
         .catch((error) => {

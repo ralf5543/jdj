@@ -17,6 +17,7 @@ exports.signup = (req, res) => {
       const user = new User({
         email: req.body.email,
         password: hash,
+        nickname: req.body.nickname,
       });
       user
         // sauvegarde le nouveau user dans la BDD
@@ -27,7 +28,7 @@ exports.signup = (req, res) => {
     .catch((error) => res.status(500).json({ error }));
 };
 
-exports.login = (req, res, next) => {
+exports.login = (req, res) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
       // vérifie qu'un email correspondant existe bien dans la BDD
@@ -53,6 +54,7 @@ exports.login = (req, res, next) => {
           res.status(200).json({
             userId: user._id,
             token: 'TOKEN',
+            nickname: user.nickname,
           });
         })
         // erreur serveur

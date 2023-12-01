@@ -4,12 +4,16 @@ import Field from '../genericComponents/Field/Field';
 
 import './SignupForm.scss';
 
-const SignupForm = ({ email, password, changeField, handleSignup }) => {
+const SignupForm = ({
+  email,
+  password,
+  nickname,
+  changeField,
+  handleSignup,
+}) => {
   const handleSubmit = (evt) => {
-    console.log('toto');
     evt.preventDefault();
     handleSignup();
-    console.log('tata');
   };
 
   return (
@@ -20,6 +24,12 @@ const SignupForm = ({ email, password, changeField, handleSignup }) => {
         className="login-form-element"
         onSubmit={handleSubmit}
       >
+        <Field
+          name="nickname"
+          placeholder="Votre pseudo"
+          onChange={changeField}
+          value={nickname}
+        />
         <Field
           name="email"
           placeholder="Adresse Email"
@@ -46,6 +56,7 @@ SignupForm.propTypes = {
   email: PropTypes.string.isRequired,
   /** contenu du champ password */
   password: PropTypes.string.isRequired,
+  nickname: PropTypes.string.isRequired,
   /** Traitement déclenché quand on saisit un caractère dans l'un des deux champs. Paramètres :
    * - newValue Nouvelle valeur du champ
    * - identifier Identifiant du champ : 'email' ou 'password'

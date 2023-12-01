@@ -10,6 +10,7 @@ const userSchema = mongoose.Schema({
   // le unique true empeche plusieurs clés identiques
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  nickname: { type: String, required: true },
 });
 
 userSchema.plugin(uniqueValidator);

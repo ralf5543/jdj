@@ -15,9 +15,9 @@ const BoardgameCard = ({
 }) => {
   const dispatch = useDispatch();
 
-  const deleteGame = (idtest) => {
+  const deleteGame = (gameId) => {
     axios
-      .delete(`http://localhost:3000/api/games/${idtest}`)
+      .delete(`http://localhost:3000/api/games/${gameId}`)
       .then((response) => {
         // console.log(response);
         console.log('Suppression du  jeu ', title);

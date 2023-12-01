@@ -4,13 +4,7 @@ import Field from '../genericComponents/Field/Field';
 
 import './LoginForm.scss';
 
-/**
- * Affichage d'un formulaire de login (e-mail et mot de passe).
- * Deux modes d'affichage :
- * - mode non connecté : affichage d'un formulaire avec un bouton OK
- * - mode connecté : affichage d'un message de bienvenue avec un bouton Déconnecté
- */
-const LoginForm = ({ email, password, changeField, handleLogin, isLogged }) => {
+const LoginForm = ({ email, password, changeField, handleLogin }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleLogin();
@@ -20,30 +14,28 @@ const LoginForm = ({ email, password, changeField, handleLogin, isLogged }) => {
     <div className="login-form">
       <h2>Connexion</h2>
 
-      {!isLogged && (
-        <form
-          autoComplete="off"
-          className="login-form-element"
-          onSubmit={handleSubmit}
-        >
-          <Field
-            name="email"
-            placeholder="Adresse Email"
-            onChange={changeField}
-            value={email}
-          />
-          <Field
-            name="password"
-            type="password"
-            placeholder="Mot de passe"
-            onChange={changeField}
-            value={password}
-          />
-          <button type="submit" className="login-form-button">
-            OK
-          </button>
-        </form>
-      )}
+      <form
+        autoComplete="off"
+        className="login-form-element"
+        onSubmit={handleSubmit}
+      >
+        <Field
+          name="email"
+          placeholder="Adresse Email"
+          onChange={changeField}
+          value={email}
+        />
+        <Field
+          name="password"
+          type="password"
+          placeholder="Mot de passe"
+          onChange={changeField}
+          value={password}
+        />
+        <button type="submit" className="login-form-button">
+          OK
+        </button>
+      </form>
     </div>
   );
 };
@@ -64,11 +56,6 @@ LoginForm.propTypes = {
 
   /** Choix entre le mode connecté (affichage d'un message) et
    * le mode pas connecté (affichage du formulaire) */
-  isLogged: PropTypes.bool,
-};
-
-LoginForm.defaultProps = {
-  isLogged: false,
 };
 
 export default LoginForm;

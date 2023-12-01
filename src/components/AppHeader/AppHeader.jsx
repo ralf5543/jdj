@@ -17,12 +17,10 @@ const AppHeader = () => {
   // /!\ ne pas oublier le nom du tiroir, state.email c'est undefined
   const emailValue = useSelector((state) => state.user.email);
   const passwordValue = useSelector((state) => state.user.password);
+  const nicknameValue = useSelector((state) => state.user.nickname);
   const isLogged = useSelector((state) => state.user.logged);
   const isSignupVisible = useSelector((state) => state.user.signupVisible);
   const isLoginVisible = useSelector((state) => state.user.loginVisible);
-  const nickname = useSelector((state) => state.user.nickname);
-
-  // console.log(emailValue);
 
   const dispatch = useDispatch();
 
@@ -39,11 +37,13 @@ const AppHeader = () => {
     <header className="header">
       {isLogged && (
         <div className="login-form-logged">
-          <p className="login-form-message">{`Bienvenue ${nickname}`}</p>
+          <h1 className="login-form-message">{`Bienvenue ${nicknameValue}`}</h1>
           <button
             type="button"
             className="login-form-button"
-            onClick={console.log('handleLogout')}
+            onClick={() => {
+              console.log('handleLogout');
+            }}
           >
             Déconnexion
           </button>
@@ -75,16 +75,13 @@ const AppHeader = () => {
         <SignupForm
           email={emailValue}
           password={passwordValue}
+          nickname={nicknameValue}
           changeField={(newValue, identifier) => {
             const action = changeSignupField(newValue, identifier);
             dispatch(action);
           }}
           handleSignup={() => {
             const action = submitSignup();
-            dispatch(action);
-          }}
-          handleLogin={() => {
-            const action = submitLogin();
             dispatch(action);
           }}
         />
@@ -110,7 +107,6 @@ const AppHeader = () => {
             const action = submitLogin();
             dispatch(action);
           }}
-          isLogged={isLogged}
         />
       )}
     </header>

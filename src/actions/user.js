@@ -19,10 +19,8 @@ export const submitSignup = () => ({
   type: SUBMIT_SIGNUP,
 });
 
-export const handleSuccessfulSignup = (nickname, token) => ({
+export const handleSuccessfulSignup = () => ({
   type: HANDLE_SUCCESSFUL_SIGNUP,
-  nickname,
-  token,
 });
 
 export const changeLoginField = (newValue, identifier) => ({
