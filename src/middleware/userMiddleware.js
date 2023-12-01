@@ -31,7 +31,7 @@ const userMiddleware = (store) => (next) => (action) => {
           );
         })
         .catch((error) => {
-          console.log('erreur lors du login : ', error);
+          console.log('erreur lors du login : ', error.message);
         });
       break;
 
@@ -49,14 +49,17 @@ const userMiddleware = (store) => (next) => (action) => {
           }
         )
         .then((response) => {
-          console.log(response);
+          console.log(
+            'bien connecté avec cet user ID : ',
+            response.data.userId
+          );
           // on a 3 infos dans response.data : pseudo, logged, token
           store.dispatch(
             handleSuccessfulLogin(response.data.pseudo, response.data.token)
           );
         })
         .catch((error) => {
-          console.log('erreur lors du login : ', error);
+          console.log('erreur lors du login : ', error.request.response);
         });
       break;
 

@@ -10,15 +10,7 @@ import './LoginForm.scss';
  * - mode non connecté : affichage d'un formulaire avec un bouton OK
  * - mode connecté : affichage d'un message de bienvenue avec un bouton Déconnecté
  */
-const LoginForm = ({
-  email,
-  password,
-  changeField,
-  handleLogin,
-  handleLogout,
-  isLogged,
-  loggedMessage,
-}) => {
+const LoginForm = ({ email, password, changeField, handleLogin, isLogged }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleLogin();
@@ -27,18 +19,7 @@ const LoginForm = ({
   return (
     <div className="login-form">
       <h2>Connexion</h2>
-      {isLogged && (
-        <div className="login-form-logged">
-          <p className="login-form-message">{loggedMessage}</p>
-          <button
-            type="button"
-            className="login-form-button"
-            onClick={handleLogout}
-          >
-            Déconnexion
-          </button>
-        </div>
-      )}
+
       {!isLogged && (
         <form
           autoComplete="off"
@@ -80,19 +61,14 @@ LoginForm.propTypes = {
   /** Traitement déclenché quand on clique sur le bouton "OK"
    * (quand on est en mode non connecté) */
   handleLogin: PropTypes.func.isRequired,
-  /** Traitement déclenché quand on clique sur le bouton "Déconnexion" (quand on est en
-   * mode connecté) */
-  handleLogout: PropTypes.func.isRequired,
+
   /** Choix entre le mode connecté (affichage d'un message) et
    * le mode pas connecté (affichage du formulaire) */
   isLogged: PropTypes.bool,
-  /** Message affiché quand on est en mode connecté */
-  loggedMessage: PropTypes.string,
 };
 
 LoginForm.defaultProps = {
   isLogged: false,
-  loggedMessage: 'Connecté',
 };
 
 export default LoginForm;

@@ -29,7 +29,7 @@ const UserSpace = () => {
   const dispatch = useDispatch();
   return (
     <>
-      <p>furtur espace perso</p>
+      <h1>futur espace perso</h1>
       <Form
         gameTitle={gameTitleValue}
         gameDescription={gameDescriptionValue}
