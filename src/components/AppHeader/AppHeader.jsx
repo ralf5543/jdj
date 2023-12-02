@@ -35,6 +35,7 @@ const AppHeader = () => {
 
   return (
     <header className="header">
+      <h1>Espace perso de {nicknameValue}</h1>
       {isLogged && (
         <div className="login-form-logged">
           <h1 className="login-form-message">{`Bienvenue ${nicknameValue}`}</h1>

@@ -4,6 +4,10 @@
 
 // le package bcrypt hash les mots de passe
 const bcrypt = require('bcrypt');
+
+// jsonwebtoken crée et vérifie les tokens d'identificationn
+const jwt = require('jsonwebtoken');
+
 const User = require('../models/user');
 
 exports.signup = (req, res) => {
@@ -53,8 +57,11 @@ exports.login = (req, res) => {
           // si c'est ok, renvoie l'id avec un token
           res.status(200).json({
             userId: user._id,
-            token: 'TOKEN',
             nickname: user.nickname,
+            // création et encryptage du token
+            token: jwt.sign({ userId: user._id }, 'RANDOM_TOKEN_SECRET', {
+              expiresIn: '24h',
+            }),
           });
         })
         // erreur serveur

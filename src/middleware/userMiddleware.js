@@ -50,7 +50,7 @@ const userMiddleware = (store) => (next) => (action) => {
           }
         )
         .then((response) => {
-          console.log('bien connecté avec ce user : ', response.data.nickname);
+          console.log('bien connecté avec ce user : ', response.data);
           // on a 3 infos dans response.data : pseudo, logged, token
           store.dispatch(
             handleSuccessfulLogin(response.data.nickname, response.data.token)

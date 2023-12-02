@@ -3,21 +3,25 @@
 // import du package express
 const express = require('express');
 
+// protecion à l'accès de chacune des routes avec l'authentification par token
+const auth = require('../middleware/auth');
+
 const routeur = express.Router();
 
 const gameController = require('../controllers/games');
 
-routeur.post('/', gameController.createGame);
+routeur.post('/', auth, gameController.createGame);
 
 // Le dernier middleware d'une chaîne doit renvoyer la réponse au client pour empêcher la requête d'expirer.
 
 // deux-points en face du segment dynamique de la route pour la rendre accessible en tant que paramètre ;
-routeur.get('/:id', gameController.getOneGame);
+// "auth" est appelé avant les autres paramètres, pour proteger l'accès
+routeur.get('/:id', auth, gameController.getOneGame);
 
-routeur.put('/:id', gameController.modifyGame);
+routeur.put('/:id', auth, gameController.modifyGame);
 
-routeur.delete('/:id', gameController.deleteGame);
+routeur.delete('/:id', auth, gameController.deleteGame);
 
-routeur.get('/', gameController.getAllGames);
+routeur.get('/', auth, gameController.getAllGames);
 
 module.exports = routeur;
