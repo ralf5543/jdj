@@ -38,7 +38,6 @@ const userMiddleware = (store) => (next) => (action) => {
 
     case SUBMIT_LOGIN:
       // console.log(store.getState().email);
-      // => undefined, on a oublié le tiroir, il faut store.getState().user.email
       axios
         .post(
           // URL
@@ -51,7 +50,8 @@ const userMiddleware = (store) => (next) => (action) => {
         )
         .then((response) => {
           console.log('bien connecté avec ce user : ', response.data);
-          // on a 3 infos dans response.data : pseudo, logged, token
+          console.log('token reçu : ', response.data.token);
+          // on a 2 infos dans response.data : pseudo et token
           store.dispatch(
             handleSuccessfulLogin(response.data.nickname, response.data.token)
           );

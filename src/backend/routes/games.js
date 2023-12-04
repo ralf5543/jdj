@@ -18,13 +18,13 @@ routeur.post('/', auth, multer, gameController.createGame);
 // Le dernier middleware d'une chaîne doit renvoyer la réponse au client pour empêcher la requête d'expirer.
 
 // deux-points en face du segment dynamique de la route pour la rendre accessible en tant que paramètre ;
-// "auth" est appelé avant les autres paramètres, pour proteger l'accès
-routeur.get('/:id', auth, gameController.getOneGame);
+// "auth" est appelé avant les autres paramètres, pour proteger certaines pages
+routeur.get('/:id', gameController.getOneGame);
 
 routeur.put('/:id', auth, gameController.modifyGame);
 
 routeur.delete('/:id', auth, gameController.deleteGame);
 
-routeur.get('/', auth, gameController.getAllGames);
+routeur.get('/', gameController.getAllGames);
 
 module.exports = routeur;

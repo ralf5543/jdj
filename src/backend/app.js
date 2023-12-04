@@ -77,7 +77,6 @@ app.use(express.json());
   );
   next();
 }); */
-app.use(cors());
 
 // Remplace la racine de tous les paths du fichier routeur par "/api/games"
 app.use('/api/games', gamesRoutes);

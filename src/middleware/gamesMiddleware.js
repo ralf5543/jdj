@@ -23,6 +23,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
       break;
 
     case POST_GAME:
+      console.log('token dans le state : ', store.getState().user.token);
       axios
         .post(
           // URL
@@ -35,6 +36,15 @@ const gamesMiddleware = (store) => (next) => (action) => {
             idealplayers: store.getState().games.gameIdealPlayers,
             duration: store.getState().games.gameDuration,
             visual: store.getState().games.gameVisual,
+          },
+          // options (notamment les headers)
+          {
+            headers: {
+              // nom: contenu
+              // on fournit le token JWT dans le header Authorization, en faisant
+              // précéder par le mot Bearer
+              Authorization: `Bearer ${store.getState().user.token}`,
+            },
           }
         )
         .then((response) => {
@@ -48,12 +58,14 @@ const gamesMiddleware = (store) => (next) => (action) => {
           } else if (error.message) {
             console.log('erreur du message : ', error.message);
           }
-
-          console.log('erreur de la requete : ', error);
         })
         .finally(() => {
+          console.log(
+            'Authorisation envoyée : ',
+            `Bearer ${store.getState().user.token}`
+          );
           // refetch la liste de jeux mise à jour
-          axios
+          /* axios
             .get('http://localhost:3000/api/games')
             .then((response) => {
               // console.log(response);
@@ -68,7 +80,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             })
             .finally(() => {
               // console.log('le Finally qui sert à rien');
-            });
+            }); */
         });
 
       break;
