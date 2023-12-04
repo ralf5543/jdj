@@ -1,25 +1,35 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 // On importe notre modèle
 const Game = require('../models/game');
 
 exports.createGame = (req, res) => {
-  // supprime l'id existant par défaut dans le body (puisque mongoose va en ajouté un)
-  // eslint-disable-next-line no-underscore-dangle
-  delete req.body._id;
+  const gameObject = JSON.parse(req.body.thing);
+  // supprime l'id existant par défaut dans le body (puisque mongoose va en ajouté un)Z
+  delete gameObject._id;
+  delete gameObject._userId;
 
   // crée une instance du modèle Game en lui passant tous les éléments de body, via un spread operator
   const game = new Game({
-    ...req.body,
+    ...gameObject,
+    userId: req.auth.userId,
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${
+      req.file.filename
+    }`,
   });
 
-  // La méthode save() renvoie une Promise
   game
+    // La méthode save() renvoie une Promise
     .save()
     // 201 est une création de ressource
     // il faut envoyer qquechose dans le then, sinon la requete est abandonnée
-    .then(() => res.status(201).json({ message: 'Objet enregistré !' }))
-    .catch((error) => res.status(400).json({ error }));
+    .then(() => {
+      res.status(201).json({ message: 'Objet enregistré !' });
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
 };
 
 exports.getOneGame = (req, res) => {

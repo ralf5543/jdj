@@ -18,6 +18,12 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+// Accède au path du serveur
+const path = require('path');
+
+// Express gère le dossier "images" de manière statique à chaque requete vers la route /images
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
 // Importation des routes
 const gamesRoutes = require('./routes/games');
 const userRoutes = require('./routes/user');
