@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 // jsonwebtoken crée et vérifie les tokens d'identificationn
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/user');
+const User = require('../models/User');
 
 exports.signup = (req, res) => {
   // bcrypt est asynchrone
@@ -41,7 +41,10 @@ exports.login = (req, res) => {
           res
             // sinon, envoie un message vlontairement trouble, pour la sécurité
             .status(401)
-            .json({ message: 'Paire login/mot de passe incorrecte' })
+            .json({
+              message:
+                'Paire login/mot de passe incorrecte (en vrai cest lemail qui foire)',
+            })
         );
       }
       // compare le mdp crypté avec celui de la BDD
@@ -50,9 +53,10 @@ exports.login = (req, res) => {
         .then((valid) => {
           // si ça ne correspond pas, message d'erreur flou :)
           if (!valid) {
-            return res
-              .status(401)
-              .json({ message: 'Paire login/mot de passe incorrecte' });
+            return res.status(401).json({
+              message:
+                'Paire login/mot de passe incorrecte (en vrai cest le MDP qui foire)',
+            });
           }
           // si c'est ok, renvoie l'id avec un token
           res.status(200).json({

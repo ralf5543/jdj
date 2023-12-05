@@ -65,7 +65,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             `Bearer ${store.getState().user.token}`
           );
           // refetch la liste de jeux mise à jour
-          /* axios
+          axios
             .get('http://localhost:3000/api/games')
             .then((response) => {
               // console.log(response);
@@ -80,7 +80,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             })
             .finally(() => {
               // console.log('le Finally qui sert à rien');
-            }); */
+            });
         });
 
       break;

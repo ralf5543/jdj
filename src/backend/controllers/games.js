@@ -2,10 +2,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 // On importe notre modèle
-const Game = require('../models/game');
+const Game = require('../models/Game');
 
 exports.createGame = (req, res) => {
-  const gameObject = JSON.parse(req.body.thing);
+  const gameObject = req.body;
   // supprime l'id existant par défaut dans le body (puisque mongoose va en ajouté un)Z
   delete gameObject._id;
   delete gameObject._userId;
@@ -14,9 +14,9 @@ exports.createGame = (req, res) => {
   const game = new Game({
     ...gameObject,
     userId: req.auth.userId,
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${
+    /* imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
-    }`,
+    }`, */
   });
 
   game

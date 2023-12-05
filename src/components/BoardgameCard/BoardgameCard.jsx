@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import './BoardgameCard.scss';
 import PropTypes from 'prop-types';
 import { fetchGames } from '../../actions/games';
+import store from '../../store';
 
 const BoardgameCard = ({
   description,
@@ -17,7 +18,18 @@ const BoardgameCard = ({
 
   const deleteGame = (gameId) => {
     axios
-      .delete(`http://localhost:3000/api/games/${gameId}`)
+      .delete(
+        `http://localhost:3000/api/games/${gameId}`,
+        // options (notamment les headers)
+        {
+          headers: {
+            // nom: contenu
+            // on fournit le token JWT dans le header Authorization, en faisant
+            // précéder par le mot Bearer
+            Authorization: `Bearer ${store.getState().user.token}`,
+          },
+        }
+      )
       .then((response) => {
         // console.log(response);
         console.log('Suppression du  jeu ', title);
