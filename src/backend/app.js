@@ -21,11 +21,6 @@ dotenv.config();
 // Accède au path du serveur
 const path = require('path');
 
-// Express gère le dossier "images" de manière statique à chaque requete vers la route /images
-app.use('/images', express.static(path.join(__dirname, 'images')));
-
-const multer = require('multer');
-
 // Importation des routes
 const gamesRoutes = require('./routes/games');
 const userRoutes = require('./routes/user');
@@ -83,49 +78,8 @@ app.use(express.json());
 // Remplace la racine de tous les paths du fichier routeur par "/api/games"
 app.use('/api/games', gamesRoutes);
 app.use('/api/auth', userRoutes);
+// Express gère le dossier "images" de manière statique à chaque requete vers la route /images
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Exporte la const pour pouvvoir y appliquer partout (notamment dans le fichier server.js)
 module.exports = app;
-
-// importing schema
-require('./models/ImageDetails');
-
-const Images = mongoose.model('ImageDetails');
-
-// ////////////////////////////////////////////////////////////
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now();
-    cb(null, uniqueSuffix + file.originalname);
-  },
-});
-
-const upload = multer({ storage: storage });
-
-app.post('/upload-image', upload.single('image'), async (req, res) => {
-  console.log(req.body);
-  const imageName = req.file.filename;
-
-  console.log('uploaded !');
-
-  try {
-    await Images.create({ image: imageName });
-    res.json({ status: 'ok' });
-  } catch (error) {
-    res.json({ status: error });
-  }
-});
-
-app.get('/get-image', async (req, res) => {
-  try {
-    Images.find({}).then((data) => {
-      res.send({ status: 'ok', data });
-    });
-  } catch (error) {
-    res.json({ status: error });
-  }
-});

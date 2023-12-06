@@ -6,7 +6,7 @@ const Game = require('../models/Game');
 
 exports.createGame = (req, res) => {
   const gameObject = req.body;
-  // supprime l'id existant par défaut dans le body (puisque mongoose va en ajouté un)Z
+  // supprime l'id existant par défaut dans le body (puisque mongoose va en ajouté un)
   delete gameObject._id;
   delete gameObject._userId;
 
@@ -14,9 +14,10 @@ exports.createGame = (req, res) => {
   const game = new Game({
     ...gameObject,
     userId: req.auth.userId,
-    /* imageUrl: `${req.protocol}://${req.get('host')}/images/${
+    // génère l'url de l'image : protocole + adresse de l'höte + dossier images + nom du fichier fourni par multer
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
-    }`, */
+    }`,
   });
 
   game

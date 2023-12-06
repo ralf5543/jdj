@@ -21,15 +21,7 @@ const App = () => {
 
   console.log('render de App');
 
-  const [image, setImage] = useState();
-
-  const onInputChange = (e) => {
-    console.log(e.target.files[0]);
-    setImage(e.target.files[0]);
-    // e.preventDefault;
-  };
-
-  const submitImage = async (e) => {
+  /* const submitImage = async (e) => {
     e.preventDefault();
     console.log('submit !');
 
@@ -43,15 +35,10 @@ const App = () => {
         headers: { 'Content-Type': 'multipart/form-data' },
       }
     );
-  };
+  }; */
 
   return (
     <div className="App">
-      <form onSubmit={submitImage}>
-        <input type="file" accept="image/" onChange={onInputChange} />
-        <button type="submit">Upload, merde !!!</button>
-      </form>
-
       <AppHeader />
       <UserSpace />
       <GamesListing games={games} />
