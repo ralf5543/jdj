@@ -23,12 +23,13 @@ const FormPostGame = ({
   const handleFileUpload = (event) => {
     // get the selected file from the input
     const file = event.target.files[0];
+    console.log('file selected : ', file);
     // create a new FormData object and append the file to it
     const formData = new FormData();
     formData.append('file', file);
     // make a POST request to the File Upload API
     axios
-      .post('http://localhost:3000/images', formData, {
+      .post('http://localhost:3000/api/games/images', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -46,7 +47,7 @@ const FormPostGame = ({
   return (
     <div>
       <form autoComplete="off" onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileUpload} />
+        <input type="file" onChange={handleFileUpload} name="image" />
         <Field
           // must have the same name of the state !!!!!!!!!!
           name="gameTitle"

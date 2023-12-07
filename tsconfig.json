@@ -19,7 +19,9 @@
   "include": [
     "frontend/vite.config.ts",
     "frontend/.eslintrc.cjs",
-    "frontend/src"
+    "frontend/src",
+    "backend/.eslintrc.cjs",
+    "backend/src"
 , ".vscode/backend"  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
