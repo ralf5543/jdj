@@ -7,7 +7,6 @@ import {
   changeGameMaxPlayersField,
   changeGameIdealPlayersField,
   changeGameDurationField,
-  changeGameVisualField,
 } from '../../actions/games';
 
 import './UserSpace.scss';
@@ -66,10 +65,6 @@ const UserSpace = () => {
           Number(newValue),
           gameDurationField
         );
-        dispatch(action);
-      }}
-      changeVisualField={(newValue, gameVisualField) => {
-        const action = changeGameVisualField(newValue, gameVisualField);
         dispatch(action);
       }}
       handlePostGame={() => {

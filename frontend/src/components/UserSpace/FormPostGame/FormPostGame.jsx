@@ -1,3 +1,4 @@
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Field from '../../genericComponents/Field/Field';
 import './FormPostGame.scss';
@@ -8,23 +9,44 @@ const FormPostGame = ({
   changeMaxplayersField,
   changeIdealPlayersField,
   changeDurationField,
-  changeVisualField,
   handlePostGame,
   gameTitle,
   gameDescription,
   gameMaxPlayers,
   gameIdealPlayers,
   gameDuration,
-  gameVisual,
 }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handlePostGame();
   };
+  const handleFileUpload = (event) => {
+    // get the selected file from the input
+    const file = event.target.files[0];
+    // create a new FormData object and append the file to it
+    const formData = new FormData();
+    formData.append('file', file);
+    // make a POST request to the File Upload API
+    axios
+      .post('http://localhost:3000/images', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        // handle the response
+        console.log(response);
+      })
+      .catch((error) => {
+        // handle errors
+        console.log(error);
+      });
+  };
 
   return (
     <div>
       <form autoComplete="off" onSubmit={handleSubmit}>
+        <input type="file" onChange={handleFileUpload} />
         <Field
           // must have the same name of the state !!!!!!!!!!
           name="gameTitle"
@@ -64,14 +86,6 @@ const FormPostGame = ({
           placeholder="Durée d'une partie"
           onChange={changeDurationField}
           value={gameDuration}
-        />
-        <Field
-          // must have the same name of the state !!!!!!!!!!
-          name="gameVisual"
-          type="text"
-          placeholder="Visuel du jeu"
-          onChange={changeVisualField}
-          value={gameVisual}
         />
         <button type="submit" className="login-form-button">
           OK
