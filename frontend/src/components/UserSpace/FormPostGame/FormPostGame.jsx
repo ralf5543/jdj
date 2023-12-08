@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Field from '../../genericComponents/Field/Field';
@@ -16,27 +17,35 @@ const FormPostGame = ({
   gameIdealPlayers,
   gameDuration,
 }) => {
+  const [file, setFile] = useState('');
+  const [filename, setFilename] = useState('Choose File');
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handlePostGame();
   };
-  const handleFileUpload = (event) => {
-    // get the selected file from the input
-    const file = event.target.files[0];
+  const handleFileUpload = (e) => {
+    setFile(e.target.files[0]);
+    setFilename(e.target.files[0].name);
+  };
+
+  const handleSubmitImage = (evt) => {
+    evt.preventDefault();
     console.log('file selected : ', file);
     // create a new FormData object and append the file to it
     const formData = new FormData();
     formData.append('file', file);
+    // formData.set('file', file);
     // make a POST request to the File Upload API
     axios
-      .post('http://localhost:3000/api/games/images', formData, {
+      .post('http://localhost:3000/images', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
       .then((response) => {
         // handle the response
-        console.log(response);
+        console.log('Image uploaded : ', response);
       })
       .catch((error) => {
         // handle errors
@@ -46,8 +55,12 @@ const FormPostGame = ({
 
   return (
     <div>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmitImage}>
         <input type="file" onChange={handleFileUpload} name="image" />
+        <button type="submit">Upload, meeeeeerde !!!</button>
+      </form>
+
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <Field
           // must have the same name of the state !!!!!!!!!!
           name="gameTitle"
@@ -102,13 +115,11 @@ FormPostGame.propTypes = {
   gameMaxPlayers: PropTypes.number.isRequired,
   gameIdealPlayers: PropTypes.number.isRequired,
   gameDuration: PropTypes.number.isRequired,
-  gameVisual: PropTypes.string.isRequired,
   changeTitleField: PropTypes.func.isRequired,
   changeDescriptionField: PropTypes.func.isRequired,
   changeMaxplayersField: PropTypes.func.isRequired,
   changeIdealPlayersField: PropTypes.func.isRequired,
   changeDurationField: PropTypes.func.isRequired,
-  changeVisualField: PropTypes.func.isRequired,
   handlePostGame: PropTypes.func.isRequired,
 };
 

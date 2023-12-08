@@ -34,7 +34,7 @@ exports.createGame = (req, res) => {
 };
 
 exports.getOneGame = (req, res) => {
-  // findOne() trouve le Thing unique ayant le même _id que le paramètre de la requête
+  // findOne() trouve le modèle Game unique ayant le même _id que le paramètre de la requête
   Game.findOne({ _id: req.params.id })
     .then((game) => res.status(200).json(game))
     .catch((error) => res.status(404).json({ error }));
@@ -56,6 +56,15 @@ exports.deleteGame = (req, res) => {
 };
 
 exports.getAllGames = (req, res) => {
+  // la méthode find() renvvoit le tableau de toutes nos instances Game de la BDD
+  /* La base de données MongoDB est fractionnée en collections : le nom de la collection est 
+    défini par défaut sur le pluriel du nom du modèle. Ici, ce sera Games . */
+  Game.find()
+    .then((games) => res.status(200).json(games))
+    .catch((error) => res.status(400).json({ error }));
+};
+
+exports.getAllImages = (req, res) => {
   // la méthode find() renvvoit le tableau de toutes nos instances Game de la BDD
   /* La base de données MongoDB est fractionnée en collections : le nom de la collection est 
     défini par défaut sur le pluriel du nom du modèle. Ici, ce sera Games . */

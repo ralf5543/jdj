@@ -24,6 +24,7 @@ const path = require('path');
 // Importation des routes
 const gamesRoutes = require('./routes/games');
 const userRoutes = require('./routes/user');
+const imagesRoutes = require('./routes/images');
 
 const uri = process.env.STRING_URI;
 
@@ -79,7 +80,13 @@ app.use(express.json());
 app.use('/api/games', gamesRoutes);
 app.use('/api/auth', userRoutes);
 // Express gère le dossier "images" de manière statique à chaque requete vers la route /images
-app.use('/images', express.static(path.join(__dirname, 'images')));
+// app.use('/images', express.static(path.join(__dirname, 'images')));
+
+app.use(
+  '/images',
+  express.static(path.join(__dirname, 'images')),
+  imagesRoutes
+);
 
 // Exporte la const pour pouvvoir y appliquer partout (notamment dans le fichier server.js)
 module.exports = app;

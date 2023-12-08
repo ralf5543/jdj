@@ -21,21 +21,18 @@ const App = () => {
 
   console.log('render de App');
 
-  /* const submitImage = async (e) => {
-    e.preventDefault();
-    console.log('submit !');
-
-    const formData = new FormData();
-    formData.append('image', image);
-
-    const result = await axios.post(
-      'http://localhost:3000/upload-image',
-      formData,
-      {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      }
-    );
-  }; */
+  axios
+    .get('http://localhost:3000/images/get-image')
+    .then((response) => {
+      // console.log(response);
+      console.log('affichage de la liste dimages : ', response.data);
+    })
+    .catch((error) => {
+      console.log('erreur de la requete : ', error);
+    })
+    .finally(() => {
+      // console.log('le Finally qui sert à rien');
+    });
 
   return (
     <div className="App">

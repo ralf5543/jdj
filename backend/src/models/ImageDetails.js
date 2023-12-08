@@ -2,9 +2,9 @@
 // import de mongoose, pour créer le schéma
 const mongoose = require('mongoose');
 
-const imageSchema = new mongoose.Schema(
+const ImageDetailsScehma = new mongoose.Schema(
   { image: String },
   { collection: 'ImageDetails' }
 );
 
-module.exports = mongoose.model('ImageDetails', imageSchema);
+module.exports = mongoose.model('ImageDetails', ImageDetailsScehma);
