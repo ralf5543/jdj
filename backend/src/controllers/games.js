@@ -4,7 +4,25 @@
 // On importe notre modèle
 const Game = require('../models/Game');
 
-exports.createGame = (req, res) => {
+exports.createGame = (req, res, next) => {
+  const game = new Game({
+    ...req.body,
+  });
+  game
+    .save()
+    .then(() => {
+      res.status(201).json({
+        message: 'Post saved successfully!',
+      });
+    })
+    .catch((error) => {
+      res.status(400).json({
+        error,
+      });
+    });
+};
+
+/* exports.createGame = (req, res) => {
   const gameObject = req.body;
   // supprime l'id existant par défaut dans le body (puisque mongoose va en ajouté un)
   delete gameObject._id;
@@ -15,9 +33,9 @@ exports.createGame = (req, res) => {
     ...gameObject,
     userId: req.auth.userId,
     // génère l'url de l'image : protocole + adresse de l'höte + dossier images + nom du fichier fourni par multer
-    imageUrl: `${req.protocol}://${req.get('host')}/images/${
+    /* imageUrl: `${req.protocol}://${req.get('host')}/images/${
       req.file.filename
-    }`,
+    }`, 
   });
 
   game
@@ -32,6 +50,8 @@ exports.createGame = (req, res) => {
       res.status(400).json({ error });
     });
 };
+
+*/
 
 exports.getOneGame = (req, res) => {
   // findOne() trouve le modèle Game unique ayant le même _id que le paramètre de la requête

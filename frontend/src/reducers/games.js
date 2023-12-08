@@ -5,7 +5,7 @@ import {
   CHANGE_GAME_MAXPLAYERS_FIELD,
   CHANGE_GAME_IDEALPLAYERS_FIELD,
   CHANGE_GAME_DURATION_FIELD,
-  CHANGE_GAME_VISUAL_FIELD,
+  CHANGE_GAME_VISUAL,
   POST_GAME,
 } from '../actions/games';
 
@@ -18,7 +18,7 @@ export const initialState = {
   gameMaxPlayers: 8000,
   gameIdealPlayers: 6000,
   gameDuration: 300,
-  gameVisual: 'https://picsum.photos/200',
+  gameVisual: '',
   currentGameId: '',
 };
 
@@ -63,10 +63,10 @@ const reducer = (state = initialState, action = {}) => {
         [action.gameDurationField]: action.newValue,
       };
 
-    case CHANGE_GAME_VISUAL_FIELD:
+    case CHANGE_GAME_VISUAL:
       return {
         ...state,
-        [action.gameVisualField]: action.newValue,
+        gameVisual: action.newValue.status,
       };
 
     case POST_GAME:

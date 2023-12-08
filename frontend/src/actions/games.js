@@ -7,7 +7,7 @@ export const CHANGE_GAME_DESCRIPTION_FIELD = 'CHANGE_GAME_DESCRIPTION_FIELD';
 export const CHANGE_GAME_MAXPLAYERS_FIELD = 'CHANGE_GAME_MAXPLAYERS_FIELD';
 export const CHANGE_GAME_IDEALPLAYERS_FIELD = 'CHANGE_GAME_IDEALPLAYERS_FIELD';
 export const CHANGE_GAME_DURATION_FIELD = 'CHANGE_GAME_DURATION_FIELD';
-export const CHANGE_GAME_VISUAL_FIELD = 'CHANGE_GAME_VISUAL_FIELD';
+export const CHANGE_GAME_VISUAL = 'CHANGE_GAME_VISUAL';
 
 export const fetchGames = () => ({
   type: FETCH_GAMES,
@@ -57,8 +57,7 @@ export const changeGameDurationField = (newValue, gameDurationField) => ({
   gameDurationField,
 });
 
-export const changeGameVisualField = (newValue, gameVisualField) => ({
-  type: CHANGE_GAME_VISUAL_FIELD,
+export const changeGameVisual = (newValue) => ({
+  type: CHANGE_GAME_VISUAL,
   newValue,
-  gameVisualField,
 });

@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import store from '../../../store';
 import Field from '../../genericComponents/Field/Field';
 import './FormPostGame.scss';
+import { changeGameVisual } from '../../../actions/games';
 
 const FormPostGame = ({
   changeTitleField,
@@ -17,9 +20,10 @@ const FormPostGame = ({
   gameIdealPlayers,
   gameDuration,
 }) => {
+  const dispatch = useDispatch();
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
-  const [uploadedFilename, setUploadedFilename] = useState(null);
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -47,7 +51,10 @@ const FormPostGame = ({
       .then((response) => {
         // handle the response
         console.log('Image uploaded : ', response.data.status);
-        setUploadedFilename(response.data.status);
+        // setUploadedFilename(response.data.status);
+        const action = changeGameVisual(response.data);
+        dispatch(action);
+        setIsFileUploaded(true);
       })
       .catch((error) => {
         // handle errors
@@ -59,9 +66,11 @@ const FormPostGame = ({
     <div>
       <form autoComplete="off" onSubmit={handleSubmitImage}>
         <input type="file" onChange={handleFileUpload} name="image" />
-        {uploadedFilename && (
+        {isFileUploaded && (
           <img
-            src={`http://localhost:3000/images/${uploadedFilename}`}
+            src={`http://localhost:3000/images/${
+              store.getState().games.gameVisual
+            }`}
             alt=""
           />
         )}

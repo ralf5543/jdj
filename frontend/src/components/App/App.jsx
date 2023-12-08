@@ -21,19 +21,6 @@ const App = () => {
 
   console.log('render de App');
 
-  axios
-    .get('http://localhost:3000/images/get-image')
-    .then((response) => {
-      // console.log(response);
-      console.log('affichage de la liste dimages : ', response.data);
-    })
-    .catch((error) => {
-      console.log('erreur de la requete : ', error);
-    })
-    .finally(() => {
-      // console.log('le Finally qui sert à rien');
-    });
-
   return (
     <div className="App">
       <AppHeader />

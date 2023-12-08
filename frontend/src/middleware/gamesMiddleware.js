@@ -35,7 +35,9 @@ const gamesMiddleware = (store) => (next) => (action) => {
             maxplayers: store.getState().games.gameMaxPlayers,
             idealplayers: store.getState().games.gameIdealPlayers,
             duration: store.getState().games.gameDuration,
-            visual: store.getState().games.gameVisual,
+            visual: `http://localhost:3000/images/${
+              store.getState().games.gameVisual
+            }`,
           },
           // options (notamment les headers)
           {

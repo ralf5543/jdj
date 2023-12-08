@@ -48,16 +48,4 @@ routeur.post('/', upload.single('file'), async (req, res) => {
   }
 });
 
-// routeur.get('/get-image', imageController.getAllImages);
-
-/* routeur.get('/get-image', async (req, res) => {
-  try {
-    Images.find({}).then((data) => {
-      res.send({ status: 'ok', data });
-    });
-  } catch (error) {
-    res.json({ status: error });
-  }
-}); */
-
 module.exports = routeur;

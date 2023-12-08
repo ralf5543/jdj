@@ -9,7 +9,7 @@ const gameSchema = mongoose.Schema({
   maxplayers: { type: Number, required: true },
   idealplayers: { type: Number, required: true },
   duration: { type: Number, required: true },
-  visual: { type: String, required: false },
+  visual: { type: String, required: true },
 });
 
 // transforme ce schéma en modèle utilisable
