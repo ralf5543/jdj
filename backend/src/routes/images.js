@@ -6,8 +6,6 @@ const express = require('express');
 const routeur = express.Router();
 const multer = require('multer');
 
-const imageController = require('../controllers/images');
-
 const Images = require('../models/ImageDetails');
 
 const MIME_TYPES = {
@@ -42,7 +40,7 @@ routeur.post('/', upload.single('file'), async (req, res) => {
 
   try {
     await Images.create({ image: imageName });
-    res.json({ status: `upload de ${imageName}` });
+    res.json({ status: `${imageName}` });
   } catch (error) {
     res.json({ status: error });
   } finally {
