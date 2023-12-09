@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require */
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './App.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import GamesListing from '../GamesListing/GamesListing';

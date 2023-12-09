@@ -69,7 +69,6 @@ const UserSpace = () => {
       }}
       handlePostGame={() => {
         // le traitement placé ici est déclenché à la soumission du formulaire
-        // console.log('handlePostGame');
         dispatch(postGame());
       }}
     />

@@ -30,13 +30,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.identifier]: action.newValue,
       };
-    /*
-      avec les ifs, si on ajoute un champ dans le formulaire il faut ajouter
-      un nouveau if.
-      Avec cette syntaxe, le reducer est prêt pour n'importe quel ajout de champ
-      MAIS il faut que le nom du champ dans le state soit présent dans le payload
-      de l'action
-    */
 
     case HANDLE_SUCCESSFUL_SIGNUP:
       return {
@@ -53,13 +46,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.identifier]: action.newValue,
       };
-    /*
-      avec les ifs, si on ajoute un champ dans le formulaire il faut ajouter
-      un nouveau if.
-      Avec cette syntaxe, le reducer est prêt pour n'importe quel ajout de champ
-      MAIS il faut que le nom du champ dans le state soit présent dans le payload
-      de l'action
-    */
 
     case HANDLE_SUCCESSFUL_LOGIN:
       return {

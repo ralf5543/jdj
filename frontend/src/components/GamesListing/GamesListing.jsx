@@ -5,7 +5,6 @@ import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import './GamesListing.scss';
 
 const GamesListing = ({ games }) => {
-  // console.log('liste de jeux : ', games);
   return (
     <ul>
       {games.map((game) => (

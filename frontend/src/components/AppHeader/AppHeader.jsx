@@ -92,10 +92,6 @@ const AppHeader = () => {
           email={emailValue}
           password={passwordValue}
           changeField={(newValue, identifier) => {
-            // console.log(
-            //   `changeField: newValue=${newValue}, identifier=${identifier}`
-            // );
-
             // on transmet les infos au store, pour le reducer user
             // ici pour les paramètres on met dans le même ordre que ce qu'on a
             // défini dans l'annuaire des actions
@@ -104,7 +100,6 @@ const AppHeader = () => {
           }}
           handleLogin={() => {
             // le traitement placé ici est déclenché à la soumission du formulaire
-            // console.log('handleLogin');
             const action = submitLogin();
             dispatch(action);
           }}

@@ -14,7 +14,7 @@ exports.signup = (req, res) => {
   // bcrypt est asynchrone
   bcrypt
     // hash le body de la requete, et "10", c'est le nombre de fois qu'il l'applique
-    // 10 est un bon compromis entre sécurité et rzapidité
+    // 10 est un bon compromis entre sécurité et rapidité
     .hash(req.body.password, 10)
     .then((hash) => {
       // Crée une copie du modèle User, en remplaçant le mdp par le hash

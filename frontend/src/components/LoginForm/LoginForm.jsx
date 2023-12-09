@@ -53,9 +53,6 @@ LoginForm.propTypes = {
   /** Traitement déclenché quand on clique sur le bouton "OK"
    * (quand on est en mode non connecté) */
   handleLogin: PropTypes.func.isRequired,
-
-  /** Choix entre le mode connecté (affichage d'un message) et
-   * le mode pas connecté (affichage du formulaire) */
 };
 
 export default LoginForm;

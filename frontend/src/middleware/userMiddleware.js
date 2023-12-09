@@ -11,7 +11,6 @@ const userMiddleware = (store) => (next) => (action) => {
 
   switch (action.type) {
     case SUBMIT_SIGNUP:
-      // console.log(store.getState().email);
       // => undefined, on a oublié le tiroir, il faut store.getState().user.email
       axios
         .post(
@@ -37,7 +36,6 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_LOGIN:
-      // console.log(store.getState().email);
       axios
         .post(
           // URL

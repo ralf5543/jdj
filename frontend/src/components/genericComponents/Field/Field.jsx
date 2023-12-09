@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 
 // == Import : local
-import './style.scss';
+import './Field.scss';
 
 // == Composant
 const Field = ({ value, type, name, placeholder, onChange }) => {

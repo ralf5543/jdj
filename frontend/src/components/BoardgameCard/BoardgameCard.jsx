@@ -31,7 +31,6 @@ const BoardgameCard = ({
         }
       )
       .then((response) => {
-        // console.log(response);
         console.log('Suppression du  jeu ', title);
       })
       .catch((error) => {

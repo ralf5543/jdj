@@ -10,15 +10,11 @@ const gamesMiddleware = (store) => (next) => (action) => {
       axios
         .get('http://localhost:3000/api/games')
         .then((response) => {
-          // console.log(response);
           console.log('affichage de la liste de jeux : ', response.data);
           store.dispatch(saveGames(response.data));
         })
         .catch((error) => {
           console.log('erreur de la requete : ', error);
-        })
-        .finally(() => {
-          // console.log('le Finally qui sert à rien');
         });
       break;
 
@@ -70,7 +66,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
           axios
             .get('http://localhost:3000/api/games')
             .then((response) => {
-              // console.log(response);
               console.log(
                 'affichage de la nouvelle liste de jeux : ',
                 response.data
@@ -79,9 +74,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
             })
             .catch((error) => {
               console.log('erreur de la requete : ', error);
-            })
-            .finally(() => {
-              // console.log('le Finally qui sert à rien');
             });
         });
 

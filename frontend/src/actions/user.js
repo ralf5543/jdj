@@ -46,5 +46,3 @@ export const handleSignupVisibility = () => ({
 export const handleLoginVisibility = () => ({
   type: HANDLE_LOGIN_VISIBILITY,
 });
-// Note : on peut aussi avoir logged en payload, ou alors le reducer se débrouille
-// en mettant touours "true"
