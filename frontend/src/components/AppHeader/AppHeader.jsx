@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import './style.scss';
 
@@ -35,7 +36,20 @@ const AppHeader = () => {
 
   return (
     <header className="header">
-      <h1>Espace perso de {nicknameValue}</h1>
+      <NavLink
+        className={({ isActive }) => (isActive ? 'current' : '')}
+        to="/contact"
+      >
+        Contactez-nous
+      </NavLink>
+      {isLogged && (
+        <NavLink
+          className={({ isActive }) => (isActive ? 'current' : '')}
+          to="/user-space"
+        >
+          Votre espace perso
+        </NavLink>
+      )}
       {isLogged && (
         <div className="login-form-logged">
           <h1 className="login-form-message">{`Bienvenue ${nicknameValue}`}</h1>

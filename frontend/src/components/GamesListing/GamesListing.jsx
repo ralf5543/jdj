@@ -1,10 +1,12 @@
 /* eslint-disable no-underscore-dangle */
-import { useEffect } from 'react';
+
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import './GamesListing.scss';
 
-const GamesListing = ({ games }) => {
+const GamesListing = () => {
+  const games = useSelector((state) => state.games.list);
   return (
     <ul>
       {games.map((game) => (

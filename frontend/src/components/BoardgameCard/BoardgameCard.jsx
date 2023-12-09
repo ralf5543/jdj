@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import './BoardgameCard.scss';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { fetchGames } from '../../actions/games';
 import store from '../../store';
 
@@ -13,6 +14,7 @@ const BoardgameCard = ({
   duration,
   visual,
   id,
+  slug,
 }) => {
   const dispatch = useDispatch();
 
@@ -53,6 +55,7 @@ const BoardgameCard = ({
         Nombre de joueurs idéal : {idealplayers}
       </p>
       <p className="boardgame-card_duration">{duration} minutes</p>
+      <Link to={`/game/${slug}`}>Fiche complète du jeu</Link>
       <button
         onClick={() => {
           deleteGame(id);
@@ -73,6 +76,7 @@ BoardgameCard.propTypes = {
   duration: PropTypes.number.isRequired,
   visual: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default BoardgameCard;

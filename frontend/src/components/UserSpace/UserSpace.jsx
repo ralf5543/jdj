@@ -10,9 +10,11 @@ import {
 } from '../../actions/games';
 
 import './UserSpace.scss';
+import Page from '../genericComponents/Page/Page';
 
 const UserSpace = () => {
   const gameTitleValue = useSelector((state) => state.games.gameTitle);
+  const nicknameValue = useSelector((state) => state.user.nickname);
   const gameDescriptionValue = useSelector(
     (state) => state.games.gameDescription
   );
@@ -27,51 +29,54 @@ const UserSpace = () => {
 
   const dispatch = useDispatch();
   return (
-    <Form
-      gameTitle={gameTitleValue}
-      gameDescription={gameDescriptionValue}
-      gameMaxPlayers={gameMaxPlayersValue}
-      gameIdealPlayers={gameIdealPlayersValue}
-      gameDuration={gameDurationValue}
-      gameVisual={gameVisualValue}
-      changeTitleField={(newValue, gameTitleField) => {
-        const action = changeGameTitleField(newValue, gameTitleField);
-        dispatch(action);
-      }}
-      changeDescriptionField={(newValue, gameDescriptionField) => {
-        const action = changeGameDescriptionField(
-          newValue,
-          gameDescriptionField
-        );
-        dispatch(action);
-      }}
-      changeMaxplayersField={(newValue, gameMaxPlayersField) => {
-        const action = changeGameMaxPlayersField(
-          // Number, because we want a number type, frome a text field
-          Number(newValue),
-          gameMaxPlayersField
-        );
-        dispatch(action);
-      }}
-      changeIdealPlayersField={(newValue, gameIdealPlayersField) => {
-        const action = changeGameIdealPlayersField(
-          Number(newValue),
-          gameIdealPlayersField
-        );
-        dispatch(action);
-      }}
-      changeDurationField={(newValue, gameDurationField) => {
-        const action = changeGameDurationField(
-          Number(newValue),
-          gameDurationField
-        );
-        dispatch(action);
-      }}
-      handlePostGame={() => {
-        // le traitement placé ici est déclenché à la soumission du formulaire
-        dispatch(postGame());
-      }}
-    />
+    <Page>
+      <h1>Espace perso de {nicknameValue}</h1>
+      <Form
+        gameTitle={gameTitleValue}
+        gameDescription={gameDescriptionValue}
+        gameMaxPlayers={gameMaxPlayersValue}
+        gameIdealPlayers={gameIdealPlayersValue}
+        gameDuration={gameDurationValue}
+        gameVisual={gameVisualValue}
+        changeTitleField={(newValue, gameTitleField) => {
+          const action = changeGameTitleField(newValue, gameTitleField);
+          dispatch(action);
+        }}
+        changeDescriptionField={(newValue, gameDescriptionField) => {
+          const action = changeGameDescriptionField(
+            newValue,
+            gameDescriptionField
+          );
+          dispatch(action);
+        }}
+        changeMaxplayersField={(newValue, gameMaxPlayersField) => {
+          const action = changeGameMaxPlayersField(
+            // Number, because we want a number type, frome a text field
+            Number(newValue),
+            gameMaxPlayersField
+          );
+          dispatch(action);
+        }}
+        changeIdealPlayersField={(newValue, gameIdealPlayersField) => {
+          const action = changeGameIdealPlayersField(
+            Number(newValue),
+            gameIdealPlayersField
+          );
+          dispatch(action);
+        }}
+        changeDurationField={(newValue, gameDurationField) => {
+          const action = changeGameDurationField(
+            Number(newValue),
+            gameDurationField
+          );
+          dispatch(action);
+        }}
+        handlePostGame={() => {
+          // le traitement placé ici est déclenché à la soumission du formulaire
+          dispatch(postGame());
+        }}
+      />
+    </Page>
   );
 };
 
