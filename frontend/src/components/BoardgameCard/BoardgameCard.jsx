@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import './BoardgameCard.scss';
 import PropTypes from 'prop-types';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { fetchGames } from '../../actions/games';
 import store from '../../store';
 
@@ -16,14 +16,6 @@ const BoardgameCard = ({
   id,
 }) => {
   const dispatch = useDispatch();
-
-  // on cherche la recette qui a le slug indiqué
-  // const game = useSelector((state) => fetchGames(state.games.list, slug));
-
-  // si on n'a pas trouvé la recette, on renvoie vers la page d'erreur
-  /* if (!game) {
-    return <Navigate to="/error" replace />;
-  } */
 
   const deleteGame = (gameId) => {
     axios
@@ -39,7 +31,7 @@ const BoardgameCard = ({
           },
         }
       )
-      .then((response) => {
+      .then(() => {
         console.log('Suppression du  jeu ', title);
       })
       .catch((error) => {

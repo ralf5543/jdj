@@ -44,7 +44,7 @@ const AppHeader = () => {
         <NavLink
           className={({ isActive }) => (isActive ? 'current' : '')}
           to="/user-space"
-        >
+        ><span class="fa-solid fa-user"></span>
           Votre espace perso
         </NavLink>
       )}
