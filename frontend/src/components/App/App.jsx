@@ -9,6 +9,8 @@ import { fetchGames } from '../../actions/games';
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import Error from '../Error/Error';
 import Home from '../Home/Home';
+import AppHeader from '../AppHeader/AppHeader';
+import GameSheet from '../GameSheet/GameSheet';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,10 +24,11 @@ const App = () => {
 
   return (
     <div className="App">
+      <AppHeader />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/user-space" element={<UserSpace />} />
-        <Route path="/game/:slug" element={<BoardgameCard />} />
+        <Route path="/game/:id" element={<GameSheet />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

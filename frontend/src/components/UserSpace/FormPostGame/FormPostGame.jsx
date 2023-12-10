@@ -63,7 +63,8 @@ const FormPostGame = ({
   };
 
   return (
-    <div>
+    <section>
+      <h2>Ajouter un jeu à votre liste</h2>
       <form autoComplete="off" onSubmit={handleSubmitImage}>
         <input type="file" onChange={handleFileUpload} name="image" />
         {isFileUploaded && (
@@ -122,7 +123,7 @@ const FormPostGame = ({
           OK
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 

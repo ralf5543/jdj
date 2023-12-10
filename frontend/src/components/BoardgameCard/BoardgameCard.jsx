@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './BoardgameCard.scss';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { fetchGames } from '../../actions/games';
 import store from '../../store';
 
@@ -14,9 +14,16 @@ const BoardgameCard = ({
   duration,
   visual,
   id,
-  slug,
 }) => {
   const dispatch = useDispatch();
+
+  // on cherche la recette qui a le slug indiqué
+  // const game = useSelector((state) => fetchGames(state.games.list, slug));
+
+  // si on n'a pas trouvé la recette, on renvoie vers la page d'erreur
+  /* if (!game) {
+    return <Navigate to="/error" replace />;
+  } */
 
   const deleteGame = (gameId) => {
     axios
@@ -47,7 +54,9 @@ const BoardgameCard = ({
     <li className="boardgame-card">
       <h2 className="boardgame-card_title">{title}</h2>
       <img className="boardgame-card_visual" src={visual} alt="" />
-      <p className="boardgame-card_description">{description}</p>
+      <p className="boardgame-card_description">
+        {description.slice(0, 100)}...
+      </p>
       <p className="boardgame-card_maxplayers">
         Nombre de joueurs MAX : {maxplayers}
       </p>
@@ -55,7 +64,7 @@ const BoardgameCard = ({
         Nombre de joueurs idéal : {idealplayers}
       </p>
       <p className="boardgame-card_duration">{duration} minutes</p>
-      <Link to={`/game/${slug}`}>Fiche complète du jeu</Link>
+      <Link to={`/game/${id}`}>Fiche complète du jeu</Link>
       <button
         onClick={() => {
           deleteGame(id);
@@ -76,7 +85,6 @@ BoardgameCard.propTypes = {
   duration: PropTypes.number.isRequired,
   visual: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
 };
 
 export default BoardgameCard;

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
@@ -36,11 +37,8 @@ const AppHeader = () => {
 
   return (
     <header className="header">
-      <NavLink
-        className={({ isActive }) => (isActive ? 'current' : '')}
-        to="/contact"
-      >
-        Contactez-nous
+      <NavLink className={({ isActive }) => (isActive ? 'current' : '')} to="/">
+        Retour à l'accueil
       </NavLink>
       {isLogged && (
         <NavLink

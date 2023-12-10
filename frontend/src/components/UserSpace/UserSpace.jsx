@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import Form from './FormPostGame/FormPostGame';
+import FormPostGame from './FormPostGame/FormPostGame';
 import {
   postGame,
   changeGameTitleField,
@@ -31,7 +31,7 @@ const UserSpace = () => {
   return (
     <Page>
       <h1>Espace perso de {nicknameValue}</h1>
-      <Form
+      <FormPostGame
         gameTitle={gameTitleValue}
         gameDescription={gameDescriptionValue}
         gameMaxPlayers={gameMaxPlayersValue}
