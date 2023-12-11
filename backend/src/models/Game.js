@@ -10,6 +10,9 @@ const gameSchema = mongoose.Schema({
   idealplayers: { type: Number, required: true },
   duration: { type: Number, required: true },
   visual: { type: String, required: true },
+
+  // given by the user who created the article, so only him can modify it
+  userId: { type: String, required: false },
 });
 
 // transforme ce schéma en modèle utilisable

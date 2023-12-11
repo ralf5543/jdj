@@ -1,10 +1,6 @@
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
 import './BoardgameCard.scss';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { fetchGames } from '../../actions/games';
-import store from '../../store';
 
 const BoardgameCard = ({
   description,
@@ -15,33 +11,6 @@ const BoardgameCard = ({
   visual,
   id,
 }) => {
-  const dispatch = useDispatch();
-
-  const deleteGame = (gameId) => {
-    axios
-      .delete(
-        `http://localhost:3000/api/games/${gameId}`,
-        // options (notamment les headers)
-        {
-          headers: {
-            // nom: contenu
-            // on fournit le token JWT dans le header Authorization, en faisant
-            // précéder par le mot Bearer
-            Authorization: `Bearer ${store.getState().user.token}`,
-          },
-        }
-      )
-      .then(() => {
-        console.log('Suppression du  jeu ', title);
-      })
-      .catch((error) => {
-        console.log('erreur de la requete : ', error);
-      })
-      .finally(() => {
-        // Recharge la liste
-        dispatch(fetchGames());
-      });
-  };
   return (
     <li className="boardgame-card">
       <h2 className="boardgame-card_title">{title}</h2>
@@ -57,14 +26,6 @@ const BoardgameCard = ({
       </p>
       <p className="boardgame-card_duration">{duration} minutes</p>
       <Link to={`/game/${id}`}>Fiche complète du jeu</Link>
-      <button
-        onClick={() => {
-          deleteGame(id);
-        }}
-        type="button"
-      >
-        Supprimer ce jeu
-      </button>
     </li>
   );
 };

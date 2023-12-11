@@ -8,13 +8,10 @@ const auth = require('../middleware/auth');
 
 const routeur = express.Router();
 
-// Permet l'upload d'images
-const multer = require('../middleware/multer-config');
-
 const gameController = require('../controllers/games');
 
 // routeur.post('/', auth, multer, gameController.createGame);
-routeur.post('/', gameController.createGame);
+routeur.post('/', auth, gameController.createGame);
 
 // Le dernier middleware d'une chaîne doit renvoyer la réponse au client pour empêcher la requête d'expirer.
 

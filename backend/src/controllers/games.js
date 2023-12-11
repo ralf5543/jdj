@@ -13,6 +13,8 @@ exports.createGame = (req, res) => {
   // crée une instance du modèle Game en lui passant tous les éléments de body, via un spread operator
   const game = new Game({
     ...req.body,
+    // gives the user id to the article so only it's owner can delete / modify it
+    userId: req.auth.userId,
   });
   game
     // La méthode save() renvoie une Promise
@@ -21,6 +23,7 @@ exports.createGame = (req, res) => {
     // il faut envoyer qquechose dans le then, sinon la requete est abandonnée
     .then(() => {
       res.status(201).json({ message: 'Objet enregistré !' });
+      console.log('req.auth.userId : ', req.auth.userId);
     })
     .catch((error) => {
       res.status(400).json({ error });
@@ -43,10 +46,22 @@ exports.modifyGame = (req, res) => {
 };
 
 exports.deleteGame = (req, res) => {
-  // deleteOne() supprime l'instance avec l'id correspondant
-  Game.deleteOne({ _id: req.params.id })
-    .then(() => res.status(200).json({ message: 'Objet supprimé !' }))
-    .catch((error) => res.status(400).json({ error }));
+  Game.findOne({ _id: req.params.id })
+    .then((game) => {
+      // check if user id given to the article is the same as the current user id
+      if (game.userId !== req.auth.userId) {
+        res.status(401).json({ message: 'Not authorized' });
+      } else {
+        Game.deleteOne({ _id: req.params.id })
+          .then(() => {
+            res.status(200).json({ message: 'Objet supprimé !' });
+          })
+          .catch((error) => res.status(401).json({ error }));
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
 };
 
 exports.getAllGames = (req, res) => {

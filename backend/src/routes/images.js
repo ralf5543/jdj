@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-// /////////////// UPLOAD DE MEEEEEEEEEEERDE
 
 const express = require('express');
 

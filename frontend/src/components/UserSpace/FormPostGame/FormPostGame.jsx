@@ -75,7 +75,7 @@ const FormPostGame = ({
             alt=""
           />
         )}
-        <button type="submit">Upload, meeeeeerde !!!</button>
+        <button type="submit">Charger l'image</button>
       </form>
 
       <form autoComplete="off" onSubmit={handleSubmit}>
