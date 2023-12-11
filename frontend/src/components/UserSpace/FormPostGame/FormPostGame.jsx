@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -6,6 +7,7 @@ import store from '../../../store';
 import Field from '../../genericComponents/Field/Field';
 import './FormPostGame.scss';
 import { changeGameVisual } from '../../../actions/games';
+import Textarea from '../../genericComponents/Textarea/Textarea';
 
 const FormPostGame = ({
   changeTitleField,
@@ -87,7 +89,7 @@ const FormPostGame = ({
           onChange={changeTitleField}
           value={gameTitle}
         />
-        <Field
+        <Textarea
           // must have the same name of the state !!!!!!!!!!
           name="gameDescription"
           type="text"

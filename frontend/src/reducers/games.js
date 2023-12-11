@@ -15,9 +15,9 @@ export const initialState = {
   areGamesLoaded: false,
   gameTitle: '',
   gameDescription: '',
-  gameMaxPlayers: 0,
-  gameIdealPlayers: 0,
-  gameDuration: 0,
+  gameMaxPlayers: '',
+  gameIdealPlayers: '',
+  gameDuration: '',
   gameVisual: '',
   currentGameId: '',
 };
@@ -74,10 +74,10 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         // clear all fields
         gameTitle: '',
-        gameDescription: '',
-        gameMaxPlayers: 0,
-        gameIdealPlayers: 0,
-        gameDuration: 0,
+        gameDescription: 'aaaaaaaaaaaaaaaaa',
+        gameMaxPlayers: '',
+        gameIdealPlayers: '',
+        gameDuration: '',
         gameVisual: '',
         currentGameId: '',
       };
