@@ -8,7 +8,7 @@ import './GamesListing.scss';
 const GamesListing = () => {
   const games = useSelector((state) => state.games.list);
   return (
-    <ul>
+    <ul className="gameslisting">
       {games.map((game) => (
         <BoardgameCard key={game._id} id={game._id} {...game} />
       ))}

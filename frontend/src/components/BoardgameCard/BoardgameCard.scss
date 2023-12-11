@@ -1,0 +1,67 @@
+@use 'src/styles/variables';
+
+.boardgame-card {
+    position: relative;
+    height: 50rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &:hover,
+    &:focus {
+        .boardgame-card_content {
+            transform: translateY(-12rem);
+        }
+
+        .boardgame-card_visual_wrapper::after {
+            opacity: .4;
+        }
+
+        .boardgame-card_visual {
+            transform: scale(1.1, 1.1);
+        }
+    }
+}
+
+.boardgame-card_visual_wrapper {
+    position: relative;
+    display: block;
+    height: 50%;
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0;
+    }
+}
+
+.boardgame-card_visual {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .3s;
+    transform: scale(1, 1);
+}
+
+.boardgame-card_content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    padding: calc(var(--spacer-m) + var(--spacer-s));
+    transform: translateY(0);
+    transition: .3s;
+    background-color: var(--color-light);
+}
+
+.boardgame-card_title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-block-end: 1.6rem;
+}
