@@ -7,7 +7,17 @@ import './GameSheet.scss';
 import { Navigate, useParams } from 'react-router-dom';
 import Page from '../genericComponents/Page/Page';
 import store from '../../store';
-import { fetchGames } from '../../actions/games';
+import {
+  fetchGames,
+  modifyGame,
+  changeGameTitleField,
+  changeGameDescriptionField,
+  changeGameMaxPlayersField,
+  changeGameIdealPlayersField,
+  changeGameDurationField,
+} from '../../actions/games';
+
+import FormModifyGame from '../UserSpace/FormModifyGame/FormModifyGame';
 
 const GameSheet = () => {
   const { id } = useParams();
@@ -53,6 +63,19 @@ const GameSheet = () => {
       });
   };
 
+  const gameTitleValue = useSelector((state) => state.games.gameTitle);
+  const gameDescriptionValue = useSelector(
+    (state) => state.games.gameDescription
+  );
+  const gameMaxPlayersValue = useSelector(
+    (state) => state.games.gameMaxPlayers
+  );
+  const gameIdealPlayersValue = useSelector(
+    (state) => state.games.gameIdealPlayers
+  );
+  const gameDurationValue = useSelector((state) => state.games.gameDuration);
+  const gameVisualValue = useSelector((state) => state.games.gameVisual);
+
   return (
     <Page>
       <div>
@@ -76,6 +99,54 @@ const GameSheet = () => {
         <p>(Vous devez être l'auteur de cette page pour la supprimer)</p>
       </div>
       {deletedGame && <Navigate to="/" replace />}
+
+      <h1>Modification de la fiche du jeu</h1>
+      <FormModifyGame
+        currentGameId={currentGame._id}
+        gameTitle={gameTitleValue}
+        gameDescription={gameDescriptionValue}
+        gameMaxPlayers={gameMaxPlayersValue}
+        gameIdealPlayers={gameIdealPlayersValue}
+        gameDuration={gameDurationValue}
+        gameVisual={gameVisualValue}
+        changeTitleField={(newValue, gameTitleField) => {
+          const action = changeGameTitleField(newValue, gameTitleField);
+          dispatch(action);
+        }}
+        changeDescriptionField={(newValue, gameDescriptionField) => {
+          const action = changeGameDescriptionField(
+            newValue,
+            gameDescriptionField
+          );
+          dispatch(action);
+        }}
+        changeMaxplayersField={(newValue, gameMaxPlayersField) => {
+          const action = changeGameMaxPlayersField(
+            // Number, because we want a number type, frome a text field
+            Number(newValue),
+            gameMaxPlayersField
+          );
+          dispatch(action);
+        }}
+        changeIdealPlayersField={(newValue, gameIdealPlayersField) => {
+          const action = changeGameIdealPlayersField(
+            Number(newValue),
+            gameIdealPlayersField
+          );
+          dispatch(action);
+        }}
+        changeDurationField={(newValue, gameDurationField) => {
+          const action = changeGameDurationField(
+            Number(newValue),
+            gameDurationField
+          );
+          dispatch(action);
+        }}
+        handleModifyGame={() => {
+          // le traitement placé ici est déclenché à la soumission du formulaire
+          dispatch(modifyGame());
+        }}
+      />
     </Page>
   );
 };

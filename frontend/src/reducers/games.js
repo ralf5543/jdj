@@ -6,6 +6,7 @@ import {
   CHANGE_GAME_IDEALPLAYERS_FIELD,
   CHANGE_GAME_DURATION_FIELD,
   CHANGE_GAME_VISUAL,
+  CHANGE_CURRENT_GAME_ID,
   POST_GAME,
 } from '../actions/games';
 
@@ -69,12 +70,18 @@ const reducer = (state = initialState, action = {}) => {
         gameVisual: action.newValue.status,
       };
 
+    case CHANGE_CURRENT_GAME_ID:
+      return {
+        ...state,
+        currentGameId: action.newValue,
+      };
+
     case POST_GAME:
       return {
         ...state,
         // clear all fields
         gameTitle: '',
-        gameDescription: 'aaaaaaaaaaaaaaaaa',
+        gameDescription: '',
         gameMaxPlayers: '',
         gameIdealPlayers: '',
         gameDuration: '',

@@ -1,6 +1,7 @@
 // ici on placera les actions qui concernent les jeux
 export const FETCH_GAMES = 'FETCH_GAMES';
 export const POST_GAME = 'POST_GAME';
+export const MODIFY_GAME = 'MODIFY_GAME';
 export const SAVE_GAMES = 'SAVE_GAMES';
 export const CHANGE_GAME_TITLE_FIELD = 'CHANGE_GAME_TITLE_FIELD';
 export const CHANGE_GAME_DESCRIPTION_FIELD = 'CHANGE_GAME_DESCRIPTION_FIELD';
@@ -8,6 +9,7 @@ export const CHANGE_GAME_MAXPLAYERS_FIELD = 'CHANGE_GAME_MAXPLAYERS_FIELD';
 export const CHANGE_GAME_IDEALPLAYERS_FIELD = 'CHANGE_GAME_IDEALPLAYERS_FIELD';
 export const CHANGE_GAME_DURATION_FIELD = 'CHANGE_GAME_DURATION_FIELD';
 export const CHANGE_GAME_VISUAL = 'CHANGE_GAME_VISUAL';
+export const CHANGE_CURRENT_GAME_ID = 'CHANGE_CURRENT_GAME_ID';
 
 export const fetchGames = () => ({
   type: FETCH_GAMES,
@@ -15,6 +17,11 @@ export const fetchGames = () => ({
 
 export const postGame = () => ({
   type: POST_GAME,
+});
+
+export const modifyGame = (toto) => ({
+  type: MODIFY_GAME,
+  toto,
 });
 
 export const saveGames = (games) => ({
@@ -59,5 +66,10 @@ export const changeGameDurationField = (newValue, gameDurationField) => ({
 
 export const changeGameVisual = (newValue) => ({
   type: CHANGE_GAME_VISUAL,
+  newValue,
+});
+
+export const changeCurrentGameId = (newValue) => ({
+  type: CHANGE_CURRENT_GAME_ID,
   newValue,
 });
