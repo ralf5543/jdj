@@ -18,9 +18,7 @@ const BoardgameCard = ({
       </picture>
       <div className="boardgame-card_content">
         <p className="boardgame-card_title">{title}</p>
-        <p className="boardgame-card_description">
-          {description.slice(0, 100)}...
-        </p>
+        <p className="boardgame-card_description">{description}</p>
         <p className="boardgame-card_maxplayers">
           Nombre de joueurs MAX : {maxplayers}
         </p>

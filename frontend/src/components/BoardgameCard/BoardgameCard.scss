@@ -32,8 +32,8 @@
         content: '';
         display: block;
         position: absolute;
-        top: 0;
-        left: 0;
+        inset-block-start: 0;
+        inset-inline-start: 0;
         width: 100%;
         height: 100%;
         background-color: black;
@@ -64,4 +64,11 @@
     font-size: 3rem;
     font-weight: 700;
     margin-block-end: 1.6rem;
+}
+
+.boardgame-card_description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; 
 }

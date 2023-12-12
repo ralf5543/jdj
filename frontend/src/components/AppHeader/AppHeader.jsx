@@ -1,123 +1,26 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import './AppHeader.scss';
+import logo from '../../assets/logo-jdj.svg';
 
-import './style.scss';
-
-import LoginForm from '../LoginForm/LoginForm';
-import {
-  changeLoginField,
-  changeSignupField,
-  submitSignup,
-  submitLogin,
-  handleSignupVisibility,
-  handleLoginVisibility,
-} from '../../actions/user';
-import SignupForm from '../SignupForm/SignupForm';
+import Navigation from './Navigation/Navigation';
 
 const AppHeader = () => {
-  // /!\ ne pas oublier le nom du tiroir, state.email c'est undefined
-  const emailValue = useSelector((state) => state.user.email);
-  const passwordValue = useSelector((state) => state.user.password);
-  const nicknameValue = useSelector((state) => state.user.nickname);
-  const isLogged = useSelector((state) => state.user.logged);
-  const isSignupVisible = useSelector((state) => state.user.signupVisible);
-  const isLoginVisible = useSelector((state) => state.user.loginVisible);
-
-  const dispatch = useDispatch();
-
-  /*
-  si on récupère le tiroir entier ?
-  const { email, password } = useSelector((state) => state.user);
-  => conséquence : on s'est abonné aux changements du tiroir, et pas au changement
-  des infos dont on a besoin dans le tiroir, donc le composant AppHeader refait un
-  rendu dès qu'une info change dans le tiroir, même si ça ne le concerne pas
-  DONC c'est pas une bonne pratique, par rapport aux performances
-  */
-
   return (
-    <header className="header">
-      <NavLink className={({ isActive }) => (isActive ? 'current' : '')} to="/">
-        Retour à l'accueil
-      </NavLink>
-      {isLogged && (
-        <NavLink
-          className={({ isActive }) => (isActive ? 'current' : '')}
-          to="/user-space"
-        >
-          <span className="fa-solid fa-user" />
-          Votre espace perso
-        </NavLink>
-      )}
-      {isLogged && (
-        <div className="login-form-logged">
-          <h1 className="login-form-message">{`Bienvenue ${nicknameValue}`}</h1>
-          <button
-            type="button"
-            className="login-form-button"
-            onClick={() => {
-              console.log('handleLogout');
-            }}
-          >
-            Déconnexion
-          </button>
+    <header className="main-header">
+      <div className="main-header_content">
+        <Navigation />
+        <div className="main-header_inner">
+          <img className="main-header_logo" src={logo} alt="JdJ logo" />
+          <div className="main-header_titles">
+            <h1 className="main-header_title">
+              Jeux <span className="main-header_title_highlight">du</span> Jeudi
+            </h1>
+            <p className="main-header_subtitle">
+              ...m'enfin surtout du week-end, en fait.
+            </p>
+          </div>
         </div>
-      )}
-      {!isLogged && (
-        <>
-          <button
-            type="button"
-            onClick={() => {
-              const action = handleLoginVisibility();
-              dispatch(action);
-            }}
-          >
-            Se connnecter
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              const action = handleSignupVisibility();
-              dispatch(action);
-            }}
-          >
-            Créer un compte
-          </button>
-        </>
-      )}
-      {isSignupVisible && (
-        <SignupForm
-          email={emailValue}
-          password={passwordValue}
-          nickname={nicknameValue}
-          changeField={(newValue, identifier) => {
-            const action = changeSignupField(newValue, identifier);
-            dispatch(action);
-          }}
-          handleSignup={() => {
-            const action = submitSignup();
-            dispatch(action);
-          }}
-        />
-      )}
-      {isLoginVisible && (
-        <LoginForm
-          email={emailValue}
-          password={passwordValue}
-          changeField={(newValue, identifier) => {
-            // on transmet les infos au store, pour le reducer user
-            // ici pour les paramètres on met dans le même ordre que ce qu'on a
-            // défini dans l'annuaire des actions
-            const action = changeLoginField(newValue, identifier);
-            dispatch(action);
-          }}
-          handleLogin={() => {
-            // le traitement placé ici est déclenché à la soumission du formulaire
-            const action = submitLogin();
-            dispatch(action);
-          }}
-        />
-      )}
+      </div>
     </header>
   );
 };
