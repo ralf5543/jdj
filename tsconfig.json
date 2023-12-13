@@ -14,7 +14,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
   },
   "include": [
     "frontend/vite.config.ts",
@@ -23,5 +23,6 @@
     "backend/.eslintrc.cjs",
     "backend/src"
 , ".vscode/backend"  ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  // "exclude": ["frontend/src/__tests__/*.test.tsx"]
 }
