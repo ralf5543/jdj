@@ -38,6 +38,8 @@ const GameSheet = () => {
 
   const handleDeleteGame = () => {
     dispatch(deleteGame());
+
+    // Route => home
     setDeletedGame(true);
   };
 
