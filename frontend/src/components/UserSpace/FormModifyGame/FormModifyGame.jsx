@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import store from '../../../store';
 import Field from '../../genericComponents/Field/Field';
 import './FormModifyGame.scss';
-import { changeGameVisual, changeCurrentGameId } from '../../../actions/games';
+import { changeGameVisual, modifyGame } from '../../../actions/games';
 import Textarea from '../../genericComponents/Textarea/Textarea';
 
 const FormModifyGame = ({
@@ -15,13 +15,11 @@ const FormModifyGame = ({
   changeMaxplayersField,
   changeIdealPlayersField,
   changeDurationField,
-  handleModifyGame,
   gameTitle,
   gameDescription,
   gameMaxPlayers,
   gameIdealPlayers,
   gameDuration,
-  currentGameId,
 }) => {
   const dispatch = useDispatch();
   const [file, setFile] = useState('');
@@ -30,9 +28,7 @@ const FormModifyGame = ({
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const action = changeCurrentGameId(currentGameId);
-    dispatch(action);
-    handleModifyGame();
+    dispatch(modifyGame());
   };
   const handleFileUpload = (e) => {
     setFile(e.target.files[0]);
@@ -143,8 +139,6 @@ FormModifyGame.propTypes = {
   changeMaxplayersField: PropTypes.func.isRequired,
   changeIdealPlayersField: PropTypes.func.isRequired,
   changeDurationField: PropTypes.func.isRequired,
-  handleModifyGame: PropTypes.func.isRequired,
-  currentGameId: PropTypes.string.isRequired,
 };
 
 export default FormModifyGame;

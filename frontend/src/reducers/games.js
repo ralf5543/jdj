@@ -8,6 +8,7 @@ import {
   CHANGE_GAME_VISUAL,
   CHANGE_CURRENT_GAME_ID,
   POST_GAME,
+  // DELETE_GAME,
 } from '../actions/games';
 
 export const initialState = {

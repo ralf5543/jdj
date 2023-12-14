@@ -1,15 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from 'react';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './GameSheet.scss';
 import { Navigate, useParams } from 'react-router-dom';
 import Page from '../genericComponents/Page/Page';
-import store from '../../store';
 import {
   deleteGame,
-  modifyGame,
   changeGameTitleField,
   changeGameDescriptionField,
   changeGameMaxPlayersField,
@@ -23,6 +20,14 @@ import FormModifyGame from '../UserSpace/FormModifyGame/FormModifyGame';
 const GameSheet = () => {
   const { id } = useParams();
 
+  const dispatch = useDispatch();
+
+  // changes the current game ID in the store
+  useEffect(() => {
+    const action = changeCurrentGameId(id);
+    dispatch(action);
+  }, [dispatch, id]);
+
   const games = useSelector((state) => state.games.list);
 
   const [deletedGame, setDeletedGame] = useState(false);
@@ -31,12 +36,8 @@ const GameSheet = () => {
   const currentGame = games.find((element) => element._id === id);
   const { title, visual, description, maxplayers, idealplayers } = currentGame;
 
-  const dispatch = useDispatch();
-
   const handleDeleteGame = () => {
-    const action = changeCurrentGameId(id);
-    dispatch(action);
-    dispatch(deleteGame(id));
+    dispatch(deleteGame());
     setDeletedGame(true);
   };
 
@@ -79,7 +80,6 @@ const GameSheet = () => {
 
       <h1>Modification de la fiche du jeu</h1>
       <FormModifyGame
-        currentGameId={currentGame._id}
         gameTitle={gameTitleValue}
         gameDescription={gameDescriptionValue}
         gameMaxPlayers={gameMaxPlayersValue}
@@ -118,10 +118,6 @@ const GameSheet = () => {
             gameDurationField
           );
           dispatch(action);
-        }}
-        handleModifyGame={() => {
-          // le traitement placé ici est déclenché à la soumission du formulaire
-          dispatch(modifyGame());
         }}
       />
     </Page>

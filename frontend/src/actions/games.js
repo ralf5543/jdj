@@ -20,14 +20,12 @@ export const postGame = () => ({
   type: POST_GAME,
 });
 
-export const modifyGame = (id) => ({
+export const modifyGame = () => ({
   type: MODIFY_GAME,
-  id,
 });
 
-export const deleteGame = (id) => ({
+export const deleteGame = () => ({
   type: DELETE_GAME,
-  id,
 });
 
 export const saveGames = (games) => ({

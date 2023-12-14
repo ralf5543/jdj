@@ -19,8 +19,6 @@ const App = () => {
     dispatch(action);
   }, [dispatch]);
 
-  console.log('render de App');
-
   return (
     <div className="App">
       <AppHeader />
