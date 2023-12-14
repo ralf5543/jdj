@@ -3,10 +3,9 @@
 import { Routes, Route } from 'react-router';
 import { useEffect } from 'react';
 import './App.scss';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import UserSpace from '../UserSpace/UserSpace';
 import { fetchGames } from '../../actions/games';
-import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import Error from '../Error/Error';
 import Home from '../Home/Home';
 import AppHeader from '../AppHeader/AppHeader';

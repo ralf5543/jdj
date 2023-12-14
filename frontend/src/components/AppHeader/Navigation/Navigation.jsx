@@ -43,7 +43,7 @@ const Navigation = () => {
             Espace perso
           </NavLink>
         )}
-        {isLogged && (
+        {isLogged ? (
           <div className="login-form-logged">
             {/*  <h1 className="login-form-message">{`Bienvenue ${nicknameValue}`}</h1> */}
             <button
@@ -56,8 +56,7 @@ const Navigation = () => {
               Déconnexion
             </button>
           </div>
-        )}
-        {!isLogged && (
+        ) : (
           <>
             <button
               type="button"
