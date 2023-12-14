@@ -2,6 +2,7 @@
 export const FETCH_GAMES = 'FETCH_GAMES';
 export const POST_GAME = 'POST_GAME';
 export const MODIFY_GAME = 'MODIFY_GAME';
+export const DELETE_GAME = 'DELETE_GAME';
 export const SAVE_GAMES = 'SAVE_GAMES';
 export const CHANGE_GAME_TITLE_FIELD = 'CHANGE_GAME_TITLE_FIELD';
 export const CHANGE_GAME_DESCRIPTION_FIELD = 'CHANGE_GAME_DESCRIPTION_FIELD';
@@ -19,9 +20,14 @@ export const postGame = () => ({
   type: POST_GAME,
 });
 
-export const modifyGame = (toto) => ({
+export const modifyGame = (id) => ({
   type: MODIFY_GAME,
-  toto,
+  id,
+});
+
+export const deleteGame = (id) => ({
+  type: DELETE_GAME,
+  id,
 });
 
 export const saveGames = (games) => ({

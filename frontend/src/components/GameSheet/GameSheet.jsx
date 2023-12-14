@@ -8,13 +8,14 @@ import { Navigate, useParams } from 'react-router-dom';
 import Page from '../genericComponents/Page/Page';
 import store from '../../store';
 import {
-  fetchGames,
+  deleteGame,
   modifyGame,
   changeGameTitleField,
   changeGameDescriptionField,
   changeGameMaxPlayersField,
   changeGameIdealPlayersField,
   changeGameDurationField,
+  changeCurrentGameId,
 } from '../../actions/games';
 
 import FormModifyGame from '../UserSpace/FormModifyGame/FormModifyGame';
@@ -32,35 +33,11 @@ const GameSheet = () => {
 
   const dispatch = useDispatch();
 
-  const deleteGame = (gameId) => {
-    axios
-      .delete(
-        `http://localhost:3000/api/games/${gameId}`,
-        // options (notamment les headers)
-        {
-          headers: {
-            // nom: contenu
-            // on fournit le token JWT dans le header Authorization, en faisant
-            // précéder par le mot Bearer
-            Authorization: `Bearer ${store.getState().user.token}`,
-          },
-        }
-      )
-      .then(() => {
-        console.log('Suppression du  jeu ', title);
-
-        // Recharge la liste
-        dispatch(fetchGames());
-
-        // Go back to home page
-        setDeletedGame(true);
-      })
-      .catch((error) => {
-        console.log('erreur de la requete : ', error);
-        if (error.response.status === 401) {
-          console.log("Le user id n'est pas celui de l'article");
-        }
-      });
+  const handleDeleteGame = () => {
+    const action = changeCurrentGameId(id);
+    dispatch(action);
+    dispatch(deleteGame(id));
+    setDeletedGame(true);
   };
 
   const gameTitleValue = useSelector((state) => state.games.gameTitle);
@@ -90,7 +67,7 @@ const GameSheet = () => {
         </p>
         <button
           onClick={() => {
-            deleteGame(id);
+            handleDeleteGame(id);
           }}
           type="button"
         >

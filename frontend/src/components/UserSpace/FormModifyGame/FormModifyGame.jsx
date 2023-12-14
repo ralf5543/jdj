@@ -30,7 +30,6 @@ const FormModifyGame = ({
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log('currentGameId : ', currentGameId);
     const action = changeCurrentGameId(currentGameId);
     dispatch(action);
     handleModifyGame();

@@ -4,6 +4,7 @@ import {
   FETCH_GAMES,
   POST_GAME,
   MODIFY_GAME,
+  DELETE_GAME,
   saveGames,
 } from '../actions/games';
 
@@ -113,6 +114,57 @@ const gamesMiddleware = (store) => (next) => (action) => {
             console.log('erreur de la request : ', error.request);
           } else if (error.message) {
             console.log('erreur du message : ', error.message);
+          }
+        })
+        .finally(() => {
+          // refetch la liste de jeux mise à jour
+          axios
+            .get('http://localhost:3000/api/games')
+            .then((response) => {
+              console.log(
+                'affichage de la nouvelle liste de jeux : ',
+                response.data
+              );
+              store.dispatch(saveGames(response.data));
+            })
+            .catch((error) => {
+              console.log('erreur de la requete : ', error);
+            });
+        });
+
+      break;
+
+    case DELETE_GAME:
+      console.log(
+        'id apres le delete : ',
+        store.getState().games.currentGameId
+      );
+      axios
+        .delete(
+          // URL
+          `http://localhost:3000/api/games/${
+            store.getState().games.currentGameId
+          }`,
+          // paramètres
+          {
+            headers: {
+              // nom: contenu
+              // on fournit le token JWT dans le header Authorization, en faisant
+              // précéder par le mot Bearer
+              Authorization: `Bearer ${store.getState().user.token}`,
+            },
+          }
+        )
+        .then(() => {
+          // Recharge la liste
+          // dispatch(fetchGames());
+          // Go back to home page
+          // setDeletedGame(true);
+        })
+        .catch((error) => {
+          console.log('erreur de la requete : ', error);
+          if (error.response.status === 401) {
+            console.log("Le user id n'est pas celui de l'article");
           }
         })
         .finally(() => {
