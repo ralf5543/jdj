@@ -24,19 +24,23 @@ const BoardgameCard = ({
         <span className="boardgame-card_coop">Coopératif</span>
         <p className="boardgame-card_title">{title}</p>
         <p className="boardgame-card_description">{description}</p>
-        <p className="boardgame-card_maxplayers">
-          Nombre de joueurs MAX : {maxplayers}
-        </p>
-        <p className="boardgame-card_idealplayers">
-          Nombre de joueurs idéal : {idealplayers}
-        </p>
-        <Link to={`/game/${id}`}>Fiche complète du jeu</Link>
+        <Link to={`/game/${id}`} className="boardgame-card_link">Fiche complète du jeu</Link>
       </div>
       <footer className="boardgame-card_footer">
-        <p className="boardgame-card_duration">
+        <p className="boardgame-card_footer_inner">
           <i className="fa-solid fa-clock" />
-          {duration}
-          <span className="boardgame-card_footer_wording">min</span>
+          <span className="boardgame-card_footer_highlight">{duration}</span>
+          min
+        </p>
+        <p className="boardgame-card_footer_inner">
+          <i className="fa-solid fa-user-group" />
+          Joueurs max :
+          <span className="boardgame-card_footer_highlight">{maxplayers}</span>
+          (idéal :
+          <span className="boardgame-card_footer_highlight">
+            {idealplayers}
+          </span>
+          )
         </p>
       </footer>
     </li>
