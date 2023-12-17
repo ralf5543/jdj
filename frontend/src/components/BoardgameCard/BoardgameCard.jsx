@@ -30,9 +30,15 @@ const BoardgameCard = ({
         <p className="boardgame-card_idealplayers">
           Nombre de joueurs idéal : {idealplayers}
         </p>
-        <p className="boardgame-card_duration">{duration} minutes</p>
         <Link to={`/game/${id}`}>Fiche complète du jeu</Link>
       </div>
+      <footer className="boardgame-card_footer">
+        <p className="boardgame-card_duration">
+          <i className="fa-solid fa-clock" />
+          {duration}
+          <span className="boardgame-card_footer_wording">min</span>
+        </p>
+      </footer>
     </li>
   );
 };
