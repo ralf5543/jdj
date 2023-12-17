@@ -96,7 +96,7 @@
     font-family: 'Roboto', sans-serif;
     font-size: 3vh;
     transform: rotate(6deg);
-    background-color: red;
+    background-color: var(--color-primary);
 
     @include m.media(">tablet") {
         margin-inline: var(--spacer-m);

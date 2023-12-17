@@ -13,10 +13,15 @@ const BoardgameCard = ({
 }) => {
   return (
     <li className="boardgame-card">
+      <span className="boardgame-card_highlight">
+        <span className="boardgame-card_highlight_amount">{maxplayers}</span>
+        <span className="boardgame-card_highlight_wording">joueurs</span>
+      </span>
       <picture className="boardgame-card_visual_wrapper">
         <img className="boardgame-card_visual" src={visual} alt="" />
       </picture>
       <div className="boardgame-card_content">
+        <span className="boardgame-card_coop">Coopératif</span>
         <p className="boardgame-card_title">{title}</p>
         <p className="boardgame-card_description">{description}</p>
         <p className="boardgame-card_maxplayers">

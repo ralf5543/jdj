@@ -1,8 +1,13 @@
 @use 'src/styles/variables';
 
+:root {
+    --picture-height: 23rem;
+    --content-translation: 12rem
+}
+
 .boardgame-card {
     position: relative;
-    height: 50rem;
+    height: 43rem;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -10,7 +15,7 @@
     &:hover,
     &:focus {
         .boardgame-card_content {
-            transform: translateY(-12rem);
+            transform: translateY(calc(var(--content-translation) * -1));
         }
 
         .boardgame-card_visual_wrapper::after {
@@ -23,10 +28,33 @@
     }
 }
 
+.boardgame-card_highlight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: calc((var(--picture-height) - var(--content-translation)) / 2);
+    right: calc(var(--spacer-m) + var(--spacer-s));
+    width: calc((var(--picture-height) - var(--content-translation)) - 4rem);
+    height: calc((var(--picture-height) - var(--content-translation)) - 4rem);
+    transform: translateY(-50%);
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    z-index: 1;
+    text-align: center;
+    color: var(--color-light);
+    line-height: 1.1;
+}
+
+.boardgame-card_highlight_amount {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
 .boardgame-card_visual_wrapper {
     position: relative;
     display: block;
-    height: 50%;
+    height: var(--picture-height);
 
     &::after {
         content: '';
@@ -53,11 +81,23 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    top: 50%;
+    top: var(--picture-height);
     padding: calc(var(--spacer-m) + var(--spacer-s));
     transform: translateY(0);
     transition: .3s;
     background-color: var(--color-light);
+}
+
+.boardgame-card_coop {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: var(--spacer-s);
 }
 
 .boardgame-card_title {
