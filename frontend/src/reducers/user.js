@@ -20,6 +20,8 @@ export const initialState = {
   nickname: '',
   // token
   token: '',
+  userId: '',
+  userNickname: '',
 };
 
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */
@@ -53,6 +55,7 @@ const reducer = (state = initialState, action = {}) => {
         logged: true,
         nickname: action.nickname,
         token: action.token,
+        userId: action.userId,
         // sécurité : on efface les identifiants dans le state dès qu'on en a
         // plus besoin
         email: '',

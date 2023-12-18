@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useSelector, useDispatch } from 'react-redux';
 import FormPostGame from './FormPostGame/FormPostGame';
 import {
@@ -11,6 +12,7 @@ import {
 
 import './UserSpace.scss';
 import Page from '../genericComponents/Page/Page';
+import GamesListing from '../GamesListing/GamesListing';
 
 const UserSpace = () => {
   const gameTitleValue = useSelector((state) => state.games.gameTitle);
@@ -26,11 +28,18 @@ const UserSpace = () => {
   );
   const gameDurationValue = useSelector((state) => state.games.gameDuration);
   const gameVisualValue = useSelector((state) => state.games.gameVisual);
+  const currentUserId = useSelector((state) => state.user.userId);
 
   const dispatch = useDispatch();
+
+  const games = useSelector((state) => state.games.list);
+  const toto = games.filter((monq) => monq.userId === currentUserId);
+
   return (
     <Page>
       <h1>Espace perso de {nicknameValue}</h1>
+      <h2>Mes jeux à moi que j'ai</h2>
+      <GamesListing games={toto} />
       <FormPostGame
         gameTitle={gameTitleValue}
         gameDescription={gameDescriptionValue}

@@ -13,6 +13,7 @@ const gameSchema = mongoose.Schema({
 
   // given by the user who created the article, so only him can modify it
   userId: { type: String, required: false },
+  userNickname: { type: String, required: false },
 });
 
 // transforme ce schéma en modèle utilisable

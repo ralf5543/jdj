@@ -40,6 +40,7 @@
     &::after {
         content: '';
         position: absolute;
+        transform: translateY(1px);// in some screens resolutions, 1px of the banner is visible
         z-index: 1;
         display : inline-block;
         background-color: var(--color-light);

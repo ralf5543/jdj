@@ -37,6 +37,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             maxplayers: store.getState().games.gameMaxPlayers,
             idealplayers: store.getState().games.gameIdealPlayers,
             duration: store.getState().games.gameDuration,
+            userNickname: store.getState().user.nickname,
             visual: `http://localhost:3000/images/${
               store.getState().games.gameVisual
             }`,
@@ -135,10 +136,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
       break;
 
     case DELETE_GAME:
-      console.log(
-        'id apres le delete : ',
-        store.getState().games.currentGameId
-      );
       axios
         .delete(
           // URL

@@ -1,4 +1,5 @@
 import './BoardgameCard.scss';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -10,6 +11,7 @@ const BoardgameCard = ({
   duration,
   visual,
   id,
+  userNickname,
 }) => {
   return (
     <li className="boardgame-card">
@@ -24,6 +26,10 @@ const BoardgameCard = ({
         <span className="boardgame-card_coop">Coopératif</span>
         <p className="boardgame-card_title">{title}</p>
         <p className="boardgame-card_description">{description}</p>
+        <p className="boardgame-card_owners">
+          Détenu par{' '}
+          <span className="boardgame-card_owners_name">{userNickname}</span>
+        </p>
         <Link to={`/game/${id}`} className="boardgame-card_link">
           Fiche complète du jeu
         </Link>
@@ -57,6 +63,7 @@ BoardgameCard.propTypes = {
   duration: PropTypes.number.isRequired,
   visual: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  userNickname: PropTypes.string.isRequired,
 };
 
 export default BoardgameCard;

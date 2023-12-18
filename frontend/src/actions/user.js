@@ -33,10 +33,17 @@ export const submitLogin = () => ({
   type: SUBMIT_LOGIN,
 });
 
-export const handleSuccessfulLogin = (nickname, token) => ({
+export const handleSuccessfulLogin = (
+  nickname,
+  token,
+  userId,
+  userNickname
+) => ({
   type: HANDLE_SUCCESSFUL_LOGIN,
   nickname,
   token,
+  userId,
+  userNickname,
 });
 
 export const handleSignupVisibility = () => ({

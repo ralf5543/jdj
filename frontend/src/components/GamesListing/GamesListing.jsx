@@ -1,12 +1,10 @@
 /* eslint-disable no-underscore-dangle */
 
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import './GamesListing.scss';
 
-const GamesListing = () => {
-  const games = useSelector((state) => state.games.list);
+const GamesListing = ({ games }) => {
   console.log('Render de GamesListing');
 
   return (
