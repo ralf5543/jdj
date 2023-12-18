@@ -1,0 +1,50 @@
+@use '../../../styles/variables';
+@use '../../../styles/extends';
+
+.modal {
+   position: fixed;
+   inset-block-start: 0;
+   inset-inline-start: 0;
+   width: 100%;
+   height: 100%;
+   z-index: var(--z-modal);
+}
+
+.modal-content {
+    position: absolute;
+    width: calc(100vw - var(--spacer-xl));
+    max-width: 96rem;
+    top: 50%;
+    left: 50%;
+    padding: var(--spacer-l);
+    transform: translate(-50%, -50%);
+    background-color: var(--color-light);
+    border-radius: var(--spacer-m);
+    z-index: 1;
+}
+
+.modal-close {
+    position: absolute;
+    inset-block-start: var(--spacer-m);
+    inset-inline-end: var(--spacer-m);
+    padding: var(--spacer-m);
+
+    i {
+        font-size: 2.4rem;
+        color: var(--color-primary)
+    }
+}
+
+.modal-close_wording {
+    @extend %accessible-wording ;
+}
+
+.modal-fog {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: .7;
+}

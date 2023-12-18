@@ -5,6 +5,7 @@ import {
   SUBMIT_SIGNUP,
   handleSuccessfulSignup,
 } from '../actions/user';
+import { hideModal } from '../actions/layout';
 
 const userMiddleware = (store) => (next) => (action) => {
   // console.log('on a intercepté une action dans le middleware: ', action);
@@ -29,6 +30,7 @@ const userMiddleware = (store) => (next) => (action) => {
           store.dispatch(
             handleSuccessfulSignup(response.data.nickname, response.data.token)
           );
+          store.dispatch(hideModal());
         })
         .catch((error) => {
           console.log("erreur lors de l'inscription : ", error.message);
@@ -60,6 +62,7 @@ const userMiddleware = (store) => (next) => (action) => {
               response.data.userNickname
             )
           );
+          store.dispatch(hideModal());
         })
         .catch((error) => {
           console.log('erreur lors du login : ', error.request.response);

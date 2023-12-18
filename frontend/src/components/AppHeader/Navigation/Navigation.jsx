@@ -13,15 +13,26 @@ import {
   handleSignupVisibility,
   handleLoginVisibility,
 } from '../../../actions/user';
+import { showModal } from '../../../actions/layout';
 import SignupForm from '../../SignupForm/SignupForm';
+import Modal from '../../genericComponents/Modal/Modal';
 
 const Navigation = () => {
   const emailValue = useSelector((state) => state.user.email);
   const passwordValue = useSelector((state) => state.user.password);
   const nicknameValue = useSelector((state) => state.user.nickname);
   const isLogged = useSelector((state) => state.user.logged);
-  const isSignupVisible = useSelector((state) => state.user.signupVisible);
+  const isModalVisible = useSelector((state) => state.layout.modalVisible);
   const isLoginVisible = useSelector((state) => state.user.loginVisible);
+  const isSignupVisible = useSelector((state) => state.user.signupVisible);
+
+  const cancelSignup = () => {
+    console.log('cancel signup');
+  };
+
+  const cancelLogin = () => {
+    console.log('cancel login');
+  };
 
   const dispatch = useDispatch();
 
@@ -67,8 +78,8 @@ const Navigation = () => {
                 type="button"
                 className="link"
                 onClick={() => {
-                  const action = handleLoginVisibility();
-                  dispatch(action);
+                  dispatch(handleLoginVisibility());
+                  dispatch(showModal());
                 }}
               >
                 Se connnecter
@@ -79,8 +90,8 @@ const Navigation = () => {
                 type="button"
                 className="link"
                 onClick={() => {
-                  const action = handleSignupVisibility();
-                  dispatch(action);
+                  dispatch(handleSignupVisibility());
+                  dispatch(showModal());
                 }}
               >
                 Créer un compte
@@ -88,38 +99,41 @@ const Navigation = () => {
             </li>
           </>
         )}
-        {isSignupVisible && (
-          <SignupForm
-            email={emailValue}
-            password={passwordValue}
-            nickname={nicknameValue}
-            changeField={(newValue, identifier) => {
-              const action = changeSignupField(newValue, identifier);
-              dispatch(action);
-            }}
-            handleSignup={() => {
-              const action = submitSignup();
-              dispatch(action);
-            }}
-          />
+        {isSignupVisible && isModalVisible && (
+          <Modal closeModal={cancelSignup}>
+            <SignupForm
+              email={emailValue}
+              password={passwordValue}
+              nickname={nicknameValue}
+              changeField={(newValue, identifier) => {
+                const action = changeSignupField(newValue, identifier);
+                dispatch(action);
+              }}
+              handleSignup={() => {
+                dispatch(submitSignup());
+              }}
+            />
+          </Modal>
         )}
-        {isLoginVisible && (
-          <LoginForm
-            email={emailValue}
-            password={passwordValue}
-            changeField={(newValue, identifier) => {
-              // on transmet les infos au store, pour le reducer user
-              // ici pour les paramètres on met dans le même ordre que ce qu'on a
-              // défini dans l'annuaire des actions
-              const action = changeLoginField(newValue, identifier);
-              dispatch(action);
-            }}
-            handleLogin={() => {
-              // le traitement placé ici est déclenché à la soumission du formulaire
-              const action = submitLogin();
-              dispatch(action);
-            }}
-          />
+        {isLoginVisible && isModalVisible && (
+          <Modal closeModal={cancelLogin}>
+            <LoginForm
+              email={emailValue}
+              password={passwordValue}
+              changeField={(newValue, identifier) => {
+                // on transmet les infos au store, pour le reducer user
+                // ici pour les paramètres on met dans le même ordre que ce qu'on a
+                // défini dans l'annuaire des actions
+                const action = changeLoginField(newValue, identifier);
+                dispatch(action);
+              }}
+              handleLogin={() => {
+                // le traitement placé ici est déclenché à la soumission du formulaire
+                const action = submitLogin();
+                dispatch(action);
+              }}
+            />
+          </Modal>
         )}
       </ul>
     </nav>

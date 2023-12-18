@@ -3,3 +3,14 @@
   background-color: var(--color-light);
   border-radius: 0.4rem;
 }
+
+%accessible-wording {
+  // make an invisible word readable by robots
+  margin: -1px;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 0);
+  position: absolute;
+}

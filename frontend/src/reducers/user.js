@@ -56,8 +56,7 @@ const reducer = (state = initialState, action = {}) => {
         nickname: action.nickname,
         token: action.token,
         userId: action.userId,
-        // sécurité : on efface les identifiants dans le state dès qu'on en a
-        // plus besoin
+        // sécurité : on efface les identifiants dans le state dès qu'on en a plus besoin
         email: '',
         password: '',
         loginVisible: false,

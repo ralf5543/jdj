@@ -12,5 +12,8 @@
   --color-secondary-text: rgb(147 147 147);
 
   // =============------------------ SIZES
-  --max-size: 1480px;
+  --size-max: 1480px;
+
+  // =============------------------ LAYERS (z-indexes)
+  --z-modal: 9;
 }

@@ -1,6 +1,6 @@
 @use 'src/styles/variables';
 
 .page {
-    max-width: var(--max-size);
+    max-width: var(--size-max);
     margin-inline: auto;
 }
