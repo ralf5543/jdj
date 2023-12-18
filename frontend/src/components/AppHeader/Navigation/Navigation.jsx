@@ -27,55 +27,65 @@ const Navigation = () => {
 
   return (
     <nav className="main-nav">
-      <ul>
-        <NavLink
-          className={({ isActive }) => (isActive ? 'current' : '')}
-          to="/"
-        >
-          Retour à l'accueil
-        </NavLink>
-        {isLogged && (
+      <ul className="main-nav_items">
+        <li className="main-nav_items_item">
           <NavLink
             className={({ isActive }) => (isActive ? 'current' : '')}
-            to="/user-space"
+            to="/"
           >
-            <span className="fa-solid fa-user" />
-            Espace perso
+            Retour à l'accueil
           </NavLink>
+        </li>
+        {isLogged && (
+          <li className="main-nav_items_item">
+            <NavLink
+              className={({ isActive }) => (isActive ? 'current' : '')}
+              to="/user-space"
+            >
+              <span className="fa-solid fa-user" />
+              Espace perso
+            </NavLink>
+          </li>
         )}
         {isLogged ? (
-          <div className="login-form-logged">
+          <li className="main-nav_items_item">
             {/*  <h1 className="login-form-message">{`Bienvenue ${nicknameValue}`}</h1> */}
             <button
               type="button"
-              className="login-form-button"
+              className="link"
               onClick={() => {
                 console.log('handleLogout');
               }}
             >
               Déconnexion
             </button>
-          </div>
+          </li>
         ) : (
           <>
-            <button
-              type="button"
-              onClick={() => {
-                const action = handleLoginVisibility();
-                dispatch(action);
-              }}
-            >
-              Se connnecter
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                const action = handleSignupVisibility();
-                dispatch(action);
-              }}
-            >
-              Créer un compte
-            </button>
+            <li className="main-nav_items_item">
+              <button
+                type="button"
+                className="link"
+                onClick={() => {
+                  const action = handleLoginVisibility();
+                  dispatch(action);
+                }}
+              >
+                Se connnecter
+              </button>
+            </li>
+            <li className="main-nav_items_item">
+              <button
+                type="button"
+                className="link"
+                onClick={() => {
+                  const action = handleSignupVisibility();
+                  dispatch(action);
+                }}
+              >
+                Créer un compte
+              </button>
+            </li>
           </>
         )}
         {isSignupVisible && (

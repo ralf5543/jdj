@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import PropTypes from 'prop-types';
+import './Page.scss';
 
 const Page = ({ children }) => (
   <main className="page">

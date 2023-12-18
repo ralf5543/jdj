@@ -36,7 +36,7 @@
     top: calc((var(--picture-height) - var(--content-translation)) / 2);
     right: calc(var(--spacer-m) + var(--spacer-s));
     width: calc((var(--picture-height) - var(--content-translation)) - 4rem);
-    height: calc((var(--picture-height) - var(--content-translation)) - 4rem);
+    aspect-ratio: 1 / 1;
     transform: translateY(-50%);
     background-color: var(--color-primary);
     border-radius: 50%;
@@ -149,4 +149,5 @@
 
 .boardgame-card_link {
     margin-block-start: auto;
+    margin-inline-end: auto;
 }

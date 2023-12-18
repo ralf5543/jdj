@@ -1,0 +1,44 @@
+@use 'src/styles/variables';
+
+.main-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-block-end: 4vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.main-nav_items {
+    display: flex;
+}
+
+.main-nav_items_item {
+    > a,
+    > button.link {
+        padding: var(--spacer-s);
+        color: var(--color-light);
+        font-size: 1.4rem;
+        text-transform: uppercase;
+
+        &:visited {
+            color: var(--color-light);
+        }
+
+        &.current {
+            color: var(--color-primary);
+        }
+
+        &::after {
+            transform: translateY(0) scaleX(0);
+            background-color: var(--color-light);
+        }
+
+        &:hover,
+        &:focus {
+
+            &::after {
+                transform: translateY(0) scaleX(1);
+            }
+        }
+    }
+}

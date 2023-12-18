@@ -3,7 +3,6 @@
 .main-header {
     position: relative;
     display: flex;
-    min-height: 15vh;
     // background-image: url("../../assets/bkg_header.jpg");
     background-image: image-set(
             url("../../assets/bkg_header_small_1x.webp") 1x,
@@ -11,10 +10,6 @@
             url("../../assets/bkg_header_small_3x.webp") 2x);
     background-position: center;
     background-size: cover;
-
-    @include m.media(">tablet") {
-        min-height: 30vh;
-    }
 
     @include m.media(">tablet", "<=desktop") {
         background-image: image-set(
@@ -62,10 +57,13 @@
 .main-header_content {
     position: relative;
     width: 100%;
+    max-width: var(--max-size);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-inline: auto;
+    padding-block-end: 4vh;
 }
 
 .main-header_titles {

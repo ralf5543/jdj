@@ -7,6 +7,8 @@ import './GamesListing.scss';
 
 const GamesListing = () => {
   const games = useSelector((state) => state.games.list);
+  console.log('Render de GamesListing');
+
   return (
     <ul className="gameslisting">
       {games.map((game) => (

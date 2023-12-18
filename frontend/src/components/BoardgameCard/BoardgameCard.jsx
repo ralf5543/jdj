@@ -24,7 +24,9 @@ const BoardgameCard = ({
         <span className="boardgame-card_coop">Coopératif</span>
         <p className="boardgame-card_title">{title}</p>
         <p className="boardgame-card_description">{description}</p>
-        <Link to={`/game/${id}`} className="boardgame-card_link">Fiche complète du jeu</Link>
+        <Link to={`/game/${id}`} className="boardgame-card_link">
+          Fiche complète du jeu
+        </Link>
       </div>
       <footer className="boardgame-card_footer">
         <p className="boardgame-card_footer_inner">
