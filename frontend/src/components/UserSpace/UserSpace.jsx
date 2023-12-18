@@ -33,13 +33,15 @@ const UserSpace = () => {
   const dispatch = useDispatch();
 
   const games = useSelector((state) => state.games.list);
-  const toto = games.filter((monq) => monq.userId === currentUserId);
+  const currentUserGames = games.filter(
+    (currentUserGame) => currentUserGame.userId === currentUserId
+  );
 
   return (
     <Page>
       <h1>Espace perso de {nicknameValue}</h1>
       <h2>Mes jeux à moi que j'ai</h2>
-      <GamesListing games={toto} />
+      <GamesListing games={currentUserGames} />
       <FormPostGame
         gameTitle={gameTitleValue}
         gameDescription={gameDescriptionValue}
