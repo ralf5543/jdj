@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import FormPostGame from './FormPostGame/FormPostGame';
+import { showModal } from '../../actions/layout';
 import {
   postGame,
   changeGameTitleField,
@@ -13,6 +15,7 @@ import {
 import './UserSpace.scss';
 import Page from '../genericComponents/Page/Page';
 import GamesListing from '../GamesListing/GamesListing';
+import Modal from '../genericComponents/Modal/Modal';
 
 const UserSpace = () => {
   const gameTitleValue = useSelector((state) => state.games.gameTitle);
@@ -29,6 +32,7 @@ const UserSpace = () => {
   const gameDurationValue = useSelector((state) => state.games.gameDuration);
   const gameVisualValue = useSelector((state) => state.games.gameVisual);
   const currentUserId = useSelector((state) => state.user.userId);
+  const isModalVisible = useSelector((state) => state.layout.modalVisible);
 
   const dispatch = useDispatch();
 
@@ -37,56 +41,75 @@ const UserSpace = () => {
     (currentUserGame) => currentUserGame.userId === currentUserId
   );
 
+  const [postgame, setPostgame] = useState('closed');
+
+  const handlePostgameForm = () => {
+    setPostgame('open');
+    dispatch(showModal());
+  };
+
+  const cancelPostgame = () => {
+    console.log('cancel post game');
+  };
+
   return (
     <Page>
       <h1>Espace perso de {nicknameValue}</h1>
       <h2>Mes jeux à moi que j'ai</h2>
       <GamesListing games={currentUserGames} />
-      <FormPostGame
-        gameTitle={gameTitleValue}
-        gameDescription={gameDescriptionValue}
-        gameMaxPlayers={gameMaxPlayersValue}
-        gameIdealPlayers={gameIdealPlayersValue}
-        gameDuration={gameDurationValue}
-        gameVisual={gameVisualValue}
-        changeTitleField={(newValue, gameTitleField) => {
-          const action = changeGameTitleField(newValue, gameTitleField);
-          dispatch(action);
-        }}
-        changeDescriptionField={(newValue, gameDescriptionField) => {
-          const action = changeGameDescriptionField(
-            newValue,
-            gameDescriptionField
-          );
-          dispatch(action);
-        }}
-        changeMaxplayersField={(newValue, gameMaxPlayersField) => {
-          const action = changeGameMaxPlayersField(
-            // Number, because we want a number type, frome a text field
-            Number(newValue),
-            gameMaxPlayersField
-          );
-          dispatch(action);
-        }}
-        changeIdealPlayersField={(newValue, gameIdealPlayersField) => {
-          const action = changeGameIdealPlayersField(
-            Number(newValue),
-            gameIdealPlayersField
-          );
-          dispatch(action);
-        }}
-        changeDurationField={(newValue, gameDurationField) => {
-          const action = changeGameDurationField(
-            Number(newValue),
-            gameDurationField
-          );
-          dispatch(action);
-        }}
-        handlePostGame={() => {
-          // le traitement placé ici est déclenché à la soumission du formulaire
-          dispatch(postGame());
-        }}
-      />
+
+      <button className="link" type="button" onClick={handlePostgameForm}>
+        Ajoutez un noveau un nouveau jeu à votre liste !
+      </button>
+      {postgame && isModalVisible && (
+        <Modal closeModal={cancelPostgame}>
+          <FormPostGame
+            gameTitle={gameTitleValue}
+            gameDescription={gameDescriptionValue}
+            gameMaxPlayers={gameMaxPlayersValue}
+            gameIdealPlayers={gameIdealPlayersValue}
+            gameDuration={gameDurationValue}
+            gameVisual={gameVisualValue}
+            changeTitleField={(newValue, gameTitleField) => {
+              const action = changeGameTitleField(newValue, gameTitleField);
+              dispatch(action);
+            }}
+            changeDescriptionField={(newValue, gameDescriptionField) => {
+              const action = changeGameDescriptionField(
+                newValue,
+                gameDescriptionField
+              );
+              dispatch(action);
+            }}
+            changeMaxplayersField={(newValue, gameMaxPlayersField) => {
+              const action = changeGameMaxPlayersField(
+                // Number, because we want a number type, frome a text field
+                Number(newValue),
+                gameMaxPlayersField
+              );
+              dispatch(action);
+            }}
+            changeIdealPlayersField={(newValue, gameIdealPlayersField) => {
+              const action = changeGameIdealPlayersField(
+                Number(newValue),
+                gameIdealPlayersField
+              );
+              dispatch(action);
+            }}
+            changeDurationField={(newValue, gameDurationField) => {
+              const action = changeGameDurationField(
+                Number(newValue),
+                gameDurationField
+              );
+              dispatch(action);
+            }}
+            handlePostGame={() => {
+              // le traitement placé ici est déclenché à la soumission du formulaire
+              dispatch(postGame());
+            }}
+          />
+        </Modal>
+      )}
     </Page>
   );
 };
