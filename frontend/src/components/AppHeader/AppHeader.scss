@@ -3,7 +3,7 @@
 .main-header {
     position: relative;
     display: flex;
-    // background-image: url("../../assets/bkg_header.jpg");
+    margin-block-end: var(--spacer-m);
     background-image: image-set(
             url("../../assets/bkg_header_small_1x.webp") 1x,
             url("../../assets/bkg_header_small_2x.webp") 2x,
@@ -19,6 +19,7 @@
     }
 
     @include m.media(">desktop") {
+        margin-block-end: var(--spacer-l);
         background-image: image-set(
             url("../../assets/bkg_header_large_1x.webp") 1x,
             url("../../assets/bkg_header_large_2x.webp") 2x,

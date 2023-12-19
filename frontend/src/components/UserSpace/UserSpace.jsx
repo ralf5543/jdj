@@ -1,6 +1,8 @@
+/* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { ErrorBoundary } from 'react-error-boundary';
 import FormPostGame from './FormPostGame/FormPostGame';
 import { showModal } from '../../actions/layout';
 import {
@@ -52,11 +54,35 @@ const UserSpace = () => {
     console.log('cancel post game');
   };
 
+  function fallbackRender({ error, resetErrorBoundary }) {
+    // Call resetErrorBoundary() to reset the error boundary and retry the render.
+
+    return (
+      <div role="alert">
+        <h2>Impossible de charger la liste de jeux :</h2>
+        <pre style={{ color: 'red' }}>{error.message}</pre>
+        <p>Merci de nous signaler cette erreur.</p>
+        <button className="link" type="button" onClick={resetErrorBoundary}>
+          Recharger la liste
+        </button>
+      </div>
+    );
+  }
+
   return (
     <Page>
       <h1>Espace perso de {nicknameValue}</h1>
       <h2>Mes jeux à moi que j'ai</h2>
-      <GamesListing games={currentUserGames} />
+
+      <ErrorBoundary
+        fallbackRender={fallbackRender}
+        onReset={(details) => {
+          // Reset the state of your app so the error doesn't happen again
+          console.log('details : ', details);
+        }}
+      >
+        <GamesListing games={currentUserGames} />
+      </ErrorBoundary>
 
       <button className="link" type="button" onClick={handlePostgameForm}>
         Ajoutez un noveau un nouveau jeu à votre liste !

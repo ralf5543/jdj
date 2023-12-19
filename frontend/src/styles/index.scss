@@ -21,6 +21,7 @@ a,
 button.link  {
   display: inline-block;
   position: relative;
+  padding-inline: 0;
   color: var(--color-primary);
 
   &:visited {
