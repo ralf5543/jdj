@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import './Modal.scss';
 import { hideModal } from '../../../actions/layout';
@@ -15,7 +16,9 @@ const handleCloseModal = () => {
   const action = hideModal();
   dispatch(action);
 }
-return (
+
+// render the component in a targeted element of the DOM
+return createPortal (
 
   <div className="modal">
     <div className="modal-content">
@@ -30,7 +33,7 @@ return (
     <button type='button' onClick={handleCloseModal} className="modal-fog">
       <span className="modal-close_wording">close modal</span>
     </button>
-  </div>
+  </div>, document.body
 )};
 
 Modal.propTypes = {
