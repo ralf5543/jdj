@@ -1,7 +1,7 @@
 import './BoardgameCard.scss';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const BoardgameCard = ({
   description,
@@ -20,7 +20,7 @@ const BoardgameCard = ({
         <span className="boardgame-card_highlight_wording">joueurs</span>
       </span>
       <picture className="boardgame-card_visual_wrapper">
-        <img className="boardgame-card_visual" src={visual} alt="" />
+        <LazyLoadImage src={visual} alt={`Visual of ${title} game`} />
       </picture>
       <div className="boardgame-card_content">
         <span className="boardgame-card_coop">Coopératif</span>

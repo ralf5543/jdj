@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './GameSheet.scss';
 import { Navigate, useParams } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Page from '../genericComponents/Page/Page';
 import {
   deleteGame,
@@ -60,7 +61,7 @@ const GameSheet = () => {
     <Page>
       <div>
         <h2 className="boardgame-card_title">{title}</h2>
-        <img src={visual} alt="" />
+        <LazyLoadImage src={visual} alt={`Visual of ${title} game`} />
         <p className="boardgame-card_description">{description}</p>
         <p className="boardgame-card_maxplayers">
           Nombre de joueurs MAX : {maxplayers}

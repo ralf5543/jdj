@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import store from '../../../store';
 import Field from '../../genericComponents/Field/Field';
 import './FormPostGame.scss';
@@ -65,16 +66,17 @@ const FormPostGame = ({
   };
 
   return (
-    <section>
+    <>
       <h2>Ajouter un jeu à votre liste</h2>
       <form autoComplete="off" onSubmit={handleSubmitImage}>
         <input type="file" onChange={handleFileUpload} name="image" />
         {isFileUploaded && (
-          <img
+          <LazyLoadImage
+            className="postgame_img-preview"
             src={`http://localhost:3000/images/${
               store.getState().games.gameVisual
             }`}
-            alt=""
+            alt="image to upload"
           />
         )}
         <button type="submit">Charger l'image</button>
@@ -125,7 +127,7 @@ const FormPostGame = ({
           OK
         </button>
       </form>
-    </section>
+    </>
   );
 };
 
