@@ -8,7 +8,7 @@ import UserSpace from '../UserSpace/UserSpace';
 import { fetchGames } from '../../actions/games';
 import Error from '../Error/Error';
 import Home from '../Home/Home';
-import AppHeader from '../AppHeader/AppHeader';
+import AppHeader from '../AppHeader/AppHeader'
 import GameSheet from '../GameSheet/GameSheet';
 
 const App = () => {
