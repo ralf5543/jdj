@@ -7,6 +7,7 @@ import {
   DELETE_GAME,
   saveGames,
 } from '../actions/games';
+import { hideModal } from '../actions/layout';
 
 const gamesMiddleware = (store) => (next) => (action) => {
   // console.log('action.type : ', action.type);
@@ -78,6 +79,8 @@ const gamesMiddleware = (store) => (next) => (action) => {
             .catch((error) => {
               console.log('erreur de la requete : ', error);
             });
+
+          store.dispatch(hideModal());
         });
       break;
 

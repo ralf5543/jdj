@@ -1,27 +1,35 @@
 /* eslint-disable no-underscore-dangle */
 
-import PropTypes from 'prop-types';
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import './GamesListing.scss';
 
-const GamesListing = ({ games }) => {
+const GamesListing = ({ games }: Props) => {
   console.log('Render de GamesListing');
 
   return (
     <ul className="gameslisting">
       {games.map((game) => (
-        <BoardgameCard key={game._id} id={game._id} {...game} />
+        <BoardgameCard
+          title=""
+          description=""
+          maxplayers={0}
+          idealplayers={0}
+          duration={0}
+          visual=""
+          userNickname=""
+          key={game._id}
+          id={game._id}
+          {...game}
+        />
       ))}
     </ul>
   );
 };
 
-GamesListing.propTypes = {
-  games: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+type Props = {
+  games: Array<{
+    _id: string;
+  }>;
 };
 
 export default GamesListing;

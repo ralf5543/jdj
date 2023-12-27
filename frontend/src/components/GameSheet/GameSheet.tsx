@@ -34,10 +34,10 @@ const GameSheet = () => {
   const [deletedGame, setDeletedGame] = useState(false);
 
   // find the first element with the id matching the slug
-  const currentGame = games.find((element) => element._id === id);
+  const currentGame = games.find((element: object) => element._id === id);
   const { title, visual, description, maxplayers, idealplayers } = currentGame;
 
-  const handleDeleteGame = () => {
+  const handleDeleteGame = (gameId: string | undefined) => {
     dispatch(deleteGame());
 
     // Route => home

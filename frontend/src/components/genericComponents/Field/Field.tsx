@@ -1,19 +1,23 @@
-// == Import : npm
-import PropTypes from 'prop-types';
-
 // == Import : local
 import './Field.scss';
+import { ChangeEvent } from 'react';
 
 // == Composant
-const Field = ({ value, type, name, placeholder, onChange }) => {
-  const handleChange = (evt) => {
+const Field = ({ value, type, name, placeholder, onChange }: Props) => {
+  const handleChange = (evt: ChangeEvent) => {
     onChange(evt.target.value, name);
   };
 
   const inputId = `field-${name}`;
 
   return (
-    <div className={value.length > 0 ? 'field field--has-content' : 'field'}>
+    <div
+      className={
+        value !== undefined && value.length > 0
+          ? 'field field--has-content'
+          : 'field'
+      }
+    >
       <input
         // React - state
         value={value}
@@ -33,12 +37,12 @@ const Field = ({ value, type, name, placeholder, onChange }) => {
   );
 };
 
-Field.propTypes = {
-  value: PropTypes.node,
-  type: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+type Props = {
+  value?: string | undefined;
+  type?: string;
+  name: string;
+  placeholder: string;
+  onChange: (event: React.ChangeEvent<HTMLElement>) => void;
 };
 
 // Valeurs par défaut pour les props

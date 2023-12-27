@@ -1,5 +1,4 @@
 import './BoardgameCard.scss';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
@@ -12,7 +11,7 @@ const BoardgameCard = ({
   visual,
   id,
   userNickname,
-}) => {
+}: Props) => {
   return (
     <li className="boardgame-card">
       <span className="boardgame-card_highlight">
@@ -55,15 +54,15 @@ const BoardgameCard = ({
   );
 };
 
-BoardgameCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  maxplayers: PropTypes.number.isRequired,
-  idealplayers: PropTypes.number.isRequired,
-  duration: PropTypes.number.isRequired,
-  visual: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  userNickname: PropTypes.string.isRequired,
+type Props = {
+  title: string;
+  description: string;
+  maxplayers: number;
+  idealplayers: number;
+  duration: number;
+  visual: string;
+  id: string;
+  userNickname: string;
 };
 
 export default BoardgameCard;
