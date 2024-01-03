@@ -1,11 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { useDispatch } from 'react-redux';
 import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
 import './Modal.scss';
+import { ReactNode } from 'react';
 import { hideModal } from '../../../actions/layout';
 
-const Modal = ({ children, closeModal }) => {
+const Modal = ({ children, closeModal }: Props) => {
 
 const dispatch = useDispatch();
 
@@ -36,9 +36,10 @@ return createPortal (
   </div>, document.body
 )};
 
-Modal.propTypes = {
-  children: PropTypes.node.isRequired,
-  closeModal: PropTypes.func.isRequired,
+type Props = {
+  // children: PropTypes.node.isRequired,
+  children: ReactNode,
+  closeModal: () => void,
 };
 
 export default Modal;

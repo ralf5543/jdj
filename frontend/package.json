@@ -1,11 +1,7 @@
 {
 	"name": "react-modele-vite",
 	"private": true,
-	"proxy": {
-		"/api/*": {
-		  "target": "http://localhost:3000"
-		}
-	  },
+	"proxy": "http://localhost:3000",
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {

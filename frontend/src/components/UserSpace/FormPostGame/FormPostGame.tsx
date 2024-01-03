@@ -22,23 +22,25 @@ const FormPostGame = ({
   gameMaxPlayers,
   gameIdealPlayers,
   gameDuration,
-}) => {
+}: Props) => {
   const dispatch = useDispatch();
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
   const [isFileUploaded, setIsFileUploaded] = useState(false);
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     handlePostGame();
   };
-  const handleFileUpload = (e) => {
-    setFile(e.target.files[0]);
-    setFilename(e.target.files[0].name);
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files != null) {
+      setFile(e.target.files[0]);
+      setFilename(e.target.files[0].name);
+    }
   };
 
-  const handleSubmitImage = (evt) => {
-    evt.preventDefault();
+  const handleSubmitImage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log('file selected : ', file);
     // create a new FormData object and append the file to it
     const formData = new FormData();
@@ -94,7 +96,6 @@ const FormPostGame = ({
         <Textarea
           // must have the same name of the state !!!!!!!!!!
           name="gameDescription"
-          type="text"
           placeholder="Description du jeu"
           onChange={changeDescriptionField}
           value={gameDescription}
@@ -131,18 +132,18 @@ const FormPostGame = ({
   );
 };
 
-FormPostGame.propTypes = {
-  gameTitle: PropTypes.string.isRequired,
-  gameDescription: PropTypes.string.isRequired,
-  gameMaxPlayers: PropTypes.number.isRequired,
-  gameIdealPlayers: PropTypes.number.isRequired,
-  gameDuration: PropTypes.number.isRequired,
-  changeTitleField: PropTypes.func.isRequired,
-  changeDescriptionField: PropTypes.func.isRequired,
-  changeMaxplayersField: PropTypes.func.isRequired,
-  changeIdealPlayersField: PropTypes.func.isRequired,
-  changeDurationField: PropTypes.func.isRequired,
-  handlePostGame: PropTypes.func.isRequired,
+type Props = {
+  gameTitle: string;
+  gameDescription: string;
+  gameMaxPlayers: string;
+  gameIdealPlayers: string;
+  gameDuration: string;
+  changeTitleField: () => void;
+  changeDescriptionField: () => void;
+  changeMaxplayersField: () => void;
+  changeIdealPlayersField: () => void;
+  changeDurationField: () => void;
+  handlePostGame: () => void;
 };
 
 export default FormPostGame;

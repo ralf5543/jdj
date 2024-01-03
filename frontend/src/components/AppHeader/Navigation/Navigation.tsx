@@ -18,13 +18,17 @@ import SignupForm from '../../SignupForm/SignupForm';
 import Modal from '../../genericComponents/Modal/Modal';
 
 const Navigation = () => {
-  const emailValue = useSelector((state) => state.user.email);
-  const passwordValue = useSelector((state) => state.user.password);
-  const nicknameValue = useSelector((state) => state.user.nickname);
-  const isLogged = useSelector((state) => state.user.logged);
-  const isModalVisible = useSelector((state) => state.layout.modalVisible);
-  const isLoginVisible = useSelector((state) => state.user.loginVisible);
-  const isSignupVisible = useSelector((state) => state.user.signupVisible);
+  const emailValue = useSelector((state: Props) => state.user.email);
+  const passwordValue = useSelector((state: Props) => state.user.password);
+  const nicknameValue = useSelector((state: Props) => state.user.nickname);
+  const isLogged = useSelector((state: Props) => state.user.logged);
+  const isModalVisible = useSelector(
+    (state: Props) => state.layout.modalVisible
+  );
+  const isLoginVisible = useSelector((state: Props) => state.user.loginVisible);
+  const isSignupVisible = useSelector(
+    (state: Props) => state.user.signupVisible
+  );
 
   const cancelSignup = () => {
     console.log('cancel signup');
@@ -138,6 +142,18 @@ const Navigation = () => {
       </ul>
     </nav>
   );
+};
+
+type Props = {
+  [key: string]: {
+    modalVisible: boolean;
+    signupVisible: boolean;
+    loginVisible: boolean;
+    logged: boolean;
+    email: string;
+    password: string;
+    nickname: string;
+  };
 };
 
 export default Navigation;

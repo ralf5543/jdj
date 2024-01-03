@@ -29,12 +29,12 @@ const GameSheet = () => {
     dispatch(action);
   }, [dispatch, id]);
 
-  const games = useSelector((state) => state.games.list);
+  const games = useSelector((state: Props) => state.games.list);
 
   const [deletedGame, setDeletedGame] = useState(false);
 
   // find the first element with the id matching the slug
-  const currentGame = games.find((element: object) => element._id === id);
+  const currentGame = games.find((element: Props) => element._id === id);
   const { title, visual, description, maxplayers, idealplayers } = currentGame;
 
   const handleDeleteGame = (gameId: string | undefined) => {
@@ -44,18 +44,19 @@ const GameSheet = () => {
     setDeletedGame(true);
   };
 
-  const gameTitleValue = useSelector((state) => state.games.gameTitle);
+  const gameTitleValue = useSelector((state: Props) => state.games.gameTitle);
   const gameDescriptionValue = useSelector(
-    (state) => state.games.gameDescription
+    (state: Props) => state.games.gameDescription
   );
   const gameMaxPlayersValue = useSelector(
-    (state) => state.games.gameMaxPlayers
+    (state: Props) => state.games.gameMaxPlayers
   );
   const gameIdealPlayersValue = useSelector(
-    (state) => state.games.gameIdealPlayers
+    (state: Props) => state.games.gameIdealPlayers
   );
-  const gameDurationValue = useSelector((state) => state.games.gameDuration);
-  const gameVisualValue = useSelector((state) => state.games.gameVisual);
+  const gameDurationValue = useSelector(
+    (state: Props) => state.games.gameDuration
+  );
 
   return (
     <Page>
@@ -88,7 +89,6 @@ const GameSheet = () => {
         gameMaxPlayers={gameMaxPlayersValue}
         gameIdealPlayers={gameIdealPlayersValue}
         gameDuration={gameDurationValue}
-        gameVisual={gameVisualValue}
         changeTitleField={(newValue, gameTitleField) => {
           const action = changeGameTitleField(newValue, gameTitleField);
           dispatch(action);
@@ -125,6 +125,18 @@ const GameSheet = () => {
       />
     </Page>
   );
+};
+
+type Props = {
+  [key: string]: {
+    gameTitle: string;
+    gameDescription: string;
+    gameMaxPlayers: number;
+    gameIdealPlayers: number;
+    gameDuration: number;
+    gameVisual: string;
+    list: Array<object>;
+  };
 };
 
 export default GameSheet;

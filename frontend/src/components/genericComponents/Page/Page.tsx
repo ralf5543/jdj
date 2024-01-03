@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
 import PropTypes from 'prop-types';
 import './Page.scss';
+import { ReactNode } from 'react';
 
-const Page = ({ children }) => (
+const Page = ({ children }: Props) => (
   <main className="page">
     {children}
   </main>
@@ -50,3 +51,7 @@ Par exemple un composant pour un message de validation :
   <input />
   <button>S'abonner</button>
 */
+
+type Props = {
+  children: ReactNode;
+}

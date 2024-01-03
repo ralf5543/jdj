@@ -6,8 +6,8 @@ import './Textarea.scss';
 
 // == Composant
 const Textarea = ({ value, name, placeholder, onChange }) => {
-  const handleChange = (evt) => {
-    onChange(evt.target.value, name);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value, name);
   };
 
   const inputId = `field-${name}`;
