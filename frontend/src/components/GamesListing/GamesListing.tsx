@@ -4,23 +4,10 @@ import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import './GamesListing.scss';
 
 const GamesListing = ({ games }: Props) => {
-  console.log('Render de GamesListing');
-
   return (
     <ul className="gameslisting">
       {games.map((game) => (
-        <BoardgameCard
-          title=""
-          description=""
-          maxplayers={0}
-          idealplayers={0}
-          duration={0}
-          visual=""
-          userNickname=""
-          key={game._id}
-          id={game._id}
-          {...game}
-        />
+        <BoardgameCard key={game._id} id={game._id} {...game} />
       ))}
     </ul>
   );
@@ -29,6 +16,13 @@ const GamesListing = ({ games }: Props) => {
 type Props = {
   games: Array<{
     _id: string;
+    title: string;
+    description: string;
+    visual: string;
+    userNickname: string;
+    maxplayers: number;
+    idealplayers: number;
+    duration: number;
   }>;
 };
 

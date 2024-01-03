@@ -7,7 +7,7 @@ import GamesListing from '../GamesListing/GamesListing';
 const Home = () => {
   const games = useSelector((state) => state.games.list);
 
-  function fallbackRender({ error, resetErrorBoundary }) {
+  function fallbackRender({ error, resetErrorBoundary }: Props) {
     // Call resetErrorBoundary() to reset the error boundary and retry the render.
 
     return (

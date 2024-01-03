@@ -26,7 +26,7 @@ const gamesRoutes = require('./routes/games');
 const userRoutes = require('./routes/user');
 const imagesRoutes = require('./routes/images');
 
-const uri = process.env.STRING_URI;
+const uri = process.env.VITE_API_KEY;
 
 // connexion à un user (via une uri pour proteger les infos, dans le fichier .env)
 mongoose
