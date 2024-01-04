@@ -24,8 +24,8 @@ const FormPostGame = ({
 }: Props) => {
   const dispatch = useDispatch();
   const [file, setFile] = useState<File>();
-  const [filename, setFilename] = useState('Choose File');
-  const [isFileUploaded, setIsFileUploaded] = useState(false);
+  const [filename, setFilename] = useState<string>('Choose File');
+  const [isFileUploaded, setIsFileUploaded] = useState<boolean>(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -75,7 +75,7 @@ const FormPostGame = ({
           <LazyLoadImage
             className="postgame_img-preview"
             src={`http://localhost:3000/images/${
-              store.getState().games.gameVisual
+              store.getState().gamesReducer.gameVisual
             }`}
             alt="image to upload"
           />

@@ -22,12 +22,12 @@ const FormModifyGame = ({
   gameDuration,
 }) => {
   const dispatch = useDispatch();
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState<string>('');
   const [filename, setFilename] = useState('Choose File');
-  const [isFileUploaded, setIsFileUploaded] = useState(false);
+  const [isFileUploaded, setIsFileUploaded] = useState<boolean>(false);
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch(modifyGame());
   };
   const handleFileUpload = (e) => {
@@ -35,8 +35,8 @@ const FormModifyGame = ({
     setFilename(e.target.files[0].name);
   };
 
-  const handleSubmitImage = (evt) => {
-    evt.preventDefault();
+  const handleSubmitImage = (e) => {
+    e.preventDefault();
     console.log('file selected : ', file);
     // create a new FormData object and append the file to it
     const formData = new FormData();
@@ -71,7 +71,7 @@ const FormModifyGame = ({
         {isFileUploaded && (
           <img
             src={`http://localhost:3000/images/${
-              store.getState().games.gameVisual
+              store.getState().gamesReducer.gameVisual
             }`}
             alt=""
           />
@@ -91,7 +91,6 @@ const FormModifyGame = ({
         <Textarea
           // must have the same name of the state !!!!!!!!!!
           name="gameDescription"
-          type="text"
           placeholder="Description du jeu"
           onChange={changeDescriptionField}
           value={gameDescription}

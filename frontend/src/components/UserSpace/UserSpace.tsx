@@ -20,30 +20,32 @@ import GamesListing from '../GamesListing/GamesListing';
 import Modal from '../genericComponents/Modal/Modal';
 
 const UserSpace = () => {
-  const gameTitleValue = useSelector((state) => state.games.gameTitle);
+  const gameTitleValue = useSelector((state) => state.gamesReducer.gameTitle);
   const nicknameValue = useSelector((state) => state.user.nickname);
   const gameDescriptionValue = useSelector(
-    (state) => state.games.gameDescription
+    (state) => state.gamesReducer.gameDescription
   );
   const gameMaxPlayersValue = useSelector(
-    (state) => state.games.gameMaxPlayers
+    (state) => state.gamesReducer.gameMaxPlayers
   );
   const gameIdealPlayersValue = useSelector(
-    (state) => state.games.gameIdealPlayers
+    (state) => state.gamesReducer.gameIdealPlayers
   );
-  const gameDurationValue = useSelector((state) => state.games.gameDuration);
-  const gameVisualValue = useSelector((state) => state.games.gameVisual);
+  const gameDurationValue = useSelector(
+    (state) => state.gamesReducer.gameDuration
+  );
+  const gameVisualValue = useSelector((state) => state.gamesReducer.gameVisual);
   const currentUserId = useSelector((state) => state.user.userId);
   const isModalVisible = useSelector((state) => state.layout.modalVisible);
 
   const dispatch = useDispatch();
 
-  const games = useSelector((state) => state.games.list);
+  const games = useSelector((state) => state.gamesReducer.list);
   const currentUserGames = games.filter(
     (currentUserGame) => currentUserGame.userId === currentUserId
   );
 
-  const [postgame, setPostgame] = useState('closed');
+  const [postgame, setPostgame] = useState<'open' | 'closed'>('closed');
 
   const handlePostgameForm = () => {
     setPostgame('open');

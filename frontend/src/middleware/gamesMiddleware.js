@@ -33,14 +33,14 @@ const gamesMiddleware = (store) => (next) => (action) => {
           'http://localhost:3000/api/games',
           // paramètres
           {
-            title: store.getState().games.gameTitle,
-            description: store.getState().games.gameDescription,
-            maxplayers: store.getState().games.gameMaxPlayers,
-            idealplayers: store.getState().games.gameIdealPlayers,
-            duration: store.getState().games.gameDuration,
+            title: store.getState().gamesReducer.gameTitle,
+            description: store.getState().gamesReducer.gameDescription,
+            maxplayers: store.getState().gamesReducer.gameMaxPlayers,
+            idealplayers: store.getState().gamesReducer.gameIdealPlayers,
+            duration: store.getState().gamesReducer.gameDuration,
             userNickname: store.getState().user.nickname,
             visual: `http://localhost:3000/images/${
-              store.getState().games.gameVisual
+              store.getState().gamesReducer.gameVisual
             }`,
           },
           // options (notamment les headers)
@@ -54,7 +54,10 @@ const gamesMiddleware = (store) => (next) => (action) => {
           }
         )
         .then((response) => {
-          console.log('on poste ce jeu : ', store.getState().games.gameTitle);
+          console.log(
+            'on poste ce jeu : ',
+            store.getState().gamesReducer.gameTitle
+          );
         })
         .catch((error) => {
           if (error.response) {
@@ -89,17 +92,17 @@ const gamesMiddleware = (store) => (next) => (action) => {
         .put(
           // URL
           `http://localhost:3000/api/games/${
-            store.getState().games.currentGameId
+            store.getState().gamesReducer.currentGameId
           }`,
           // paramètres
           {
-            title: store.getState().games.gameTitle,
-            description: store.getState().games.gameDescription,
-            maxplayers: store.getState().games.gameMaxPlayers,
-            idealplayers: store.getState().games.gameIdealPlayers,
-            duration: store.getState().games.gameDuration,
+            title: store.getState().gamesReducer.gameTitle,
+            description: store.getState().gamesReducer.gameDescription,
+            maxplayers: store.getState().gamesReducer.gameMaxPlayers,
+            idealplayers: store.getState().gamesReducer.gameIdealPlayers,
+            duration: store.getState().gamesReducer.gameDuration,
             visual: `http://localhost:3000/images/${
-              store.getState().games.gameVisual
+              store.getState().gamesReducer.gameVisual
             }`,
           },
           {
@@ -109,7 +112,10 @@ const gamesMiddleware = (store) => (next) => (action) => {
           }
         )
         .then(() => {
-          console.log('on modifie ce jeu : ', store.getState().games.gameTitle);
+          console.log(
+            'on modifie ce jeu : ',
+            store.getState().gamesReducer.gameTitle
+          );
         })
         .catch((error) => {
           if (error.response) {
@@ -143,7 +149,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
         .delete(
           // URL
           `http://localhost:3000/api/games/${
-            store.getState().games.currentGameId
+            store.getState().gamesReducer.currentGameId
           }`,
           // paramètres
           {

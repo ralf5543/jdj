@@ -29,13 +29,15 @@ const GameSheet = () => {
     dispatch(action);
   }, [dispatch, id]);
 
-  const games = useSelector((state: Props) => state.games.list);
+  const games = useSelector((state: Props) => state.gamesReducer.list);
 
-  const [deletedGame, setDeletedGame] = useState(false);
+  const [deletedGame, setDeletedGame] = useState<boolean>(false);
 
   // find the first element with the id matching the slug
-  const currentGame = games.find((element: Props) => element._id === id);
+  const currentGame = games.find((element) => element._id === id);
   const { title, visual, description, maxplayers, idealplayers } = currentGame;
+
+  console.log('currentGame : ', currentGame);
 
   const handleDeleteGame = (gameId: string | undefined) => {
     dispatch(deleteGame());
@@ -44,18 +46,20 @@ const GameSheet = () => {
     setDeletedGame(true);
   };
 
-  const gameTitleValue = useSelector((state: Props) => state.games.gameTitle);
+  const gameTitleValue = useSelector(
+    (state: Props) => state.gamesReducer.gameTitle
+  );
   const gameDescriptionValue = useSelector(
-    (state: Props) => state.games.gameDescription
+    (state: Props) => state.gamesReducer.gameDescription
   );
   const gameMaxPlayersValue = useSelector(
-    (state: Props) => state.games.gameMaxPlayers
+    (state: Props) => state.gamesReducer.gameMaxPlayers
   );
   const gameIdealPlayersValue = useSelector(
-    (state: Props) => state.games.gameIdealPlayers
+    (state: Props) => state.gamesReducer.gameIdealPlayers
   );
   const gameDurationValue = useSelector(
-    (state: Props) => state.games.gameDuration
+    (state: Props) => state.gamesReducer.gameDuration
   );
 
   return (
@@ -131,9 +135,9 @@ type Props = {
   [key: string]: {
     gameTitle: string;
     gameDescription: string;
-    gameMaxPlayers: number;
-    gameIdealPlayers: number;
-    gameDuration: number;
+    gameMaxPlayers: string;
+    gameIdealPlayers: string;
+    gameDuration: string;
     gameVisual: string;
     list: Array<object>;
   };

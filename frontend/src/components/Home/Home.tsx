@@ -5,7 +5,7 @@ import Page from '../genericComponents/Page/Page';
 import GamesListing from '../GamesListing/GamesListing';
 
 const Home = () => {
-  const games = useSelector((state: Props) => state.games.list);
+  const games = useSelector((state: Props) => state.gamesReducer.list);
 
   function fallbackRender({ error, resetErrorBoundary }) {
     // Call resetErrorBoundary() to reset the error boundary and retry the render.
@@ -40,8 +40,10 @@ const Home = () => {
 
 type Props = {
   [key: string]: {
-    list: Array<object>;
+    // array of objects
+    list: object[];
   };
+  // gamesReducer: object[];
 };
 
 export default Home;
