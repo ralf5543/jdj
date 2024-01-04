@@ -3,10 +3,10 @@
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import './GamesListing.scss';
 
-const GamesListing = ({ games }: Props) => {
+const GamesListing = ({ games }: any) => {
   return (
     <ul className="gameslisting">
-      {games.map((game) => (
+      {games.map((game: any) => (
         <BoardgameCard key={game._id} id={game._id} {...game} />
       ))}
     </ul>
@@ -14,16 +14,7 @@ const GamesListing = ({ games }: Props) => {
 };
 
 type Props = {
-  games: Array<{
-    _id: string;
-    title: string;
-    description: string;
-    visual: string;
-    userNickname: string;
-    maxplayers: number;
-    idealplayers: number;
-    duration: number;
-  }>;
+  games: object[];
 };
 
 export default GamesListing;

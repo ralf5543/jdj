@@ -43,7 +43,6 @@ type Props = {
     // array of objects
     list: object[];
   };
-  // gamesReducer: object[];
 };
 
 export default Home;

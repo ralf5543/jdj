@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import store from '../../../store';
 import Field from '../../genericComponents/Field/Field';
 import './FormModifyGame.scss';
@@ -20,7 +19,7 @@ const FormModifyGame = ({
   gameMaxPlayers,
   gameIdealPlayers,
   gameDuration,
-}) => {
+}: Props) => {
   const dispatch = useDispatch();
   const [file, setFile] = useState<string>('');
   const [filename, setFilename] = useState('Choose File');
@@ -127,17 +126,19 @@ const FormModifyGame = ({
   );
 };
 
-FormModifyGame.propTypes = {
-  gameTitle: PropTypes.string.isRequired,
-  gameDescription: PropTypes.string.isRequired,
-  gameMaxPlayers: PropTypes.string.isRequired,
-  gameIdealPlayers: PropTypes.string.isRequired,
-  gameDuration: PropTypes.string.isRequired,
-  changeTitleField: PropTypes.func.isRequired,
-  changeDescriptionField: PropTypes.func.isRequired,
-  changeMaxplayersField: PropTypes.func.isRequired,
-  changeIdealPlayersField: PropTypes.func.isRequired,
-  changeDurationField: PropTypes.func.isRequired,
+type Props = {
+  gameTitle: string;
+  gameDescription: string;
+  gameMaxPlayers: string;
+  gameIdealPlayers: string;
+  gameDuration: string;
+  changeTitleField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
+  changeDescriptionField: (arg0: string, arg1: string) => void;
+  changeMaxplayersField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
+  changeIdealPlayersField: (
+    ChangeEvent: React.ChangeEvent<HTMLElement>
+  ) => void;
+  changeDurationField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
 };
 
 export default FormModifyGame;

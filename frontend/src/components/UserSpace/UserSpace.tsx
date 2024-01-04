@@ -20,27 +20,33 @@ import GamesListing from '../GamesListing/GamesListing';
 import Modal from '../genericComponents/Modal/Modal';
 
 const UserSpace = () => {
-  const gameTitleValue = useSelector((state) => state.gamesReducer.gameTitle);
-  const nicknameValue = useSelector((state) => state.user.nickname);
+  const gameTitleValue = useSelector(
+    (state: Props) => state.gamesReducer.gameTitle
+  );
+  const nicknameValue = useSelector((state: Props) => state.user.nickname);
   const gameDescriptionValue = useSelector(
-    (state) => state.gamesReducer.gameDescription
+    (state: Props) => state.gamesReducer.gameDescription
   );
   const gameMaxPlayersValue = useSelector(
-    (state) => state.gamesReducer.gameMaxPlayers
+    (state: Props) => state.gamesReducer.gameMaxPlayers
   );
   const gameIdealPlayersValue = useSelector(
-    (state) => state.gamesReducer.gameIdealPlayers
+    (state: Props) => state.gamesReducer.gameIdealPlayers
   );
   const gameDurationValue = useSelector(
-    (state) => state.gamesReducer.gameDuration
+    (state: Props) => state.gamesReducer.gameDuration
   );
-  const gameVisualValue = useSelector((state) => state.gamesReducer.gameVisual);
-  const currentUserId = useSelector((state) => state.user.userId);
-  const isModalVisible = useSelector((state) => state.layout.modalVisible);
+  const gameVisualValue = useSelector(
+    (state: Props) => state.gamesReducer.gameVisual
+  );
+  const currentUserId = useSelector((state: Props) => state.user.userId);
+  const isModalVisible = useSelector(
+    (state: Props) => state.layout.modalVisible
+  );
 
   const dispatch = useDispatch();
 
-  const games = useSelector((state) => state.gamesReducer.list);
+  const games = useSelector((state: Props) => state.gamesReducer.list);
   const currentUserGames = games.filter(
     (currentUserGame) => currentUserGame.userId === currentUserId
   );
@@ -139,6 +145,22 @@ const UserSpace = () => {
       )}
     </Page>
   );
+};
+
+type Props = {
+  [key: string]: {
+    gameTitle: string;
+    nickname: string;
+    gameDescription: string;
+    gameMaxPlayers: string;
+    gameIdealPlayers: string;
+    gameDuration: string;
+    gameVisual: string;
+    userId: string;
+    modalVisible: boolean;
+    list: object[];
+  };
+  games: any;
 };
 
 export default UserSpace;

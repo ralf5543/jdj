@@ -37,7 +37,6 @@ return createPortal (
 )};
 
 type Props = {
-  // children: PropTypes.node.isRequired,
   children: ReactNode,
   closeModal: () => void,
 };

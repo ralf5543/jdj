@@ -11,7 +11,7 @@ const BoardgameCard = ({
   visual,
   id,
   userNickname,
-}: Props) => {
+}: any) => {
   return (
     <li className="boardgame-card">
       <span className="boardgame-card_highlight">
