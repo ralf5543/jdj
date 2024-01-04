@@ -111,22 +111,21 @@ const UserSpace = () => {
             }}
             changeMaxplayersField={(newValue, gameMaxPlayersField) => {
               const action = changeGameMaxPlayersField(
-                // Number, because we want a number type, frome a text field
-                Number(newValue),
+                newValue,
                 gameMaxPlayersField
               );
               dispatch(action);
             }}
             changeIdealPlayersField={(newValue, gameIdealPlayersField) => {
               const action = changeGameIdealPlayersField(
-                Number(newValue),
+                newValue,
                 gameIdealPlayersField
               );
               dispatch(action);
             }}
             changeDurationField={(newValue, gameDurationField) => {
               const action = changeGameDurationField(
-                Number(newValue),
+                newValue,
                 gameDurationField
               );
               dispatch(action);

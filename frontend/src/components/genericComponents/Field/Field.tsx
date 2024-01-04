@@ -4,8 +4,8 @@ import { ChangeEvent } from 'react';
 
 // == Composant
 const Field = ({ value, type, name, placeholder, onChange }: Props) => {
-  const handleChange = (evt: ChangeEvent) => {
-    onChange(evt.target.value, name);
+  const handleChange = (e: React.ChangeEvent) => {
+    onChange(e.target.value, name);
   };
 
   const inputId = `field-${name}`;

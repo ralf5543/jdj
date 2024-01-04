@@ -26,16 +26,16 @@ const FormModifyGame = ({
   const [filename, setFilename] = useState('Choose File');
   const [isFileUploaded, setIsFileUploaded] = useState<boolean>(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     dispatch(modifyGame());
   };
-  const handleFileUpload = (e) => {
+  const handleFileUpload = (e: React.SyntheticEvent) => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
   };
 
-  const handleSubmitImage = (e) => {
+  const handleSubmitImage = (e: React.SyntheticEvent) => {
     e.preventDefault();
     console.log('file selected : ', file);
     // create a new FormData object and append the file to it
@@ -130,9 +130,9 @@ const FormModifyGame = ({
 FormModifyGame.propTypes = {
   gameTitle: PropTypes.string.isRequired,
   gameDescription: PropTypes.string.isRequired,
-  gameMaxPlayers: PropTypes.number.isRequired,
-  gameIdealPlayers: PropTypes.number.isRequired,
-  gameDuration: PropTypes.number.isRequired,
+  gameMaxPlayers: PropTypes.string.isRequired,
+  gameIdealPlayers: PropTypes.string.isRequired,
+  gameDuration: PropTypes.string.isRequired,
   changeTitleField: PropTypes.func.isRequired,
   changeDescriptionField: PropTypes.func.isRequired,
   changeMaxplayersField: PropTypes.func.isRequired,

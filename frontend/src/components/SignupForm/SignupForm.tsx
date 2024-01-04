@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import Field from '../genericComponents/Field/Field';
 
 import './SignupForm.scss';
@@ -10,9 +8,9 @@ const SignupForm = ({
   nickname,
   changeField,
   handleSignup,
-}) => {
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
+}: Props) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
     handleSignup();
   };
 
@@ -51,19 +49,12 @@ const SignupForm = ({
   );
 };
 
-SignupForm.propTypes = {
-  /** contenu du champ e-mail */
-  email: PropTypes.string.isRequired,
-  /** contenu du champ password */
-  password: PropTypes.string.isRequired,
-  nickname: PropTypes.string.isRequired,
-  /** Traitement déclenché quand on saisit un caractère dans l'un des deux champs. Paramètres :
-   * - newValue Nouvelle valeur du champ
-   * - identifier Identifiant du champ : 'email' ou 'password'
-   */
-  changeField: PropTypes.func.isRequired,
-
-  handleSignup: PropTypes.func.isRequired,
+type Props = {
+  email: string;
+  password: string;
+  nickname: string;
+  changeField: () => void;
+  handleSignup: () => void;
 };
 
 export default SignupForm;

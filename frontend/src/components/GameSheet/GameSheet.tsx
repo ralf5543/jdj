@@ -106,29 +106,33 @@ const GameSheet = () => {
         }}
         changeMaxplayersField={(newValue, gameMaxPlayersField) => {
           const action = changeGameMaxPlayersField(
-            // Number, because we want a number type, frome a text field
-            Number(newValue),
+            newValue,
             gameMaxPlayersField
           );
           dispatch(action);
         }}
         changeIdealPlayersField={(newValue, gameIdealPlayersField) => {
           const action = changeGameIdealPlayersField(
-            Number(newValue),
+            newValue,
             gameIdealPlayersField
           );
           dispatch(action);
         }}
         changeDurationField={(newValue, gameDurationField) => {
-          const action = changeGameDurationField(
-            Number(newValue),
-            gameDurationField
-          );
+          const action = changeGameDurationField(newValue, gameDurationField);
           dispatch(action);
         }}
       />
     </Page>
   );
+};
+
+type Toto = {
+  title: any;
+  visual: any;
+  description: any;
+  maxPlayers: any;
+  idealPlayers: any;
 };
 
 type Props = {
