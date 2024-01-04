@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import store from '../../../store';
 import Field from '../../genericComponents/Field/Field';
@@ -24,7 +23,7 @@ const FormPostGame = ({
   gameDuration,
 }: Props) => {
   const dispatch = useDispatch();
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState<File>();
   const [filename, setFilename] = useState('Choose File');
   const [isFileUploaded, setIsFileUploaded] = useState(false);
 
@@ -138,11 +137,13 @@ type Props = {
   gameMaxPlayers: string;
   gameIdealPlayers: string;
   gameDuration: string;
-  changeTitleField: () => void;
-  changeDescriptionField: () => void;
-  changeMaxplayersField: () => void;
-  changeIdealPlayersField: () => void;
-  changeDurationField: () => void;
+  changeTitleField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
+  changeDescriptionField: (arg0: string, arg1: string) => void;
+  changeMaxplayersField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
+  changeIdealPlayersField: (
+    ChangeEvent: React.ChangeEvent<HTMLElement>
+  ) => void;
+  changeDurationField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
   handlePostGame: () => void;
 };
 

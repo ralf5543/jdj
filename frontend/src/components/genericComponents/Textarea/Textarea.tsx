@@ -1,19 +1,22 @@
-// == Import : npm
-import PropTypes from 'prop-types';
-
 // == Import : local
 import './Textarea.scss';
 
 // == Composant
-const Textarea = ({ value, name, placeholder, onChange }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+const Textarea = ({ value, name, placeholder, onChange }: Props) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChange(e.target.value, name);
   };
 
   const inputId = `field-${name}`;
 
   return (
-    <div className={value.length > 0 ? 'field field--has-content' : 'field'}>
+    <div
+      className={
+        value !== undefined && value.length > 0
+          ? 'field field--has-content'
+          : 'field'
+      }
+    >
       <textarea
         onChange={handleChange}
         // infos de base
@@ -31,11 +34,11 @@ const Textarea = ({ value, name, placeholder, onChange }) => {
   );
 };
 
-Textarea.propTypes = {
-  value: PropTypes.node,
-  name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+type Props = {
+  value?: string;
+  name: string;
+  placeholder: string;
+  onChange: (arg0: string, arg1: string) => void;
 };
 
 // Valeurs par défaut pour les props
