@@ -1,6 +1,5 @@
 // == Import : local
 import './Field.scss';
-import { ChangeEvent } from 'react';
 
 // == Composant
 const Field = ({ value, type, name, placeholder, onChange }: Props) => {
@@ -25,7 +24,7 @@ const Field = ({ value, type, name, placeholder, onChange }: Props) => {
         // infos de base
         id={inputId}
         type={type}
-        className="field-input"
+        className="textfield"
         placeholder={placeholder}
         name={name}
       />
