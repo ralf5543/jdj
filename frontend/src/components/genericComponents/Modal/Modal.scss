@@ -14,6 +14,7 @@
     position: absolute;
     width: calc(100vw - var(--spacer-xl));
     max-width: 96rem;
+    min-height: 50vh;
     top: 50%;
     left: 50%;
     padding: var(--spacer-l);

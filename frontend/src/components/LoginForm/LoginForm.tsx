@@ -1,5 +1,5 @@
 import Field from '../genericComponents/Field/Field';
-
+import Button from '../genericComponents/Button/Button';
 import './LoginForm.scss';
 
 const LoginForm = ({ email, password, changeField, handleLogin }: Props) => {
@@ -30,9 +30,7 @@ const LoginForm = ({ email, password, changeField, handleLogin }: Props) => {
           onChange={changeField}
           value={password}
         />
-        <button type="submit" className="login-form-button">
-          OK
-        </button>
+        <Button label="Connexion" type="submit" />
       </form>
     </div>
   );
