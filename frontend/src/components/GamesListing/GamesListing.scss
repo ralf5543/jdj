@@ -1,5 +1,9 @@
 @use 'src/styles/include-media' as m;
 
+.gameslisting_wrapper {
+    position: relative;
+}
+
 .gameslisting {
     display: flex;
     flex-wrap: wrap;

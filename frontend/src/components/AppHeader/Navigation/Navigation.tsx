@@ -23,7 +23,7 @@ const Navigation = () => {
   const nicknameValue = useSelector((state: Props) => state.user.nickname);
   const isLogged = useSelector((state: Props) => state.user.logged);
   const isModalVisible = useSelector(
-    (state: Props) => state.layout.modalVisible
+    (state: Props) => state.layoutReducer.modalVisible
   );
   const isLoginVisible = useSelector((state: Props) => state.user.loginVisible);
   const isSignupVisible = useSelector(

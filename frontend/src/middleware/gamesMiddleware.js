@@ -7,13 +7,16 @@ import {
   DELETE_GAME,
   saveGames,
 } from '../actions/games';
-import { hideModal } from '../actions/layout';
+import { hideModal, showLoader, hideLoader } from '../actions/layout';
 
 const gamesMiddleware = (store) => (next) => (action) => {
   // console.log('action.type : ', action.type);
   switch (action.type) {
     case FETCH_GAMES:
       // console.log('aller chercher les jeux');
+
+      store.dispatch(showLoader());
+
       axios
         .get('http://localhost:3000/api/games')
         .then((response) => {
@@ -22,10 +25,14 @@ const gamesMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log('erreur de la requete : ', error);
+        })
+        .finally(() => {
+          store.dispatch(hideLoader());
         });
       break;
 
     case POST_GAME:
+      store.dispatch(showLoader());
       console.log('token dans le state : ', store.getState().user.token);
       axios
         .post(
@@ -69,6 +76,8 @@ const gamesMiddleware = (store) => (next) => (action) => {
           }
         })
         .finally(() => {
+          store.dispatch(hideModal());
+
           // refetch la liste de jeux mise à jour
           axios
             .get('http://localhost:3000/api/games')
@@ -81,13 +90,15 @@ const gamesMiddleware = (store) => (next) => (action) => {
             })
             .catch((error) => {
               console.log('erreur de la requete : ', error);
+            })
+            .finally(() => {
+              store.dispatch(hideLoader());
             });
-
-          store.dispatch(hideModal());
         });
       break;
 
     case MODIFY_GAME:
+      store.dispatch(showLoader());
       axios
         .put(
           // URL
@@ -139,12 +150,16 @@ const gamesMiddleware = (store) => (next) => (action) => {
             })
             .catch((error) => {
               console.log('erreur de la requete : ', error);
+            })
+            .finally(() => {
+              store.dispatch(hideLoader());
             });
         });
 
       break;
 
     case DELETE_GAME:
+      store.dispatch(showLoader());
       axios
         .delete(
           // URL
@@ -186,6 +201,9 @@ const gamesMiddleware = (store) => (next) => (action) => {
             })
             .catch((error) => {
               console.log('erreur de la requete : ', error);
+            })
+            .finally(() => {
+              store.dispatch(hideLoader());
             });
         });
 

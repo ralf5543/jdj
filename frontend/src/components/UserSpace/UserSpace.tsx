@@ -41,7 +41,7 @@ const UserSpace = () => {
   );
   const currentUserId = useSelector((state: Props) => state.user.userId);
   const isModalVisible = useSelector(
-    (state: Props) => state.layout.modalVisible
+    (state: Props) => state.layoutReducer.modalVisible
   );
 
   const dispatch = useDispatch();
