@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios from '../utils/axios';
+
 import {
   SUBMIT_LOGIN,
   handleSuccessfulLogin,
@@ -16,7 +17,7 @@ const userMiddleware = (store) => (next) => (action) => {
       axios
         .post(
           // URL
-          'http://localhost:3000/api/auth/signup',
+          '/api/auth/signup',
           // informations
           {
             email: store.getState().user.email,
@@ -41,7 +42,7 @@ const userMiddleware = (store) => (next) => (action) => {
       axios
         .post(
           // URL
-          'http://localhost:3000/api/auth/login',
+          '/api/auth/login',
           // informations
           {
             email: store.getState().user.email,

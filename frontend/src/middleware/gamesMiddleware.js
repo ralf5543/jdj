@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-import axios from 'axios';
+import axios from '../utils/axios';
+
 import {
   FETCH_GAMES,
   POST_GAME,
@@ -18,7 +18,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
       store.dispatch(showLoader());
 
       axios
-        .get('http://localhost:3000/api/games')
+        .get('/api/games')
         .then((response) => {
           console.log('affichage de la liste de jeux : ', response.data);
           store.dispatch(saveGames(response.data));
@@ -37,7 +37,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
       axios
         .post(
           // URL
-          'http://localhost:3000/api/games',
+          '/api/games',
           // paramètres
           {
             title: store.getState().gamesReducer.gameTitle,
@@ -46,9 +46,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             idealplayers: store.getState().gamesReducer.gameIdealPlayers,
             duration: store.getState().gamesReducer.gameDuration,
             userNickname: store.getState().user.nickname,
-            visual: `http://localhost:3000/images/${
-              store.getState().gamesReducer.gameVisual
-            }`,
+            visual: `/images/${store.getState().gamesReducer.gameVisual}`,
           },
           // options (notamment les headers)
           {
@@ -80,7 +78,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
 
           // refetch la liste de jeux mise à jour
           axios
-            .get('http://localhost:3000/api/games')
+            .get('/api/games')
             .then((response) => {
               console.log(
                 'affichage de la nouvelle liste de jeux : ',
@@ -102,9 +100,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
       axios
         .put(
           // URL
-          `http://localhost:3000/api/games/${
-            store.getState().gamesReducer.currentGameId
-          }`,
+          `/api/games/${store.getState().gamesReducer.currentGameId}`,
           // paramètres
           {
             title: store.getState().gamesReducer.gameTitle,
@@ -112,9 +108,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             maxplayers: store.getState().gamesReducer.gameMaxPlayers,
             idealplayers: store.getState().gamesReducer.gameIdealPlayers,
             duration: store.getState().gamesReducer.gameDuration,
-            visual: `http://localhost:3000/images/${
-              store.getState().gamesReducer.gameVisual
-            }`,
+            visual: `/images/${store.getState().gamesReducer.gameVisual}`,
           },
           {
             headers: {
@@ -140,7 +134,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
         .finally(() => {
           // refetch la liste de jeux mise à jour
           axios
-            .get('http://localhost:3000/api/games')
+            .get('/api/games')
             .then((response) => {
               console.log(
                 'affichage de la nouvelle liste de jeux : ',
@@ -163,9 +157,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
       axios
         .delete(
           // URL
-          `http://localhost:3000/api/games/${
-            store.getState().gamesReducer.currentGameId
-          }`,
+          `/api/games/${store.getState().gamesReducer.currentGameId}`,
           // paramètres
           {
             headers: {
@@ -191,7 +183,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
         .finally(() => {
           // refetch la liste de jeux mise à jour
           axios
-            .get('http://localhost:3000/api/games')
+            .get('/api/games')
             .then((response) => {
               console.log(
                 'affichage de la nouvelle liste de jeux : ',
