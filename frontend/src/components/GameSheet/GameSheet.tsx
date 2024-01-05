@@ -6,6 +6,7 @@ import './GameSheet.scss';
 import { Navigate, useParams } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Page from '../genericComponents/Page/Page';
+import Button from '../genericComponents/Button/Button';
 import {
   deleteGame,
   changeGameTitleField,
@@ -22,6 +23,10 @@ const GameSheet = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
+
+  const toto = (tralala: string) => {
+    console.log('vive oui oui : ', tralala);
+  };
 
   // changes the current game ID in the store
   useEffect(() => {
@@ -82,6 +87,13 @@ const GameSheet = () => {
         >
           Supprimer ce jeu
         </button>
+
+        <Button
+          type="button"
+          label="Supprimer la fiche de ce jeu"
+          action={() => handleDeleteGame(id)}
+        />
+
         <p>(Vous devez être l'auteur de cette page pour la supprimer)</p>
       </div>
       {deletedGame && <Navigate to="/" replace />}

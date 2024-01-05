@@ -1,3 +1,4 @@
+import Button from '../genericComponents/Button/Button';
 import Field from '../genericComponents/Field/Field';
 
 import './SignupForm.scss';
@@ -41,9 +42,7 @@ const SignupForm = ({
           onChange={changeField}
           value={password}
         />
-        <button type="submit" className="login-form-button">
-          OK
-        </button>
+        <Button label="Valider l'inscription" type="submit" />
       </form>
     </div>
   );

@@ -46,7 +46,9 @@ const gamesMiddleware = (store) => (next) => (action) => {
             idealplayers: store.getState().gamesReducer.gameIdealPlayers,
             duration: store.getState().gamesReducer.gameDuration,
             userNickname: store.getState().user.nickname,
-            visual: `/images/${store.getState().gamesReducer.gameVisual}`,
+            visual: `${import.meta.env.VITE_BASE_URL}/images/${
+              store.getState().gamesReducer.gameVisual
+            }`,
           },
           // options (notamment les headers)
           {

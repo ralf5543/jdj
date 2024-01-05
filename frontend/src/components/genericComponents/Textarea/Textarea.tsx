@@ -27,7 +27,7 @@ const Textarea = ({ value, name, placeholder, onChange }: Props) => {
         value={value}
       />
 
-      <label htmlFor={inputId} className="field-label">
+      <label htmlFor={inputId} className="field_label">
         {placeholder}
       </label>
     </div>

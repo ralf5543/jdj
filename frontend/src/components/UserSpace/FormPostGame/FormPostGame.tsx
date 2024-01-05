@@ -8,6 +8,7 @@ import Field from '../../genericComponents/Field/Field';
 import './FormPostGame.scss';
 import { changeGameVisual } from '../../../actions/games';
 import Textarea from '../../genericComponents/Textarea/Textarea';
+import Button from '../../genericComponents/Button/Button';
 
 const FormPostGame = ({
   changeTitleField,
@@ -47,7 +48,7 @@ const FormPostGame = ({
     // formData.set('file', file);
     // make a POST request to the File Upload API
     axios
-      .post('http://localhost:3000/images', formData, {
+      .post(`${import.meta.env.VITE_BASE_URL}/images`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -74,13 +75,13 @@ const FormPostGame = ({
         {isFileUploaded && (
           <LazyLoadImage
             className="postgame_img-preview"
-            src={`http://localhost:3000/images/${
+            src={`${import.meta.env.VITE_BASE_URL}/images/${
               store.getState().gamesReducer.gameVisual
             }`}
             alt="image to upload"
           />
         )}
-        <button type="submit">Charger l'image</button>
+        <Button label="Charger l'image" type="submit" />
       </form>
 
       <form autoComplete="off" onSubmit={handleSubmit}>
@@ -123,9 +124,7 @@ const FormPostGame = ({
           onChange={changeDurationField}
           value={gameDuration}
         />
-        <button type="submit" className="login-form-button">
-          OK
-        </button>
+        <Button type="submit" label="Poster la fiche" />
       </form>
     </>
   );

@@ -7,6 +7,7 @@ import Field from '../../genericComponents/Field/Field';
 import './FormModifyGame.scss';
 import { changeGameVisual, modifyGame } from '../../../actions/games';
 import Textarea from '../../genericComponents/Textarea/Textarea';
+import Button from '../../genericComponents/Button/Button';
 
 const FormModifyGame = ({
   changeTitleField,
@@ -43,7 +44,7 @@ const FormModifyGame = ({
     // formData.set('file', file);
     // make a POST request to the File Upload API
     axios
-      .post('http://localhost:3000/images', formData, {
+      .post(`${import.meta.env.VITE_BASE_URL}/images`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -69,13 +70,13 @@ const FormModifyGame = ({
         <input type="file" onChange={handleFileUpload} name="image" />
         {isFileUploaded && (
           <img
-            src={`http://localhost:3000/images/${
+            src={`${import.meta.env.VITE_BASE_URL}/images/${
               store.getState().gamesReducer.gameVisual
             }`}
             alt=""
           />
         )}
-        <button type="submit">Charger l'image</button>
+        <Button label="Charger l'image" type="submit" />
       </form>
 
       <form autoComplete="off" onSubmit={handleSubmit}>
@@ -118,9 +119,7 @@ const FormModifyGame = ({
           onChange={changeDurationField}
           value={gameDuration}
         />
-        <button type="submit" className="login-form-button">
-          OK
-        </button>
+        <Button label="Valider les changements" type="submit" />
       </form>
     </section>
   );

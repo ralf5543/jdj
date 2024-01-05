@@ -29,7 +29,7 @@ const Field = ({ value, type, name, placeholder, onChange }: Props) => {
         name={name}
       />
 
-      <label htmlFor={inputId} className="field-label">
+      <label htmlFor={inputId} className="field_label">
         {placeholder}
       </label>
     </div>

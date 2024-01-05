@@ -18,6 +18,7 @@ import './UserSpace.scss';
 import Page from '../genericComponents/Page/Page';
 import GamesListing from '../GamesListing/GamesListing';
 import Modal from '../genericComponents/Modal/Modal';
+import Button from '../genericComponents/Button/Button';
 
 const UserSpace = () => {
   const gameTitleValue = useSelector(
@@ -70,9 +71,11 @@ const UserSpace = () => {
         <h2>Impossible de charger la liste de jeux :</h2>
         <pre style={{ color: 'red' }}>{error.message}</pre>
         <p>Merci de nous signaler cette erreur.</p>
-        <button className="link" type="button" onClick={resetErrorBoundary}>
-          Recharger la liste
-        </button>
+        <Button
+          label="Recharger la liste"
+          type="button"
+          action={resetErrorBoundary}
+        />
       </div>
     );
   }
@@ -91,6 +94,12 @@ const UserSpace = () => {
       >
         <GamesListing games={currentUserGames} />
       </ErrorBoundary>
+
+      <Button
+        label="Ajouter un noveau un nouveau jeu"
+        type="button"
+        action={handlePostgameForm}
+      />
 
       <button className="link" type="button" onClick={handlePostgameForm}>
         Ajoutez un noveau un nouveau jeu à votre liste !
