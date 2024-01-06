@@ -10,6 +10,7 @@ import Error from '../Error/Error';
 import Home from '../Home/Home';
 import AppHeader from '../AppHeader/AppHeader';
 import GameSheet from '../GameSheet/GameSheet';
+import Toaster from '../genericComponents/Toaster/Toaster';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <Toaster text="Bravo, t'es connecté !" />
       <AppHeader />
       <Routes>
         <Route path="/" element={<Home />} />

@@ -12,10 +12,16 @@
   --color-light: white;
   --color-secondary-text: rgb(147 147 147);
 
+  // Request colors
+  --color-info: white;
+  --color-success: green;
+  --color-alert: orange;
+  --color-error: red;
+
   // =============------------------ SIZES
   --size-max: 1480px;
 
   // =============------------------ LAYERS (z-indexes)
-  --z-modal: 9;
-  --z-loader: 5;
+  --z-modal: 5;
+  --z-loader: 9;
 }
