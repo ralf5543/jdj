@@ -1,17 +1,18 @@
 import './Button.scss';
 
-const Button = ({ type, label, action }: Props) => {
+const Button = ({ children, label, type, ...attributes }: Props) => {
   return (
-    <button className="cta" type={type} onClick={(action = () => null)}>
+    <button className="cta" type={type} {...attributes}>
       {label}
+      {children}
     </button>
   );
 };
 
-type Props = {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: React.ReactNode | undefined;
   label: string;
   type: 'submit' | 'reset' | 'button' | undefined;
-  action?: () => void | undefined;
-};
+}
 
 export default Button;

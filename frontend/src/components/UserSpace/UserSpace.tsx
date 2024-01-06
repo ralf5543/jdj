@@ -74,7 +74,7 @@ const UserSpace = () => {
         <Button
           label="Recharger la liste"
           type="button"
-          action={resetErrorBoundary}
+          onClick={resetErrorBoundary}
         />
       </div>
     );
@@ -98,12 +98,9 @@ const UserSpace = () => {
       <Button
         label="Ajouter un noveau un nouveau jeu"
         type="button"
-        action={handlePostgameForm}
+        onClick={handlePostgameForm}
       />
 
-      <button className="link" type="button" onClick={handlePostgameForm}>
-        Ajoutez un noveau un nouveau jeu à votre liste !
-      </button>
       {postgame && isModalVisible && (
         <Modal closeModal={cancelPostgame}>
           <FormPostGame

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { ErrorBoundary } from 'react-error-boundary';
 import Page from '../genericComponents/Page/Page';
 import GamesListing from '../GamesListing/GamesListing';
+import Button from '../genericComponents/Button/Button';
 
 const Home = () => {
   const games = useSelector((state: Props) => state.gamesReducer.list);
@@ -15,9 +16,11 @@ const Home = () => {
         <h2>Impossible de charger la liste de jeux :</h2>
         <pre style={{ color: 'red' }}>{error.message}</pre>
         <p>Merci de nous signaler cette erreur.</p>
-        <button className="link" type="button" onClick={resetErrorBoundary}>
-          Recharger la liste
-        </button>
+        <Button
+          label="Recharger la liste"
+          type="button"
+          onClick={resetErrorBoundary}
+        />
       </div>
     );
   }

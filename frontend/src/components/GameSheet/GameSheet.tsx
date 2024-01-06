@@ -79,19 +79,11 @@ const GameSheet = () => {
         <p className="boardgame-card_idealplayers">
           Nombre de joueurs idéal : {idealplayers}
         </p>
-        <button
-          onClick={() => {
-            handleDeleteGame(id);
-          }}
-          type="button"
-        >
-          Supprimer ce jeu
-        </button>
 
         <Button
           type="button"
           label="Supprimer la fiche de ce jeu"
-          action={() => handleDeleteGame(id)}
+          onClick={() => handleDeleteGame(id)}
         />
 
         <p>(Vous devez être l'auteur de cette page pour la supprimer)</p>
