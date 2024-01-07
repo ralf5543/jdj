@@ -2,6 +2,10 @@
 
 .cta {
     display: inline-flex;
+    align-items: center;
+
+    // for icons
+    gap: var(--spacer-m);
     position: relative;
     padding-block: var(--spacer-s);
     padding-inline: var(--spacer-m);
@@ -37,6 +41,11 @@
         opacity: .5;
         transform: translate(50%, -50%) rotate(45deg);
         transition: right .3s;
+    }
+
+    // Fontawesome icon
+    > i {
+        order: -1;
     }
 
     &:hover,

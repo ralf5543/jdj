@@ -26,6 +26,7 @@ const FormPostGame = ({
   const dispatch = useDispatch();
   const [file, setFile] = useState<File>();
   const [filename, setFilename] = useState<string>('Choose File');
+  const [fileChosen, setFileChosen] = useState<boolean>(false);
   const [isFileUploaded, setIsFileUploaded] = useState<boolean>(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,6 +37,7 @@ const FormPostGame = ({
     if (e.target.files != null) {
       setFile(e.target.files[0]);
       setFilename(e.target.files[0].name);
+      setFileChosen(true);
     }
   };
 
@@ -67,22 +69,46 @@ const FormPostGame = ({
       });
   };
 
+  console.log('fileChosen : ', fileChosen);
+
   return (
     <>
       <h2>Ajouter un jeu à votre liste</h2>
-      <form autoComplete="off" onSubmit={handleSubmitImage}>
-        <input type="file" onChange={handleFileUpload} name="image" />
-        {isFileUploaded && (
-          <LazyLoadImage
-            className="postgame_img-preview"
-            src={`${import.meta.env.VITE_BASE_URL}/images/${
-              store.getState().gamesReducer.gameVisual
-            }`}
-            alt="image to upload"
-          />
-        )}
-        <Button label="Charger l'image" type="submit" />
-      </form>
+
+      {!isFileUploaded && (
+        <form autoComplete="off" onSubmit={handleSubmitImage}>
+          <div className="field">
+            {fileChosen ? (
+              <Button label={`Publier l'image : ${filename}`} type="submit">
+                <i className="fa-solid fa-file-arrow-up" />
+              </Button>
+            ) : (
+              <>
+                <input
+                  type="file"
+                  id="uploadfile"
+                  onChange={handleFileUpload}
+                  name="image"
+                />
+                <label htmlFor="uploadfile">
+                  <i className="fa-solid fa-file-arrow-up" />
+                  Choisir une image sur votre ordinateur
+                </label>
+              </>
+            )}
+          </div>
+        </form>
+      )}
+
+      {isFileUploaded && (
+        <LazyLoadImage
+          className="postgame_img-preview"
+          src={`${import.meta.env.VITE_BASE_URL}/images/${
+            store.getState().gamesReducer.gameVisual
+          }`}
+          alt="image uploaded"
+        />
+      )}
 
       <form autoComplete="off" onSubmit={handleSubmit}>
         <Field

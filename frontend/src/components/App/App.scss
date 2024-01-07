@@ -1,0 +1,6 @@
+.App {
+    &.modal-visible {
+        max-height: 100vh;
+        overflow: hidden;
+    }
+}

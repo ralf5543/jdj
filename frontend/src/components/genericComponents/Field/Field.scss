@@ -1,4 +1,7 @@
 @use '../../../styles/variables';
+@use '../../../styles/extends';
+
+@import '../Button/Button.scss';
 
 .field {
     display: flex;
@@ -13,6 +16,20 @@
         border: 1px solid var(--color-secondary-text);
         border-radius: var(--spacer-s);
         background-color: var(--color-secondary);
+    }
+
+    input[type=file] {
+        @extend %accessible-wording ;
+
+        + label {
+            @extend .cta;
+            margin-inline-end: auto;
+            cursor: pointer;
+        }
+    }
+
+    > .cta {
+        margin-inline-end: auto;
     }
 }
 

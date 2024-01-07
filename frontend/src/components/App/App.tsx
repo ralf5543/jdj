@@ -25,8 +25,12 @@ const App = () => {
     (state: Props) => state.toasterReducer.toasterVisible
   );
 
+  const isModalVisible = useSelector(
+    (state: Props) => state.layoutReducer.modalVisible
+  );
+
   return (
-    <div className="App">
+    <div className={isModalVisible ? 'App modal-visible' : 'App'}>
       <AnimatePresence>{toaster && <Toaster />}</AnimatePresence>
       <AppHeader />
       <Routes>

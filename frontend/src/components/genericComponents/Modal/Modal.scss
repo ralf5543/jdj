@@ -18,6 +18,8 @@
     width: calc(100vw - var(--spacer-xl));
     max-width: 96rem;
     min-height: 50vh;
+    max-height: 90vh;
+    overflow-y: auto;
     padding: var(--spacer-l);
     background-color: var(--color-light);
     border-radius: var(--spacer-m);
