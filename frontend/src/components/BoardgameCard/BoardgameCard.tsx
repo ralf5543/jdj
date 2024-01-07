@@ -16,8 +16,9 @@ const BoardgameCard = ({
   return (
     <motion.li
       className="boardgame-card"
-      initial={{ y: 300, opacity: 0 }}
-      whileInView={{ y: 0, opacity: 1 }}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
     >
       <span className="boardgame-card_highlight">
         <span className="boardgame-card_highlight_amount">{maxplayers}</span>
