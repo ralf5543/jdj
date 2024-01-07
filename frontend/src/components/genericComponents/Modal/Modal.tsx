@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { useDispatch } from 'react-redux';
 import { createPortal } from 'react-dom';
+import { motion } from 'framer-motion';
 import './Modal.scss';
 import { ReactNode } from 'react';
 import { hideModal } from '../../../actions/layout';
@@ -17,11 +18,28 @@ const handleCloseModal = () => {
   dispatch(action);
 }
 
+// =====================---------------- MODAL ANIMATIONS ----------------====================
+
+const fog = {
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+}
+
+const modal = {
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: -200 },
+}
+
 // render the component in a targeted element of the DOM
 return createPortal (
 
-  <div className="modal">
-    <div className="modal-content">
+  <motion.div className="modal"
+    initial="hidden"
+    animate="visible"
+    variants={fog}
+    exit={{opacity: 0}}
+    >
+    <motion.div className="modal-content" variants={modal} exit={{ y: -200, opacity: 0 }}>
     <button type='button' onClick={handleCloseModal} className="modal-close">
       <i className="fa-solid fa-close" />
       <span className="modal-close_wording">close modal</span>
@@ -29,11 +47,11 @@ return createPortal (
     <div className="modal_content">
       {children}
     </div>
-    </div>
+    </motion.div>
     <button type='button' onClick={handleCloseModal} className="modal-fog">
       <span className="modal-close_wording">close modal</span>
     </button>
-  </div>, document.body
+  </motion.div>, document.body
 )};
 
 type Props = {

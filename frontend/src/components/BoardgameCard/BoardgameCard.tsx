@@ -1,6 +1,7 @@
 import './BoardgameCard.scss';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { motion } from 'framer-motion';
 
 const BoardgameCard = ({
   description,
@@ -13,7 +14,11 @@ const BoardgameCard = ({
   userNickname,
 }: any) => {
   return (
-    <li className="boardgame-card">
+    <motion.li
+      className="boardgame-card"
+      initial={{ y: 300, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+    >
       <span className="boardgame-card_highlight">
         <span className="boardgame-card_highlight_amount">{maxplayers}</span>
         <span className="boardgame-card_highlight_wording">joueurs</span>
@@ -50,7 +55,7 @@ const BoardgameCard = ({
           )
         </p>
       </footer>
-    </li>
+    </motion.li>
   );
 };
 

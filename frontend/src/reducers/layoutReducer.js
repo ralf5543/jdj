@@ -1,13 +1,44 @@
-import { SHOW_MODAL, HIDE_MODAL } from '../actions/layout';
-import { SHOW_LOADER, HIDE_LOADER } from '../actions/layout';
+import {
+  SHOW_MODAL,
+  HIDE_MODAL,
+  SHOW_LOADER,
+  HIDE_LOADER,
+  SHOW_TOASTER,
+  HIDE_TOASTER,
+} from '../actions/layout';
 
 export const initialState = {
   modalVisible: false,
   isLoading: false,
 };
 
-/* reducer qui s'occupe de ce qui concerne l'utilisateur */
-const reducer = (state = initialState, action = {}) => {
+export const toasterInitialState = {
+  toasterVisible: false,
+  step: '',
+  text: '',
+};
+
+export const toasterReducer = (state = toasterInitialState, action = {}) => {
+  switch (action.type) {
+    case SHOW_TOASTER:
+      return {
+        ...state,
+        toasterVisible: true,
+        step: action.step,
+        text: action.text,
+      };
+    case HIDE_TOASTER:
+      return {
+        ...state,
+        toasterVisible: false,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export const layoutReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case SHOW_MODAL:
       return {
@@ -34,5 +65,3 @@ const reducer = (state = initialState, action = {}) => {
       return state;
   }
 };
-
-export default reducer;

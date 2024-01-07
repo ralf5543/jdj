@@ -11,7 +11,7 @@
 
 .toaster {
     position: fixed;
-    top: var(--spacer-l);
+    bottom: var(--spacer-l);
     right: var(--spacer-l);
     z-index: calc(var(--z-loader) + 1);
     display: inline-flex;
@@ -24,6 +24,7 @@
     background-color: rgba(0, 0, 0, .7);
     color: var(--color-light);
     box-shadow: 0 0px 5px 0px rgba(0,0,0,0.75);
+    transition: .3s;
 
     // icon
     i {
@@ -44,6 +45,12 @@
 
     &-error {
         @include toaster-step('error')
+    }
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 0 0 0 rgba(0,0,0,0.75);
+        background-color: rgba(0, 0, 0, .9);
     }
 }
 

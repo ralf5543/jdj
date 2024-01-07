@@ -3,7 +3,8 @@
 import { Routes, Route } from 'react-router';
 import { useEffect } from 'react';
 import './App.scss';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { AnimatePresence } from 'framer-motion';
 import UserSpace from '../UserSpace/UserSpace';
 import { fetchGames } from '../../actions/games';
 import Error from '../Error/Error';
@@ -20,9 +21,13 @@ const App = () => {
     dispatch(action);
   }, [dispatch]);
 
+  const toaster = useSelector(
+    (state: Props) => state.toasterReducer.toasterVisible
+  );
+
   return (
     <div className="App">
-      <Toaster text="Bravo, t'es connecté !" />
+      <AnimatePresence>{toaster && <Toaster />}</AnimatePresence>
       <AppHeader />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -32,6 +37,12 @@ const App = () => {
       </Routes>
     </div>
   );
+};
+
+type Props = {
+  [key: string]: {
+    toasterVisible: boolean;
+  };
 };
 
 export default App;

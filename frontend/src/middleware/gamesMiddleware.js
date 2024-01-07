@@ -7,7 +7,12 @@ import {
   DELETE_GAME,
   saveGames,
 } from '../actions/games';
-import { hideModal, showLoader, hideLoader } from '../actions/layout';
+import {
+  hideModal,
+  showLoader,
+  hideLoader,
+  showToaster,
+} from '../actions/layout';
 
 const gamesMiddleware = (store) => (next) => (action) => {
   // console.log('action.type : ', action.type);
@@ -25,6 +30,12 @@ const gamesMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log('erreur de la requete : ', error);
+          store.dispatch(
+            showToaster(
+              'error',
+              "La liste n'a pas pu être chargée correctement"
+            )
+          );
         })
         .finally(() => {
           store.dispatch(hideLoader());
@@ -65,6 +76,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             'on poste ce jeu : ',
             store.getState().gamesReducer.gameTitle
           );
+          store.dispatch(showToaster('success', 'Nouveau jeu ajouté !'));
         })
         .catch((error) => {
           if (error.response) {
@@ -74,6 +86,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
           } else if (error.message) {
             console.log('erreur du message : ', error.message);
           }
+          store.dispatch(showToaster('error', "Une erreur s'est produite"));
         })
         .finally(() => {
           store.dispatch(hideModal());
@@ -123,14 +136,17 @@ const gamesMiddleware = (store) => (next) => (action) => {
             'on modifie ce jeu : ',
             store.getState().gamesReducer.gameTitle
           );
+          store.dispatch(showToaster('success', 'Fiche modifiée !'));
         })
         .catch((error) => {
-          if (error.response) {
-            console.log('erreur de la response : ', error.response);
-          } else if (error.request) {
-            console.log('erreur de la request : ', error.request);
-          } else if (error.message) {
-            console.log('erreur du message : ', error.message);
+          console.log('erreur de la requete : ', error);
+          if (error.response.status === 401) {
+            console.log("Le user id n'est pas celui de l'article");
+            store.dispatch(
+              showToaster('error', "Vous n'êtes pas l'auteur de cette page !")
+            );
+          } else {
+            store.dispatch(showToaster('error', "Une erreur s'est produite"));
           }
         })
         .finally(() => {
@@ -171,15 +187,19 @@ const gamesMiddleware = (store) => (next) => (action) => {
           }
         )
         .then(() => {
-          // Recharge la liste
-          // dispatch(fetchGames());
-          // Go back to home page
-          // setDeletedGame(true);
+          store.dispatch(
+            showToaster('success', 'La fiche du jeu a bien été supprimée')
+          );
         })
         .catch((error) => {
           console.log('erreur de la requete : ', error);
           if (error.response.status === 401) {
             console.log("Le user id n'est pas celui de l'article");
+            store.dispatch(
+              showToaster('error', "Vous n'êtes pas l'auteur de cette page !")
+            );
+          } else {
+            store.dispatch(showToaster('error', "Une erreur s'est produite"));
           }
         })
         .finally(() => {

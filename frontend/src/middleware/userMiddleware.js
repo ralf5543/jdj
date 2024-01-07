@@ -6,7 +6,7 @@ import {
   SUBMIT_SIGNUP,
   handleSuccessfulSignup,
 } from '../actions/user';
-import { hideModal } from '../actions/layout';
+import { hideModal, showToaster } from '../actions/layout';
 
 const userMiddleware = (store) => (next) => (action) => {
   // console.log('on a intercepté une action dans le middleware: ', action);
@@ -32,9 +32,13 @@ const userMiddleware = (store) => (next) => (action) => {
             handleSuccessfulSignup(response.data.nickname, response.data.token)
           );
           store.dispatch(hideModal());
+          store.dispatch(
+            showToaster('success', 'Inscription terminée avec succès')
+          );
         })
         .catch((error) => {
           console.log("erreur lors de l'inscription : ", error.message);
+          store.dispatch(showToaster('error', "L'inscription a échoué..."));
         });
       break;
 
@@ -64,9 +68,15 @@ const userMiddleware = (store) => (next) => (action) => {
             )
           );
           store.dispatch(hideModal());
+          store.dispatch(
+            showToaster('success', 'Vous êtes à présent connecté !')
+          );
         })
         .catch((error) => {
-          console.log('erreur lors du login : ', error.request.response);
+          console.log('erreur login : ', error.request.response);
+          store.dispatch(
+            showToaster('error', 'Adresse email ou mot de passe incorrect(e)')
+          );
         });
       break;
 

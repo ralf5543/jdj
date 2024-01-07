@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import './Navigation.scss';
 
+import { AnimatePresence } from 'framer-motion';
 import LoginForm from '../../LoginForm/LoginForm';
 import {
   changeLoginField,
@@ -103,42 +104,46 @@ const Navigation = () => {
             </li>
           </>
         )}
-        {isSignupVisible && isModalVisible && (
-          <Modal closeModal={cancelSignup}>
-            <SignupForm
-              email={emailValue}
-              password={passwordValue}
-              nickname={nicknameValue}
-              changeField={(newValue, identifier) => {
-                const action = changeSignupField(newValue, identifier);
-                dispatch(action);
-              }}
-              handleSignup={() => {
-                dispatch(submitSignup());
-              }}
-            />
-          </Modal>
-        )}
-        {isLoginVisible && isModalVisible && (
-          <Modal closeModal={cancelLogin}>
-            <LoginForm
-              email={emailValue}
-              password={passwordValue}
-              changeField={(newValue, identifier) => {
-                // on transmet les infos au store, pour le reducer user
-                // ici pour les paramètres on met dans le même ordre que ce qu'on a
-                // défini dans l'annuaire des actions
-                const action = changeLoginField(newValue, identifier);
-                dispatch(action);
-              }}
-              handleLogin={() => {
-                // le traitement placé ici est déclenché à la soumission du formulaire
-                const action = submitLogin();
-                dispatch(action);
-              }}
-            />
-          </Modal>
-        )}
+        <AnimatePresence>
+          {isSignupVisible && isModalVisible && (
+            <Modal closeModal={cancelSignup}>
+              <SignupForm
+                email={emailValue}
+                password={passwordValue}
+                nickname={nicknameValue}
+                changeField={(newValue, identifier) => {
+                  const action = changeSignupField(newValue, identifier);
+                  dispatch(action);
+                }}
+                handleSignup={() => {
+                  dispatch(submitSignup());
+                }}
+              />
+            </Modal>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {isLoginVisible && isModalVisible && (
+            <Modal closeModal={cancelLogin}>
+              <LoginForm
+                email={emailValue}
+                password={passwordValue}
+                changeField={(newValue, identifier) => {
+                  // on transmet les infos au store, pour le reducer user
+                  // ici pour les paramètres on met dans le même ordre que ce qu'on a
+                  // défini dans l'annuaire des actions
+                  const action = changeLoginField(newValue, identifier);
+                  dispatch(action);
+                }}
+                handleLogin={() => {
+                  // le traitement placé ici est déclenché à la soumission du formulaire
+                  const action = submitLogin();
+                  dispatch(action);
+                }}
+              />
+            </Modal>
+          )}
+        </AnimatePresence>
       </ul>
     </nav>
   );

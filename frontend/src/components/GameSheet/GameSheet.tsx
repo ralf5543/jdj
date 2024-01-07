@@ -24,10 +24,6 @@ const GameSheet = () => {
 
   const dispatch = useDispatch();
 
-  const toto = (tralala: string) => {
-    console.log('vive oui oui : ', tralala);
-  };
-
   // changes the current game ID in the store
   useEffect(() => {
     const action = changeCurrentGameId(id);
