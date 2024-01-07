@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ErrorBoundary } from 'react-error-boundary';
+import { Navigate } from 'react-router-dom';
 import FormPostGame from './FormPostGame/FormPostGame';
 import { showModal } from '../../actions/layout';
 import {
@@ -63,6 +64,8 @@ const UserSpace = () => {
     console.log('cancel post game');
   };
 
+  const isLogged = useSelector((state: Props) => state.user.logged);
+
   function fallbackRender({ error, resetErrorBoundary }) {
     // Call resetErrorBoundary() to reset the error boundary and retry the render.
 
@@ -82,6 +85,9 @@ const UserSpace = () => {
 
   return (
     <Page>
+      {/* Redirect to home page if not log out */}
+      {!isLogged && <Navigate to="/" replace />}
+
       <h1>Espace perso de {nicknameValue}</h1>
       <h2>Mes jeux à moi que j'ai</h2>
 

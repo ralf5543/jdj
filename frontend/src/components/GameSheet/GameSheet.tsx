@@ -84,7 +84,7 @@ const GameSheet = () => {
 
         <p>(Vous devez être l'auteur de cette page pour la supprimer)</p>
       </div>
-      {deletedGame && <Navigate to="/" replace />}
+      {deletedGame && <Navigate to="/user-space" replace />}
 
       <h1>Modification de la fiche du jeu</h1>
       <FormModifyGame
@@ -125,14 +125,6 @@ const GameSheet = () => {
       />
     </Page>
   );
-};
-
-type Toto = {
-  title: any;
-  visual: any;
-  description: any;
-  maxPlayers: any;
-  idealPlayers: any;
 };
 
 type Props = {

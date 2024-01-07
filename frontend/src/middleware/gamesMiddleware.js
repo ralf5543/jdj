@@ -71,7 +71,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             },
           }
         )
-        .then((response) => {
+        .then(() => {
           console.log(
             'on poste ce jeu : ',
             store.getState().gamesReducer.gameTitle
