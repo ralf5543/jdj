@@ -16,7 +16,7 @@ const SignupForm = ({
   };
 
   return (
-    <div>
+    <>
       <h2>Inscription</h2>
       <form
         autoComplete="off"
@@ -44,7 +44,7 @@ const SignupForm = ({
         />
         <Button label="Valider l'inscription" type="submit" />
       </form>
-    </div>
+    </>
   );
 };
 

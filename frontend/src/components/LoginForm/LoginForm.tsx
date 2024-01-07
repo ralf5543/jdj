@@ -9,7 +9,7 @@ const LoginForm = ({ email, password, changeField, handleLogin }: Props) => {
   };
 
   return (
-    <div className="login-form">
+    <>
       <h2>Connexion</h2>
 
       <form
@@ -32,7 +32,7 @@ const LoginForm = ({ email, password, changeField, handleLogin }: Props) => {
         />
         <Button label="Connexion" type="submit" />
       </form>
-    </div>
+    </>
   );
 };
 

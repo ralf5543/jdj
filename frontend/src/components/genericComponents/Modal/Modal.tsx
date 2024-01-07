@@ -21,12 +21,17 @@ const handleCloseModal = () => {
 // =====================---------------- MODAL ANIMATIONS ----------------====================
 
 const fog = {
-  visible: { opacity: 1 },
   hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.3
+    }
+  }
 }
 
 const modal = {
-  visible: { opacity: 1, y: 0 },
+  show: { opacity: 1, y: 0 },
   hidden: { opacity: 0, y: -200 },
 }
 
@@ -35,7 +40,7 @@ return createPortal (
 
   <motion.div className="modal"
     initial="hidden"
-    animate="visible"
+    animate="show"
     variants={fog}
     exit={{opacity: 0}}
     >
