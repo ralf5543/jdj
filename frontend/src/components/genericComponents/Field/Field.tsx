@@ -1,11 +1,17 @@
-// == Import : local
+import { useState } from 'react';
 import './Field.scss';
 
 // == Composant
-const Field = ({ value, type, name, placeholder, onChange }: Props) => {
+const Field = ({ defaultInputValue, value, type, name, placeholder, onChange }: Props) => {
   const handleChange = (e: React.ChangeEvent) => {
+    // replaces field default value by the new value entered
+    onChange(setDynamicvalue(e.target.value));
+
+    // pass this new value
     onChange(e.target.value, name);
   };
+
+  const [dynamicvalue, setDynamicvalue] = useState(defaultInputValue);
 
   const inputId = `field-${name}`;
 
@@ -19,7 +25,7 @@ const Field = ({ value, type, name, placeholder, onChange }: Props) => {
     >
       <input
         // React - state
-        value={value}
+        value={dynamicvalue}
         onChange={handleChange}
         // infos de base
         id={inputId}
@@ -41,6 +47,7 @@ type Props = {
   type?: string;
   name: string;
   placeholder: string;
+  toto?: string;
   onChange: (event: React.ChangeEvent<HTMLElement>) => void;
 };
 
@@ -48,6 +55,7 @@ type Props = {
 Field.defaultProps = {
   value: '',
   type: 'text',
+  toto: '',
 };
 
 // == Export

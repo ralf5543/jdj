@@ -38,7 +38,7 @@ const GameSheet = () => {
 
   // find the first element with the id matching the slug
   const currentGame = games.find((element) => element._id === id);
-  const { title, visual, description, maxplayers, idealplayers } = currentGame;
+  const { title, visual, description, maxplayers, idealplayers, duration } = currentGame;
 
   console.log('currentGame : ', currentGame);
 
@@ -121,6 +121,11 @@ const GameSheet = () => {
             gameMaxPlayers={gameMaxPlayersValue}
             gameIdealPlayers={gameIdealPlayersValue}
             gameDuration={gameDurationValue}
+            currentGameTitle={title}
+            currentGameDescription={description}
+            currentGameMaxPlayers={maxplayers}
+            currentGameIdealPlayers={idealplayers}
+            currentGameDuration={duration}
             changeTitleField={(newValue, gameTitleField) => {
               const action = changeGameTitleField(newValue, gameTitleField);
               dispatch(action);

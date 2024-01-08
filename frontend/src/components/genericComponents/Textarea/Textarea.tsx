@@ -1,11 +1,17 @@
-// == Import : local
+import { useState } from 'react';
 import './Textarea.scss';
 
 // == Composant
-const Textarea = ({ value, name, placeholder, onChange }: Props) => {
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+const Textarea = ({ defaultInputValue, value, name, placeholder, onChange }: Props) => {
+  const handleChange = (e: React.ChangeEvent) => {
+    // replaces field default value by the new value entered
+    onChange(setDynamicvalue(e.target.value));
+
+    // pass this new value
     onChange(e.target.value, name);
   };
+
+  const [dynamicvalue, setDynamicvalue] = useState(defaultInputValue);
 
   const inputId = `field-${name}`;
 
@@ -24,7 +30,7 @@ const Textarea = ({ value, name, placeholder, onChange }: Props) => {
         className="field-input"
         placeholder={placeholder}
         name={name}
-        value={value}
+        value={dynamicvalue}
       />
 
       <label htmlFor={inputId} className="field_label">

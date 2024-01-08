@@ -43,6 +43,8 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_LOGIN:
+      console.log('store.getState().user.email : ', store.getState().user.email);
+      console.log('store.getState().user.password : ', store.getState().user.password);
       axios
         .post(
           // URL

@@ -1,6 +1,7 @@
 .field {
     textarea {
         width: 100%;
+        min-height: 10rem;
         padding: var(--spacer-s);
         border: 1px solid var(--color-secondary-text);
         border-radius: var(--spacer-s);

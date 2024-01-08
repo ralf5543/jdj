@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import store from '../../../store';
@@ -10,6 +10,11 @@ import Textarea from '../../genericComponents/Textarea/Textarea';
 import Button from '../../genericComponents/Button/Button';
 
 const FormModifyGame = ({
+  currentGameTitle,
+  currentGameDescription,
+  currentGameMaxPlayers,
+  currentGameIdealPlayers,
+  currentGameDuration,
   changeTitleField,
   changeDescriptionField,
   changeMaxplayersField,
@@ -25,6 +30,8 @@ const FormModifyGame = ({
   const [file, setFile] = useState<string>('');
   const [filename, setFilename] = useState('Choose File');
   const [isFileUploaded, setIsFileUploaded] = useState<boolean>(false);
+
+  const ref = useRef(null);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -63,7 +70,7 @@ const FormModifyGame = ({
       });
   };
 
-  console.log('gameTitle : ', gameTitle)
+  console.log('gameTitle : ', gameTitle);
 
   return (
     <section>
@@ -89,6 +96,7 @@ const FormModifyGame = ({
           placeholder="Titre du jeu"
           onChange={changeTitleField}
           value={gameTitle}
+          defaultInputValue={currentGameTitle}
         />
         <Textarea
           // must have the same name of the state !!!!!!!!!!
@@ -96,6 +104,7 @@ const FormModifyGame = ({
           placeholder="Description du jeu"
           onChange={changeDescriptionField}
           value={gameDescription}
+          defaultInputValue={currentGameDescription}
         />
         <Field
           // must have the same name of the state !!!!!!!!!!
@@ -104,6 +113,7 @@ const FormModifyGame = ({
           placeholder="Nombre de joueurs maximum"
           onChange={changeMaxplayersField}
           value={gameMaxPlayers}
+          defaultInputValue={currentGameMaxPlayers}
         />
         <Field
           // must have the same name of the state !!!!!!!!!!
@@ -112,6 +122,7 @@ const FormModifyGame = ({
           placeholder="Nombre de joueurs idéal"
           onChange={changeIdealPlayersField}
           value={gameIdealPlayers}
+          defaultInputValue={currentGameIdealPlayers}
         />
         <Field
           // must have the same name of the state !!!!!!!!!!
@@ -120,6 +131,7 @@ const FormModifyGame = ({
           placeholder="Durée d'une partie"
           onChange={changeDurationField}
           value={gameDuration}
+          defaultInputValue={currentGameDuration}
         />
         <Button label="Valider les changements" type="submit" />
       </form>
