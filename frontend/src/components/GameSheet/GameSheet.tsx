@@ -57,8 +57,6 @@ const GameSheet = () => {
     duration,
   ]);
 
-  console.log('currentGame : ', currentGame);
-
   const handleDeleteGame = (gameId: string | undefined) => {
     dispatch(deleteGame());
 
@@ -83,14 +81,16 @@ const GameSheet = () => {
   );
 
   // ======================------------------- MODIFY GAME
-  const [modifygame, setModifygame] = useState<'open' | 'closed'>('closed');
+  const [modifygame, setModifygame] = useState<boolean>(false);
 
   const isModalVisible = useSelector(
     (state: Props) => state.layoutReducer.modalVisible
   );
 
+  const isLogged = useSelector((state: Props) => state.user.logged);
+
   const handleModifygameForm = () => {
-    setModifygame('open');
+    setModifygame(true);
     dispatch(showModal());
   };
 
@@ -114,11 +114,21 @@ const GameSheet = () => {
           Nombre de joueurs idéal : {idealplayers}
         </p>
 
-        <Button
-          type="button"
-          label="Supprimer la fiche de ce jeu"
-          onClick={() => handleDeleteGame(id)}
-        />
+        {isLogged && (
+          <>
+            <Button
+              type="button"
+              label="Supprimer la fiche de ce jeu"
+              onClick={() => handleDeleteGame(id)}
+            />
+
+            <Button
+              label="Modifier la fiche de ce jeu"
+              type="button"
+              onClick={handleModifygameForm}
+            />
+          </>
+        )}
 
         <p>
           (Vous devez être l'auteur de cette page pour la supprimer ou la
@@ -126,12 +136,6 @@ const GameSheet = () => {
         </p>
       </div>
       {deletedGame && <Navigate to="/user-space" replace />}
-
-      <Button
-        label="Modifier la fiche de ce jeu"
-        type="button"
-        onClick={handleModifygameForm}
-      />
 
       {modifygame && isModalVisible && (
         <Modal closeModal={cancelModifygame}>

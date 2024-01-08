@@ -53,10 +53,10 @@ const UserSpace = () => {
     (currentUserGame) => currentUserGame.userId === currentUserId
   );
 
-  const [postgame, setPostgame] = useState<'open' | 'closed'>('closed');
+  const [postgame, setPostgame] = useState<boolean>(false);
 
   const handlePostgameForm = () => {
-    setPostgame('open');
+    setPostgame(true);
     dispatch(showModal());
   };
 

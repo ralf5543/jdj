@@ -103,10 +103,6 @@ const FormModifyGame = ({
         </form>
       )}
 
-      <h1>{`${import.meta.env.VITE_BASE_URL}/images/${
-        store.getState().gamesReducer.gameVisual
-      }`}</h1>
-
       <LazyLoadImage
         className="postgame_img-preview"
         src={`${import.meta.env.VITE_BASE_URL}/images/${
