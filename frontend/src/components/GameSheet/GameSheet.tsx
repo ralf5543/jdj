@@ -7,6 +7,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Page from '../genericComponents/Page/Page';
 import Button from '../genericComponents/Button/Button';
+import { showModal } from '../../actions/layout';
 import {
   deleteGame,
   changeGameTitleField,
@@ -18,6 +19,7 @@ import {
 } from '../../actions/games';
 
 import FormModifyGame from '../UserSpace/FormModifyGame/FormModifyGame';
+import Modal from '../genericComponents/Modal/Modal';
 
 const GameSheet = () => {
   const { id } = useParams();
@@ -63,6 +65,22 @@ const GameSheet = () => {
     (state: Props) => state.gamesReducer.gameDuration
   );
 
+  // ======================------------------- MODIFY GAME
+  const [modifygame, setModifygame] = useState<'open' | 'closed'>('closed');
+
+  const isModalVisible = useSelector(
+    (state: Props) => state.layoutReducer.modalVisible
+  );
+
+  const handleModifygameForm = () => {
+    setModifygame('open');
+    dispatch(showModal());
+  };
+
+  const cancelModifygame = () => {
+    console.log('cancel modify game');
+  };
+
   return (
     <Page>
       <div>
@@ -82,47 +100,62 @@ const GameSheet = () => {
           onClick={() => handleDeleteGame(id)}
         />
 
-        <p>(Vous devez être l'auteur de cette page pour la supprimer)</p>
+        <p>
+          (Vous devez être l'auteur de cette page pour la supprimer ou la
+          modifier)
+        </p>
       </div>
       {deletedGame && <Navigate to="/user-space" replace />}
 
-      <h1>Modification de la fiche du jeu</h1>
-      <FormModifyGame
-        gameTitle={gameTitleValue}
-        gameDescription={gameDescriptionValue}
-        gameMaxPlayers={gameMaxPlayersValue}
-        gameIdealPlayers={gameIdealPlayersValue}
-        gameDuration={gameDurationValue}
-        changeTitleField={(newValue, gameTitleField) => {
-          const action = changeGameTitleField(newValue, gameTitleField);
-          dispatch(action);
-        }}
-        changeDescriptionField={(newValue, gameDescriptionField) => {
-          const action = changeGameDescriptionField(
-            newValue,
-            gameDescriptionField
-          );
-          dispatch(action);
-        }}
-        changeMaxplayersField={(newValue, gameMaxPlayersField) => {
-          const action = changeGameMaxPlayersField(
-            newValue,
-            gameMaxPlayersField
-          );
-          dispatch(action);
-        }}
-        changeIdealPlayersField={(newValue, gameIdealPlayersField) => {
-          const action = changeGameIdealPlayersField(
-            newValue,
-            gameIdealPlayersField
-          );
-          dispatch(action);
-        }}
-        changeDurationField={(newValue, gameDurationField) => {
-          const action = changeGameDurationField(newValue, gameDurationField);
-          dispatch(action);
-        }}
+      <Button
+        label="Modifier la fiche de ce jeu"
+        type="button"
+        onClick={handleModifygameForm}
       />
+
+      {modifygame && isModalVisible && (
+        <Modal closeModal={cancelModifygame}>
+          <FormModifyGame
+            gameTitle={gameTitleValue}
+            gameDescription={gameDescriptionValue}
+            gameMaxPlayers={gameMaxPlayersValue}
+            gameIdealPlayers={gameIdealPlayersValue}
+            gameDuration={gameDurationValue}
+            changeTitleField={(newValue, gameTitleField) => {
+              const action = changeGameTitleField(newValue, gameTitleField);
+              dispatch(action);
+            }}
+            changeDescriptionField={(newValue, gameDescriptionField) => {
+              const action = changeGameDescriptionField(
+                newValue,
+                gameDescriptionField
+              );
+              dispatch(action);
+            }}
+            changeMaxplayersField={(newValue, gameMaxPlayersField) => {
+              const action = changeGameMaxPlayersField(
+                newValue,
+                gameMaxPlayersField
+              );
+              dispatch(action);
+            }}
+            changeIdealPlayersField={(newValue, gameIdealPlayersField) => {
+              const action = changeGameIdealPlayersField(
+                newValue,
+                gameIdealPlayersField
+              );
+              dispatch(action);
+            }}
+            changeDurationField={(newValue, gameDurationField) => {
+              const action = changeGameDurationField(
+                newValue,
+                gameDurationField
+              );
+              dispatch(action);
+            }}
+          />
+        </Modal>
+      )}
     </Page>
   );
 };

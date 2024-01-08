@@ -63,6 +63,8 @@ const FormModifyGame = ({
       });
   };
 
+  console.log('gameTitle : ', gameTitle)
+
   return (
     <section>
       <h2>Modifier la fiche du jeu</h2>
