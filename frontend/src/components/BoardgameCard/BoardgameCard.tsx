@@ -25,7 +25,10 @@ const BoardgameCard = ({
         <span className="boardgame-card_highlight_wording">joueurs</span>
       </span>
       <picture className="boardgame-card_visual_wrapper">
-        <LazyLoadImage src={visual} alt={`Visual of ${title} game`} />
+        <LazyLoadImage
+          src={`${import.meta.env.VITE_BASE_URL}/images/${visual}`}
+          alt={`Visual of ${title} game`}
+        />
       </picture>
       <div className="boardgame-card_content">
         <span className="boardgame-card_coop">Coopératif</span>

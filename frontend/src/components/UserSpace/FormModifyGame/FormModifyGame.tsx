@@ -1,7 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import store from '../../../store';
 import Field from '../../genericComponents/Field/Field';
 import './FormModifyGame.scss';
@@ -27,22 +28,26 @@ const FormModifyGame = ({
   gameDuration,
 }: Props) => {
   const dispatch = useDispatch();
-  const [file, setFile] = useState<string>('');
-  const [filename, setFilename] = useState('Choose File');
+  const [file, setFile] = useState<File>();
+  const [filename, setFilename] = useState<string>('Choose File');
+  const [fileChosen, setFileChosen] = useState<boolean>(false);
   const [isFileUploaded, setIsFileUploaded] = useState<boolean>(false);
-
-  const ref = useRef(null);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     dispatch(modifyGame());
   };
-  const handleFileUpload = (e: React.SyntheticEvent) => {
-    setFile(e.target.files[0]);
-    setFilename(e.target.files[0].name);
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files != null) {
+      setFile(e.target.files[0]);
+      setFilename(e.target.files[0].name);
+      setFileChosen(true);
+    }
   };
 
-  const handleSubmitImage = (e: React.SyntheticEvent) => {
+  console.log('gameDescription : ', currentGameDescription);
+
+  const handleSubmitImage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('file selected : ', file);
     // create a new FormData object and append the file to it
@@ -70,23 +75,45 @@ const FormModifyGame = ({
       });
   };
 
-  console.log('gameTitle : ', gameTitle);
-
   return (
-    <section>
+    <>
       <h2>Modifier la fiche du jeu</h2>
-      <form autoComplete="off" onSubmit={handleSubmitImage}>
-        <input type="file" onChange={handleFileUpload} name="image" />
-        {isFileUploaded && (
-          <img
-            src={`${import.meta.env.VITE_BASE_URL}/images/${
-              store.getState().gamesReducer.gameVisual
-            }`}
-            alt=""
-          />
-        )}
-        <Button label="Charger l'image" type="submit" />
-      </form>
+      {!isFileUploaded && (
+        <form autoComplete="off" onSubmit={handleSubmitImage}>
+          <div className="field">
+            {fileChosen ? (
+              <Button label={`Publier l'image : ${filename}`} type="submit">
+                <i className="fa-solid fa-file-arrow-up" />
+              </Button>
+            ) : (
+              <>
+                <input
+                  type="file"
+                  id="uploadfile"
+                  onChange={handleFileUpload}
+                  name="image"
+                />
+                <label htmlFor="uploadfile">
+                  <i className="fa-solid fa-file-arrow-up" />
+                  Choisir une nouvelle image sur votre ordinateur
+                </label>
+              </>
+            )}
+          </div>
+        </form>
+      )}
+
+      <h1>{`${import.meta.env.VITE_BASE_URL}/images/${
+        store.getState().gamesReducer.gameVisual
+      }`}</h1>
+
+      <LazyLoadImage
+        className="postgame_img-preview"
+        src={`${import.meta.env.VITE_BASE_URL}/images/${
+          store.getState().gamesReducer.gameVisual
+        }`}
+        alt="image uploaded"
+      />
 
       <form autoComplete="off" onSubmit={handleSubmit}>
         <Field
@@ -135,7 +162,7 @@ const FormModifyGame = ({
         />
         <Button label="Valider les changements" type="submit" />
       </form>
-    </section>
+    </>
   );
 };
 

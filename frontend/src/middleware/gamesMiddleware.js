@@ -57,9 +57,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             idealplayers: store.getState().gamesReducer.gameIdealPlayers,
             duration: store.getState().gamesReducer.gameDuration,
             userNickname: store.getState().user.nickname,
-            visual: `${import.meta.env.VITE_BASE_URL}/images/${
-              store.getState().gamesReducer.gameVisual
-            }`,
+            visual: store.getState().gamesReducer.gameVisual,
           },
           // options (notamment les headers)
           {
@@ -123,7 +121,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             maxplayers: store.getState().gamesReducer.gameMaxPlayers,
             idealplayers: store.getState().gamesReducer.gameIdealPlayers,
             duration: store.getState().gamesReducer.gameDuration,
-            visual: `/images/${store.getState().gamesReducer.gameVisual}`,
+            visual: store.getState().gamesReducer.gameVisual,
           },
           {
             headers: {
@@ -136,6 +134,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             'on modifie ce jeu : ',
             store.getState().gamesReducer.gameTitle
           );
+          store.dispatch(hideModal());
           store.dispatch(showToaster('success', 'Fiche modifiée !'));
         })
         .catch((error) => {

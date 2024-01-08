@@ -28,8 +28,7 @@ const GameSheet = () => {
 
   // changes the current game ID in the store
   useEffect(() => {
-    const action = changeCurrentGameId(id);
-    dispatch(action);
+    dispatch(changeCurrentGameId(id));
   }, [dispatch, id]);
 
   const games = useSelector((state: Props) => state.gamesReducer.list);
@@ -38,7 +37,25 @@ const GameSheet = () => {
 
   // find the first element with the id matching the slug
   const currentGame = games.find((element) => element._id === id);
-  const { title, visual, description, maxplayers, idealplayers, duration } = currentGame;
+  const { title, visual, description, maxplayers, idealplayers, duration } =
+    currentGame;
+
+  useEffect(() => {
+    dispatch(changeGameDescriptionField(title, 'gameTitle'));
+    dispatch(changeGameDescriptionField(visual, 'gameVisual'));
+    dispatch(changeGameDescriptionField(description, 'gameDescription'));
+    dispatch(changeGameDescriptionField(maxplayers, 'gameMaxPlayers'));
+    dispatch(changeGameDescriptionField(idealplayers, 'gameIdealPlayers'));
+    dispatch(changeGameDescriptionField(duration, 'gameDuration'));
+  }, [
+    dispatch,
+    title,
+    visual,
+    description,
+    maxplayers,
+    idealplayers,
+    duration,
+  ]);
 
   console.log('currentGame : ', currentGame);
 
@@ -85,7 +102,10 @@ const GameSheet = () => {
     <Page>
       <div>
         <h2 className="boardgame-card_title">{title}</h2>
-        <LazyLoadImage src={visual} alt={`Visual of ${title} game`} />
+        <LazyLoadImage
+          src={`${import.meta.env.VITE_BASE_URL}/images/${visual}`}
+          alt={`Visual of ${title} game`}
+        />
         <p className="boardgame-card_description">{description}</p>
         <p className="boardgame-card_maxplayers">
           Nombre de joueurs MAX : {maxplayers}

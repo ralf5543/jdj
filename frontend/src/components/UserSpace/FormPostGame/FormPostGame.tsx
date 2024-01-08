@@ -69,8 +69,6 @@ const FormPostGame = ({
       });
   };
 
-  console.log('fileChosen : ', fileChosen);
-
   return (
     <>
       <h2>Ajouter un jeu à votre liste</h2>

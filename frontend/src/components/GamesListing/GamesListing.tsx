@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import Loader from '../genericComponents/Loader/Loader';
 import './GamesListing.scss';
