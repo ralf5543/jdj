@@ -1,7 +1,9 @@
 import './Page.scss';
 import { ReactNode } from 'react';
 
-const Page = ({ children }: Props) => <main className="page">{children}</main>;
+const Page = ({ children }: Props) => (
+  <section className="page">{children}</section>
+);
 
 export default Page;
 

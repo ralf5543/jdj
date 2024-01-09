@@ -8,6 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Page from '../genericComponents/Page/Page';
 import Button from '../genericComponents/Button/Button';
 import { showModal } from '../../actions/layout';
+
 import {
   deleteGame,
   changeGameTitleField,
