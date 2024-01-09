@@ -1,7 +1,7 @@
 import './Toaster.scss';
 import { createPortal } from 'react-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { motion } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { hideToaster } from '../../../actions/layout';
 
 const Toaster = () => {
@@ -32,18 +32,20 @@ const Toaster = () => {
   }, 5000);
 
   return createPortal(
-    <motion.div
-      className={`toaster toaster-${toasterStep}`}
-      role="alert"
-      initial={{ opacity: 0, y: 100 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      whileHover={{ scale: 1.05 }}
-      exit={{ opacity: 0, y: 100 }}
-    >
-      <i className={`fa-solid fa-${icon}`} />
-      <p className="toaster_text">{toasterText}</p>
-    </motion.div>,
+    <LazyMotion features={domAnimation}>
+      <m.div
+        className={`toaster toaster-${toasterStep}`}
+        role="alert"
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        whileHover={{ scale: 1.05 }}
+        exit={{ opacity: 0, y: 100 }}
+      >
+        <i className={`fa-solid fa-${icon}`} />
+        <p className="toaster_text">{toasterText}</p>
+      </m.div>
+    </LazyMotion>,
     document.body
   );
 };
