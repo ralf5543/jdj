@@ -23,7 +23,11 @@ const router = createBrowserRouter([
         <App />
       </Provider>
     ),
-    errorElement: <Error />,
+    errorElement: (
+      <Provider store={store}>
+        <Error />
+      </Provider>
+    ),
     children: [
       {
         path: '/',
