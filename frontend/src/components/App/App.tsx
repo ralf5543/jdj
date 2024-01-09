@@ -9,6 +9,7 @@ import { AnimatePresence } from 'framer-motion';
 import { fetchGames } from '../../actions/games';
 import AppHeader from '../AppHeader/AppHeader';
 import Toaster from '../genericComponents/Toaster/Toaster';
+import AppFooter from '../AppFooter/AppFooter';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,8 @@ const App = () => {
       >
         <Outlet />
       </main>
+
+      <AppFooter />
     </>
   );
 };

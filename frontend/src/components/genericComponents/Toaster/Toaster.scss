@@ -1,5 +1,3 @@
-@use 'src/styles/variables';
-
 @mixin toaster-step ($step) {
     border-color: var(--color-#{$step});
 
