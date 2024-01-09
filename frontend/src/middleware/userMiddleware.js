@@ -43,8 +43,14 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_LOGIN:
-      console.log('store.getState().user.email : ', store.getState().user.email);
-      console.log('store.getState().user.password : ', store.getState().user.password);
+      console.log(
+        'store.getState().user.email : ',
+        store.getState().user.email
+      );
+      console.log(
+        'store.getState().user.password : ',
+        store.getState().user.password
+      );
       axios
         .post(
           // URL
@@ -69,6 +75,10 @@ const userMiddleware = (store) => (next) => (action) => {
               response.data.userNickname
             )
           );
+
+          localStorage.setItem('nickname', response.data.nickname);
+          localStorage.setItem('userId', response.data.userId);
+
           store.dispatch(hideModal());
           store.dispatch(
             showToaster('success', 'Vous êtes à présent connecté !')

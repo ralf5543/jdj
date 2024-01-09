@@ -31,12 +31,15 @@ const Navigation = () => {
     (state: Props) => state.user.signupVisible
   );
 
-  const cancelSignup = () => {
-    console.log('cancel signup');
-  };
+  // close modals (no other use)
+  const cancelSignup = () => {};
 
-  const cancelLogin = () => {
-    console.log('cancel login');
+  const cancelLogin = () => {};
+
+  // Logout
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
   };
 
   const dispatch = useDispatch();
@@ -66,13 +69,7 @@ const Navigation = () => {
         {isLogged ? (
           <li className="main-nav_items_item">
             {/*  <h1 className="login-form-message">{`Bienvenue ${nicknameValue}`}</h1> */}
-            <button
-              type="button"
-              className="link"
-              onClick={() => {
-                console.log('handleLogout');
-              }}
-            >
+            <button type="button" className="link" onClick={handleLogout}>
               Déconnexion
             </button>
           </li>
