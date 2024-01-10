@@ -8,11 +8,17 @@
 
 .main-nav_items {
     display: flex;
+    width: 100%;
+    max-width: var(--size-max);
+    padding-inline: var(--spacer-l);
 }
 
 .main-nav_items_item {
     > a,
     > button.link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacer-s);
         padding: var(--spacer-s);
         color: var(--color-light);
         font-size: 1.4rem;
@@ -38,5 +44,14 @@
                 transform: translateY(0) scaleX(1);
             }
         }
+
+        // Reajust the icon just to be visually perfect
+        span {
+            transform: translateY(-0.1rem);
+        }
+    }
+
+    &:first-of-type {
+        margin-inline-end: auto;
     }
 }

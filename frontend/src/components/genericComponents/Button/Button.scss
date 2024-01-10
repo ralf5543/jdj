@@ -1,6 +1,7 @@
 .cta {
     display: inline-flex;
     align-items: center;
+    align-self: flex-start;
 
     // for icons
     gap: var(--spacer-m);

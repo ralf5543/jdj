@@ -2,11 +2,18 @@
 
 .gameslisting_wrapper {
     position: relative;
+
+    + button,
+    a {
+        margin-block-start: var(--spacer-l);
+    }
 }
 
 .gameslisting {
     display: flex;
     flex-wrap: wrap;
+    margin-inline: calc(var(--spacer-m) * -1 );
+    margin-block: calc(var(--spacer-m) * -1 );
 
     > li {
         width: 100%;

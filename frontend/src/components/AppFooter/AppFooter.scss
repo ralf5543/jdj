@@ -1,8 +1,14 @@
 .main-footer {
-    display: flex;
-    justify-content: space-between;
     margin-block-start: auto;
-    padding: var(--spacer-m);
     background-color: var(--color-dark);
     color: var(--color-light);
+}
+
+.main-footer_inner {
+    max-width: var(--size-max);
+    margin-inline: auto;
+    padding-inline: var(--spacer-l);
+    padding-block: var(--spacer-m);
+    display: flex;
+    justify-content: space-between;
 }

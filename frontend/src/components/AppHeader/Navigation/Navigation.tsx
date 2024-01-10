@@ -52,7 +52,8 @@ const Navigation = () => {
             className={({ isActive }) => (isActive ? 'current' : '')}
             to="/"
           >
-            Retour à l'accueil
+            <span className="fa-solid fa-home" />
+            Accueil
           </NavLink>
         </li>
         {isLogged && (

@@ -2,6 +2,7 @@
 import { useRouteError } from 'react-router-dom';
 import Page from '../genericComponents/Page/Page';
 import AppHeader from '../AppHeader/AppHeader';
+import AppFooter from '../AppFooter/AppFooter';
 
 const Error = () => {
   const error = useRouteError();
@@ -18,6 +19,7 @@ const Error = () => {
         </p>
         <p>(vous êtes bien avancés comme ça...)</p>
       </Page>
+      <AppFooter />
     </>
   );
 };

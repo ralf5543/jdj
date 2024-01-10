@@ -6,8 +6,10 @@ const AppFooter = () => {
 
   return (
     <footer className="main-footer">
-      <span className="author">@Ralf</span>
-      <span className="date">{year}</span>
+      <div className="main-footer_inner">
+        <span className="author">@Ralf</span>
+        <span className="date">{year}</span>
+      </div>
     </footer>
   );
 };

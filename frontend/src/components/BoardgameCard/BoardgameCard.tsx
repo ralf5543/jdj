@@ -30,6 +30,7 @@ const BoardgameCard = ({
           <LazyLoadImage
             src={`${import.meta.env.VITE_BASE_URL}/images/${visual}`}
             alt={`Visual of ${title} game`}
+            className="boardgame-card_visual"
           />
         </picture>
         <div className="boardgame-card_content">
