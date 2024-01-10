@@ -5,7 +5,7 @@ import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import Loader from '../genericComponents/Loader/Loader';
 import './GamesListing.scss';
 
-const GamesListing = ({ games }: any) => {
+const GamesListing = ({ games }: Props) => {
   const isLoaderVisible = useSelector(
     (state: Props) => state.layoutReducer.isLoading
   );
@@ -23,29 +23,23 @@ const GamesListing = ({ games }: any) => {
   const maxPlayersDescending = [...games].sort(
     (a, b) => b.maxplayers - a.maxplayers
   );
-  const idealPlayersAscending = [...games].sort(
-    (a, b) => a.idealplayers - b.idealplayers
-  );
-  const idealPlayersDescending = [...games].sort(
-    (a, b) => b.idealplayers - a.idealplayers
-  );
+
+  const newGamesFirst = [...games].reverse();
 
   const [filterGames, setFilterGames] = useState(titleAscending);
-  // const [searchGame, setSearchGame] = useState('');
 
-  // By default, sort by alphabetic order, on loading
+  // By default, sort by most recent date, on loading
   useEffect(() => {
-    setFilterGames(titleAscending);
+    setFilterGames(newGamesFirst);
   }, [games]);
 
-  const handleFilter = (e) => {
+  const handleFilter = (e: React.ChangeEvent) => {
     const { value } = e.target;
     // const lowerCased = value.toLowerCase();
-    const filtered = games.filter((game) =>
+    const filtered = games.filter((game: { title: string }) =>
       game.title.toLowerCase().includes(value.toLowerCase())
     );
     setFilterGames(filtered);
-    console.log('value : ', value);
   };
 
   return (
@@ -53,23 +47,50 @@ const GamesListing = ({ games }: any) => {
       {isLoaderVisible && <Loader />}
 
       <header className="gameslisting_sort">
-        <p>Trier par</p>
-        <button
-          type="button"
-          onClick={() => {
-            setFilterGames(titleAscending);
-          }}
-        >
-          A - Z
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            setFilterGames(titleDescending);
-          }}
-        >
-          Z - A
-        </button>
+        <p>Date d'ajout :</p>
+
+        <div className="gameslisting_sort_cta_wrapper">
+          <button
+            className="gameslisting_sort_cta"
+            type="button"
+            onClick={() => {
+              setFilterGames(newGamesFirst);
+            }}
+          >
+            <i class="fa-solid fa-sort-up"></i>
+          </button>
+          <button
+            className="gameslisting_sort_cta"
+            type="button"
+            onClick={() => {
+              // the original array
+              setFilterGames(games);
+            }}
+          >
+            <i class="fa-solid fa-sort-down"></i>
+          </button>
+        </div>
+        <p>Ordre alphabétique :</p>
+        <div className="gameslisting_sort_cta_wrapper">
+          <button
+            className="gameslisting_sort_cta"
+            type="button"
+            onClick={() => {
+              setFilterGames(titleAscending);
+            }}
+          >
+            <i class="fa-solid fa-arrow-down-a-z"></i>
+          </button>
+          <button
+            className="gameslisting_sort_cta"
+            type="button"
+            onClick={() => {
+              setFilterGames(titleDescending);
+            }}
+          >
+            <i class="fa-solid fa-arrow-down-z-a"></i>
+          </button>
+        </div>
 
         <p>Nombre de joueurs maximum :</p>
         <button
@@ -84,24 +105,6 @@ const GamesListing = ({ games }: any) => {
           type="button"
           onClick={() => {
             setFilterGames(maxPlayersAscending);
-          }}
-        >
-          -
-        </button>
-
-        <p>Nombre de joueurs idéal :</p>
-        <button
-          type="button"
-          onClick={() => {
-            setFilterGames(idealPlayersDescending);
-          }}
-        >
-          +
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            setFilterGames(idealPlayersAscending);
           }}
         >
           -
@@ -132,6 +135,7 @@ const GamesListing = ({ games }: any) => {
 };
 
 type Props = {
+  layoutReducer: any;
   games: object[];
 };
 

@@ -20,7 +20,7 @@ const BoardgameCard = ({
         className="boardgame-card"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.4 }}
+        viewport={{ once: false, amount: 0.4 }}
       >
         <span className="boardgame-card_highlight">
           <span className="boardgame-card_highlight_amount">{maxplayers}</span>
