@@ -30,74 +30,99 @@ const GamesListing = ({ games }: any) => {
     (a, b) => b.idealplayers - a.idealplayers
   );
 
-  const [sortGames, setSortGames] = useState(titleAscending);
+  const [filterGames, setFilterGames] = useState(titleAscending);
+  // const [searchGame, setSearchGame] = useState('');
 
-  // By default, sort by alphabetic order, on loading o ge
+  // By default, sort by alphabetic order, on loading
   useEffect(() => {
-    setSortGames(titleAscending);
+    setFilterGames(titleAscending);
   }, [games]);
+
+  const handleFilter = (e) => {
+    const { value } = e.target;
+    // const lowerCased = value.toLowerCase();
+    const filtered = games.filter((game) =>
+      game.title.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilterGames(filtered);
+    console.log('value : ', value);
+  };
 
   return (
     <div className="gameslisting_wrapper">
       {isLoaderVisible && <Loader />}
 
-      <h2>Trier par</h2>
-      <button
-        type="button"
-        onClick={() => {
-          setSortGames(titleAscending);
-        }}
-      >
-        A - Z
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          setSortGames(titleDescending);
-        }}
-      >
-        Z - A
-      </button>
+      <header className="gameslisting_sort">
+        <p>Trier par</p>
+        <button
+          type="button"
+          onClick={() => {
+            setFilterGames(titleAscending);
+          }}
+        >
+          A - Z
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setFilterGames(titleDescending);
+          }}
+        >
+          Z - A
+        </button>
 
-      <p>Nombre de joueurs maximum :</p>
-      <button
-        type="button"
-        onClick={() => {
-          setSortGames(maxPlayersDescending);
-        }}
-      >
-        +
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          setSortGames(maxPlayersAscending);
-        }}
-      >
-        -
-      </button>
+        <p>Nombre de joueurs maximum :</p>
+        <button
+          type="button"
+          onClick={() => {
+            setFilterGames(maxPlayersDescending);
+          }}
+        >
+          +
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setFilterGames(maxPlayersAscending);
+          }}
+        >
+          -
+        </button>
 
-      <p>Nombre de joueurs idéal :</p>
-      <button
-        type="button"
-        onClick={() => {
-          setSortGames(idealPlayersDescending);
-        }}
-      >
-        +
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          setSortGames(idealPlayersAscending);
-        }}
-      >
-        -
-      </button>
+        <p>Nombre de joueurs idéal :</p>
+        <button
+          type="button"
+          onClick={() => {
+            setFilterGames(idealPlayersDescending);
+          }}
+        >
+          +
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setFilterGames(idealPlayersAscending);
+          }}
+        >
+          -
+        </button>
+      </header>
+
+      <div className="field">
+        <input
+          type="text"
+          onChange={handleFilter}
+          placeholder="Nom du jeu"
+          id="filterfield"
+        />
+        <label htmlFor="filterfield" className="field_label">
+          Chercher un jeu par son titre
+        </label>
+      </div>
 
       {games.length > 0 && (
         <ul className="gameslisting">
-          {sortGames.map((game: any) => (
+          {filterGames.map((game: any) => (
             <BoardgameCard key={game._id} id={game._id} {...game} />
           ))}
         </ul>
