@@ -13,16 +13,19 @@ import Button from '../../genericComponents/Button/Button';
 const FormModifyGame = ({
   currentGameTitle,
   currentGameDescription,
+  currentGameMinPlayers,
   currentGameMaxPlayers,
   currentGameIdealPlayers,
   currentGameDuration,
   changeTitleField,
   changeDescriptionField,
+  changeMinplayersField,
   changeMaxplayersField,
   changeIdealPlayersField,
   changeDurationField,
   gameTitle,
   gameDescription,
+  gameMinPlayers,
   gameMaxPlayers,
   gameIdealPlayers,
   gameDuration,
@@ -131,6 +134,15 @@ const FormModifyGame = ({
         />
         <Field
           // must have the same name of the state !!!!!!!!!!
+          name="gameMinPlayers"
+          type="number"
+          placeholder="Nombre de joueurs minimum"
+          onChange={changeMinplayersField}
+          value={gameMinPlayers}
+          defaultInputValue={currentGameMinPlayers}
+        />
+        <Field
+          // must have the same name of the state !!!!!!!!!!
           name="gameMaxPlayers"
           type="number"
           placeholder="Nombre de joueurs maximum"
@@ -165,11 +177,13 @@ const FormModifyGame = ({
 type Props = {
   gameTitle: string;
   gameDescription: string;
+  gameMinPlayers: string;
   gameMaxPlayers: string;
   gameIdealPlayers: string;
   gameDuration: string;
   changeTitleField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
   changeDescriptionField: (arg0: string, arg1: string) => void;
+  changeMinplayersField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
   changeMaxplayersField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
   changeIdealPlayersField: (
     ChangeEvent: React.ChangeEvent<HTMLElement>

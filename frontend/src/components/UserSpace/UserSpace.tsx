@@ -10,6 +10,7 @@ import {
   postGame,
   changeGameTitleField,
   changeGameDescriptionField,
+  changeGameMinPlayersField,
   changeGameMaxPlayersField,
   changeGameIdealPlayersField,
   changeGameDurationField,
@@ -28,6 +29,9 @@ const UserSpace = () => {
   const nicknameValue = useSelector((state: Props) => state.user.nickname);
   const gameDescriptionValue = useSelector(
     (state: Props) => state.gamesReducer.gameDescription
+  );
+  const gameMinPlayersValue = useSelector(
+    (state: Props) => state.gamesReducer.gameMinPlayers
   );
   const gameMaxPlayersValue = useSelector(
     (state: Props) => state.gamesReducer.gameMaxPlayers
@@ -112,6 +116,7 @@ const UserSpace = () => {
           <FormPostGame
             gameTitle={gameTitleValue}
             gameDescription={gameDescriptionValue}
+            gameMinPlayers={gameMinPlayersValue}
             gameMaxPlayers={gameMaxPlayersValue}
             gameIdealPlayers={gameIdealPlayersValue}
             gameDuration={gameDurationValue}
@@ -124,6 +129,13 @@ const UserSpace = () => {
               const action = changeGameDescriptionField(
                 newValue,
                 gameDescriptionField
+              );
+              dispatch(action);
+            }}
+            changeMinplayersField={(newValue, gameMinPlayersField) => {
+              const action = changeGameMinPlayersField(
+                newValue,
+                gameMinPlayersField
               );
               dispatch(action);
             }}
@@ -164,6 +176,7 @@ type Props = {
     gameTitle: string;
     nickname: string;
     gameDescription: string;
+    gameMinPlayers: string;
     gameMaxPlayers: string;
     gameIdealPlayers: string;
     gameDuration: string;

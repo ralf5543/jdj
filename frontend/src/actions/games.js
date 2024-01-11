@@ -6,6 +6,7 @@ export const DELETE_GAME = 'DELETE_GAME';
 export const SAVE_GAMES = 'SAVE_GAMES';
 export const CHANGE_GAME_TITLE_FIELD = 'CHANGE_GAME_TITLE_FIELD';
 export const CHANGE_GAME_DESCRIPTION_FIELD = 'CHANGE_GAME_DESCRIPTION_FIELD';
+export const CHANGE_GAME_MINPLAYERS_FIELD = 'CHANGE_GAME_MINPLAYERS_FIELD';
 export const CHANGE_GAME_MAXPLAYERS_FIELD = 'CHANGE_GAME_MAXPLAYERS_FIELD';
 export const CHANGE_GAME_IDEALPLAYERS_FIELD = 'CHANGE_GAME_IDEALPLAYERS_FIELD';
 export const CHANGE_GAME_DURATION_FIELD = 'CHANGE_GAME_DURATION_FIELD';
@@ -45,6 +46,12 @@ export const changeGameDescriptionField = (newValue, gameDescriptionField) => ({
   type: CHANGE_GAME_DESCRIPTION_FIELD,
   newValue,
   gameDescriptionField,
+});
+
+export const changeGameMinPlayersField = (newValue, gameMinPlayersField) => ({
+  type: CHANGE_GAME_MINPLAYERS_FIELD,
+  newValue,
+  gameMinPlayersField,
 });
 
 export const changeGameMaxPlayersField = (newValue, gameMaxPlayersField) => ({

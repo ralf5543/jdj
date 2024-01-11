@@ -6,6 +6,7 @@ import { LazyMotion, domAnimation, m } from 'framer-motion';
 const BoardgameCard = ({
   description,
   title,
+  minplayers,
   maxplayers,
   idealplayers,
   duration,
@@ -23,7 +24,9 @@ const BoardgameCard = ({
         viewport={{ once: false, amount: 0.4 }}
       >
         <span className="boardgame-card_highlight">
-          <span className="boardgame-card_highlight_amount">{maxplayers}</span>
+          <span className="boardgame-card_highlight_amount">
+            {minplayers} - {maxplayers}
+          </span>
           <span className="boardgame-card_highlight_wording">joueurs</span>
         </span>
         <picture className="boardgame-card_visual_wrapper">
@@ -53,9 +56,9 @@ const BoardgameCard = ({
           </p>
           <p className="boardgame-card_footer_inner">
             <i className="fa-solid fa-user-group" />
-            Joueurs max :
+            Nombre de joueurs :
             <span className="boardgame-card_footer_highlight">
-              {maxplayers}
+              {minplayers} - {maxplayers}
             </span>
             (idéal :
             <span className="boardgame-card_footer_highlight">
@@ -72,6 +75,7 @@ const BoardgameCard = ({
 type Props = {
   title: string;
   description: string;
+  minplayers: number;
   maxplayers: number;
   idealplayers: number;
   duration: number;

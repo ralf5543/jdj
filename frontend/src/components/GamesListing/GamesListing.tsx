@@ -24,6 +24,8 @@ const GamesListing = ({ games }: Props) => {
     (a, b) => b.maxplayers - a.maxplayers
   );
 
+  const minPlayersNumber = [...games];
+
   const newGamesFirst = [...games].reverse();
 
   const [filterGames, setFilterGames] = useState(titleAscending);
@@ -33,9 +35,16 @@ const GamesListing = ({ games }: Props) => {
     setFilterGames(newGamesFirst);
   }, [games]);
 
+  const handlePlayersNumber = (e: React.ChangeEvent) => {
+    const { value } = e.target;
+    const filtered = games.filter((game: { title: string }) =>
+      game.title.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilterGames(filtered);
+  };
+
   const handleFilter = (e: React.ChangeEvent) => {
     const { value } = e.target;
-    // const lowerCased = value.toLowerCase();
     const filtered = games.filter((game: { title: string }) =>
       game.title.toLowerCase().includes(value.toLowerCase())
     );
@@ -57,7 +66,7 @@ const GamesListing = ({ games }: Props) => {
               setFilterGames(newGamesFirst);
             }}
           >
-            <i class="fa-solid fa-sort-up"></i>
+            <i className="fa-solid fa-arrow-up" />
           </button>
           <button
             className="gameslisting_sort_cta"
@@ -67,7 +76,7 @@ const GamesListing = ({ games }: Props) => {
               setFilterGames(games);
             }}
           >
-            <i class="fa-solid fa-sort-down"></i>
+            <i className="fa-solid fa-arrow-down" />
           </button>
         </div>
         <p>Ordre alphabétique :</p>
@@ -79,7 +88,7 @@ const GamesListing = ({ games }: Props) => {
               setFilterGames(titleAscending);
             }}
           >
-            <i class="fa-solid fa-arrow-down-a-z"></i>
+            <i className="fa-solid fa-arrow-down-a-z" />
           </button>
           <button
             className="gameslisting_sort_cta"
@@ -88,7 +97,7 @@ const GamesListing = ({ games }: Props) => {
               setFilterGames(titleDescending);
             }}
           >
-            <i class="fa-solid fa-arrow-down-z-a"></i>
+            <i className="fa-solid fa-arrow-down-z-a" />
           </button>
         </div>
 
@@ -110,6 +119,27 @@ const GamesListing = ({ games }: Props) => {
           -
         </button>
       </header>
+      <p>Nombre de joueurs minimum :</p>
+      <div className="field">
+        <select
+          name="playersNb"
+          id="playersNb"
+          onChange={() => {
+            setFilterGames(minPlayersNumber);
+          }}
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8 et +">8</option>
+        </select>
+
+        <label htmlFor="pet-select">Choose a pet:</label>
+      </div>
 
       <div className="field">
         <input

@@ -78,6 +78,7 @@ const userMiddleware = (store) => (next) => (action) => {
 
           localStorage.setItem('nickname', response.data.nickname);
           localStorage.setItem('userId', response.data.userId);
+          localStorage.setItem('token', response.data.token);
 
           store.dispatch(hideModal());
           store.dispatch(

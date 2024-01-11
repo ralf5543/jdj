@@ -44,7 +44,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
 
     case POST_GAME:
       store.dispatch(showLoader());
-      console.log('token dans le state : ', store.getState().user.token);
       axios
         .post(
           // URL
@@ -53,6 +52,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
           {
             title: store.getState().gamesReducer.gameTitle,
             description: store.getState().gamesReducer.gameDescription,
+            minplayers: store.getState().gamesReducer.gameMinPlayers,
             maxplayers: store.getState().gamesReducer.gameMaxPlayers,
             idealplayers: store.getState().gamesReducer.gameIdealPlayers,
             duration: store.getState().gamesReducer.gameDuration,
@@ -118,6 +118,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
           {
             title: store.getState().gamesReducer.gameTitle,
             description: store.getState().gamesReducer.gameDescription,
+            minplayers: store.getState().gamesReducer.gameMinPlayers,
             maxplayers: store.getState().gamesReducer.gameMaxPlayers,
             idealplayers: store.getState().gamesReducer.gameIdealPlayers,
             duration: store.getState().gamesReducer.gameDuration,

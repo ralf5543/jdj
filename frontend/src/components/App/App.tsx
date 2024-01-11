@@ -32,10 +32,11 @@ const App = () => {
   useEffect(() => {
     const loggedInUser = localStorage.getItem('userId');
     const loggedInNickname = localStorage.getItem('nickname');
+    const loggedInToken = localStorage.getItem('token');
 
     if (loggedInUser) {
-      // nickname, token NOT sent, user id
-      dispatch(handleSuccessfulLogin(loggedInNickname, '', loggedInUser));
+      // nickname, token, user id
+      dispatch(handleSuccessfulLogin(loggedInNickname, loggedInToken, loggedInUser));
     }
   }, [dispatch]);
 

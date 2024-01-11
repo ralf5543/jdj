@@ -13,12 +13,14 @@ import Button from '../../genericComponents/Button/Button';
 const FormPostGame = ({
   changeTitleField,
   changeDescriptionField,
+  changeMinplayersField,
   changeMaxplayersField,
   changeIdealPlayersField,
   changeDurationField,
   handlePostGame,
   gameTitle,
   gameDescription,
+  gameMinPlayers,
   gameMaxPlayers,
   gameIdealPlayers,
   gameDuration,
@@ -126,6 +128,14 @@ const FormPostGame = ({
         />
         <Field
           // must have the same name of the state !!!!!!!!!!
+          name="gameMinPlayers"
+          type="number"
+          placeholder="Nombre de joueurs minimum"
+          onChange={changeMinplayersField}
+          value={gameMinPlayers}
+        />
+        <Field
+          // must have the same name of the state !!!!!!!!!!
           name="gameMaxPlayers"
           type="number"
           placeholder="Nombre de joueurs maximum"
@@ -157,11 +167,13 @@ const FormPostGame = ({
 type Props = {
   gameTitle: string;
   gameDescription: string;
+  gameMinPlayers: string;
   gameMaxPlayers: string;
   gameIdealPlayers: string;
   gameDuration: string;
   changeTitleField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
   changeDescriptionField: (arg0: string, arg1: string) => void;
+  changeMinplayersField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
   changeMaxplayersField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
   changeIdealPlayersField: (
     ChangeEvent: React.ChangeEvent<HTMLElement>

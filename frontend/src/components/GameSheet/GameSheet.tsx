@@ -13,6 +13,7 @@ import {
   deleteGame,
   changeGameTitleField,
   changeGameDescriptionField,
+  changeGameMinPlayersField,
   changeGameMaxPlayersField,
   changeGameIdealPlayersField,
   changeGameDurationField,
@@ -38,25 +39,15 @@ const GameSheet = () => {
 
   // find the first element with the id matching the slug
   const currentGame = games.find((element) => element._id === id);
-  const { title, visual, description, maxplayers, idealplayers, duration } =
-    currentGame;
-
-  useEffect(() => {
-    dispatch(changeGameDescriptionField(title, 'gameTitle'));
-    dispatch(changeGameDescriptionField(visual, 'gameVisual'));
-    dispatch(changeGameDescriptionField(description, 'gameDescription'));
-    dispatch(changeGameDescriptionField(maxplayers, 'gameMaxPlayers'));
-    dispatch(changeGameDescriptionField(idealplayers, 'gameIdealPlayers'));
-    dispatch(changeGameDescriptionField(duration, 'gameDuration'));
-  }, [
-    dispatch,
+  const {
     title,
     visual,
     description,
+    minplayers,
     maxplayers,
     idealplayers,
     duration,
-  ]);
+  } = currentGame;
 
   const handleDeleteGame = (gameId: string | undefined) => {
     dispatch(deleteGame());
@@ -70,6 +61,9 @@ const GameSheet = () => {
   );
   const gameDescriptionValue = useSelector(
     (state: Props) => state.gamesReducer.gameDescription
+  );
+  const gameMinPlayersValue = useSelector(
+    (state: Props) => state.gamesReducer.gameMinPlayers
   );
   const gameMaxPlayersValue = useSelector(
     (state: Props) => state.gamesReducer.gameMaxPlayers
@@ -91,11 +85,29 @@ const GameSheet = () => {
   const isLogged = useSelector((state: Props) => state.user.logged);
 
   const handleModifygameForm = () => {
+    // Retrieves all games datas in the store, so the user doesn't have to rewrite infos
+    dispatch(changeGameDescriptionField(title, 'gameTitle'));
+    dispatch(changeGameDescriptionField(visual, 'gameVisual'));
+    dispatch(changeGameDescriptionField(description, 'gameDescription'));
+    dispatch(changeGameDescriptionField(minplayers, 'gameMinPlayers'));
+    dispatch(changeGameDescriptionField(maxplayers, 'gameMaxPlayers'));
+    dispatch(changeGameDescriptionField(idealplayers, 'gameIdealPlayers'));
+    dispatch(changeGameDescriptionField(duration, 'gameDuration'));
+
     setModifygame(true);
     dispatch(showModal());
   };
 
   const cancelModifygame = () => {
+    // Removes the datas saved
+    dispatch(changeGameDescriptionField('', 'gameTitle'));
+    dispatch(changeGameDescriptionField('', 'gameVisual'));
+    dispatch(changeGameDescriptionField('', 'gameDescription'));
+    dispatch(changeGameDescriptionField('', 'gameMinPlayers'));
+    dispatch(changeGameDescriptionField('', 'gameMaxPlayers'));
+    dispatch(changeGameDescriptionField('', 'gameIdealPlayers'));
+    dispatch(changeGameDescriptionField('', 'gameDuration'));
+
     console.log('cancel modify game');
   };
 
@@ -109,7 +121,7 @@ const GameSheet = () => {
         />
         <p className="boardgame-card_description">{description}</p>
         <p className="boardgame-card_maxplayers">
-          Nombre de joueurs MAX : {maxplayers}
+          Nombre de joueurs : {minplayers} - {maxplayers}
         </p>
         <p className="boardgame-card_idealplayers">
           Nombre de joueurs idéal : {idealplayers}
@@ -143,11 +155,13 @@ const GameSheet = () => {
           <FormModifyGame
             gameTitle={gameTitleValue}
             gameDescription={gameDescriptionValue}
+            gameMinPlayers={gameMinPlayersValue}
             gameMaxPlayers={gameMaxPlayersValue}
             gameIdealPlayers={gameIdealPlayersValue}
             gameDuration={gameDurationValue}
             currentGameTitle={title}
             currentGameDescription={description}
+            currentGameMinPlayers={minplayers}
             currentGameMaxPlayers={maxplayers}
             currentGameIdealPlayers={idealplayers}
             currentGameDuration={duration}
@@ -159,6 +173,13 @@ const GameSheet = () => {
               const action = changeGameDescriptionField(
                 newValue,
                 gameDescriptionField
+              );
+              dispatch(action);
+            }}
+            changeMinplayersField={(newValue, gameMinPlayersField) => {
+              const action = changeGameMinPlayersField(
+                newValue,
+                gameMinPlayersField
               );
               dispatch(action);
             }}
@@ -194,6 +215,7 @@ type Props = {
   [key: string]: {
     gameTitle: string;
     gameDescription: string;
+    gameMinPlayers: string;
     gameMaxPlayers: string;
     gameIdealPlayers: string;
     gameDuration: string;

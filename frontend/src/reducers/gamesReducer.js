@@ -2,12 +2,14 @@ import {
   SAVE_GAMES,
   CHANGE_GAME_TITLE_FIELD,
   CHANGE_GAME_DESCRIPTION_FIELD,
+  CHANGE_GAME_MINPLAYERS_FIELD,
   CHANGE_GAME_MAXPLAYERS_FIELD,
   CHANGE_GAME_IDEALPLAYERS_FIELD,
   CHANGE_GAME_DURATION_FIELD,
   CHANGE_GAME_VISUAL,
   CHANGE_CURRENT_GAME_ID,
   POST_GAME,
+  MODIFY_GAME,
   // DELETE_GAME,
 } from '../actions/games';
 
@@ -17,6 +19,7 @@ export const initialState = {
   areGamesLoaded: false,
   gameTitle: '',
   gameDescription: '',
+  gameMinPlayers: '',
   gameMaxPlayers: '',
   gameIdealPlayers: '',
   gameDuration: '',
@@ -43,6 +46,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.gameDescriptionField]: action.newValue,
+      };
+
+    case CHANGE_GAME_MINPLAYERS_FIELD:
+      return {
+        ...state,
+        [action.gameMinPlayersField]: action.newValue,
       };
 
     case CHANGE_GAME_MAXPLAYERS_FIELD:
@@ -81,6 +90,21 @@ const reducer = (state = initialState, action = {}) => {
         // clear all fields
         gameTitle: '',
         gameDescription: '',
+        gameMinPlayers: '',
+        gameMaxPlayers: '',
+        gameIdealPlayers: '',
+        gameDuration: '',
+        gameVisual: '',
+        currentGameId: '',
+      };
+
+    case MODIFY_GAME:
+      return {
+        ...state,
+        // clear all fields
+        gameTitle: '',
+        gameDescription: '',
+        gameMinPlayers: '',
         gameMaxPlayers: '',
         gameIdealPlayers: '',
         gameDuration: '',
