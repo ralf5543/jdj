@@ -53,7 +53,7 @@ const Navigation = () => {
             to="/"
           >
             <span className="fa-solid fa-home" />
-            Accueil
+            <span className="main-nav_items_item_wording">Accueil</span>
           </NavLink>
         </li>
         {isLogged && (
