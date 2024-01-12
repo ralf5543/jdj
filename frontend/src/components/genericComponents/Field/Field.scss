@@ -1,6 +1,18 @@
+@use 'src/styles/include-media' as m;
 @use '../../../styles/extends';
 
 @import '../Button/Button.scss';
+
+.fields_columns {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-s);
+
+    @include m.media(">desktop") {
+        flex-direction: row;
+        gap: var(--spacer-l);
+    }
+}
 
 .field {
     display: flex;
@@ -11,7 +23,9 @@
     input[type=number],
     input[type=password] {
         width: 100%;
-        padding: var(--spacer-s);
+        min-height: 4.8rem;
+        padding-block: var(--spacer-s);
+        padding-inline: var(--spacer-m);
         border: 1px solid var(--color-secondary-text);
         border-radius: var(--spacer-s);
         background-color: var(--color-secondary);
@@ -30,6 +44,27 @@
     > .cta {
         margin-inline-end: auto;
     }
+
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 100%;
+        min-height: 4.8rem;
+        padding-block: var(--spacer-s);
+        padding-inline: var(--spacer-m);
+        border: 1px solid var(--color-secondary-text);
+        border-radius: var(--spacer-s);
+        background-color: var(--color-secondary);
+        background-image: url('../../../assets/caret-down.svg');
+        background-size: 2rem;
+        background-repeat: no-repeat;
+        background-position-x: calc(100% - var(--spacer-m));
+        background-position-y: center;
+    }
+
+    &.field--full-width {
+        flex: 1;
+    }
 }
 
 .field_label {
@@ -37,8 +72,4 @@
     margin-inline-start: var(--spacer-m);
     margin-block-end: var(--spacer-xs);
     font-weight: 600;
-}
-
-.field.field--has-content > input {
-    // border-color: red;
 }

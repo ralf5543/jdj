@@ -24,8 +24,6 @@ const GamesListing = ({ games }: Props) => {
     (a, b) => b.maxplayers - a.maxplayers
   );
 
-  const minPlayersNumber = [...games];
-
   const newGamesFirst = [...games].reverse();
 
   const [filterGames, setFilterGames] = useState(titleAscending);
@@ -37,14 +35,24 @@ const GamesListing = ({ games }: Props) => {
 
   const handlePlayersNumber = (e: React.ChangeEvent) => {
     const { value } = e.target;
-    const filtered = games.filter((game: { title: string }) =>
-      game.title.toLowerCase().includes(value.toLowerCase())
+
+    // First, filter on available games with minimum players below the chosen value
+    const minFiltered = games.filter(
+      (game) => Number(game.minplayers) <= value
     );
-    setFilterGames(filtered);
+
+    // Then, filter this news array with max players games available
+    const maxFiltered = minFiltered.filter(
+      (game) => Number(game.maxplayers) >= value
+    );
+
+    setFilterGames(maxFiltered);
   };
 
   const handleFilter = (e: React.ChangeEvent) => {
     const { value } = e.target;
+
+    // Search filter doesn't care about capitalized letters
     const filtered = games.filter((game: { title: string }) =>
       game.title.toLowerCase().includes(value.toLowerCase())
     );
@@ -55,103 +63,47 @@ const GamesListing = ({ games }: Props) => {
     <div className="gameslisting_wrapper">
       {isLoaderVisible && <Loader />}
 
-      <header className="gameslisting_sort">
-        <p>Date d'ajout :</p>
+      <header className="gameslisting_header">
+        <p>
+          Recherchez un jeu en fonction du nombre de vos joueurs, ou directement
+          par son titre.
+        </p>
 
-        <div className="gameslisting_sort_cta_wrapper">
-          <button
-            className="gameslisting_sort_cta"
-            type="button"
-            onClick={() => {
-              setFilterGames(newGamesFirst);
-            }}
-          >
-            <i className="fa-solid fa-arrow-up" />
-          </button>
-          <button
-            className="gameslisting_sort_cta"
-            type="button"
-            onClick={() => {
-              // the original array
-              setFilterGames(games);
-            }}
-          >
-            <i className="fa-solid fa-arrow-down" />
-          </button>
-        </div>
-        <p>Ordre alphabétique :</p>
-        <div className="gameslisting_sort_cta_wrapper">
-          <button
-            className="gameslisting_sort_cta"
-            type="button"
-            onClick={() => {
-              setFilterGames(titleAscending);
-            }}
-          >
-            <i className="fa-solid fa-arrow-down-a-z" />
-          </button>
-          <button
-            className="gameslisting_sort_cta"
-            type="button"
-            onClick={() => {
-              setFilterGames(titleDescending);
-            }}
-          >
-            <i className="fa-solid fa-arrow-down-z-a" />
-          </button>
-        </div>
+        <div className="fields_columns">
+          <div className="field">
+            <select
+              name="playersNb"
+              id="playersNb"
+              onChange={handlePlayersNumber}
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8 et +</option>
+            </select>
 
-        <p>Nombre de joueurs maximum :</p>
-        <button
-          type="button"
-          onClick={() => {
-            setFilterGames(maxPlayersDescending);
-          }}
-        >
-          +
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            setFilterGames(maxPlayersAscending);
-          }}
-        >
-          -
-        </button>
+            <label htmlFor="playersNb" className="field_label">
+              Nombre de joueurs :
+            </label>
+          </div>
+
+          <div className="field field--full-width">
+            <input
+              type="text"
+              onChange={handleFilter}
+              placeholder="Nom du jeu"
+              id="filterfield"
+            />
+            <label htmlFor="filterfield" className="field_label">
+              Titre du jeu
+            </label>
+          </div>
+        </div>
       </header>
-      <p>Nombre de joueurs minimum :</p>
-      <div className="field">
-        <select
-          name="playersNb"
-          id="playersNb"
-          onChange={() => {
-            setFilterGames(minPlayersNumber);
-          }}
-        >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8 et +">8</option>
-        </select>
-
-        <label htmlFor="pet-select">Choose a pet:</label>
-      </div>
-
-      <div className="field">
-        <input
-          type="text"
-          onChange={handleFilter}
-          placeholder="Nom du jeu"
-          id="filterfield"
-        />
-        <label htmlFor="filterfield" className="field_label">
-          Chercher un jeu par son titre
-        </label>
-      </div>
 
       {games.length > 0 && (
         <ul className="gameslisting">

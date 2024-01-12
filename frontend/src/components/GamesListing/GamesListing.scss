@@ -9,6 +9,14 @@
     }
 }
 
+.gameslisting_header {
+    margin-block-end: var(--spacer-m);
+        
+    @include m.media(">tablet") {
+        margin-block-end: var(--spacer-l);
+    }
+}
+
 .gameslisting {
     display: flex;
     flex-wrap: wrap;
@@ -31,33 +39,6 @@
     }
 }
 
-.gameslisting_sort {
-    display: flex;
-    align-items: center;
-
-    p {
-        margin-block-end: 0;
-    }
-}
-
 .gameslisting_sort_cta_wrapper {
     display: flex;
-}
-
-.gameslisting_sort_cta {
-    padding: var(--spacer-s);
-    border: 1px solid var(--color-primary);
-    color: var(--color-primary);
-
-    &:first-of-type {
-        border-radius: var(--spacer-s) 0 0 var(--spacer-s);
-    }
-
-    &:not(:first-of-type) {
-        border-radius: 0 var(--spacer-s) var(--spacer-s) 0;
-    }
-
-    > i {
-        font-size: 2rem;
-    }
 }

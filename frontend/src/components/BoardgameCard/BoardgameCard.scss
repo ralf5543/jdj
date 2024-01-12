@@ -114,6 +114,11 @@
     -webkit-box-orient: vertical; 
 }
 
+// todo: display it on the gamesheeet
+.boardgame-card_owners {
+    display: none;
+}
+
 .boardgame-card_owners_name {
     font-style: italic;
 }
