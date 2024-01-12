@@ -2,7 +2,16 @@ import { useEffect, useState } from 'react';
 import './Field.scss';
 
 // == Composant
-const Field = ({ defaultInputValue, value, type, name, placeholder, onChange }: Props) => {
+const Field = ({
+  defaultInputValue,
+  value,
+  type,
+  name,
+  placeholder,
+  helper,
+  label,
+  onChange,
+}: Props) => {
   const handleChange = (e: React.ChangeEvent) => {
     // replaces field default value by the new value entered
     onChange(setDynamicvalue(e.target.value));
@@ -36,8 +45,10 @@ const Field = ({ defaultInputValue, value, type, name, placeholder, onChange }: 
       />
 
       <label htmlFor={inputId} className="field_label">
-        {placeholder}
+        {label}
       </label>
+
+      {helper && <p className="field_helper">{helper}</p>}
     </div>
   );
 };
@@ -47,7 +58,8 @@ type Props = {
   type?: string;
   name: string;
   placeholder: string;
-  toto?: string;
+  label: string;
+  helper?: string;
   onChange: (event: React.ChangeEvent<HTMLElement>) => void;
 };
 
@@ -55,7 +67,7 @@ type Props = {
 Field.defaultProps = {
   value: '',
   type: 'text',
-  toto: '',
+  helper: '',
 };
 
 // == Export

@@ -52,7 +52,7 @@ const Navigation = () => {
             className={({ isActive }) => (isActive ? 'current' : '')}
             to="/"
           >
-            <span className="fa-solid fa-home" />
+            <span className="main-nav_items_item_icon fa-solid fa-home" />
             <span className="main-nav_items_item_wording">Accueil</span>
           </NavLink>
         </li>
@@ -62,7 +62,7 @@ const Navigation = () => {
               className={({ isActive }) => (isActive ? 'current' : '')}
               to="/user-space"
             >
-              <span className="fa-solid fa-user" />
+              <span className="main-nav_items_item_icon fa-solid fa-user" />
               Espace perso
             </NavLink>
           </li>

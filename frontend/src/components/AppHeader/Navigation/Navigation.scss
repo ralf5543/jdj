@@ -17,7 +17,7 @@
 
 .main-nav_items_item {
     display: flex;
-    
+
     > a,
     > button.link {
         display: inline-flex;
@@ -50,7 +50,7 @@
         }
 
         // Reajust the icon just to be visually perfect
-        span {
+        .main-nav_items_item_icon {
             transform: translateY(-0.1rem);
         }
     }

@@ -21,6 +21,7 @@
 
     input[type=text],
     input[type=number],
+    input[type=email],
     input[type=password] {
         width: 100%;
         min-height: 4.8rem;
@@ -72,4 +73,9 @@
     margin-inline-start: var(--spacer-m);
     margin-block-end: var(--spacer-xs);
     font-weight: 600;
+}
+
+.field_helper {
+    margin-block: var(--spacer-s) 0;
+    font-size: 1.2rem;
 }

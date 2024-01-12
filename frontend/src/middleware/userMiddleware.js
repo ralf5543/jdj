@@ -38,7 +38,12 @@ const userMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log("erreur lors de l'inscription : ", error.message);
-          store.dispatch(showToaster('error', "L'inscription a échoué..."));
+          store.dispatch(
+            showToaster(
+              'error',
+              "L'inscription a échoué. Avez-vous rempli tous les champs ?"
+            )
+          );
         });
       break;
 
