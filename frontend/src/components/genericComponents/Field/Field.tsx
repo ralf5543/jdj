@@ -10,6 +10,7 @@ const Field = ({
   placeholder,
   helper,
   label,
+  passwordType,
   onChange,
 }: Props) => {
   const handleChange = (e: React.ChangeEvent) => {
@@ -24,6 +25,8 @@ const Field = ({
 
   const inputId = `field-${name}`;
 
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div
       className={
@@ -32,17 +35,44 @@ const Field = ({
           : 'field'
       }
     >
-      <input
-        // React - state
-        value={dynamicvalue}
-        onChange={handleChange}
-        // infos de base
-        id={inputId}
-        type={type}
-        className="textfield"
-        placeholder={placeholder}
-        name={name}
-      />
+      <div className="textfield_wrapper">
+        {passwordType ? (
+          <input
+            value={dynamicvalue}
+            onChange={handleChange}
+            id={inputId}
+            type={showPassword ? 'text' : 'password'}
+            className="textfield"
+            placeholder={placeholder}
+            name={name}
+          />
+        ) : (
+          <input
+            value={dynamicvalue}
+            onChange={handleChange}
+            id={inputId}
+            type={type}
+            className="textfield"
+            placeholder={placeholder}
+            name={name}
+          />
+        )}
+
+        {type === 'password' && (
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="field_cta"
+          >
+            <span
+              className={`field_cta_icon fa-regular fa-eye${showPassword ? '-slash' : ''}`}
+            />
+            <span className="field_cta_wording">
+              {showPassword ? 'Cacher mot de passe' : 'Afficher mot de passe'}
+            </span>
+          </button>
+        )}
+      </div>
 
       <label htmlFor={inputId} className="field_label">
         {label}
@@ -54,7 +84,9 @@ const Field = ({
 };
 
 type Props = {
-  value?: string | undefined;
+  passwordType?: boolean;
+  defaultInputValue?: string | undefined;
+  value?: string;
   type?: string;
   name: string;
   placeholder: string;
@@ -65,6 +97,8 @@ type Props = {
 
 // Valeurs par défaut pour les props
 Field.defaultProps = {
+  passwordType: false,
+  defaultInputValue: '',
   value: '',
   type: 'text',
   helper: '',

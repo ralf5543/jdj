@@ -68,6 +68,10 @@
     }
 }
 
+.textfield_wrapper {
+    position: relative;
+}
+
 .field_label {
     order: -1;
     margin-inline-start: var(--spacer-m);
@@ -78,4 +82,21 @@
 .field_helper {
     margin-block: var(--spacer-s) 0;
     font-size: 1.2rem;
+}
+
+.field_cta {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 4.8rem;
+}
+
+.field_cta_icon {
+    font-size: 1.8rem;
+    color: var(--color-secondary-text);
+}
+
+.field_cta_wording {
+    @extend %accessible-wording ;
 }

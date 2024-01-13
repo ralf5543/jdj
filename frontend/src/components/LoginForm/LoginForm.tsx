@@ -22,6 +22,7 @@ const LoginForm = ({ email, password, changeField, handleLogin }: Props) => {
           placeholder="Adresse Email"
           onChange={changeField}
           value={email}
+          label="Email"
         />
         <Field
           name="password"
@@ -29,6 +30,8 @@ const LoginForm = ({ email, password, changeField, handleLogin }: Props) => {
           placeholder="Mot de passe"
           onChange={changeField}
           value={password}
+          label="Mot de passe"
+          passwordType
         />
         <Button label="Connexion" type="submit" />
       </form>

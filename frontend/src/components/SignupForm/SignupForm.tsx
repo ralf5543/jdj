@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Button from '../genericComponents/Button/Button';
 import Field from '../genericComponents/Field/Field';
@@ -13,10 +12,6 @@ const SignupForm = ({
   changeField,
   handleSignup,
 }: Props) => {
-  const [showValidationMessage, setShowValidationMessage] = useState(false);
-  const [validationMessage, setValidationMessage] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-
   const dispatch = useDispatch();
 
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -27,16 +22,12 @@ const SignupForm = ({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (!password) {
-      setShowValidationMessage(false);
       dispatch(showToaster('error', 'Il manque le mot de passe, hein...'));
     } else if (!passwordRegex.test(password)) {
-      setShowValidationMessage(true);
-
       dispatch(
         showToaster('error', "Votre mot de passe n'est pas assez sécurisé")
       );
     } else {
-      setShowValidationMessage(false);
       handleSignup();
     }
   };
@@ -66,7 +57,8 @@ const SignupForm = ({
         />
         <Field
           name="password"
-          type={showPassword ? 'text' : 'password'}
+          type="password"
+          passwordType
           label="Mot de passe"
           placeholder="Mot de passe"
           onChange={changeField}
@@ -75,16 +67,7 @@ const SignupForm = ({
           minuscule, une majuscule, un chiffre et un caractère spécial (oui c'est
           relou...)."
         />
-        <button
-          type="button"
-          onClick={() => setShowPassword(!showPassword)}
-          className="password-button"
-        >
-          {showPassword ? 'Hide' : 'Show'}
-        </button>
-        {showValidationMessage && (
-          <span className="validation-message">{validationMessage}</span>
-        )}
+
         <Button label="Valider l'inscription" type="submit" />
       </form>
     </>
