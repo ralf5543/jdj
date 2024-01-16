@@ -6,8 +6,9 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import store from '../../../store';
 import Field from '../../genericComponents/Form/Field/Field';
 import './FormModifyGame.scss';
-import { changeGameVisual, modifyGame } from '../../../actions/games';
+import { uploadGameVisual, modifyGame } from '../../../actions/games';
 import Textarea from '../../genericComponents/Form/Textarea/Textarea';
+import Radio from '../../genericComponents/Form/Radio/Radio';
 import Button from '../../genericComponents/Button/Button';
 
 const FormModifyGame = ({
@@ -23,12 +24,14 @@ const FormModifyGame = ({
   changeMaxplayersField,
   changeIdealPlayersField,
   changeDurationField,
+  changeConfrontationField,
   gameTitle,
   gameDescription,
   gameMinPlayers,
   gameMaxPlayers,
   gameIdealPlayers,
   gameDuration,
+  gameConfrontation,
 }: Props) => {
   const dispatch = useDispatch();
   const [file, setFile] = useState<File>();
@@ -68,7 +71,7 @@ const FormModifyGame = ({
         // handle the response
         console.log('Image uploaded : ', response.data.status);
         // setUploadedFilename(response.data.status);
-        const action = changeGameVisual(response.data);
+        const action = uploadGameVisual(response.data);
         dispatch(action);
         setIsFileUploaded(true);
       })
@@ -168,6 +171,30 @@ const FormModifyGame = ({
           value={gameDuration}
           defaultInputValue={currentGameDuration}
         />
+        <p> Type de jeu :</p>
+        <div className="fields_columns">
+          <Radio
+            name="gameConfrontation"
+            id="Confrontation"
+            placeholder="Confrontation"
+            onChange={changeConfrontationField}
+            value={gameConfrontation}
+          />
+          <Radio
+            name="gameConfrontation"
+            id="Coopération"
+            placeholder="Coopération"
+            onChange={changeConfrontationField}
+            value={gameConfrontation}
+          />
+          <Radio
+            name="gameConfrontation"
+            id="Semi-coopération"
+            placeholder="Semi-coopération"
+            onChange={changeConfrontationField}
+            value={gameConfrontation}
+          />
+        </div>
         <Button label="Valider les changements" type="submit" />
       </form>
     </>
@@ -181,6 +208,7 @@ type Props = {
   gameMaxPlayers: string;
   gameIdealPlayers: string;
   gameDuration: string;
+  gameConfrontation: string;
   changeTitleField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
   changeDescriptionField: (arg0: string, arg1: string) => void;
   changeMinplayersField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
@@ -189,6 +217,9 @@ type Props = {
     ChangeEvent: React.ChangeEvent<HTMLElement>
   ) => void;
   changeDurationField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
+  changeConfrontationField: (
+    ChangeEvent: React.ChangeEvent<HTMLElement>
+  ) => void;
 };
 
 export default FormModifyGame;

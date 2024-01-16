@@ -18,6 +18,7 @@ import {
   changeGameIdealPlayersField,
   changeGameDurationField,
   changeCurrentGameId,
+  changeGameConfrontationField,
 } from '../../actions/games';
 
 import FormModifyGame from '../UserSpace/FormModifyGame/FormModifyGame';
@@ -47,6 +48,7 @@ const GameSheet = () => {
     maxplayers,
     idealplayers,
     duration,
+    confrontation,
   } = currentGame;
 
   const handleDeleteGame = (gameId: string | undefined) => {
@@ -74,6 +76,9 @@ const GameSheet = () => {
   const gameDurationValue = useSelector(
     (state: Props) => state.gamesReducer.gameDuration
   );
+  const gameConfrontationValue = useSelector(
+    (state: Props) => state.gamesReducer.gameConfrontation
+  );
 
   // ======================------------------- MODIFY GAME
   const [modifygame, setModifygame] = useState<boolean>(false);
@@ -87,12 +92,13 @@ const GameSheet = () => {
   const handleModifygameForm = () => {
     // Retrieves all games datas in the store, so the user doesn't have to rewrite infos
     dispatch(changeGameDescriptionField(title, 'gameTitle'));
-    dispatch(changeGameDescriptionField(visual, 'gameVisual'));
+    // dispatch(uploadGameVisual(visual, 'gameVisual'));
     dispatch(changeGameDescriptionField(description, 'gameDescription'));
-    dispatch(changeGameDescriptionField(minplayers, 'gameMinPlayers'));
-    dispatch(changeGameDescriptionField(maxplayers, 'gameMaxPlayers'));
-    dispatch(changeGameDescriptionField(idealplayers, 'gameIdealPlayers'));
-    dispatch(changeGameDescriptionField(duration, 'gameDuration'));
+    dispatch(changeGameMinPlayersField(minplayers, 'gameMinPlayers'));
+    dispatch(changeGameMaxPlayersField(maxplayers, 'gameMaxPlayers'));
+    dispatch(changeGameIdealPlayersField(idealplayers, 'gameIdealPlayers'));
+    dispatch(changeGameDurationField(duration, 'gameDuration'));
+    dispatch(changeGameConfrontationField(confrontation, 'gameConfrontation'));
 
     setModifygame(true);
     dispatch(showModal());
@@ -107,6 +113,7 @@ const GameSheet = () => {
     dispatch(changeGameDescriptionField('', 'gameMaxPlayers'));
     dispatch(changeGameDescriptionField('', 'gameIdealPlayers'));
     dispatch(changeGameDescriptionField('', 'gameDuration'));
+    dispatch(changeGameConfrontationField('', 'gameConfrontation'));
 
     console.log('cancel modify game');
   };
@@ -119,6 +126,7 @@ const GameSheet = () => {
           src={`${import.meta.env.VITE_BASE_URL}/images/${visual}`}
           alt={`Visual of ${title} game`}
         />
+        <h3>Jeu de type {confrontation}</h3>
         <p className="boardgame-card_description">{description}</p>
         <p className="boardgame-card_maxplayers">
           Nombre de joueurs : {minplayers} - {maxplayers}
@@ -159,12 +167,14 @@ const GameSheet = () => {
             gameMaxPlayers={gameMaxPlayersValue}
             gameIdealPlayers={gameIdealPlayersValue}
             gameDuration={gameDurationValue}
+            gameConfrontation={gameConfrontationValue}
             currentGameTitle={title}
             currentGameDescription={description}
             currentGameMinPlayers={minplayers}
             currentGameMaxPlayers={maxplayers}
             currentGameIdealPlayers={idealplayers}
             currentGameDuration={duration}
+            currentGameConfrontation={confrontation}
             changeTitleField={(newValue, gameTitleField) => {
               const action = changeGameTitleField(newValue, gameTitleField);
               dispatch(action);
@@ -204,6 +214,13 @@ const GameSheet = () => {
               );
               dispatch(action);
             }}
+            changeConfrontationField={(newValue, gameConfrontationField) => {
+              const action = changeGameConfrontationField(
+                newValue,
+                gameConfrontationField
+              );
+              dispatch(action);
+            }}
           />
         </Modal>
       )}
@@ -219,6 +236,7 @@ type Props = {
     gameMaxPlayers: string;
     gameIdealPlayers: string;
     gameDuration: string;
+    gameconfrontation: string;
     gameVisual: string;
     list: Array<object>;
   };

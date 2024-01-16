@@ -6,7 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import store from '../../../store';
 import Field from '../../genericComponents/Form/Field/Field';
 import './FormPostGame.scss';
-import { changeGameVisual } from '../../../actions/games';
+import { uploadGameVisual } from '../../../actions/games';
 import Textarea from '../../genericComponents/Form/Textarea/Textarea';
 import Button from '../../genericComponents/Button/Button';
 import Radio from '../../genericComponents/Form/Radio/Radio';
@@ -64,7 +64,7 @@ const FormPostGame = ({
         // handle the response
         console.log('Image uploaded : ', response.data.status);
         // setUploadedFilename(response.data.status);
-        const action = changeGameVisual(response.data);
+        const action = uploadGameVisual(response.data);
         dispatch(action);
         setIsFileUploaded(true);
       })
@@ -161,69 +161,30 @@ const FormPostGame = ({
           onChange={changeDurationField}
           value={gameDuration}
         />
-        <Radio
-          name="gameConfrontation"
-          id="Confrontation"
-          placeholder="Confrontation"
-          onChange={changeConfrontationField}
-          value={gameConfrontation}
-        />
-        <Radio
-          name="gameConfrontation"
-          id="Coopération"
-          placeholder="Coopération"
-          onChange={changeConfrontationField}
-          value={gameConfrontation}
-        />
-        <Radio
-          name="gameConfrontation"
-          id="Semi-coopération"
-          placeholder="Semi-coopération"
-          onChange={changeConfrontationField}
-          value={gameConfrontation}
-        />
-{/* 
-        <div className="form-check">
-          <label>
-            <input
-              type="radio"
-              name="gameConfrontation"
-              value="option1"
-              checked={selectedOption === 'option1'}
-              className="form-check-input"
-              onChange={handleOptionChange}
-            />
-            Option 1
-          </label>
+        <p> Type de jeu :</p>
+        <div className="fields_columns">
+          <Radio
+            name="gameConfrontation"
+            id="Confrontation"
+            placeholder="Confrontation"
+            onChange={changeConfrontationField}
+            value={gameConfrontation}
+          />
+          <Radio
+            name="gameConfrontation"
+            id="Coopération"
+            placeholder="Coopération"
+            onChange={changeConfrontationField}
+            value={gameConfrontation}
+          />
+          <Radio
+            name="gameConfrontation"
+            id="Semi-coopération"
+            placeholder="Semi-coopération"
+            onChange={changeConfrontationField}
+            value={gameConfrontation}
+          />
         </div>
-
-        <div className="form-check">
-          <label>
-            <input
-              type="radio"
-              name="gameConfrontation"
-              value="option2"
-              className="form-check-input"
-              checked={selectedOption === 'option2'}
-              onChange={handleOptionChange}
-            />
-            Option 2
-          </label>
-        </div>
-
-        <div className="form-check">
-          <label>
-            <input
-              type="radio"
-              name="gameConfrontation"
-              value="option3"
-              className="form-check-input"
-              checked={selectedOption === 'option3'}
-              onChange={handleOptionChange}
-            />
-            Option 3
-          </label>
-        </div> */}
 
         <Button type="submit" label="Poster la fiche" />
       </form>

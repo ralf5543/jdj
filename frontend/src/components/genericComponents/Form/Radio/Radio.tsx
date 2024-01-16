@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Radio.scss';
+import store from '../../../../store';
 
 // == Composant
 const Radio = ({
@@ -10,26 +11,28 @@ const Radio = ({
   id,
   onChange,
 }: Props) => {
-  const [selectedOption, setSelectedOption] = useState('option1');
-  console.log('selectedOption : ', selectedOption);
+  const [dynamicvalue, setDynamicvalue] = useState(defaultInputValue);
 
   const handleChange = (e: React.ChangeEvent) => {
     console.log('ben alors ?');
-    console.log('e : ', e);
-    console.log('e.target.value : ', e.target.value);
     console.log('value : ', value);
-    console.log('selectedOption : ', selectedOption);
+    console.log('dynamicvalue : ', dynamicvalue);
+    console.log('id : ', id);
+    console.log(
+      'store.getState().gamesReducer.gameConfrontation : ',
+      store.getState().gamesReducer.gameConfrontation
+    );
+    console.log(
+      'store === id : ',
+      id === store.getState().gamesReducer.gameConfrontation
+    );
     // replaces field default value by the new value entered
     onChange(setDynamicvalue(e.target.value));
 
     // pass this new value
     // onChange(e.target.value, name);
     onChange(id, name);
-
-    setSelectedOption(e.target.value);
   };
-
-  const [dynamicvalue, setDynamicvalue] = useState(defaultInputValue);
 
   return (
     <div
@@ -39,17 +42,14 @@ const Radio = ({
           : 'field'
       }
     >
-      <label className="field_label">
-        {placeholder}
-
-        <input
-          onChange={handleChange}
-          type="radio"
-          value={dynamicvalue}
-          name={name}
-          checked={selectedOption === value}
-        />
-      </label>
+      <input
+        onChange={handleChange}
+        type="radio"
+        value={dynamicvalue}
+        name={name}
+        id={id}
+      />
+      <label htmlFor={id}>{placeholder}</label>
     </div>
   );
 };

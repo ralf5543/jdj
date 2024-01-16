@@ -75,7 +75,7 @@ const Field = ({
       </div>
 
       <label htmlFor={inputId} className="field_label">
-        {label}
+        {placeholder}
       </label>
 
       {helper && <p className="field_helper">{helper}</p>}

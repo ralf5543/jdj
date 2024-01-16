@@ -123,6 +123,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             maxplayers: store.getState().gamesReducer.gameMaxPlayers,
             idealplayers: store.getState().gamesReducer.gameIdealPlayers,
             duration: store.getState().gamesReducer.gameDuration,
+            confrontation: store.getState().gamesReducer.gameConfrontation,
             visual: store.getState().gamesReducer.gameVisual,
           },
           {

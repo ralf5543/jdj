@@ -12,7 +12,7 @@ export const CHANGE_GAME_IDEALPLAYERS_FIELD = 'CHANGE_GAME_IDEALPLAYERS_FIELD';
 export const CHANGE_GAME_DURATION_FIELD = 'CHANGE_GAME_DURATION_FIELD';
 export const CHANGE_GAME_CONFRONTATION_FIELD =
   'CHANGE_GAME_CONFRONTATION_FIELD';
-export const CHANGE_GAME_VISUAL = 'CHANGE_GAME_VISUAL';
+export const UPLOAD_GAME_VISUAL = 'UPLOAD_GAME_VISUAL';
 export const CHANGE_CURRENT_GAME_ID = 'CHANGE_CURRENT_GAME_ID';
 
 export const fetchGames = () => ({
@@ -50,6 +50,15 @@ export const changeGameDescriptionField = (newValue, gameDescriptionField) => ({
   gameDescriptionField,
 });
 
+export const changeGameConfrontationField = (
+  newValue,
+  gameConfrontationField
+) => ({
+  type: CHANGE_GAME_CONFRONTATION_FIELD,
+  newValue,
+  gameConfrontationField,
+});
+
 export const changeGameMinPlayersField = (newValue, gameMinPlayersField) => ({
   type: CHANGE_GAME_MINPLAYERS_FIELD,
   newValue,
@@ -77,17 +86,8 @@ export const changeGameDurationField = (newValue, gameDurationField) => ({
   gameDurationField,
 });
 
-export const changeGameConfrontationField = (
-  newValue,
-  gameConfrontationField
-) => ({
-  type: CHANGE_GAME_CONFRONTATION_FIELD,
-  newValue,
-  gameConfrontationField,
-});
-
-export const changeGameVisual = (newValue) => ({
-  type: CHANGE_GAME_VISUAL,
+export const uploadGameVisual = (newValue) => ({
+  type: UPLOAD_GAME_VISUAL,
   newValue,
 });
 

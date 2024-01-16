@@ -7,7 +7,7 @@ import {
   CHANGE_GAME_IDEALPLAYERS_FIELD,
   CHANGE_GAME_DURATION_FIELD,
   CHANGE_GAME_CONFRONTATION_FIELD,
-  CHANGE_GAME_VISUAL,
+  UPLOAD_GAME_VISUAL,
   CHANGE_CURRENT_GAME_ID,
   POST_GAME,
   MODIFY_GAME,
@@ -80,7 +80,7 @@ const reducer = (state = initialState, action = {}) => {
         [action.gameDurationField]: action.newValue,
       };
 
-    case CHANGE_GAME_VISUAL:
+    case UPLOAD_GAME_VISUAL:
       return {
         ...state,
         gameVisual: action.newValue.status,
