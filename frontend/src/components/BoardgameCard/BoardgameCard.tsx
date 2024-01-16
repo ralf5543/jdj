@@ -14,6 +14,7 @@ const BoardgameCard = ({
   confrontation,
   id,
   userNickname,
+  owners,
 }: Props) => {
   return (
     // animations from Framer Motion (reduced weight with "m" instead of "motion")
@@ -42,8 +43,7 @@ const BoardgameCard = ({
           <p className="boardgame-card_title">{title}</p>
           <p className="boardgame-card_description">{description}</p>
           <p className="boardgame-card_owners">
-            Détenu par{' '}
-            <span className="boardgame-card_owners_name">{userNickname}</span>
+            Détenu par {owners.length} {`joueur${owners.length > 1 ? 's' : ''}`}
           </p>
           <Link to={`/game/${id}`} className="boardgame-card_link">
             Fiche complète du jeu

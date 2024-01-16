@@ -49,6 +49,7 @@ const GameSheet = () => {
     idealplayers,
     duration,
     confrontation,
+    owners,
   } = currentGame;
 
   const handleDeleteGame = (gameId: string | undefined) => {
@@ -79,6 +80,8 @@ const GameSheet = () => {
   const gameConfrontationValue = useSelector(
     (state: Props) => state.gamesReducer.gameConfrontation
   );
+
+  const toto = owners.map((gaaaame: any) => gaaaame);
 
   // ======================------------------- MODIFY GAME
   const [modifygame, setModifygame] = useState<boolean>(false);
@@ -133,6 +136,11 @@ const GameSheet = () => {
         </p>
         <p className="boardgame-card_idealplayers">
           Nombre de joueurs idéal : {idealplayers}
+        </p>
+
+        <p>
+          Détenu par {owners.length}{' '}
+          {`Joueur${owners.length > 1 ? 's' : ''} du Jeudi`}({toto})
         </p>
 
         {isLogged && (
