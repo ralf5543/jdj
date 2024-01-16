@@ -4,11 +4,12 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import store from '../../../store';
-import Field from '../../genericComponents/Field/Field';
+import Field from '../../genericComponents/Form/Field/Field';
 import './FormPostGame.scss';
 import { changeGameVisual } from '../../../actions/games';
-import Textarea from '../../genericComponents/Textarea/Textarea';
+import Textarea from '../../genericComponents/Form/Textarea/Textarea';
 import Button from '../../genericComponents/Button/Button';
+import Radio from '../../genericComponents/Form/Radio/Radio';
 
 const FormPostGame = ({
   changeTitleField,
@@ -17,6 +18,7 @@ const FormPostGame = ({
   changeMaxplayersField,
   changeIdealPlayersField,
   changeDurationField,
+  changeConfrontationField,
   handlePostGame,
   gameTitle,
   gameDescription,
@@ -24,6 +26,7 @@ const FormPostGame = ({
   gameMaxPlayers,
   gameIdealPlayers,
   gameDuration,
+  gameConfrontation,
 }: Props) => {
   const dispatch = useDispatch();
   const [file, setFile] = useState<File>();
@@ -158,6 +161,70 @@ const FormPostGame = ({
           onChange={changeDurationField}
           value={gameDuration}
         />
+        <Radio
+          name="gameConfrontation"
+          id="Confrontation"
+          placeholder="Confrontation"
+          onChange={changeConfrontationField}
+          value={gameConfrontation}
+        />
+        <Radio
+          name="gameConfrontation"
+          id="Coopération"
+          placeholder="Coopération"
+          onChange={changeConfrontationField}
+          value={gameConfrontation}
+        />
+        <Radio
+          name="gameConfrontation"
+          id="Semi-coopération"
+          placeholder="Semi-coopération"
+          onChange={changeConfrontationField}
+          value={gameConfrontation}
+        />
+{/* 
+        <div className="form-check">
+          <label>
+            <input
+              type="radio"
+              name="gameConfrontation"
+              value="option1"
+              checked={selectedOption === 'option1'}
+              className="form-check-input"
+              onChange={handleOptionChange}
+            />
+            Option 1
+          </label>
+        </div>
+
+        <div className="form-check">
+          <label>
+            <input
+              type="radio"
+              name="gameConfrontation"
+              value="option2"
+              className="form-check-input"
+              checked={selectedOption === 'option2'}
+              onChange={handleOptionChange}
+            />
+            Option 2
+          </label>
+        </div>
+
+        <div className="form-check">
+          <label>
+            <input
+              type="radio"
+              name="gameConfrontation"
+              value="option3"
+              className="form-check-input"
+              checked={selectedOption === 'option3'}
+              onChange={handleOptionChange}
+            />
+            Option 3
+          </label>
+        </div> */}
+
         <Button type="submit" label="Poster la fiche" />
       </form>
     </>
@@ -171,6 +238,7 @@ type Props = {
   gameMaxPlayers: string;
   gameIdealPlayers: string;
   gameDuration: string;
+  gameConfrontation: string;
   changeTitleField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
   changeDescriptionField: (arg0: string, arg1: string) => void;
   changeMinplayersField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
@@ -179,6 +247,9 @@ type Props = {
     ChangeEvent: React.ChangeEvent<HTMLElement>
   ) => void;
   changeDurationField: (ChangeEvent: React.ChangeEvent<HTMLElement>) => void;
+  changeConfrontationField: (
+    ChangeEvent: React.ChangeEvent<HTMLElement>
+  ) => void;
   handlePostGame: () => void;
 };
 

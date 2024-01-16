@@ -1,4 +1,4 @@
-import Field from '../genericComponents/Field/Field';
+import Field from '../genericComponents/Form/Field/Field';
 import Button from '../genericComponents/Button/Button';
 import './LoginForm.scss';
 

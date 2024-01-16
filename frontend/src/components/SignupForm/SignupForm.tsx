@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import Button from '../genericComponents/Button/Button';
-import Field from '../genericComponents/Field/Field';
+import Field from '../genericComponents/Form/Field/Field';
 import { showToaster } from '../../actions/layout';
 
 import './SignupForm.scss';

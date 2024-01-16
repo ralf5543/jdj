@@ -14,6 +14,7 @@ import {
   changeGameMaxPlayersField,
   changeGameIdealPlayersField,
   changeGameDurationField,
+  changeGameConfrontationField,
 } from '../../actions/games';
 
 import './UserSpace.scss';
@@ -160,6 +161,13 @@ const UserSpace = () => {
               );
               dispatch(action);
             }}
+            changeConfrontationField={(newValue, gameConfrontationField) => {
+              const action = changeGameConfrontationField(
+                newValue,
+                gameConfrontationField
+              );
+              dispatch(action);
+            }}
             handlePostGame={() => {
               // le traitement placé ici est déclenché à la soumission du formulaire
               dispatch(postGame());
@@ -181,6 +189,7 @@ type Props = {
     gameIdealPlayers: string;
     gameDuration: string;
     gameVisual: string;
+    gameConfrontation: string;
     userId: string;
     modalVisible: boolean;
     list: object[];

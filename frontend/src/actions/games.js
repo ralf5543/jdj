@@ -10,6 +10,8 @@ export const CHANGE_GAME_MINPLAYERS_FIELD = 'CHANGE_GAME_MINPLAYERS_FIELD';
 export const CHANGE_GAME_MAXPLAYERS_FIELD = 'CHANGE_GAME_MAXPLAYERS_FIELD';
 export const CHANGE_GAME_IDEALPLAYERS_FIELD = 'CHANGE_GAME_IDEALPLAYERS_FIELD';
 export const CHANGE_GAME_DURATION_FIELD = 'CHANGE_GAME_DURATION_FIELD';
+export const CHANGE_GAME_CONFRONTATION_FIELD =
+  'CHANGE_GAME_CONFRONTATION_FIELD';
 export const CHANGE_GAME_VISUAL = 'CHANGE_GAME_VISUAL';
 export const CHANGE_CURRENT_GAME_ID = 'CHANGE_CURRENT_GAME_ID';
 
@@ -73,6 +75,15 @@ export const changeGameDurationField = (newValue, gameDurationField) => ({
   type: CHANGE_GAME_DURATION_FIELD,
   newValue,
   gameDurationField,
+});
+
+export const changeGameConfrontationField = (
+  newValue,
+  gameConfrontationField
+) => ({
+  type: CHANGE_GAME_CONFRONTATION_FIELD,
+  newValue,
+  gameConfrontationField,
 });
 
 export const changeGameVisual = (newValue) => ({

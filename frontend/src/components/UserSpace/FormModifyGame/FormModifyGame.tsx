@@ -4,10 +4,10 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import store from '../../../store';
-import Field from '../../genericComponents/Field/Field';
+import Field from '../../genericComponents/Form/Field/Field';
 import './FormModifyGame.scss';
 import { changeGameVisual, modifyGame } from '../../../actions/games';
-import Textarea from '../../genericComponents/Textarea/Textarea';
+import Textarea from '../../genericComponents/Form/Textarea/Textarea';
 import Button from '../../genericComponents/Button/Button';
 
 const FormModifyGame = ({

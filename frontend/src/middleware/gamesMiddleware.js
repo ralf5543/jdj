@@ -56,6 +56,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             maxplayers: store.getState().gamesReducer.gameMaxPlayers,
             idealplayers: store.getState().gamesReducer.gameIdealPlayers,
             duration: store.getState().gamesReducer.gameDuration,
+            confrontation: store.getState().gamesReducer.gameConfrontation,
             userNickname: store.getState().user.nickname,
             visual: store.getState().gamesReducer.gameVisual,
           },

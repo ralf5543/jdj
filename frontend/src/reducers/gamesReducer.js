@@ -6,6 +6,7 @@ import {
   CHANGE_GAME_MAXPLAYERS_FIELD,
   CHANGE_GAME_IDEALPLAYERS_FIELD,
   CHANGE_GAME_DURATION_FIELD,
+  CHANGE_GAME_CONFRONTATION_FIELD,
   CHANGE_GAME_VISUAL,
   CHANGE_CURRENT_GAME_ID,
   POST_GAME,
@@ -23,6 +24,7 @@ export const initialState = {
   gameMaxPlayers: '',
   gameIdealPlayers: '',
   gameDuration: '',
+  gameConfrontation: '',
   gameVisual: '',
   currentGameId: '',
 };
@@ -46,6 +48,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.gameDescriptionField]: action.newValue,
+      };
+
+    case CHANGE_GAME_CONFRONTATION_FIELD:
+      return {
+        ...state,
+        [action.gameConfrontationField]: action.newValue,
       };
 
     case CHANGE_GAME_MINPLAYERS_FIELD:

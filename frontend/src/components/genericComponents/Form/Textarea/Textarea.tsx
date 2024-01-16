@@ -2,7 +2,13 @@ import { useState } from 'react';
 import './Textarea.scss';
 
 // == Composant
-const Textarea = ({ defaultInputValue, value, name, placeholder, onChange }: Props) => {
+const Textarea = ({
+  defaultInputValue,
+  value,
+  name,
+  placeholder,
+  onChange,
+}: Props) => {
   const handleChange = (e: React.ChangeEvent) => {
     // replaces field default value by the new value entered
     onChange(setDynamicvalue(e.target.value));
@@ -42,6 +48,7 @@ const Textarea = ({ defaultInputValue, value, name, placeholder, onChange }: Pro
 
 type Props = {
   value?: string;
+  defaultInputValue?: string | undefined;
   name: string;
   placeholder: string;
   onChange: (arg0: string, arg1: string) => void;
@@ -50,6 +57,7 @@ type Props = {
 // Valeurs par défaut pour les props
 Textarea.defaultProps = {
   value: '',
+  defaultInputValue: '',
 };
 
 // == Export

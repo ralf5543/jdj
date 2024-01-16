@@ -11,6 +11,7 @@ const BoardgameCard = ({
   idealplayers,
   duration,
   visual,
+  confrontation,
   id,
   userNickname,
 }: Props) => {
@@ -37,7 +38,7 @@ const BoardgameCard = ({
           />
         </picture>
         <div className="boardgame-card_content">
-          <span className="boardgame-card_coop">Coopératif</span>
+          <span className="boardgame-card_coop">{confrontation}</span>
           <p className="boardgame-card_title">{title}</p>
           <p className="boardgame-card_description">{description}</p>
           <p className="boardgame-card_owners">
@@ -80,6 +81,7 @@ type Props = {
   idealplayers: number;
   duration: number;
   visual: string;
+  confrontation: string;
   id: string;
   userNickname: string;
 };

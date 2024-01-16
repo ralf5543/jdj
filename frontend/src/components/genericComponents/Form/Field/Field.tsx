@@ -13,6 +13,8 @@ const Field = ({
   passwordType,
   onChange,
 }: Props) => {
+  const [dynamicvalue, setDynamicvalue] = useState(defaultInputValue);
+
   const handleChange = (e: React.ChangeEvent) => {
     // replaces field default value by the new value entered
     onChange(setDynamicvalue(e.target.value));
@@ -20,8 +22,6 @@ const Field = ({
     // pass this new value
     onChange(e.target.value, name);
   };
-
-  const [dynamicvalue, setDynamicvalue] = useState(defaultInputValue);
 
   const inputId = `field-${name}`;
 
