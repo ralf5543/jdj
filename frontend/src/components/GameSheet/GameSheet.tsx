@@ -119,12 +119,16 @@ const GameSheet = () => {
     console.log('cancel modify game');
   };
 
-  const toto = owners.map((owner: any) => owner);
+  const allUsers = useSelector((state: Props) => state.user.users);
+
+  const ownersIds = allUsers.filter(item => owners.includes(item._id));
+
 
   const handleAddOwner = () => {
     console.log('id : ', id);
     console.log('owners : ', owners);
-    console.log('toto : ', toto);
+    console.log('allUsers : ', allUsers);
+    console.log('ownersIds : ', ownersIds);
   };
 
   return (
@@ -147,7 +151,7 @@ const GameSheet = () => {
         <p>
           Détenu par {owners.length}{' '}
           {`Joueur${owners.length > 1 ? 's' : ''} du Jeudi`}(
-          {owners.map((owner: any) => owner)})
+          {ownersIds.map((owner: any) => owner.nickname)})
         </p>
 
         <Button

@@ -32,8 +32,7 @@ const reducer = (state = initialState, action = {}) => {
     case SAVE_USERS:
       return {
         ...state,
-        list: action.users,
-        // areGamesLoaded: true,
+        users: action.users,
       };
 
     case CHANGE_SIGNUP_FIELD:
