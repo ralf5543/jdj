@@ -1,10 +1,12 @@
 import axios from '../utils/axios';
 
 import {
+  FETCH_USERS,
   SUBMIT_LOGIN,
   handleSuccessfulLogin,
   SUBMIT_SIGNUP,
   handleSuccessfulSignup,
+  saveUsers,
 } from '../actions/user';
 import { hideModal, showToaster } from '../actions/layout';
 
@@ -12,8 +14,26 @@ const userMiddleware = (store) => (next) => (action) => {
   // console.log('on a intercepté une action dans le middleware: ', action);
 
   switch (action.type) {
+    case FETCH_USERS:
+      axios
+        .get('/api/auth')
+        .then((response) => {
+          console.log('affichage de la liste de users : ', response.data);
+          store.dispatch(saveUsers(response.data));
+        })
+        .catch((error) => {
+          console.log('erreur de la requete : ', error);
+          store.dispatch(
+            showToaster(
+              'error',
+              "La liste n'a pas pu être chargée correctement"
+            )
+          );
+        })
+        .finally(() => {});
+      break;
+
     case SUBMIT_SIGNUP:
-      // => undefined, on a oublié le tiroir, il faut store.getState().user.email
       axios
         .post(
           // URL

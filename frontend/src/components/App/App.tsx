@@ -7,7 +7,7 @@ import './App.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
 import { fetchGames } from '../../actions/games';
-import { handleSuccessfulLogin } from '../../actions/user';
+import { fetchUsers, handleSuccessfulLogin } from '../../actions/user';
 import AppHeader from '../AppHeader/AppHeader';
 import Toaster from '../genericComponents/Toaster/Toaster';
 import AppFooter from '../AppFooter/AppFooter';
@@ -17,6 +17,11 @@ const App = () => {
 
   useEffect(() => {
     const action = fetchGames();
+    dispatch(action);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const action = fetchUsers();
     dispatch(action);
   }, [dispatch]);
 

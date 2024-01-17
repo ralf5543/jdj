@@ -42,8 +42,9 @@ const BoardgameCard = ({
           <span className="boardgame-card_coop">{confrontation}</span>
           <p className="boardgame-card_title">{title}</p>
           <p className="boardgame-card_description">{description}</p>
-          <p className="boardgame-card_owners">
-            Détenu par {owners.length} {`joueur${owners.length > 1 ? 's' : ''}`}
+          <p className="boardgame-card_owners_name">
+            Détenu par {owners.length}{' '}
+            {`Joueur${owners.length > 1 ? 's' : ''} du Jeudi`}
           </p>
           <Link to={`/game/${id}`} className="boardgame-card_link">
             Fiche complète du jeu

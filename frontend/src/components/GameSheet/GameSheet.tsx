@@ -81,8 +81,6 @@ const GameSheet = () => {
     (state: Props) => state.gamesReducer.gameConfrontation
   );
 
-  const toto = owners.map((gaaaame: any) => gaaaame);
-
   // ======================------------------- MODIFY GAME
   const [modifygame, setModifygame] = useState<boolean>(false);
 
@@ -121,6 +119,14 @@ const GameSheet = () => {
     console.log('cancel modify game');
   };
 
+  const toto = owners.map((owner: any) => owner);
+
+  const handleAddOwner = () => {
+    console.log('id : ', id);
+    console.log('owners : ', owners);
+    console.log('toto : ', toto);
+  };
+
   return (
     <Page>
       <div>
@@ -140,8 +146,15 @@ const GameSheet = () => {
 
         <p>
           Détenu par {owners.length}{' '}
-          {`Joueur${owners.length > 1 ? 's' : ''} du Jeudi`}({toto})
+          {`Joueur${owners.length > 1 ? 's' : ''} du Jeudi`}(
+          {owners.map((owner: any) => owner)})
         </p>
+
+        <Button
+          type="button"
+          label="Je possède aussi ce jeu !"
+          onClick={() => handleAddOwner()}
+        />
 
         {isLogged && (
           <>

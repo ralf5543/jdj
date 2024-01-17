@@ -1,5 +1,7 @@
 // ici on placera les actions qui concernent l'utilisateur
 // intention : changer la valeur de l'un des champs du formulaire d'authentification
+export const FETCH_USERS = 'FETCH_USERS';
+export const SAVE_USERS = 'SAVE_USERS';
 export const CHANGE_SIGNUP_FIELD = 'CHANGE_SIGNUP_FIELD';
 export const SUBMIT_SIGNUP = 'SUBMIT_SIGNUP';
 export const CHANGE_LOGIN_FIELD = 'CHANGE_LOGIN_FIELD';
@@ -8,6 +10,15 @@ export const HANDLE_SUCCESSFUL_LOGIN = 'HANDLE_SUCCESSFUL_LOGIN';
 export const HANDLE_SUCCESSFUL_SIGNUP = 'HANDLE_SUCCESSFUL_SIGNUP';
 export const HANDLE_SIGNUP_VISIBILITY = 'HANDLE_SIGNUP_VISIBILITY';
 export const HANDLE_LOGIN_VISIBILITY = 'HANDLE_LOGIN_VISIBILITY';
+
+export const fetchUsers = () => ({
+  type: FETCH_USERS,
+});
+
+export const saveUsers = (users) => ({
+  type: SAVE_USERS,
+  users,
+});
 
 export const changeSignupField = (newValue, identifier) => ({
   type: CHANGE_SIGNUP_FIELD,

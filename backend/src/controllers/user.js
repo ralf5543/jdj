@@ -73,3 +73,12 @@ exports.login = (req, res) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+exports.getAllUsers = (req, res) => {
+  // la méthode find() renvvoit le tableau de toutes nos instances User de la BDD
+  /* La base de données MongoDB est fractionnée en collections : le nom de la collection est 
+    défini par défaut sur le pluriel du nom du modèle. Ici, ce sera Users . */
+  User.find()
+    .then((users) => res.status(200).json(users))
+    .catch((error) => res.status(400).json({ error }));
+};

@@ -1,4 +1,5 @@
 import {
+  SAVE_USERS,
   CHANGE_LOGIN_FIELD,
   HANDLE_SUCCESSFUL_LOGIN,
   CHANGE_SIGNUP_FIELD,
@@ -8,6 +9,7 @@ import {
 } from '../actions/user';
 
 export const initialState = {
+  users: [],
   signupVisible: false,
   loginVisible: false,
   // indique si l'utilisateur est authentifié
@@ -27,6 +29,13 @@ export const initialState = {
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case SAVE_USERS:
+      return {
+        ...state,
+        list: action.users,
+        // areGamesLoaded: true,
+      };
+
     case CHANGE_SIGNUP_FIELD:
       return {
         ...state,
