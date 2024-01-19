@@ -18,6 +18,7 @@ import {
   changeGameIdealPlayersField,
   changeGameDurationField,
   changeCurrentGameId,
+  changeGameOwners,
   changeGameConfrontationField,
 } from '../../actions/games';
 
@@ -28,11 +29,6 @@ const GameSheet = () => {
   const { id } = useParams();
 
   const dispatch = useDispatch();
-
-  // changes the current game ID in the store
-  useEffect(() => {
-    dispatch(changeCurrentGameId(id));
-  }, [dispatch, id]);
 
   const games = useSelector((state: Props) => state.gamesReducer.list);
 
@@ -51,6 +47,12 @@ const GameSheet = () => {
     confrontation,
     owners,
   } = currentGame;
+
+  // changes the current game ID in the store
+  useEffect(() => {
+    dispatch(changeCurrentGameId(id));
+    dispatch(changeGameOwners(owners));
+  }, [dispatch, id, owners]);
 
   const handleDeleteGame = (gameId: string | undefined) => {
     dispatch(deleteGame());
@@ -123,12 +125,11 @@ const GameSheet = () => {
 
   const ownersIds = allUsers.filter(item => owners.includes(item._id));
 
+  const currentUserId = useSelector((state: Props) => state.user.userId);
 
   const handleAddOwner = () => {
-    console.log('id : ', id);
-    console.log('owners : ', owners);
-    console.log('allUsers : ', allUsers);
-    console.log('ownersIds : ', ownersIds);
+    const newOwner = [...owners, currentUserId];
+    dispatch(changeGameOwners(newOwner));
   };
 
   return (
@@ -262,6 +263,7 @@ type Props = {
     gameIdealPlayers: string;
     gameDuration: string;
     gameconfrontation: string;
+    gameOwners: Array<string>;
     gameVisual: string;
     list: Array<object>;
   };

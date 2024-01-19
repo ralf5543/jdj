@@ -1,5 +1,6 @@
 import {
   SAVE_GAMES,
+  CHANGE_GAME_OWNERS,
   CHANGE_GAME_TITLE_FIELD,
   CHANGE_GAME_DESCRIPTION_FIELD,
   CHANGE_GAME_MINPLAYERS_FIELD,
@@ -37,6 +38,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         list: action.games,
         areGamesLoaded: true,
+      };
+
+    case CHANGE_GAME_OWNERS:
+      return {
+        ...state,
+        gameOwners: action.newValue,
       };
 
     case CHANGE_GAME_TITLE_FIELD:

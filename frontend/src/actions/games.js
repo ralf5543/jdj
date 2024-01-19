@@ -4,6 +4,8 @@ export const POST_GAME = 'POST_GAME';
 export const MODIFY_GAME = 'MODIFY_GAME';
 export const DELETE_GAME = 'DELETE_GAME';
 export const SAVE_GAMES = 'SAVE_GAMES';
+export const CHANGE_GAME_OWNERS = 'CHANGE_GAME_OWNERS';
+export const MODIFY_GAME_OWNERS = 'MODIFY_GAME_OWNERS';
 export const CHANGE_GAME_TITLE_FIELD = 'CHANGE_GAME_TITLE_FIELD';
 export const CHANGE_GAME_DESCRIPTION_FIELD = 'CHANGE_GAME_DESCRIPTION_FIELD';
 export const CHANGE_GAME_MINPLAYERS_FIELD = 'CHANGE_GAME_MINPLAYERS_FIELD';
@@ -94,4 +96,13 @@ export const uploadGameVisual = (newValue) => ({
 export const changeCurrentGameId = (newValue) => ({
   type: CHANGE_CURRENT_GAME_ID,
   newValue,
+});
+
+export const changeGameOwners = (newValue) => ({
+  type: CHANGE_GAME_OWNERS,
+  newValue,
+});
+
+export const modifyGameOwners = () => ({
+  type: MODIFY_GAME_OWNERS,
 });
