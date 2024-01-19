@@ -27,6 +27,7 @@ export const initialState = {
   gameConfrontation: '',
   gameVisual: '',
   currentGameId: '',
+  gameOwners: '',
 };
 
 const reducer = (state = initialState, action = {}) => {

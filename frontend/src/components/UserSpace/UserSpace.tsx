@@ -54,9 +54,7 @@ const UserSpace = () => {
   const dispatch = useDispatch();
 
   const games = useSelector((state: Props) => state.gamesReducer.list);
-  const currentUserGames = games.filter(
-    (currentUserGame) => currentUserGame.userId === currentUserId
-  );
+  const gamesOwnedByUser = games.filter((game) => game.owners.includes(currentUserId));
 
   const [postgame, setPostgame] = useState<boolean>(false);
 
@@ -103,7 +101,7 @@ const UserSpace = () => {
           console.log('details : ', details);
         }}
       >
-        <GamesListing games={currentUserGames} />
+        <GamesListing games={gamesOwnedByUser} />
       </ErrorBoundary>
 
       <Button

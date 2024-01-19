@@ -150,8 +150,8 @@ const GameSheet = () => {
 
         <p>
           Détenu par {owners.length}{' '}
-          {`Joueur${owners.length > 1 ? 's' : ''} du Jeudi`}(
-          {ownersIds.map((owner: any) => owner.nickname)})
+          {`Joueur${owners.length > 1 ? 's' : ''} du Jeudi`} (
+          {ownersIds.map((owner: any) => owner.nickname).join(', ')})
         </p>
 
         <Button
