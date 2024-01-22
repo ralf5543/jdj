@@ -123,18 +123,30 @@ const GameSheet = () => {
 
   const allUsers = useSelector((state: Props) => state.user.users);
 
-  const ownersIds = allUsers.filter(item => owners.includes(item._id));
+  const ownersIds = allUsers.filter((item) => owners.includes(item._id));
 
   const currentUserId = useSelector((state: Props) => state.user.userId);
+
+  const OwnsTheGame = ownersIds.some((item) => item._id === currentUserId);
 
   const handleAddOwner = () => {
     const newOwner = [...owners, currentUserId];
     dispatch(changeGameOwners(newOwner));
   };
 
+  const handleRemoveOwner = () => {
+    const newOwner = owners.filter((item) => item !== currentUserId);
+    dispatch(changeGameOwners(newOwner));
+  };
+
   return (
     <Page>
       <div>
+        <h1>
+          {' '}
+          id :{' '}
+          {useSelector((state: Props) => state.gamesReducer.currentGameId)}
+        </h1>
         <h2 className="boardgame-card_title">{title}</h2>
         <LazyLoadImage
           src={`${import.meta.env.VITE_BASE_URL}/images/${visual}`}
@@ -155,11 +167,19 @@ const GameSheet = () => {
           {ownersIds.map((owner: any) => owner.nickname).join(', ')})
         </p>
 
-        <Button
-          type="button"
-          label="Je possède aussi ce jeu !"
-          onClick={() => handleAddOwner()}
-        />
+        {OwnsTheGame ? (
+          <Button
+            type="button"
+            label="Je ne possède plus ce jeu !"
+            onClick={() => handleRemoveOwner()}
+          />
+        ) : (
+          <Button
+            type="button"
+            label="Je possède aussi ce jeu !"
+            onClick={() => handleAddOwner()}
+          />
+        )}
 
         {isLogged && (
           <>

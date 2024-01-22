@@ -15,7 +15,6 @@ const Textarea = ({
 
     // pass this new value
     onChange(e.target.value, name);
-    console.log('dynamicvalue : ', dynamicvalue);
   };
 
   const [dynamicvalue, setDynamicvalue] = useState(defaultInputValue);

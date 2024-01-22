@@ -14,18 +14,6 @@ const Radio = ({
   const [dynamicvalue, setDynamicvalue] = useState(defaultInputValue);
 
   const handleChange = (e: React.ChangeEvent) => {
-    console.log('ben alors ?');
-    console.log('value : ', value);
-    console.log('dynamicvalue : ', dynamicvalue);
-    console.log('id : ', id);
-    console.log(
-      'store.getState().gamesReducer.gameConfrontation : ',
-      store.getState().gamesReducer.gameConfrontation
-    );
-    console.log(
-      'store === id : ',
-      id === store.getState().gamesReducer.gameConfrontation
-    );
     // replaces field default value by the new value entered
     onChange(setDynamicvalue(e.target.value));
 

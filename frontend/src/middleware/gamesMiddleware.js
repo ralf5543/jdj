@@ -60,6 +60,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
             confrontation: store.getState().gamesReducer.gameConfrontation,
             userNickname: store.getState().user.nickname,
             visual: store.getState().gamesReducer.gameVisual,
+            owners: store.getState().user.userId,
           },
           // options (notamment les headers)
           {

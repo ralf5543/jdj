@@ -110,6 +110,7 @@ const reducer = (state = initialState, action = {}) => {
         gameMaxPlayers: '',
         gameIdealPlayers: '',
         gameDuration: '',
+        gameConfrontation: '',
         gameVisual: '',
         currentGameId: '',
       };
@@ -124,6 +125,7 @@ const reducer = (state = initialState, action = {}) => {
         gameMaxPlayers: '',
         gameIdealPlayers: '',
         gameDuration: '',
+        gameConfrontation: '',
         gameVisual: '',
         currentGameId: '',
       };
