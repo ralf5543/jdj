@@ -45,6 +45,8 @@ const GameSheet = () => {
     idealplayers,
     duration,
     confrontation,
+    _id,
+    userId
   } = currentGame;
 
   // changes the current game ID in the store
@@ -59,6 +61,8 @@ const GameSheet = () => {
     // Route => home
     setDeletedGame(true);
   };
+
+  const currentUserId = useSelector((state: Props) => state.user.userId);
 
   const gameTitleValue = useSelector(
     (state: Props) => state.gamesReducer.gameTitle
@@ -123,13 +127,12 @@ const GameSheet = () => {
   const allUsers = useSelector((state: Props) => state.user.users);
 
   const gameOwners = allUsers.filter((user) => user.ownedGames.includes(id));
-  const gameOwnersNicknames = gameOwners.map((owner) => owner.nickname);
 
   // const ownersIds = allUsers.filter((item) => owners.includes(item._id));
 
   // const currentUserId = useSelector((state: Props) => state.user.userId);
 
-  // const OwnsTheGame = ownersIds.some((item) => item._id === currentUserId);
+  const OwnsTheGame = gameOwners.some((item) => item._id === currentUserId);
 
   const handleAddOwner = () => {
     // const newOwner = [...owners, currentUserId];
@@ -144,9 +147,6 @@ const GameSheet = () => {
   return (
     <Page>
       <div>
-        <h1>
-          {useSelector((state: Props) => state.gamesReducer.currentGameId)}
-        </h1>
         <h2 className="boardgame-card_title">{title}</h2>
         <LazyLoadImage
           src={`${import.meta.env.VITE_BASE_URL}/images/${visual}`}
@@ -167,7 +167,7 @@ const GameSheet = () => {
           {gameOwners.map((owner: any) => owner.nickname).join(', ')})
         </p>
 
-       {/*  {OwnsTheGame ? (
+        {OwnsTheGame ? (
           <Button
             type="button"
             label="Je ne possède plus ce jeu !"
@@ -179,9 +179,9 @@ const GameSheet = () => {
             label="Je possède aussi ce jeu !"
             onClick={() => handleAddOwner()}
           />
-        )} */}
+        )}
 
-        {isLogged && (
+        {currentUserId === userId && (
           <>
             <Button
               type="button"
