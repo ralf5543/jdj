@@ -26,7 +26,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
       axios
         .get('/api/games')
         .then((response) => {
-          console.log('affichage de la liste de jeux : ', response.data);
+          // console.log('affichage de la liste de jeux : ', response.data);
           store.dispatch(saveGames(response.data));
         })
         .catch((error) => {
@@ -60,7 +60,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
             confrontation: store.getState().gamesReducer.gameConfrontation,
             userNickname: store.getState().user.nickname,
             visual: store.getState().gamesReducer.gameVisual,
-            owners: store.getState().user.userId,
           },
           // options (notamment les headers)
           {

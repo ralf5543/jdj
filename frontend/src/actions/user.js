@@ -44,17 +44,12 @@ export const submitLogin = () => ({
   type: SUBMIT_LOGIN,
 });
 
-export const handleSuccessfulLogin = (
-  nickname,
-  token,
-  userId,
-  userNickname
-) => ({
+export const handleSuccessfulLogin = (nickname, token, userId, ownedGames) => ({
   type: HANDLE_SUCCESSFUL_LOGIN,
   nickname,
   token,
   userId,
-  userNickname,
+  ownedGames,
 });
 
 export const handleSignupVisibility = () => ({

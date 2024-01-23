@@ -18,7 +18,7 @@ const userMiddleware = (store) => (next) => (action) => {
       axios
         .get('/api/auth')
         .then((response) => {
-          console.log('affichage de la liste de users : ', response.data);
+          // console.log('affichage de la liste de users : ', response.data);
           store.dispatch(saveUsers(response.data));
         })
         .catch((error) => {
@@ -68,14 +68,6 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_LOGIN:
-      console.log(
-        'store.getState().user.email : ',
-        store.getState().user.email
-      );
-      console.log(
-        'store.getState().user.password : ',
-        store.getState().user.password
-      );
       axios
         .post(
           // URL
@@ -87,23 +79,22 @@ const userMiddleware = (store) => (next) => (action) => {
           }
         )
         .then((response) => {
-          console.log('bien connecté avec ce user : ', response.data);
-          console.log('token reçu : ', response.data.token);
-          console.log("id de l'user : ", response.data.userId);
-          console.log("nickname de l'user : ", response.data.userNickname);
-          // on a 2 infos dans response.data : pseudo et token
           store.dispatch(
             handleSuccessfulLogin(
               response.data.nickname,
               response.data.token,
               response.data.userId,
-              response.data.userNickname
+              response.data.ownedGames
             )
           );
 
           localStorage.setItem('nickname', response.data.nickname);
           localStorage.setItem('userId', response.data.userId);
           localStorage.setItem('token', response.data.token);
+          // change the data into array
+          JSON.parse(
+            localStorage.setItem('ownedGames', response.data.ownedGames)
+          );
 
           store.dispatch(hideModal());
           store.dispatch(

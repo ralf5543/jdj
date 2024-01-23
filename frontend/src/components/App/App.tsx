@@ -38,10 +38,18 @@ const App = () => {
     const loggedInUser = localStorage.getItem('userId');
     const loggedInNickname = localStorage.getItem('nickname');
     const loggedInToken = localStorage.getItem('token');
+    const loggedInOwnedGames = localStorage.getItem('ownedGames');
 
     if (loggedInUser) {
-      // nickname, token, user id
-      dispatch(handleSuccessfulLogin(loggedInNickname, loggedInToken, loggedInUser));
+      // nickname, token, user id, owned games
+      dispatch(
+        handleSuccessfulLogin(
+          loggedInNickname,
+          loggedInToken,
+          loggedInUser,
+          loggedInOwnedGames
+        )
+      );
     }
   }, [dispatch]);
 

@@ -45,14 +45,13 @@ const GameSheet = () => {
     idealplayers,
     duration,
     confrontation,
-    owners,
   } = currentGame;
 
   // changes the current game ID in the store
   useEffect(() => {
     dispatch(changeCurrentGameId(id));
-    dispatch(changeGameOwners(owners));
-  }, [dispatch, id, owners]);
+    // dispatch(changeGameOwners(owners));
+  }, [dispatch, id]);
 
   const handleDeleteGame = (gameId: string | undefined) => {
     dispatch(deleteGame());
@@ -123,19 +122,22 @@ const GameSheet = () => {
 
   const allUsers = useSelector((state: Props) => state.user.users);
 
-  const ownersIds = allUsers.filter((item) => owners.includes(item._id));
+  const gameOwners = allUsers.filter((user) => user.ownedGames.includes(id));
+  const gameOwnersNicknames = gameOwners.map((owner) => owner.nickname);
 
-  const currentUserId = useSelector((state: Props) => state.user.userId);
+  // const ownersIds = allUsers.filter((item) => owners.includes(item._id));
 
-  const OwnsTheGame = ownersIds.some((item) => item._id === currentUserId);
+  // const currentUserId = useSelector((state: Props) => state.user.userId);
+
+  // const OwnsTheGame = ownersIds.some((item) => item._id === currentUserId);
 
   const handleAddOwner = () => {
-    const newOwner = [...owners, currentUserId];
+    // const newOwner = [...owners, currentUserId];
     dispatch(changeGameOwners(newOwner));
   };
 
   const handleRemoveOwner = () => {
-    const newOwner = owners.filter((item) => item !== currentUserId);
+    // const newOwner = owners.filter((item) => item !== currentUserId);
     dispatch(changeGameOwners(newOwner));
   };
 
@@ -143,8 +145,6 @@ const GameSheet = () => {
     <Page>
       <div>
         <h1>
-          {' '}
-          id :{' '}
           {useSelector((state: Props) => state.gamesReducer.currentGameId)}
         </h1>
         <h2 className="boardgame-card_title">{title}</h2>
@@ -162,12 +162,12 @@ const GameSheet = () => {
         </p>
 
         <p>
-          Détenu par {owners.length}{' '}
-          {`Joueur${owners.length > 1 ? 's' : ''} du Jeudi`} (
-          {ownersIds.map((owner: any) => owner.nickname).join(', ')})
+          Détenu par {gameOwners.length}{' '}
+          {`Joueur${gameOwners.length > 1 ? 's' : ''} du Jeudi`} (
+          {gameOwners.map((owner: any) => owner.nickname).join(', ')})
         </p>
 
-        {OwnsTheGame ? (
+       {/*  {OwnsTheGame ? (
           <Button
             type="button"
             label="Je ne possède plus ce jeu !"
@@ -179,7 +179,7 @@ const GameSheet = () => {
             label="Je possède aussi ce jeu !"
             onClick={() => handleAddOwner()}
           />
-        )}
+        )} */}
 
         {isLogged && (
           <>

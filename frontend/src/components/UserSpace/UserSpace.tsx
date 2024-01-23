@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Navigate } from 'react-router-dom';
+import { fetchUsers } from '../../actions/user';
 import FormPostGame from './FormPostGame/FormPostGame';
 import { showModal } from '../../actions/layout';
 import {
@@ -46,15 +47,21 @@ const UserSpace = () => {
   const gameVisualValue = useSelector(
     (state: Props) => state.gamesReducer.gameVisual
   );
-  const currentUserId = useSelector((state: Props) => state.user.userId);
+
   const isModalVisible = useSelector(
     (state: Props) => state.layoutReducer.modalVisible
   );
+  const ownedGamesById = useSelector((state: Props) => state.user.ownedGames);
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const action = fetchUsers();
+    dispatch(action);
+  }, [dispatch]);
   const games = useSelector((state: Props) => state.gamesReducer.list);
-  const gamesOwnedByUser = games.filter((game) => game.owners.includes(currentUserId));
+
+  const ownedGamesList = games.filter((game) => ownedGamesById.includes(game._id));
 
   const [postgame, setPostgame] = useState<boolean>(false);
 
@@ -101,7 +108,7 @@ const UserSpace = () => {
           console.log('details : ', details);
         }}
       >
-        <GamesListing games={gamesOwnedByUser} />
+        <GamesListing games={ownedGamesList} />
       </ErrorBoundary>
 
       <Button

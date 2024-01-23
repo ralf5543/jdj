@@ -1,4 +1,5 @@
 import './BoardgameCard.scss';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
@@ -13,9 +14,11 @@ const BoardgameCard = ({
   visual,
   confrontation,
   id,
-  userNickname,
-  owners,
 }: Props) => {
+  const allUsers = useSelector((state: Props) => state.user.users);
+
+  const gameOwners = allUsers.filter((user) => user.ownedGames.includes(id));
+
   return (
     // animations from Framer Motion (reduced weight with "m" instead of "motion")
     <LazyMotion features={domAnimation}>
@@ -43,8 +46,8 @@ const BoardgameCard = ({
           <p className="boardgame-card_title">{title}</p>
           <p className="boardgame-card_description">{description}</p>
           <p className="boardgame-card_owners_name">
-            Détenu par {owners.length}{' '}
-            {`Joueur${owners.length > 1 ? 's' : ''} du Jeudi`}
+            Détenu par {gameOwners.length}{' '}
+            {`Joueur${gameOwners.length > 1 ? 's' : ''} du Jeudi`}
           </p>
           <Link to={`/game/${id}`} className="boardgame-card_link">
             Fiche complète du jeu
@@ -84,7 +87,6 @@ type Props = {
   visual: string;
   confrontation: string;
   id: string;
-  userNickname: string;
 };
 
 export default BoardgameCard;

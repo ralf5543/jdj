@@ -12,7 +12,6 @@ const gameSchema = mongoose.Schema({
   duration: { type: String, required: true },
   visual: { type: String, required: true },
   confrontation: { type: String, required: true },
-  owners: { type: Array, required: false },
 
   // given by the user who created the article, so only him can modify it
   userId: { type: String, required: false },

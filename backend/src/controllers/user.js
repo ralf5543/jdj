@@ -22,6 +22,7 @@ exports.signup = (req, res) => {
         email: req.body.email,
         password: hash,
         nickname: req.body.nickname,
+        ownedGames: req.body.ownedGames,
       });
       user
         // sauvegarde le nouveau user dans la BDD
@@ -62,6 +63,7 @@ exports.login = (req, res) => {
           res.status(200).json({
             userId: user._id,
             nickname: user.nickname,
+            ownedGames: user.ownedGames,
             // création et encrytage du token
             token: jwt.sign({ userId: user._id }, 'RANDOM_TOKEN_SECRET', {
               expiresIn: '24h',
