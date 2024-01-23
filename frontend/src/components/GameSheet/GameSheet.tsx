@@ -93,8 +93,6 @@ const GameSheet = () => {
     (state: Props) => state.layoutReducer.modalVisible
   );
 
-  const isLogged = useSelector((state: Props) => state.user.logged);
-
   const handleModifygameForm = () => {
     // Retrieves all games datas in the store, so the user doesn't have to rewrite infos
     dispatch(changeGameDescriptionField(title, 'gameTitle'));
@@ -127,20 +125,19 @@ const GameSheet = () => {
   const allUsers = useSelector((state: Props) => state.user.users);
 
   const gameOwners = allUsers.filter((user) => user.ownedGames.includes(id));
-
-  // const ownersIds = allUsers.filter((item) => owners.includes(item._id));
+  const ownersIds =  gameOwners.map((owner) => owner._id );
 
   // const currentUserId = useSelector((state: Props) => state.user.userId);
 
   const OwnsTheGame = gameOwners.some((item) => item._id === currentUserId);
 
   const handleAddOwner = () => {
-    // const newOwner = [...owners, currentUserId];
+    const newOwner = [...ownersIds, currentUserId];
     dispatch(changeGameOwners(newOwner));
   };
 
   const handleRemoveOwner = () => {
-    // const newOwner = owners.filter((item) => item !== currentUserId);
+    const newOwner = ownersIds.filter((item) => item !== currentUserId);
     dispatch(changeGameOwners(newOwner));
   };
 
