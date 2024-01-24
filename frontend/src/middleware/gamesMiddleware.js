@@ -3,7 +3,6 @@ import axios from '../utils/axios';
 import {
   FETCH_GAMES,
   POST_GAME,
-  MODIFY_GAME_OWNERS,
   MODIFY_GAME,
   DELETE_GAME,
   saveGames,
@@ -172,8 +171,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
         });
 
       break;
-
-    case MODIFY_GAME_OWNERS:
       store.dispatch(showLoader());
       axios
         .put(

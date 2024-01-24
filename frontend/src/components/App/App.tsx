@@ -47,7 +47,8 @@ const App = () => {
           loggedInNickname,
           loggedInToken,
           loggedInUser,
-          loggedInOwnedGames
+          // change data into array
+          JSON.parse(loggedInOwnedGames)
         )
       );
     }

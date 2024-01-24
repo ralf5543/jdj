@@ -59,14 +59,6 @@ exports.modifyGame = (req, res) => {
     });
 };
 
-/* exports.modifyGame = (req, res) => {
-  //  updateOne modifie le corps de l'objet avec l'id précisé
-  // on ne veut pas créer un nouvel id, donc on précise que son "nouvel" id correspond à l'ancien (celui de la requete)
-  Game.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
-    .then(() => res.status(200).json({ message: 'Objet modifié !' }))
-    .catch((error) => res.status(400).json({ error }));
-}; */
-
 exports.deleteGame = (req, res) => {
   Game.findOne({ _id: req.params.id })
     .then((game) => {

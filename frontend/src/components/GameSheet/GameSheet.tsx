@@ -8,6 +8,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Page from '../genericComponents/Page/Page';
 import Button from '../genericComponents/Button/Button';
 import { showModal } from '../../actions/layout';
+import { modifyProfile } from '../../actions/user';
 
 import {
   deleteGame,
@@ -18,7 +19,6 @@ import {
   changeGameIdealPlayersField,
   changeGameDurationField,
   changeCurrentGameId,
-  changeGameOwners,
   changeGameConfrontationField,
 } from '../../actions/games';
 
@@ -46,7 +46,7 @@ const GameSheet = () => {
     duration,
     confrontation,
     _id,
-    userId
+    userId,
   } = currentGame;
 
   // changes the current game ID in the store
@@ -123,22 +123,32 @@ const GameSheet = () => {
   };
 
   const allUsers = useSelector((state: Props) => state.user.users);
-
   const gameOwners = allUsers.filter((user) => user.ownedGames.includes(id));
-  const ownersIds =  gameOwners.map((owner) => owner._id );
-
-  // const currentUserId = useSelector((state: Props) => state.user.userId);
-
+  const ownersIds = gameOwners.map((owner) => owner._id);
   const OwnsTheGame = gameOwners.some((item) => item._id === currentUserId);
 
+  // get list of id games and put them in an array
+  const currentUserOwnedGames = useSelector((state: Props) => state.user.ownedGames);
+
+  console.log('currentUserOwnedGames : ', currentUserOwnedGames);
+  console.log('game id : ', _id);
+  console.log('updatedGamesList : ', [...currentUserOwnedGames, _id]);
+
+  const [gameslist, setUpdategameslist] = useState("pending");
+
+  useEffect(() => {
+    if (gameslist !== "pending") {
+      const action = modifyProfile(gameslist);
+      dispatch(action);
+    }
+  }, [dispatch, gameslist]);
+
   const handleAddOwner = () => {
-    const newOwner = [...ownersIds, currentUserId];
-    dispatch(changeGameOwners(newOwner));
+    setUpdategameslist([...currentUserOwnedGames, _id]);
   };
 
   const handleRemoveOwner = () => {
-    const newOwner = ownersIds.filter((item) => item !== currentUserId);
-    dispatch(changeGameOwners(newOwner));
+    setUpdategameslist(ownersIds.filter((item) => item !== currentUserId));
   };
 
   return (

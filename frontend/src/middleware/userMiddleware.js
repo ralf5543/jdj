@@ -5,10 +5,16 @@ import {
   SUBMIT_LOGIN,
   handleSuccessfulLogin,
   SUBMIT_SIGNUP,
+  MODIFY_PROFILE,
   handleSuccessfulSignup,
   saveUsers,
 } from '../actions/user';
-import { hideModal, showToaster } from '../actions/layout';
+import {
+  showLoader,
+  hideLoader,
+  hideModal,
+  showToaster,
+} from '../actions/layout';
 
 const userMiddleware = (store) => (next) => (action) => {
   // console.log('on a intercepté une action dans le middleware: ', action);
@@ -91,10 +97,9 @@ const userMiddleware = (store) => (next) => (action) => {
           localStorage.setItem('nickname', response.data.nickname);
           localStorage.setItem('userId', response.data.userId);
           localStorage.setItem('token', response.data.token);
+
           // change the data into array
-          JSON.parse(
-            localStorage.setItem('ownedGames', response.data.ownedGames)
-          );
+          localStorage.setItem('ownedGames', JSON.stringify(response.data.ownedGames));
 
           store.dispatch(hideModal());
           store.dispatch(
@@ -107,6 +112,49 @@ const userMiddleware = (store) => (next) => (action) => {
             showToaster('error', 'Adresse email ou mot de passe incorrect(e)')
           );
         });
+      break;
+
+    case MODIFY_PROFILE:
+      store.dispatch(showLoader());
+      console.log('état du store : ', store.getState().user.ownedGames);
+      axios
+        .put(
+          // URL
+          `/api/auth/${store.getState().user.userId}`,
+          // paramètres
+          {
+            ownedGames: store.getState().user.ownedGames,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${store.getState().user.token}`,
+            },
+          }
+        )
+        .then(() => {
+          console.log(
+            'on modifie cette liste : ',
+            store.getState().user.ownedGames
+          );
+          store.dispatch(
+            showToaster('success', 'Le jeu a été ajouté à votre collection !')
+          );
+        })
+        .catch((error) => {
+          console.log('erreur de la requete : ', error);
+          if (error.response.status === 401) {
+            console.log("Le user id n'est pas celui de l'article");
+            store.dispatch(
+              showToaster('error', "Vous n'êtes pas l'auteur de cette page !")
+            );
+          } else {
+            store.dispatch(showToaster('error', "Une erreur s'est produite"));
+          }
+        })
+        .finally(() => {
+          store.dispatch(hideLoader());
+        });
+
       break;
 
     default:

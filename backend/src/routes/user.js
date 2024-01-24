@@ -10,4 +10,7 @@ router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.get('/', userCtrl.getAllUsers);
 
+router.get('/:id', userCtrl.getOneUser);
+router.put('/:id', userCtrl.modifyProfile);
+
 module.exports = router;

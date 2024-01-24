@@ -2,6 +2,7 @@ import {
   SAVE_USERS,
   CHANGE_LOGIN_FIELD,
   HANDLE_SUCCESSFUL_LOGIN,
+  MODIFY_PROFILE,
   CHANGE_SIGNUP_FIELD,
   HANDLE_SUCCESSFUL_SIGNUP,
   HANDLE_SIGNUP_VISIBILITY,
@@ -89,6 +90,12 @@ const reducer = (state = initialState, action = {}) => {
         loginVisible: true,
         email: '',
         password: '',
+      };
+
+    case MODIFY_PROFILE:
+      return {
+        ...state,
+        ownedGames: action.ownedGames,
       };
 
     default:

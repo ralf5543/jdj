@@ -84,3 +84,28 @@ exports.getAllUsers = (req, res) => {
     .then((users) => res.status(200).json(users))
     .catch((error) => res.status(400).json({ error }));
 };
+
+exports.getOneUser = (req, res) => {
+  // findOne() trouve le modèle Game unique ayant le même _id que le paramètre de la requête
+  User.findOne({ _id: req.params.id })
+    .then((user) => res.status(200).json(user))
+    .catch((error) => res.status(404).json({ error }));
+};
+
+exports.modifyProfile = (req, res) => {
+  const userObject = req.body;
+  delete userObject._userId;
+
+  User.findOne({ _id: req.params.id })
+    .then((user) => {
+      User.updateOne(
+        { _id: req.params.id },
+        { ...userObject, _id: req.params.id }
+      )
+        .then(() => res.status(200).json({ message: 'Objet modifié!' }))
+        .catch((error) => res.status(401).json({ error }));
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
+};

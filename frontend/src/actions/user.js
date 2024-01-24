@@ -10,6 +10,7 @@ export const HANDLE_SUCCESSFUL_LOGIN = 'HANDLE_SUCCESSFUL_LOGIN';
 export const HANDLE_SUCCESSFUL_SIGNUP = 'HANDLE_SUCCESSFUL_SIGNUP';
 export const HANDLE_SIGNUP_VISIBILITY = 'HANDLE_SIGNUP_VISIBILITY';
 export const HANDLE_LOGIN_VISIBILITY = 'HANDLE_LOGIN_VISIBILITY';
+export const MODIFY_PROFILE = 'MODIFY_PROFILE';
 
 export const fetchUsers = () => ({
   type: FETCH_USERS,
@@ -58,4 +59,9 @@ export const handleSignupVisibility = () => ({
 
 export const handleLoginVisibility = () => ({
   type: HANDLE_LOGIN_VISIBILITY,
+});
+
+export const modifyProfile = (ownedGames) => ({
+  type: MODIFY_PROFILE,
+  ownedGames,
 });
