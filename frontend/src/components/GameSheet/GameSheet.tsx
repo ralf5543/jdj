@@ -14,7 +14,7 @@ import {
   showLoader,
   hideLoader,
 } from '../../actions/layout';
-import { modifyProfile } from '../../actions/user';
+import { modifyProfile, fetchUsers } from '../../actions/user';
 
 import {
   deleteGame,
@@ -69,6 +69,9 @@ const GameSheet = () => {
 
   const currentUserId = useSelector((state: Props) => state.user.userId);
   const currentUserToken = useSelector((state: Props) => state.user.token);
+  const currentUserOwnedGames = useSelector(
+    (state: Props) => state.user.ownedGames
+  );
 
   const gameTitleValue = useSelector(
     (state: Props) => state.gamesReducer.gameTitle
@@ -130,11 +133,7 @@ const GameSheet = () => {
 
   const allUsers = useSelector((state: Props) => state.user.users);
   const gameOwners = allUsers.filter((user) => user.ownedGames.includes(id));
-  const OwnsTheGame = gameOwners.some((item) => item._id === currentUserId);
-
-  const currentUserOwnedGames = useSelector(
-    (state: Props) => state.user.ownedGames
-  );
+  const OwnsTheGame = currentUserOwnedGames.some((item) => item === _id);
 
   const updatedGamesList = (newValue) => {
     dispatch(showLoader());
@@ -154,6 +153,7 @@ const GameSheet = () => {
       )
       .then(() => {
         dispatch(modifyProfile(newValue));
+        dispatch(fetchUsers());
         dispatch(
           showToaster('success', 'Votre liste de jeux a été mise à jour !')
         );
@@ -193,7 +193,7 @@ const GameSheet = () => {
         {OwnsTheGame ? (
           <Button
             type="button"
-            label="Je ne possède plus ce jeu !"
+            label="Retirer ce jeu de ma liste"
             onClick={() =>
               updatedGamesList(
                 currentUserOwnedGames.filter((item) => item !== _id)
@@ -203,7 +203,7 @@ const GameSheet = () => {
         ) : (
           <Button
             type="button"
-            label="Je possède aussi ce jeu !"
+            label="Ajouter ce jeu à ma liste!"
             onClick={() => updatedGamesList([...currentUserOwnedGames, _id])}
           />
         )}
