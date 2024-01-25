@@ -1,0 +1,70 @@
+@use 'src/styles/include-media' as m;
+
+.gamesheet_inner {
+    display: flex;
+    flex-direction: column;
+    
+    @include m.media(">desktop") {
+        flex-direction: row;
+        gap: var(--spacer-l);
+    }
+}
+
+.gamesheet_title {
+    margin-block-end: 0;
+}
+
+.gamesheet_visual {
+    object-fit: cover;
+    max-height: 50vh;
+    width: 100%;
+    margin-block-end: var(--spacer-l);
+}
+
+.gamesheet_owners {
+    font-size: 1.3rem;
+}
+
+.gamesheet_owners_amount {
+    margin-inline-start: var(--spacer-xs);
+    font-weight: 700;
+}
+
+.gamesheet_infos {
+    margin-block-end: var(--spacer-l);
+    padding: var(--spacer-m);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--spacer-m);
+    
+    @include m.media(">desktop") {
+        flex: 26rem 0 0;
+        align-self: flex-start;
+    }
+}
+
+.gamesheet_infos_title {
+    font-size: 2rem;
+    margin-block-end: var(--spacer-m);
+}
+
+.gamesheet_resume {
+    li {
+        display: flex;
+        gap: var(--spacer-m);
+        align-items: baseline;
+        margin-block-end: var(--spacer-m);
+        font-size: 1.4rem;
+
+        &::before {
+            content: '';
+            display: inline-block;
+            width: var(--spacer-s);
+            height: var(--spacer-s);
+            background-color: var(--color-primary);
+        }
+    }
+}
+
+.gamesheet_actions {
+    margin-block-end: var(--spacer-l);
+}

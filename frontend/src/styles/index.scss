@@ -16,6 +16,11 @@ body {
 
 p {
   font-size: 1.6rem;
+
+  &.text-secondary {
+    font-size: 1.4rem;
+    color: var(--color-secondary-text);
+  }
 }
 
 a,
@@ -51,7 +56,7 @@ button.link  {
 
 h1 {
   margin-block-end: var(--spacer-l);
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 300;
 }
 

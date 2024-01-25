@@ -170,29 +170,40 @@ const GameSheet = () => {
 
   return (
     <Page>
-      <div>
-        <h2 className="boardgame-card_title">{title}</h2>
-        <LazyLoadImage
-          src={`${import.meta.env.VITE_BASE_URL}/images/${visual}`}
-          alt={`Visual of ${title} game`}
-        />
-        <h3>Jeu de type {confrontation}</h3>
-        <p className="boardgame-card_description">{description}</p>
-        <p className="boardgame-card_maxplayers">
-          Nombre de joueurs : {minplayers} - {maxplayers}
+      <article className="gamesheet">
+        <h1 className="gamesheet_title">{title}</h1>
+        <p className="gamesheet_owners">
+          Détenu par
+          <span className="gamesheet_owners_amount">
+            {gameOwners.length}{' '}
+            {`Joueur${gameOwners.length > 1 ? 's' : ''} du Jeudi`}
+          </span>{' '}
+          ({gameOwners.map((owner: any) => owner.nickname).join(', ')})
         </p>
-        <p className="boardgame-card_idealplayers">
-          Nombre de joueurs idéal : {idealplayers}
-        </p>
+        <div className="gamesheet_inner">
+          <div className="gamesheet_content">
+            <LazyLoadImage
+              className="gamesheet_visual"
+              src={`${import.meta.env.VITE_BASE_URL}/images/${visual}`}
+              alt={`Visual of ${title} game`}
+            />
 
-        <p>
-          Détenu par {gameOwners.length}{' '}
-          {`Joueur${gameOwners.length > 1 ? 's' : ''} du Jeudi`} (
-          {gameOwners.map((owner: any) => owner.nickname).join(', ')})
-        </p>
+            <p className="gamesheet_description">{description}</p>
+          </div>
+          <aside className="gamesheet_infos">
+            <h2 className="gamesheet_infos_title">En vrac...</h2>
+            <ul className="gamesheet_resume">
+              <li>Type : {confrontation}</li>
+              <li>
+                Nombre de joueurs : {minplayers} - {maxplayers}
+              </li>
+              <li>Nombre de joueurs idéal : {idealplayers}</li>
+            </ul>
+          </aside>
+        </div>
 
         {isLogged && (
-          <>
+          <div className="gamesheet_actions">
             {' '}
             {OwnsTheGame ? (
               <Button
@@ -228,14 +239,14 @@ const GameSheet = () => {
                 />
               </>
             )}
-          </>
+          </div>
         )}
 
-        <p>
+        <p className="text-secondary">
           (Vous devez être l'auteur de cette page pour la supprimer ou la
           modifier)
         </p>
-      </div>
+      </article>
       {deletedGame && <Navigate to="/user-space" replace />}
 
       {modifygame && isModalVisible && (
