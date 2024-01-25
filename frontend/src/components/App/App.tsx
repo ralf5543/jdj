@@ -6,8 +6,13 @@ import { useEffect } from 'react';
 import './App.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
+import axios from '../../utils/axios';
 import { fetchGames } from '../../actions/games';
-import { fetchUsers, handleSuccessfulLogin } from '../../actions/user';
+import {
+  fetchUsers,
+  handleSuccessfulLogin,
+  modifyProfile,
+} from '../../actions/user';
 import AppHeader from '../AppHeader/AppHeader';
 import Toaster from '../genericComponents/Toaster/Toaster';
 import AppFooter from '../AppFooter/AppFooter';
@@ -25,6 +30,9 @@ const App = () => {
     dispatch(action);
   }, [dispatch]);
 
+  const isLogged = useSelector((state: Props) => state.user.logged);
+  const currentUserId = useSelector((state: Props) => state.user.userId);
+
   const toaster = useSelector(
     (state: Props) => state.toasterReducer.toasterVisible
   );
@@ -33,26 +41,34 @@ const App = () => {
     (state: Props) => state.layoutReducer.modalVisible
   );
 
-  // To refresh page without losing connexion (in fact, REconnect)
+  // =============------------------------- To refresh page without losing connexion (in fact, REconnect)
   useEffect(() => {
     const loggedInUser = localStorage.getItem('userId');
     const loggedInNickname = localStorage.getItem('nickname');
     const loggedInToken = localStorage.getItem('token');
-    // const loggedInOwnedGames = localStorage.getItem('ownedGames');
 
     if (loggedInUser) {
-      // nickname, token, user id, owned games
+      // nickname, token, user id
       dispatch(
-        handleSuccessfulLogin(
-          loggedInNickname,
-          loggedInToken,
-          loggedInUser
-          // change data into array
-          // JSON.parse(loggedInOwnedGames)
-        )
+        handleSuccessfulLogin(loggedInNickname, loggedInToken, loggedInUser)
       );
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    if (isLogged) {
+      axios
+        .get(`/api/auth/${currentUserId}`)
+        .then((response) => {
+          console.log('response.data : ', response.data.ownedGames);
+          dispatch(modifyProfile(response.data.ownedGames));
+        })
+        .catch((error) => {
+          console.log('erreur de la requete : ', error);
+        })
+        .finally(() => {});
+    }
+  }, [dispatch, currentUserId, isLogged]);
 
   return (
     <>

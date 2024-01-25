@@ -92,9 +92,6 @@ const userMiddleware = (store) => (next) => (action) => {
           localStorage.setItem('userId', response.data.userId);
           localStorage.setItem('token', response.data.token);
 
-          // change the data into array
-          // localStorage.setItem('ownedGames', JSON.stringify(response.data.ownedGames));
-
           store.dispatch(hideModal());
           store.dispatch(
             showToaster('success', 'Vous êtes à présent connecté !')
