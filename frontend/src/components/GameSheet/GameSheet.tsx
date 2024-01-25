@@ -5,9 +5,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import './GameSheet.scss';
 import { Navigate, useParams } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import axios from '../../utils/axios';
 import Page from '../genericComponents/Page/Page';
 import Button from '../genericComponents/Button/Button';
-import { showModal } from '../../actions/layout';
+import {
+  showModal,
+  showToaster,
+  showLoader,
+  hideLoader,
+} from '../../actions/layout';
 import { modifyProfile } from '../../actions/user';
 
 import {
@@ -52,7 +58,6 @@ const GameSheet = () => {
   // changes the current game ID in the store
   useEffect(() => {
     dispatch(changeCurrentGameId(id));
-    // dispatch(changeGameOwners(owners));
   }, [dispatch, id]);
 
   const handleDeleteGame = (gameId: string | undefined) => {
@@ -63,6 +68,7 @@ const GameSheet = () => {
   };
 
   const currentUserId = useSelector((state: Props) => state.user.userId);
+  const currentUserToken = useSelector((state: Props) => state.user.token);
 
   const gameTitleValue = useSelector(
     (state: Props) => state.gamesReducer.gameTitle
@@ -124,31 +130,41 @@ const GameSheet = () => {
 
   const allUsers = useSelector((state: Props) => state.user.users);
   const gameOwners = allUsers.filter((user) => user.ownedGames.includes(id));
-  const ownersIds = gameOwners.map((owner) => owner._id);
   const OwnsTheGame = gameOwners.some((item) => item._id === currentUserId);
 
-  // get list of id games and put them in an array
-  const currentUserOwnedGames = useSelector((state: Props) => state.user.ownedGames);
+  const currentUserOwnedGames = useSelector(
+    (state: Props) => state.user.ownedGames
+  );
 
-  console.log('currentUserOwnedGames : ', currentUserOwnedGames);
-  console.log('game id : ', _id);
-  console.log('updatedGamesList : ', [...currentUserOwnedGames, _id]);
-
-  const [gameslist, setUpdategameslist] = useState("pending");
-
-  useEffect(() => {
-    if (gameslist !== "pending") {
-      const action = modifyProfile(gameslist);
-      dispatch(action);
-    }
-  }, [dispatch, gameslist]);
-
-  const handleAddOwner = () => {
-    setUpdategameslist([...currentUserOwnedGames, _id]);
-  };
-
-  const handleRemoveOwner = () => {
-    setUpdategameslist(ownersIds.filter((item) => item !== currentUserId));
+  const updatedGamesList = (newValue) => {
+    dispatch(showLoader());
+    axios
+      .put(
+        // URL
+        `/api/auth/${currentUserId}`,
+        // paramètres
+        {
+          ownedGames: newValue,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${currentUserToken}`,
+          },
+        }
+      )
+      .then(() => {
+        dispatch(modifyProfile(newValue));
+        dispatch(
+          showToaster('success', 'Votre liste de jeux a été mise à jour !')
+        );
+      })
+      .catch((error) => {
+        console.log('erreur de la requete : ', error);
+        dispatch(showToaster('error', "Une erreur s'est produite"));
+      })
+      .finally(() => {
+        dispatch(hideLoader());
+      });
   };
 
   return (
@@ -178,13 +194,17 @@ const GameSheet = () => {
           <Button
             type="button"
             label="Je ne possède plus ce jeu !"
-            onClick={() => handleRemoveOwner()}
+            onClick={() =>
+              updatedGamesList(
+                currentUserOwnedGames.filter((item) => item !== _id)
+              )
+            }
           />
         ) : (
           <Button
             type="button"
             label="Je possède aussi ce jeu !"
-            onClick={() => handleAddOwner()}
+            onClick={() => updatedGamesList([...currentUserOwnedGames, _id])}
           />
         )}
 

@@ -38,7 +38,7 @@ const App = () => {
     const loggedInUser = localStorage.getItem('userId');
     const loggedInNickname = localStorage.getItem('nickname');
     const loggedInToken = localStorage.getItem('token');
-    const loggedInOwnedGames = localStorage.getItem('ownedGames');
+    // const loggedInOwnedGames = localStorage.getItem('ownedGames');
 
     if (loggedInUser) {
       // nickname, token, user id, owned games
@@ -46,9 +46,9 @@ const App = () => {
         handleSuccessfulLogin(
           loggedInNickname,
           loggedInToken,
-          loggedInUser,
+          loggedInUser
           // change data into array
-          JSON.parse(loggedInOwnedGames)
+          // JSON.parse(loggedInOwnedGames)
         )
       );
     }

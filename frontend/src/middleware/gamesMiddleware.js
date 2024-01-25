@@ -171,60 +171,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
         });
 
       break;
-      store.dispatch(showLoader());
-      axios
-        .put(
-          // URL
-          `/api/games/${store.getState().gamesReducer.currentGameId}`,
-          // paramètres
-          {
-            visual: store.getState().gamesReducer.gameOwners,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${store.getState().user.token}`,
-            },
-          }
-        )
-        .then(() => {
-          console.log(
-            'on modifie ce jeu : ',
-            store.getState().gamesReducer.gameTitle
-          );
-          store.dispatch(hideModal());
-          store.dispatch(showToaster('success', 'Fiche modifiée !'));
-        })
-        .catch((error) => {
-          console.log('erreur de la requete : ', error);
-          if (error.response.status === 401) {
-            console.log("Le user id n'est pas celui de l'article");
-            store.dispatch(
-              showToaster('error', "Vous n'êtes pas l'auteur de cette page !")
-            );
-          } else {
-            store.dispatch(showToaster('error', "Une erreur s'est produite"));
-          }
-        })
-        .finally(() => {
-          // refetch la liste de jeux mise à jour
-          axios
-            .get('/api/games')
-            .then((response) => {
-              console.log(
-                'affichage de la nouvelle liste de jeux : ',
-                response.data
-              );
-              store.dispatch(saveGames(response.data));
-            })
-            .catch((error) => {
-              console.log('erreur de la requete : ', error);
-            })
-            .finally(() => {
-              store.dispatch(hideLoader());
-            });
-        });
-
-      break;
 
     case DELETE_GAME:
       store.dispatch(showLoader());
