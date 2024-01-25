@@ -72,6 +72,7 @@ const GameSheet = () => {
   const currentUserOwnedGames = useSelector(
     (state: Props) => state.user.ownedGames
   );
+  const isLogged = useSelector((state: Props) => state.user.logged);
 
   const gameTitleValue = useSelector(
     (state: Props) => state.gamesReducer.gameTitle
@@ -190,37 +191,43 @@ const GameSheet = () => {
           {gameOwners.map((owner: any) => owner.nickname).join(', ')})
         </p>
 
-        {OwnsTheGame ? (
-          <Button
-            type="button"
-            label="Retirer ce jeu de ma liste"
-            onClick={() =>
-              updatedGamesList(
-                currentUserOwnedGames.filter((item) => item !== _id)
-              )
-            }
-          />
-        ) : (
-          <Button
-            type="button"
-            label="Ajouter ce jeu à ma liste!"
-            onClick={() => updatedGamesList([...currentUserOwnedGames, _id])}
-          />
-        )}
-
-        {currentUserId === userId && (
+        {isLogged && (
           <>
-            <Button
-              type="button"
-              label="Supprimer la fiche de ce jeu"
-              onClick={() => handleDeleteGame(id)}
-            />
+            {' '}
+            {OwnsTheGame ? (
+              <Button
+                type="button"
+                label="Retirer ce jeu de ma liste"
+                onClick={() =>
+                  updatedGamesList(
+                    currentUserOwnedGames.filter((item) => item !== _id)
+                  )
+                }
+              />
+            ) : (
+              <Button
+                type="button"
+                label="Ajouter ce jeu à ma liste!"
+                onClick={() =>
+                  updatedGamesList([...currentUserOwnedGames, _id])
+                }
+              />
+            )}
+            {currentUserId === userId && (
+              <>
+                <Button
+                  type="button"
+                  label="Supprimer la fiche de ce jeu"
+                  onClick={() => handleDeleteGame(id)}
+                />
 
-            <Button
-              label="Modifier la fiche de ce jeu"
-              type="button"
-              onClick={handleModifygameForm}
-            />
+                <Button
+                  label="Modifier la fiche de ce jeu"
+                  type="button"
+                  onClick={handleModifygameForm}
+                />
+              </>
+            )}
           </>
         )}
 
