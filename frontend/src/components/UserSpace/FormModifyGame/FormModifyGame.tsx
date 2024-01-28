@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import store from '../../../store';
 import Field from '../../genericComponents/Form/Field/Field';
 import './FormModifyGame.scss';
 import { uploadGameVisual, modifyGame } from '../../../actions/games';
@@ -18,6 +17,7 @@ const FormModifyGame = ({
   currentGameMaxPlayers,
   currentGameIdealPlayers,
   currentGameDuration,
+  currentGameVisual,
   changeTitleField,
   changeDescriptionField,
   changeMinplayersField,
@@ -111,9 +111,10 @@ const FormModifyGame = ({
 
       <LazyLoadImage
         className="postgame_img-preview"
-        src={`${import.meta.env.VITE_BASE_URL}/images/${
+        /* src={`${import.meta.env.VITE_BASE_URL}/images/${
           store.getState().gamesReducer.gameVisual
-        }`}
+        }`} */
+        src={`${import.meta.env.VITE_BASE_URL}/images/${currentGameVisual}`}
         alt="image uploaded"
       />
 

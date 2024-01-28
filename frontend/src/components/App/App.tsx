@@ -60,7 +60,6 @@ const App = () => {
       axios
         .get(`/api/auth/${currentUserId}`)
         .then((response) => {
-          console.log('response.data : ', response.data.ownedGames);
           dispatch(modifyProfile(response.data.ownedGames));
         })
         .catch((error) => {

@@ -3,6 +3,7 @@
 .gamesheet_inner {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     
     @include m.media(">desktop") {
         flex-direction: row;

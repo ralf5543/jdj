@@ -45,10 +45,16 @@ const BoardgameCard = ({
           <span className="boardgame-card_coop">{confrontation}</span>
           <p className="boardgame-card_title">{title}</p>
           <p className="boardgame-card_description">{description}</p>
-          <p className="boardgame-card_owners_name">
-            Détenu par {gameOwners.length}{' '}
-            {`Joueur${gameOwners.length > 1 ? 's' : ''} du Jeudi`}
-          </p>
+
+          {gameOwners.length > 0 ? (
+            <p className="boardgame-card_owners_name">
+              Détenu par {gameOwners.length}{' '}
+              {`Joueur${gameOwners.length > 1 ? 's' : ''} du Jeudi`}
+            </p>
+          ) : (
+            <p className="boardgame-card_owners_none">Plus aucun Joueur du Jeudi ne possède ce jeu !</p>
+          )}
+
           <Link to={`/game/${id}`} className="boardgame-card_link">
             Fiche complète du jeu
           </Link>

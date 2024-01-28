@@ -22,7 +22,10 @@ exports.createGame = (req, res) => {
     // 201 est une création de ressource
     // il faut envoyer qquechose dans le then, sinon la requete est abandonnée
     .then(() => {
-      res.status(201).json({ message: 'Objet enregistré !' });
+      res.status(201).json({
+        message: 'Objet enregistré !',
+        gameObject,
+      });
       console.log('req.auth.userId : ', req.auth.userId);
     })
     .catch((error) => {

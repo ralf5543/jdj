@@ -26,6 +26,7 @@ import {
   changeGameDurationField,
   changeCurrentGameId,
   changeGameConfrontationField,
+  uploadGameVisual,
 } from '../../actions/games';
 
 import FormModifyGame from '../UserSpace/FormModifyGame/FormModifyGame';
@@ -42,6 +43,7 @@ const GameSheet = () => {
 
   // find the first element with the id matching the slug
   const currentGame = games.find((element) => element._id === id);
+
   const {
     title,
     visual,
@@ -106,7 +108,7 @@ const GameSheet = () => {
   const handleModifygameForm = () => {
     // Retrieves all games datas in the store, so the user doesn't have to rewrite infos
     dispatch(changeGameDescriptionField(title, 'gameTitle'));
-    // dispatch(uploadGameVisual(visual, 'gameVisual'));
+    dispatch(uploadGameVisual(visual, 'gameVisual'));
     dispatch(changeGameDescriptionField(description, 'gameDescription'));
     dispatch(changeGameMinPlayersField(minplayers, 'gameMinPlayers'));
     dispatch(changeGameMaxPlayersField(maxplayers, 'gameMaxPlayers'));
@@ -266,6 +268,7 @@ const GameSheet = () => {
             currentGameIdealPlayers={idealplayers}
             currentGameDuration={duration}
             currentGameConfrontation={confrontation}
+            currentGameVisual={visual}
             changeTitleField={(newValue, gameTitleField) => {
               const action = changeGameTitleField(newValue, gameTitleField);
               dispatch(action);
