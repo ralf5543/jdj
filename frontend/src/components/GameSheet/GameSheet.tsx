@@ -174,14 +174,22 @@ const GameSheet = () => {
     <Page>
       <article className="gamesheet">
         <h1 className="gamesheet_title">{title}</h1>
-        <p className="gamesheet_owners">
-          Détenu par
-          <span className="gamesheet_owners_amount">
-            {gameOwners.length}{' '}
-            {`Joueur${gameOwners.length > 1 ? 's' : ''} du Jeudi`}
-          </span>{' '}
-          ({gameOwners.map((owner: any) => owner.nickname).join(', ')})
-        </p>
+
+        {gameOwners.length > 0 ? (
+          <p className="gamesheet_owners">
+            Détenu par
+            <span className="gamesheet_owners_amount">
+              {gameOwners.length}{' '}
+              {`Joueur${gameOwners.length > 1 ? 's' : ''} du Jeudi`}
+            </span>{' '}
+            ({gameOwners.map((owner: any) => owner.nickname).join(', ')})
+          </p>
+        ) : (
+          <p className="gamesheet_owners_none">
+            Plus aucun Joueur du Jeudi ne possède ce jeu !
+          </p>
+        )}
+
         <div className="gamesheet_inner">
           <div className="gamesheet_content">
             <LazyLoadImage

@@ -72,50 +72,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
           }
         )
         .then(() => {
-          /* rechercher un objet game dont le userId est égal à l'id de l'user (et qui n'est )
-          utilisé par personne ?), récupérer son id et l'ajouter à la liste de jeux de l'user */
-
-          /* axios
-            .put(
-              // URL
-              `/api/auth/${store.getState().user.userId}`,
-              // paramètres
-              {
-                ownedGames: [...store.getState().user.ownedGames, _id],
-              },
-              {
-                headers: {
-                  Authorization: `Bearer ${store.getState().user.token}`,
-                },
-              }
-            )
-            .then(() => {
-              dispatch(modifyProfile(newValue));
-              dispatch(fetchUsers());
-            })
-            .catch((error) => {
-              console.log('erreur de la requete : ', error);
-              dispatch(showToaster('error', "Une erreur s'est produite"));
-            })
-            .finally(() => {
-              dispatch(hideLoader());
-            }); */
-
-          store.dispatch(showToaster('success', 'Nouveau jeu ajouté !'));
-        })
-        .catch((error) => {
-          if (error.response) {
-            console.log('erreur de la response : ', error.response);
-          } else if (error.request) {
-            console.log('erreur de la request : ', error.request);
-          } else if (error.message) {
-            console.log('erreur du message : ', error.message);
-          }
-          store.dispatch(showToaster('error', "Une erreur s'est produite"));
-        })
-        .finally(() => {
-          store.dispatch(hideModal());
-
           // refetch la liste de jeux mise à jour
           axios
             .get('/api/games')
@@ -131,20 +87,22 @@ const gamesMiddleware = (store) => (next) => (action) => {
             })
             .finally(() => {
               // all games list updated
-              const toto = store.getState().gamesReducer.list;
+              const allGamesList = store.getState().gamesReducer.list;
 
               // last game posted
-              const tata = toto.slice(-1);
+              const lastGamePosted = allGamesList.slice(-1);
 
               // check if this last game is the one posted by current user
-              if (tata[0].userId === store.getState().user.userId) {
+              if (lastGamePosted[0].userId === store.getState().user.userId) {
                 // get last game id
                 // eslint-disable-next-line no-underscore-dangle
-                const bbbb = tata[0]._id;
-                console.log('bbbb : ', bbbb);
+                const lastGamePostedId = lastGamePosted[0]._id;
 
-                const ccc = [...store.getState().user.ownedGames, bbbb];
-                console.log('ccc : ', ccc);
+                // current used games list updated with last game posted
+                const currentUserUpdatedList = [
+                  ...store.getState().user.ownedGames,
+                  lastGamePostedId,
+                ];
 
                 axios
                   .put(
@@ -152,7 +110,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
                     `/api/auth/${store.getState().user.userId}`,
                     // paramètres
                     {
-                      ownedGames: ccc,
+                      ownedGames: currentUserUpdatedList,
                     },
                     {
                       headers: {
@@ -161,27 +119,37 @@ const gamesMiddleware = (store) => (next) => (action) => {
                     }
                   )
                   .then(() => {
-                    store.dispatch(modifyProfile(ccc));
+                    store.dispatch(modifyProfile(currentUserUpdatedList));
                     store.dispatch(fetchUsers());
                   })
                   .catch((error) => {
                     console.log('erreur de la requete : ', error);
-                    store.dispatch(showToaster('error', "Une erreur s'est produite"));
+                    store.dispatch(
+                      showToaster('error', "Une erreur s'est produite")
+                    );
                   })
                   .finally(() => {
                     store.dispatch(hideLoader());
                   });
               }
-
-              console.log('toto: ', toto);
-              console.log('tata[0]: ', tata[0]);
-              console.log(
-                'store.getState().user.userId : ',
-                store.getState().user.userId
-              );
-              // console.log('aaaa: ', aaaa);
               store.dispatch(hideLoader());
             });
+          store.dispatch(showToaster('success', 'Nouveau jeu ajouté !'));
+        })
+        .catch((error) => {
+          if (error.response) {
+            console.log('erreur de la response : ', error.response);
+          } else if (error.request) {
+            console.log('erreur de la request : ', error.request);
+          } else if (error.message) {
+            console.log('erreur du message : ', error.message);
+          }
+          store.dispatch(showToaster('error', "Une erreur s'est produite"));
+        })
+        .finally(() => {
+          store.dispatch(hideModal());
+
+          
         });
       break;
 
