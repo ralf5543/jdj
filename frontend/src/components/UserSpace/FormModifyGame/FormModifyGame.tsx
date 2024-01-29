@@ -9,6 +9,7 @@ import { uploadGameVisual, modifyGame } from '../../../actions/games';
 import Textarea from '../../genericComponents/Form/Textarea/Textarea';
 import Radio from '../../genericComponents/Form/Radio/Radio';
 import Button from '../../genericComponents/Button/Button';
+import store from '../../../store';
 
 const FormModifyGame = ({
   currentGameTitle,
@@ -51,6 +52,8 @@ const FormModifyGame = ({
     }
   };
 
+  const [dynamicvalue, setDynamicvalue] = useState(currentGameVisual);
+
   console.log('gameDescription : ', currentGameDescription);
 
   const handleSubmitImage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -74,12 +77,19 @@ const FormModifyGame = ({
         const action = uploadGameVisual(response.data);
         dispatch(action);
         setIsFileUploaded(true);
+        setDynamicvalue(response.data.status);
       })
       .catch((error) => {
         // handle errors
         console.log(error);
       });
   };
+
+  console.log('currentGameVisual : ', currentGameVisual);
+  console.log(
+    'store.getState().gamesReducer.gameVisual : ',
+    store.getState().gamesReducer.gameVisual
+  );
 
   return (
     <>
@@ -114,7 +124,9 @@ const FormModifyGame = ({
         /* src={`${import.meta.env.VITE_BASE_URL}/images/${
           store.getState().gamesReducer.gameVisual
         }`} */
-        src={`${import.meta.env.VITE_BASE_URL}/images/${currentGameVisual}`}
+        src={`${import.meta.env.VITE_BASE_URL}/images/${
+          dynamicvalue
+        }`}
         alt="image uploaded"
       />
 
