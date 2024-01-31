@@ -21,7 +21,7 @@
     "frontend/.eslintrc.cjs",
     "frontend/src",
     "backend/.eslintrc.cjs",
-    "backend/src"
+    "backend/api"
 , ".vscode/backend"  ],
   "references": [{ "path": "./tsconfig.node.json" }],
   // "exclude": ["frontend/src/__tests__/*.test.tsx"]

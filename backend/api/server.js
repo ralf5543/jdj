@@ -4,7 +4,7 @@
 const http = require('http');
 
 // importe notre application/fichier app express
-const app = require('./app');
+const app = require('./index');
 
 // création du serveur AVEC EXPRESS
 const server = http.createServer(app);
