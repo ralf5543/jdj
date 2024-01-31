@@ -22,9 +22,9 @@ dotenv.config();
 const path = require('path');
 
 // Importation des routes
-const gamesRoutes = require('./routes/games');
-const userRoutes = require('./routes/user');
-const imagesRoutes = require('./routes/images');
+const gamesRoutes = require('../routes/games');
+const userRoutes = require('../routes/user');
+const imagesRoutes = require('../routes/images');
 
 const uri = process.env.VITE_API_KEY;
 
