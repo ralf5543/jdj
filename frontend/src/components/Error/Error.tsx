@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import React from 'react';
 import { useRouteError } from 'react-router-dom';
 import Page from '../genericComponents/Page/Page';
 import AppHeader from '../AppHeader/AppHeader';

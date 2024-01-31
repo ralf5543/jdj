@@ -1,3 +1,4 @@
+import React from 'react';
 import './Loader.scss';
 import svg from '../../../assets/ball-triangle.svg';
 

@@ -127,9 +127,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
                     store.dispatch(
                       showToaster('error', "Une erreur s'est produite")
                     );
-                  })
-                  .finally(() => {
-                    store.dispatch(hideLoader());
                   });
               }
               store.dispatch(hideLoader());

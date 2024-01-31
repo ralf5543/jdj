@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import React from 'react';
 import './AppHeader.scss';
 import logo from '../../assets/logo-jdj.svg';
 

@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -7,6 +8,7 @@ import store from '../../../store';
 import Field from '../../genericComponents/Form/Field/Field';
 import './FormPostGame.scss';
 import { uploadGameVisual } from '../../../actions/games';
+import { hideLoader, showLoader } from '../../../actions/layout';
 import Textarea from '../../genericComponents/Form/Textarea/Textarea';
 import Button from '../../genericComponents/Button/Button';
 import Radio from '../../genericComponents/Form/Radio/Radio';
@@ -54,6 +56,8 @@ const FormPostGame = ({
     formData.append('file', file);
     // formData.set('file', file);
     // make a POST request to the File Upload API
+    store.dispatch(showLoader());
+
     axios
       .post(`${import.meta.env.VITE_BASE_URL}/images`, formData, {
         headers: {
@@ -71,6 +75,9 @@ const FormPostGame = ({
       .catch((error) => {
         // handle errors
         console.log(error);
+      })
+      .finally(() => {
+        store.dispatch(hideLoader());
       });
   };
 

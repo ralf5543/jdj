@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './Radio.scss';
-import store from '../../../../store';
 
 // == Composant
 const Radio = ({

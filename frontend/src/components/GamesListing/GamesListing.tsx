@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
