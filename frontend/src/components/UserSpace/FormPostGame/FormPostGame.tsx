@@ -8,7 +8,7 @@ import store from '../../../store';
 import Field from '../../genericComponents/Form/Field/Field';
 import './FormPostGame.scss';
 import { uploadGameVisual } from '../../../actions/games';
-import { hideLoader, showLoader } from '../../../actions/layout';
+import { hideLoader, showLoader, showToaster } from '../../../actions/layout';
 import Textarea from '../../genericComponents/Form/Textarea/Textarea';
 import Button from '../../genericComponents/Button/Button';
 import Radio from '../../genericComponents/Form/Radio/Radio';
@@ -42,9 +42,20 @@ const FormPostGame = ({
   };
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files != null) {
-      setFile(e.target.files[0]);
-      setFilename(e.target.files[0].name);
-      setFileChosen(true);
+      const fileSize = e.target.files[0].size;
+      if (fileSize > 500000) {
+        console.log('image trop lourde : ', `${fileSize} octets`);
+
+        // reset the file input value
+        e.target.value = '';
+        store.dispatch(
+          showToaster('error', 'Votre image doit peser moins de 500 ko')
+        );
+      } else {
+        setFile(e.target.files[0]);
+        setFilename(e.target.files[0].name);
+        setFileChosen(true);
+      }
     }
   };
 
@@ -56,8 +67,8 @@ const FormPostGame = ({
     formData.append('file', file);
     // formData.set('file', file);
     // make a POST request to the File Upload API
-    store.dispatch(showLoader());
 
+    store.dispatch(showLoader());
     axios
       .post(`${import.meta.env.VITE_BASE_URL}/images`, formData, {
         headers: {

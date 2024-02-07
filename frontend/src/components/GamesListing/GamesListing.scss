@@ -7,6 +7,10 @@
     + a {
         margin-block-start: var(--spacer-l);
     }
+
+    .cta + & {
+        margin-block-start: var(--spacer-l);
+    }
 }
 
 .gameslisting_header {

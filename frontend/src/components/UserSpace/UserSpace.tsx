@@ -101,6 +101,12 @@ const UserSpace = () => {
       <h1>Espace perso de {nicknameValue}</h1>
       <h2>Mes jeux à moi que j'ai</h2>
 
+      <Button
+        label="Ajouter un nouveau jeu"
+        type="button"
+        onClick={handlePostgameForm}
+      />
+
       <ErrorBoundary
         fallbackRender={fallbackRender}
         onReset={(details) => {
@@ -110,12 +116,6 @@ const UserSpace = () => {
       >
         <GamesListing games={ownedGamesList} />
       </ErrorBoundary>
-
-      <Button
-        label="Ajouter un noveau un nouveau jeu"
-        type="button"
-        onClick={handlePostgameForm}
-      />
 
       {postgame && isModalVisible && (
         <Modal closeModal={cancelPostgame}>
