@@ -90,6 +90,9 @@ const App = () => {
 
 type Props = {
   [key: string]: {
+    modalVisible: boolean;
+    userId: string;
+    logged: boolean;
     toasterVisible: boolean;
   };
 };

@@ -42,20 +42,24 @@ const GameSheet = () => {
   const [deletedGame, setDeletedGame] = useState<boolean>(false);
 
   // find the first element with the id matching the slug
-  const currentGame = games.find((element) => element._id === id);
+  const currentGame = games.find((element: any) => element._id === id);
 
-  const {
-    title,
-    visual,
-    description,
-    minplayers,
-    maxplayers,
-    idealplayers,
-    duration,
-    confrontation,
-    _id,
-    userId,
-  } = currentGame;
+  if (typeof currentGame === 'object') {
+    if (Object.keys(currentGame).length === 0) {
+      const {
+        title,
+        visual,
+        description,
+        minplayers,
+        maxplayers,
+        idealplayers,
+        duration,
+        confrontation,
+        _id,
+        userId,
+      } = currentGame;
+    }
+  }
 
   // changes the current game ID in the store
   useEffect(() => {
@@ -138,7 +142,7 @@ const GameSheet = () => {
   const gameOwners = allUsers.filter((user) => user.ownedGames.includes(id));
   const OwnsTheGame = currentUserOwnedGames.some((item) => item === _id);
 
-  const updatedGamesList = (newValue) => {
+  const updatedGamesList = (newValue: object) => {
     dispatch(showLoader());
     axios
       .put(
@@ -331,17 +335,27 @@ const GameSheet = () => {
 };
 
 type Props = {
-  [key: string]: {
+  gamesReducer: {
     gameTitle: string;
     gameDescription: string;
     gameMinPlayers: string;
     gameMaxPlayers: string;
     gameIdealPlayers: string;
     gameDuration: string;
-    gameconfrontation: string;
+    gameConfrontation: string;
     gameOwners: Array<string>;
     gameVisual: string;
     list: Array<object>;
+  };
+  user: {
+    userId: string;
+    token: string;
+    ownedGames: string;
+    logged: string;
+    users: string;
+  };
+  layoutReducer: {
+    modalVisible: boolean;
   };
 };
 

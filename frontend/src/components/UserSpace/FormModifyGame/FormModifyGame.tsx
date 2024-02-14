@@ -124,9 +124,7 @@ const FormModifyGame = ({
         /* src={`${import.meta.env.VITE_BASE_URL}/images/${
           store.getState().gamesReducer.gameVisual
         }`} */
-        src={`${import.meta.env.VITE_BASE_URL}/images/${
-          dynamicvalue
-        }`}
+        src={`${import.meta.env.VITE_BASE_URL}/images/${dynamicvalue}`}
         alt="image uploaded"
       />
 

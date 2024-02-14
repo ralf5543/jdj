@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
+
 import './Button.scss';
 
-const Button = ({ children, label, type, ...attributes }: Props) => {
+const Button: FC<Props> = ({
+  children,
+  label,
+  type = 'button',
+  ...attributes
+}) => {
   return (
+    // eslint-disable-next-line react/button-has-type
     <button className="cta" type={type} {...attributes}>
       {label}
       {children}
@@ -11,9 +18,7 @@ const Button = ({ children, label, type, ...attributes }: Props) => {
 };
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: React.ReactNode | undefined;
   label: string;
-  type: 'submit' | 'reset' | 'button' | undefined;
 }
 
 export default Button;

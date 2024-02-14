@@ -148,7 +148,7 @@ const Navigation = () => {
 };
 
 type Props = {
-  [key: string]: {
+  user: {
     modalVisible: boolean;
     signupVisible: boolean;
     loginVisible: boolean;
@@ -156,6 +156,7 @@ type Props = {
     email: string;
     password: string;
     nickname: string;
+    changeField: (newValue: string, identifier: string) => void;
   };
 };
 
