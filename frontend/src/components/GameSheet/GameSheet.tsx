@@ -31,6 +31,7 @@ import {
 
 import FormModifyGame from '../UserSpace/FormModifyGame/FormModifyGame';
 import Modal from '../genericComponents/Modal/Modal';
+import { Games } from './types';
 
 const GameSheet = () => {
   const { id } = useParams();
@@ -42,10 +43,9 @@ const GameSheet = () => {
   const [deletedGame, setDeletedGame] = useState<boolean>(false);
 
   // find the first element with the id matching the slug
-  const currentGame = games.find((element: any) => element._id === id);
+  const currentGame = games.find((element) => element._id === id);
 
-  if (typeof currentGame === 'object') {
-    if (Object.keys(currentGame).length === 0) {
+  if ( currentGame ) {
       const {
         title,
         visual,
@@ -56,10 +56,14 @@ const GameSheet = () => {
         duration,
         confrontation,
         _id,
-        userId,
+        userId
       } = currentGame;
+
+
     }
   }
+
+  const dispatch = useDispatch();
 
   // changes the current game ID in the store
   useEffect(() => {
@@ -345,7 +349,7 @@ type Props = {
     gameConfrontation: string;
     gameOwners: Array<string>;
     gameVisual: string;
-    list: Array<object>;
+    list: Games;
   };
   user: {
     userId: string;
