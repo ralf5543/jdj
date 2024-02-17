@@ -45,25 +45,20 @@ const GameSheet = () => {
   // find the first element with the id matching the slug
   const currentGame = games.find((element) => element._id === id);
 
-  if ( currentGame ) {
-      const {
-        title,
-        visual,
-        description,
-        minplayers,
-        maxplayers,
-        idealplayers,
-        duration,
-        confrontation,
-        _id,
-        userId
-      } = currentGame;
-
-
-    }
+  if (currentGame) {
+    const {
+      title,
+      visual,
+      description,
+      minplayers,
+      maxplayers,
+      idealplayers,
+      duration,
+      confrontation,
+      _id,
+      userId,
+    } = currentGame;
   }
-
-  const dispatch = useDispatch();
 
   // changes the current game ID in the store
   useEffect(() => {
