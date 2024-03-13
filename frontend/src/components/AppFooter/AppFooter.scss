@@ -12,3 +12,16 @@
     display: flex;
     justify-content: space-between;
 }
+
+.author {
+    &::after {
+        content: '-';
+        display: inline-block;
+        margin-inline: var(--spacer-m);
+    }
+}
+
+.main-footer_cta {
+    margin-inline-start: auto;
+    color: var(--color-light);
+}

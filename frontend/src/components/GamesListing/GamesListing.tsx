@@ -1,12 +1,13 @@
 /* eslint-disable no-underscore-dangle */
-import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import Loader from '../genericComponents/Loader/Loader';
 import './GamesListing.scss';
+import { ThemeContext } from '../../utils/context';
 
 const GamesListing = ({ games }: Props) => {
+  const {toggleTheme, theme} = useContext(ThemeContext);
   const isLoaderVisible = useSelector(
     (state: Props) => state.layoutReducer.isLoading
   );
@@ -61,7 +62,8 @@ const GamesListing = ({ games }: Props) => {
   };
 
   return (
-    <div className="gameslisting_wrapper">
+    <div className={`gameslisting_wrapper ${theme}_theme`}>
+      <h1>Theme : {theme}</h1>
       {isLoaderVisible && <Loader />}
 
       <header className="gameslisting_header">

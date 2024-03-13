@@ -2,10 +2,11 @@
 /* eslint-disable global-require */
 
 import { Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence } from 'framer-motion';
+import { ThemeContext } from '../../utils/context';
 import axios from '../../utils/axios';
 import { fetchGames } from '../../actions/games';
 import {
@@ -18,6 +19,11 @@ import Toaster from '../genericComponents/Toaster/Toaster';
 import AppFooter from '../AppFooter/AppFooter';
 
 const App = () => {
+  const [theme, setTheme] = useState('dark');
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -70,7 +76,7 @@ const App = () => {
   }, [dispatch, currentUserId, isLogged]);
 
   return (
-    <>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <AppHeader />
 
       <AnimatePresence>{toaster && <Toaster />}</AnimatePresence>
@@ -84,7 +90,7 @@ const App = () => {
       </main>
 
       <AppFooter />
-    </>
+    </ThemeContext.Provider>
   );
 };
 
