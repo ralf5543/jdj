@@ -27,7 +27,7 @@ const Home = () => {
 
   return (
     <Page>
-      <h1>Ceci est la home</h1>
+      <h1>La ludothèque des JdJ</h1>
       <ErrorBoundary
         fallbackRender={fallbackRender}
         onReset={(details) => {

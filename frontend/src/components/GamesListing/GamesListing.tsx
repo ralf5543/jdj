@@ -54,7 +54,6 @@ const GamesListing = ({ games }: Props) => {
 
   return (
     <div className={`gameslisting_wrapper ${theme}-theme`}>
-      <h1>Theme : {theme}</h1>
       {isLoaderVisible && <Loader />}
 
       <header className="gameslisting_header">
