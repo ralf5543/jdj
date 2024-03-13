@@ -3,11 +3,12 @@ import { useEffect, useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import BoardgameCard from '../BoardgameCard/BoardgameCard';
 import Loader from '../genericComponents/Loader/Loader';
+import Field from '../genericComponents/Form/Field/Field';
 import './GamesListing.scss';
 import { ThemeContext } from '../../utils/context';
 
 const GamesListing = ({ games }: Props) => {
-  const {toggleTheme, theme} = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const isLoaderVisible = useSelector(
     (state: Props) => state.layoutReducer.isLoading
   );
@@ -68,6 +69,7 @@ const GamesListing = ({ games }: Props) => {
               name="playersNb"
               id="playersNb"
               onChange={handlePlayersNumber}
+              className={`${theme}-theme`}
             >
               <option value="1">1</option>
               <option value="2">2</option>
@@ -90,6 +92,7 @@ const GamesListing = ({ games }: Props) => {
               onChange={handleFilter}
               placeholder="Nom du jeu"
               id="filterfield"
+              className={`${theme}-theme`}
             />
             <label htmlFor="filterfield" className="field_label">
               Titre du jeu

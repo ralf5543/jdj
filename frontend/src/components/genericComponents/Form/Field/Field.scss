@@ -30,6 +30,11 @@
         border: 1px solid var(--color-secondary-text);
         border-radius: var(--spacer-s);
         background-color: var(--color-secondary);
+
+        &.dark-theme {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+        }
     }
 
     input[type=file] {
@@ -61,6 +66,11 @@
         background-repeat: no-repeat;
         background-position-x: calc(100% - var(--spacer-m));
         background-position-y: center;
+
+        &.dark-theme {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+        }
     }
 
     &.field--full-width {

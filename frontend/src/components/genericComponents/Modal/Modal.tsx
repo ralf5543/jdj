@@ -3,10 +3,13 @@ import { useDispatch } from 'react-redux';
 import { createPortal } from 'react-dom';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import './Modal.scss';
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 import { hideModal } from '../../../actions/layout';
+import { ThemeContext } from '../../../utils/context';
 
 const Modal = ({ children, closeModal }: Props) => {
+
+const { theme } = useContext(ThemeContext);
 
 const dispatch = useDispatch();
 
@@ -44,7 +47,7 @@ return createPortal (
     variants={fog}
     exit={{opacity: 0}}
     >
-    <m.div className="modal-content" variants={modal} exit={{ y: -200, opacity: 0 }}>
+    <m.div className={`modal-content ${theme}-theme`} variants={modal} exit={{ y: -200, opacity: 0 }}>
     <button type='button' onClick={handleCloseModal} className="modal-close">
       <i className="fa-solid fa-close" />
       <span className="modal-close_wording">close modal</span>

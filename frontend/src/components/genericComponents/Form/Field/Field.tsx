@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import './Field.scss';
+import { ThemeContext } from '../../../../utils/context';
 
 // == Composant
 const Field = ({
@@ -13,6 +14,7 @@ const Field = ({
   passwordType,
   onChange,
 }: Props) => {
+  const { theme } = useContext(ThemeContext);
   const [dynamicvalue, setDynamicvalue] = useState(defaultInputValue);
 
   const handleChange = (e: React.ChangeEvent) => {
@@ -29,11 +31,10 @@ const Field = ({
 
   return (
     <div
-      className={
-        value !== undefined && value.length > 0
-          ? 'field field--has-content'
-          : 'field'
+      className={`field ${
+        value !== undefined && value.length > 0 ? 'field--has-content' : ''
       }
+      `}
     >
       <div className="textfield_wrapper">
         {passwordType ? (
@@ -42,7 +43,7 @@ const Field = ({
             onChange={handleChange}
             id={inputId}
             type={showPassword ? 'text' : 'password'}
-            className="textfield"
+            className={`textfield ${theme}-theme`}
             placeholder={placeholder}
             name={name}
           />
@@ -52,7 +53,7 @@ const Field = ({
             onChange={handleChange}
             id={inputId}
             type={type}
-            className="textfield"
+            className={`textfield ${theme}-theme`}
             placeholder={placeholder}
             name={name}
           />
@@ -65,7 +66,9 @@ const Field = ({
             className="field_cta"
           >
             <span
-              className={`field_cta_icon fa-regular fa-eye${showPassword ? '-slash' : ''}`}
+              className={`field_cta_icon fa-regular fa-eye${
+                showPassword ? '-slash' : ''
+              }`}
             />
             <span className="field_cta_wording">
               {showPassword ? 'Cacher mot de passe' : 'Afficher mot de passe'}

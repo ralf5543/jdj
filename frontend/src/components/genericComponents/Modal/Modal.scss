@@ -50,3 +50,9 @@
     background-color: black;
     opacity: .7;
 }
+
+// ==================-------------- DARK THEME
+.modal-content.dark-theme {
+    background-color: var(--color-dark-bg);
+    color: var(--color-light);
+}

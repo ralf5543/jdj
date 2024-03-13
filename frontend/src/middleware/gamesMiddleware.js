@@ -16,31 +16,30 @@ import {
 import { fetchUsers, modifyProfile } from '../actions/user';
 
 const gamesMiddleware = (store) => (next) => (action) => {
+  const refreshGamesList = () => {
+    axios
+      .get('/api/games')
+      .then((response) => {
+        // console.log('affichage de la liste de jeux : ', response.data);
+        store.dispatch(saveGames(response.data));
+      })
+      .catch((error) => {
+        console.log('erreur de la requete : ', error);
+        store.dispatch(
+          showToaster('error', "La liste n'a pas pu être chargée correctement")
+        );
+      })
+      .finally(() => {
+        store.dispatch(hideLoader());
+      });
+  };
+
   // console.log('action.type : ', action.type);
   switch (action.type) {
     case FETCH_GAMES:
-      // console.log('aller chercher les jeux');
-
       store.dispatch(showLoader());
 
-      axios
-        .get('/api/games')
-        .then((response) => {
-          // console.log('affichage de la liste de jeux : ', response.data);
-          store.dispatch(saveGames(response.data));
-        })
-        .catch((error) => {
-          console.log('erreur de la requete : ', error);
-          store.dispatch(
-            showToaster(
-              'error',
-              "La liste n'a pas pu être chargée correctement"
-            )
-          );
-        })
-        .finally(() => {
-          store.dispatch(hideLoader());
-        });
+      refreshGamesList();
       break;
 
     case POST_GAME:
@@ -145,8 +144,6 @@ const gamesMiddleware = (store) => (next) => (action) => {
         })
         .finally(() => {
           store.dispatch(hideModal());
-
-          
         });
       break;
 
@@ -194,21 +191,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
         })
         .finally(() => {
           // refetch la liste de jeux mise à jour
-          axios
-            .get('/api/games')
-            .then((response) => {
-              console.log(
-                'affichage de la nouvelle liste de jeux : ',
-                response.data
-              );
-              store.dispatch(saveGames(response.data));
-            })
-            .catch((error) => {
-              console.log('erreur de la requete : ', error);
-            })
-            .finally(() => {
-              store.dispatch(hideLoader());
-            });
+          refreshGamesList();
         });
 
       break;
@@ -247,21 +230,7 @@ const gamesMiddleware = (store) => (next) => (action) => {
         })
         .finally(() => {
           // refetch la liste de jeux mise à jour
-          axios
-            .get('/api/games')
-            .then((response) => {
-              console.log(
-                'affichage de la nouvelle liste de jeux : ',
-                response.data
-              );
-              store.dispatch(saveGames(response.data));
-            })
-            .catch((error) => {
-              console.log('erreur de la requete : ', error);
-            })
-            .finally(() => {
-              store.dispatch(hideLoader());
-            });
+          refreshGamesList();
         });
 
       break;
