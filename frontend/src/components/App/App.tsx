@@ -19,7 +19,7 @@ import Toaster from '../genericComponents/Toaster/Toaster';
 import AppFooter from '../AppFooter/AppFooter';
 
 const App = () => {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
   };
@@ -77,19 +77,20 @@ const App = () => {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className={`main-layout ${theme}-theme ${
+          isModalVisible ? 'modal-visible' : ''
+        }`}>
       <AppHeader />
 
       <AnimatePresence>{toaster && <Toaster />}</AnimatePresence>
 
       <main
-        className={
-          isModalVisible ? 'main-content modal-visible' : 'main-content'
-        }
-      >
+        className="main-content">
         <Outlet />
       </main>
 
       <AppFooter />
+      </div>
     </ThemeContext.Provider>
   );
 };

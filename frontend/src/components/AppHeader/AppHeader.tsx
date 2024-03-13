@@ -1,13 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import { useContext } from 'react';
+import { ThemeContext } from '../../utils/context';
 import './AppHeader.scss';
 import logo from '../../assets/logo-jdj.svg';
 
 import Navigation from './Navigation/Navigation';
 
 const AppHeader = () => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <header className="main-header">
+    <header className={`main-header ${theme}-theme`}>
       <div className="main-header_content">
         <Navigation />
         <div className="main-header_inner">

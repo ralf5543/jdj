@@ -54,6 +54,12 @@
             height: 2rem;
         }
     }
+
+    &.dark-theme {
+        &::after {
+            background-color: var(--color-dark-bg);
+        }
+    }
 }
 
 .main-header_content {

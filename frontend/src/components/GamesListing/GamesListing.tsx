@@ -16,15 +16,6 @@ const GamesListing = ({ games }: Props) => {
   const titleAscending = [...games].sort((a, b) =>
     a.title > b.title ? 1 : -1
   );
-  const titleDescending = [...games].sort((a, b) =>
-    a.title > b.title ? -1 : 1
-  );
-  const maxPlayersAscending = [...games].sort(
-    (a, b) => a.maxplayers - b.maxplayers
-  );
-  const maxPlayersDescending = [...games].sort(
-    (a, b) => b.maxplayers - a.maxplayers
-  );
 
   const newGamesFirst = [...games].reverse();
 
@@ -62,7 +53,7 @@ const GamesListing = ({ games }: Props) => {
   };
 
   return (
-    <div className={`gameslisting_wrapper ${theme}_theme`}>
+    <div className={`gameslisting_wrapper ${theme}-theme`}>
       <h1>Theme : {theme}</h1>
       {isLoaderVisible && <Loader />}
 

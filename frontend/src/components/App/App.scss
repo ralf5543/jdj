@@ -1,11 +1,23 @@
-.main-content {
+.main-layout {
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-block-end: var(--spacer-l);
     
     &.modal-visible {
         max-height: 100vh;
         overflow: hidden;
     }
+
+    &.dark-theme {
+        background-color: var(--color-dark-bg);
+        color: var(--color-light);
+    }
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-block-end: var(--spacer-l);
+
 }

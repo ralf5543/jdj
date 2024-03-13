@@ -1,9 +1,10 @@
-import React from 'react';
+import { useContext } from 'react';
 import './BoardgameCard.scss';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { ThemeContext } from '../../utils/context';
 
 const BoardgameCard = ({
   description,
@@ -16,6 +17,8 @@ const BoardgameCard = ({
   confrontation,
   id,
 }: Props) => {
+
+  const { theme } = useContext(ThemeContext);
   const allUsers = useSelector((state: Props) => state.user.users);
 
   const gameOwners = allUsers.filter((user) => user.ownedGames.includes(id));
@@ -24,7 +27,7 @@ const BoardgameCard = ({
     // animations from Framer Motion (reduced weight with "m" instead of "motion")
     <LazyMotion features={domAnimation}>
       <m.li
-        className="boardgame-card"
+        className={`boardgame-card ${theme}-theme`}
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.1 }}

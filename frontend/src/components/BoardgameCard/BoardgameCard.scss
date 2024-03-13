@@ -164,3 +164,11 @@
     font-size: 1.2rem;
     font-weight: 700;
 }
+
+// ===============------------------------ DARK THEME
+
+.boardgame-card.dark-theme {
+    .boardgame-card_content,.boardgame-card_footer {
+        background-color: var(--color-dark);
+    }
+}
