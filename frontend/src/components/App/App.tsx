@@ -22,6 +22,7 @@ const App = () => {
   const [theme, setTheme] = useState('light');
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');
+    localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light');
   };
 
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ const App = () => {
     const loggedInUser = localStorage.getItem('userId');
     const loggedInNickname = localStorage.getItem('nickname');
     const loggedInToken = localStorage.getItem('token');
+    setTheme(localStorage.getItem('theme'));
 
     if (loggedInUser) {
       // nickname, token, user id
